@@ -1,0 +1,27 @@
+create table member (
+mid number not null,
+memail varchar2(50) not null,
+mname varchar2(30) not null,
+mpw varchar2(30) not null,
+mphone varchar2(20),
+mcheck number,
+mpoint number,
+mdate date,
+constraint pk_mem primary key(mid)
+);
+
+create table page(
+pid number not null,
+pname varchar2(50) not null,
+pnick varchar2(30),
+pintro varchar(2000),
+pgenre varchar2(50),
+ploc varchar2(100),
+pperiod date,
+pshowtime varchar2(30),
+ppoint number,
+pdate date,
+pmaster number,
+constraint pk_page primary key(pid),
+constraint fk_page foreign key(pmaster) references member(mid)
+);
