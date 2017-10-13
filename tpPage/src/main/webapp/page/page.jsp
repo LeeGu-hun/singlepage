@@ -7,13 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-
-asdfasdf
-메인
-메인ㅇ멩ㄴ러ㅣ머
-ㅁㄴㄷㅅ243324<br>
-<br>
-asdfjasfd
-<br>
+page
 </body>
 </html>

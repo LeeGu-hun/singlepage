@@ -1,17 +1,17 @@
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ page session="false" %>
-<html>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html lang="ko">
 <head>
-	<title>Home</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>SinglePage</title>
 </head>
 <body>
-<h1>
-	Hello world!  
-</h1>
+<%@ include file="./include/header.jsp" %>
 
-<P>  The time on the server is ${serverTime}. </P>
-<script>
-location.href='./main';
-</script>
+<%@ include file="./main/main.jsp" %>
+
+<%@ include file="./include/footer.jsp" %>
 </body>
 </html>

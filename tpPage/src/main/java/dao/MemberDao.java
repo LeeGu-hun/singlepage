@@ -27,7 +27,6 @@ public class MemberDao {
 	}
 
 	public int count() {
-		System.out.println("asdfaf");
 		Integer count = jdbcTemplate.queryForInt("select count(*) from MEMBER");
 		return count;
 	}
