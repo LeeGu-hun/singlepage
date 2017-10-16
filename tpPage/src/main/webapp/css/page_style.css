@@ -2,25 +2,12 @@
 
 .sidebox {
 	position: relative;
-	width: 300px;
-	min-height: 1px;
-	-ms-flex: 0 0 300px;
-     	flex: 0 0 300px;
-  	max-width: 300px;
-  	padding-right: 0;
-	padding-left: 0;
-	background-color: red;
+	width:300px;
+	background: red;
 }
 
 .centerbox {
 	position: relative;
-	width: 100%;
-	min-height: 1px;
-	-ms-flex: 0 0 auto;
-    	flex: 0 0 auto;
-  	width: auto;
-	max-width: none;
-	padding-right: 0;
-	padding-left: 0;
-	background-color: blue;
+	width:500px;
+	background: blue;
 }

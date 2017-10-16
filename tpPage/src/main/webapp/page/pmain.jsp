@@ -8,7 +8,7 @@
 	</div>
 	
 	<div class="centerbox">
-	df4444
+	center
 	</div>
 	
 	<div class="sidebox">
