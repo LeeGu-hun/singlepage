@@ -13,7 +13,6 @@ public class temp {
 		this.memberDao = memberDao;
 	}
 	
-	
 	@RequestMapping("/home")
 	public String onLoad() {
 		return "home";
@@ -21,7 +20,7 @@ public class temp {
 	
 	@RequestMapping("/page")
 	public String page() {
-		return "page/page";
+		return "page";
 	}
 
 }

@@ -3,5 +3,6 @@
 
 <div style="background-color: #cccccc;">
 header
-<a href="./page" class="btn btn-primary">페이지</a>
+<a href="./home" class="btn btn-primary">home</a>
+<a href="./page" class="btn btn-primary">page</a>
 </div>
