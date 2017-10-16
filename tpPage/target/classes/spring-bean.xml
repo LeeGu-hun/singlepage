@@ -21,4 +21,12 @@
 		<constructor-arg ref="dataSource" />
 	</bean>
 
+	<bean id="mainDao" class="dao.MainDao">
+		<constructor-arg ref="dataSource" />
+	</bean>
+	
+	<bean id="mainSvc" class="main.MainService">
+		<constructor-arg ref="mainDao" />
+	</bean>
+	
 </beans>

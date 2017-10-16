@@ -2,17 +2,16 @@ package controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-
-import dao.MemberDao;
+import main.MainService;
 
 @Controller
-public class temp {
-	MemberDao memberDao;
-	
-	public void setMemberDao(MemberDao memberDao) {
-		this.memberDao = memberDao;
+public class MainController {
+	MainService mainService;
+
+	public void setMainService(MainService mainService) {
+		this.mainService = mainService;
 	}
-	
+
 	@RequestMapping("/home")
 	public String onLoad() {
 		return "home";
@@ -24,3 +23,5 @@ public class temp {
 	}
 
 }
+
+
