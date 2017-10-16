@@ -3,16 +3,21 @@
 
 <div style="width:100%">
 
-	<div class="sidebox">
-	left
+	<div id="pageleftbox" style="border:1px">
+		<%@ include file="/page/left.jsp" %>
 	</div>
 	
-	<div class="centerbox">
-	center
+	<div id="pagecenterbox" >
+		<div style="border:1px solid black;">
+			<%@ include file="/page/top.jsp" %>
+		</div>
+		<div style="border:1px solid black">
+			<%@ include file="/page/board.jsp" %>
+		</div>
 	</div>
 	
-	<div class="sidebox">
-	right
+	<div id="pagerightbox" style="border:1px">
+		<%@ include file="/page/right.jsp" %>
 	</div>
 
 </div>
