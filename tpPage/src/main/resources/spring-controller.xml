@@ -10,9 +10,8 @@
 
 <!-- 	<mvc:view-controller path="/main" view-name="main" /> -->
 
- 	<bean class="controller.temp">
-		<property name="memberDao" ref="memberDao" />
+	<bean class="controller.MainController">
+		<property name="mainService" ref="mainSvc" />
 	</bean>
-
 
 </beans>
