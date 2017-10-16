@@ -25,8 +25,16 @@
 		<constructor-arg ref="dataSource" />
 	</bean>
 	
+	<bean id="pboardDao" class="dao.PboardDao">
+		<constructor-arg ref="dataSource" />
+	</bean>
+	
 	<bean id="mainSvc" class="main.MainService">
 		<constructor-arg ref="mainDao" />
+	</bean>
+	
+	<bean id="pboardSvc" class="board.PboardService">
+		<constructor-arg ref="pboardDao" />
 	</bean>
 	
 </beans>

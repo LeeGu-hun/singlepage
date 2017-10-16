@@ -16,11 +16,6 @@ public class MainController {
 	public String onLoad() {
 		return "home";
 	}
-	
-	@RequestMapping("/page")
-	public String page() {
-		return "page";
-	}
 
 }
 

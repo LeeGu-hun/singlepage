@@ -28,13 +28,13 @@ constraint fk_page foreign key(pmaster) references member(mid)
 
 create table pboard(
 pbid number not null,
-pbsubject varchar2(200),
-pbcontent varchar2(3000),
+pbsubject varchar2(200) not null,
+pbcontent varchar2(3000) not null,
 pbfile varchar2(100),
 pbnewfile varchar2(100),
-pbref_ref int,
-pbref_lev int,
-pbref_seq int,
+pbre_ref int,
+pbre_lev int,
+pbre_seq int,
 pbreadcount int,
 pbdate date,
 pbhostid int,
