@@ -7,6 +7,9 @@
 	-ms-flex: 0 0 300px;
      	flex: 0 0 300px;
   	max-width: 300px;
+  	padding-right: 0;
+	padding-left: 0;
+	background-color: red;
 }
 
 .centerbox {
@@ -17,4 +20,7 @@
     	flex: 0 0 auto;
   	width: auto;
 	max-width: none;
+	padding-right: 0;
+	padding-left: 0;
+	background-color: blue;
 }

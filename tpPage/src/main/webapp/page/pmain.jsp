@@ -7,6 +7,9 @@
 	left
 	</div>
 	
+	<div class="centerbox">
+	df4444
+	</div>
 	
 	<div class="sidebox">
 	right
