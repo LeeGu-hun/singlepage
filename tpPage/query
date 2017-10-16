@@ -25,3 +25,21 @@ pmaster number,
 constraint pk_page primary key(pid),
 constraint fk_page foreign key(pmaster) references member(mid)
 );
+
+create table pboard(
+pbid number not null,
+pbsubject varchar2(200),
+pbcontent varchar2(3000),
+pbfile varchar2(100),
+pbnewfile varchar2(100),
+pbref_ref int,
+pbref_lev int,
+pbref_seq int,
+pbreadcount int,
+pbdate date,
+pbhostid int,
+pbwriterid int,
+constraint pk_pboard primary key(pbid),
+constraint fk_pboard_hostid foreign key(pbhostid) references page(pid),
+constraint fk_pboard_writerid foreign key(pbwriterid) references member(mid)
+);
