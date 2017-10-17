@@ -18,4 +18,8 @@
 		<property name="pboardSvc" ref="pboardSvc" />
 	</bean>
 
+	<bean class="controller.temp">
+		<property name="memberDao" ref="memberDao" />
+	</bean>
+
 </beans>
