@@ -4,7 +4,7 @@ import java.util.Date;
 
 public class Pboard {
 	
-	private int pbid, pbpbre_ref, pbre_lev, pbre_seq, pbreadcount, pbhostid, pbwriterid;
+	private int pbid, pbre_ref, pbre_lev, pbre_seq, pbreadcount, pbhostid, pbwriterid;
 	private String pbsubject, pbcontent, pbfile, pbnewfile;
 	private Date pbdate;
 	
@@ -26,12 +26,12 @@ public class Pboard {
 		this.pbid = pbid;
 	}
 
-	public int getPbpbre_ref() {
-		return pbpbre_ref;
+	public int getPbre_ref() {
+		return pbre_ref;
 	}
 
-	public void setPbpbre_ref(int pbpbre_ref) {
-		this.pbpbre_ref = pbpbre_ref;
+	public void setPbre_ref(int pbre_ref) {
+		this.pbre_ref = pbre_ref;
 	}
 
 	public int getPbre_lev() {

@@ -13,8 +13,8 @@ public class PboardService {
 	}
 	
 	@Transactional
-	public void pboardWrite(int pbhostid, int pbwriterid, String pbsubject, String pbcontent, String pbfile,
-			String pbnewfile) {
+	public void pboardWrite(int pbhostid, int pbwriterid, String pbsubject, String pbcontent,
+			String pbfile, String pbnewfile) {
 		
 		Pboard pboard;
 		pboard = new Pboard(pbhostid, pbwriterid, pbsubject, pbcontent, pbfile, pbnewfile);

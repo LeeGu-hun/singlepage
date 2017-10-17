@@ -24,9 +24,8 @@ public class PboardController {
 		return "page";
 	}
 	
-	@RequestMapping("/pboard/write")
+	@RequestMapping("/pbwrite")
 	public String pboardWrite(@ModelAttribute("pboardcmd") PboardCommand pbc) {
-		System.out.println("controller");
 		int pbhostid = 1;
 		int pbwriterid = 2;
 		MultipartFile multi = pbc.getPbfile();
