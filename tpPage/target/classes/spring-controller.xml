@@ -13,5 +13,9 @@
 	<bean class="controller.MainController">
 		<property name="mainService" ref="mainSvc" />
 	</bean>
+	
+	<bean class="controller.PboardController">
+		<property name="pboardSvc" ref="pboardSvc" />
+	</bean>
 
 </beans>
