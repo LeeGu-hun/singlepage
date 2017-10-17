@@ -22,5 +22,14 @@ public class temp {
 	public String page() {
 		return "page";
 	}
+	
+	@RequestMapping("/join")
+	public String join() {
+		return "join/join";
+	}
+	@RequestMapping("/login")
+	public String login() {
+		return "join/login";
+	}
 
 }
