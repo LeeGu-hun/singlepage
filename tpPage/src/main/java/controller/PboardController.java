@@ -27,7 +27,7 @@ public class PboardController {
 	@RequestMapping("/pbwrite")
 	public String pboardWrite(@ModelAttribute("pboardcmd") PboardCommand pbc) {
 		int pbhostid = 1;
-		int pbwriterid = 2;
+		int pbwriterid = 1;
 		MultipartFile multi = pbc.getPbfile();
 		String pbfile = multi.getOriginalFilename();
 		if(!(pbfile.equals(""))) {

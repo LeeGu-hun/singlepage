@@ -10,6 +10,10 @@
 
 <!-- 	<mvc:view-controller path="/main" view-name="main" /> -->
 
+	<bean class="controller.LoginController">
+		<property name="memberDao" ref="memberDao" />
+	</bean>
+
 	<bean class="controller.MainController">
 		<property name="mainService" ref="mainSvc" />
 	</bean>
@@ -17,5 +21,6 @@
 	<bean class="controller.PboardController">
 		<property name="pboardSvc" ref="pboardSvc" />
 	</bean>
+	
 
 </beans>
