@@ -12,6 +12,12 @@ constraint pk_mem primary key(mid)
 
 create sequence mid_seq increment by 1 start with 1 maxvalue 30000;
 
+insert into member values(mid_seq.nextval, 'email', 'name', 'pw', null, null, null, sysdate);
+
+insert into member (mid, memail, mname, mpw, mphone, mcheck, mpoint, mdate)
+values(mid_seq.nextval, 'email', 'name', 'pw', null, null, null, sysdate); 
+
+
 create table page(
 pid number not null,
 pname varchar2(50) not null,
@@ -29,6 +35,12 @@ constraint fk_page foreign key(pmaster) references member(mid)
 );
 
 create sequence pid_seq increment by 1 start with 1 maxvalue 30000;
+
+insert into page values(pid_seq.nextval, 'name', 'nick', 'intoro', null, null, null, null, null, sysdate, '1');
+
+insert into page(pid, pname, pnick, pintro, pgenre, ploc, pperiod, pshowtime, ppoint, pdate, pmaster)
+values(pid_seq.nextval, 'name', 'nick', 'intoro', null, null, null, null, null, sysdate, '1');
+
 
 create table pboard(
 pbid number not null,
@@ -49,3 +61,10 @@ constraint fk_pboard_writerid foreign key(pbwriterid) references member(mid)
 );
 
 create sequence pbid_seq increment by 1 start with 1 maxvalue 30000;
+
+insert into pboard values(
+pbid_seq.nextval, 'subject', 'content', 'file', 'newfile', 0, 0, 0, 0, sysdate, 1, 1);
+
+insert into pboard (pbid, pbsubject, pbcontent, pbfile, pbnewfile, pbre_ref, pbre_lev, pbre_seq, pbreadcount, pbdate, pbhostid, pbwriterid)
+values(pbid_seq.nextval, 'subject', 'content', 'file', 'newfile', 0, 0, 0, 0, sysdate, 1, 1);
+
