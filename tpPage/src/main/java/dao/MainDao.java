@@ -11,7 +11,7 @@ public class MainDao {
 	}
 
 	public int count() {
-		Integer count = jdbcTemplate.queryForInt("select count(*) from ");
+		Integer count = jdbcTemplate.queryForInt("select count(*) from board");
 		return count;
 	}
 }

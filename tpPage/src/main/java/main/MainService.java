@@ -9,6 +9,26 @@ public class MainService {
 		this.mainDao = mainDao;
 	}
 	
+	public void getReco() {
+		
+	}
+	
+	public void getFavo() {
+		
+	}
+	
+	public void getWing() {
+		
+	}
+	
+	public void getNewbie() {
+		
+	}
+	
+	public void getRandom() {
+		
+	}
+	
 	
 	
 }
