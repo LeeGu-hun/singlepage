@@ -14,8 +14,11 @@ public class MainController {
 
 	@RequestMapping("/home")
 	public String onLoad() {
+		
 		return "home";
 	}
+	
+	
 
 }
 
