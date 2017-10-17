@@ -10,6 +10,8 @@ mdate date,
 constraint pk_mem primary key(mid)
 );
 
+create sequence mid_seq increment by 1 start with 1 maxvalue 30000;
+
 create table page(
 pid number not null,
 pname varchar2(50) not null,
@@ -25,6 +27,8 @@ pmaster number,
 constraint pk_page primary key(pid),
 constraint fk_page foreign key(pmaster) references member(mid)
 );
+
+create sequence pid_seq increment by 1 start with 1 maxvalue 30000;
 
 create table pboard(
 pbid number not null,
@@ -43,3 +47,5 @@ constraint pk_pboard primary key(pbid),
 constraint fk_pboard_hostid foreign key(pbhostid) references page(pid),
 constraint fk_pboard_writerid foreign key(pbwriterid) references member(mid)
 );
+
+create sequence pbid_seq increment by 1 start with 1 maxvalue 30000;
