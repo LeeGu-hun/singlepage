@@ -1,21 +1,20 @@
 <%@ page contentType="text/html; charset=utf-8" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <!DOCTYPE html>
 <html>
 <head>
 	<title>회원가입</title>
 </head>
 <body>
- 	<%-- <form:form action="joinOK">
+ 	<form:form commandName="joincmd" action="memberJoin">
 	<p>
-		<label>이름:<br>
-		<form:input path="mname" />
+		<label>이멜:<br>
+		<form:input path="memail" />
 		</label>
 	</p>
 	<p>
-		<label>이메일:<br>
-		<form:input path="memail" />
+		<label>이름:<br>
+		<form:input path="mname" />
 		</label>
 	</p>
 	<p>
@@ -25,12 +24,12 @@
 	</p>
 	<p>
 		<label>비밀번호 확인:<br>
-		<form:password path="confirmMpw" />
+		<form:password path="mpwconf" />
 		</label>
 	</p>
 	
 	<p>가입하면 약관은 자동동의</p>
 	<input type="submit" value="가입 완료">
-	</form:form>  --%>
+	</form:form>
 </body>
 </html>

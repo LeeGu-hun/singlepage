@@ -1,5 +1,6 @@
 package member;
 
+import java.sql.Timestamp;
 import java.util.Date;
 
 public class Member {
@@ -8,11 +9,11 @@ public class Member {
 	private String memail;
 	private String mpw;
 	private String mphone;
-	private String mcheck;
+	private int mcheck;
 	private int mpoint;
 	private Date mdate;
 	
-	public Member(int mid, String mname, String memail, String mpw, String mphone, String mcheck, int mpoint,
+	public Member(int mid, String mname, String memail, String mpw, String mphone, int mcheck, int mpoint,
 			Date mdate) {
 		this.mid = mid;
 		this.mname = mname;
@@ -22,6 +23,14 @@ public class Member {
 		this.mcheck = mcheck;
 		this.mpoint = mpoint;
 		this.mdate = mdate;
+	}
+
+	public Member(String mname, String memail, String mpw) {
+
+		this.mname = mname;
+		this.memail = memail;
+		this.mpw = mpw;
+
 	}
 
 	public int getMid() {
@@ -64,11 +73,11 @@ public class Member {
 		this.mphone = mphone;
 	}
 
-	public String getMcheck() {
+	public int getMcheck() {
 		return mcheck;
 	}
 
-	public void setMcheck(String mcheck) {
+	public void setMcheck(int mcheck) {
 		this.mcheck = mcheck;
 	}
 

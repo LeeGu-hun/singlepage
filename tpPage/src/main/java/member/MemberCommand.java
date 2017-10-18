@@ -2,15 +2,7 @@ package member;
 
 public class MemberCommand {
 	private int mid;
-	private String mname, memail, mpw, confirmMpw;
-	
-	public MemberCommand(int mid, String mname, String memail, String mpw, String confirmMpw) {
-		this.mid = mid;
-		this.mname = mname;
-		this.memail = memail;
-		this.mpw = mpw;
-		this.confirmMpw = confirmMpw;
-	}
+	private String mname, memail, mpw, mpwconf;
 	
 	public int getMid() {
 		return mid;
@@ -36,11 +28,12 @@ public class MemberCommand {
 	public void setMpw(String mpw) {
 		this.mpw = mpw;
 	}
-	public String getConfirmMpw() {
-		return confirmMpw;
+	public String getMpwconf() {
+		return mpwconf;
 	}
-	public void setConfirmMpw(String confirmMpw) {
-		this.confirmMpw = confirmMpw;
+	public void setMpwconf(String mpwconf) {
+		this.mpwconf = mpwconf;
 	}
+	
 
 }

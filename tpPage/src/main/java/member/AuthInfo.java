@@ -1,4 +1,4 @@
-package login;
+package member;
 
 public class AuthInfo {
 	private String mname;
