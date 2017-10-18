@@ -5,12 +5,15 @@
 <head>
 
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
-<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/page_style.css?ver=123323231" />
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/page_style.css?ver=1" />
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/ptop.css?ver=33" />
 
-<script src="http://code.jquery.com/jquery-3.1.1.js"></script>
-<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script 
+	src="https://code.jquery.com/jquery-3.2.1.min.js"
+	integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+	crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
-<script src="<%=request.getContextPath()%>/js/common.js?ver=1323322322321"></script>
+<script src="<%=request.getContextPath()%>/js/autosize.js?ver=1"></script>
 
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>SinglePage</title>

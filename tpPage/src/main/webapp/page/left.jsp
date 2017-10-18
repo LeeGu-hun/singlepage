@@ -2,9 +2,8 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-<link rel="stylesheet" type="text/css"
-	href="<%=request.getContextPath()%>/css/left.css?ver=" />
-<script src="<%=request.getContextPath()%>/js/page.js?ver=2222"></script>
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/left.css?ver=1" />
+<script src="<%=request.getContextPath()%>/js/left.js?ver=1"></script>
 
 <div style="margin: 50px auto; width: 200px; text-align: center">
 	<div>

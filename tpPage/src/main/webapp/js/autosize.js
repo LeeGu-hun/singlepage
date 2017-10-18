@@ -18,8 +18,6 @@ function autolayout() {
 	pagecenterwidth = $(window).width() - ($('#pageleftbox').width() + $('#pageleftbox').width());
 	pagecenterheight = $('#pagecenterbox').height();
 	$('#pagecenterbox').css('width', pagecenterwidth);
-	/*$('#pageleftbox').css('height', pagecenterheight);
-	$('#pagerightbox').css('height', pagecenterheight);*/	
 }
 
 $(document).ready(function() {
