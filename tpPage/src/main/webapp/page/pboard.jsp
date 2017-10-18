@@ -19,5 +19,3 @@
 		value="<%=request.getRealPath("/pbuploads/")%>" />
 	<input type="submit" value="등록" />
 </form:form>
-파일저장경로 -
-<%=request.getRealPath("/pbuploads/")%>

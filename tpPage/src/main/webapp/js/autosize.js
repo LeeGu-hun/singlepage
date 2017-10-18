@@ -1,28 +1,47 @@
 /*function autoDiv() {
-	mainBoxHeight = $('#contentBox').height();
+	pagemainboxHeight = $('#pagecontentbox').height();
 	windowHeight  = $(window).height() - $('#footer').height();
-	if(mainBoxHeight < windowHeight){
-		$('#mainBox').css('height', windowHeight);
+	if(pagemainoxHeight < windowHeight){
+		$('#pagemainbox').css('height', windowHeight);
 	} else {
-		$('#mainBox').css('height', mainBoxHeight);
+		$('#pagemainBox').css('height', pagemainboxHeight);
 	}
-}
-*/
+}*/
+
+
+
+
 
 function autolayout() {
-	windowwidth = $(window).width();
-	pagecenterwidth = $(window).width() - ($('#pageleftbox').width() + $('#pageleftbox').width());
-	pagecenterheight = $('#pagecenterbox').height();
-	$('#pagecenterbox').css('width', pagecenterwidth);
+	windowH = $(window).height() - (/*$('#header').height() + */$('#footer').height());
+	pagecontentboxH = $('#pagecontentbox').height();
+	if(windowH > pagecontentboxH) {
+		$('#pagemainbox').css('height', windowH);
+	} else {
+		$('#pagemainbox').css('height', pagecontentboxH);
+	}
+	windowW = $(window).width();
+	pagecenterboxW = $(window).width() - ($('#pageleftbox').width() + $('#pageleftbox').width());
+	$('#pagecenterbox').css('width', pagecenterboxW);
+	/*if(windowW < 900) {
+		$('#pagerightbox').remove();
+		$('#pagecenterbox').css('width', 'auto');
+	}*/
 }
 
 $(document).ready(function() {
-	/*autoDiv();*/
+	autolayout();
+});
+
+$(document).resize(function() {
+	autolayout();
+});
+
+$(window).ready(function () {
 	autolayout();
 });
 
 $(window).resize(function () {
-	/*autoDiv();*/
 	autolayout();
 });
 

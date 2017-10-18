@@ -19,11 +19,6 @@ public class BoardController {
 		this.pboardSvc = pboardSvc;
 	}
 	
-	@RequestMapping("/page")
-	public String page(@ModelAttribute("pboardcmd") PboardCommand pbc) {
-		return "page";
-	}
-	
 	@RequestMapping("/pbwrite")
 	public String pboardWrite(@ModelAttribute("pboardcmd") PboardCommand pbc) {
 		int pbhostid = 1;

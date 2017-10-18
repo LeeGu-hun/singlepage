@@ -37,16 +37,20 @@
 		<constructor-arg ref="dataSource" />
 	</bean>
 	
+	<bean id="memberSvc" class="member.MemberService">
+		<constructor-arg  ref="memberDao" />
+	</bean>
+	
 	<bean id="mainSvc" class="main.MainService">
 		<constructor-arg ref="mainDao" />
+	</bean>
+	
+	<bean id="pageSvc" class="page.PageService">
 	</bean>
 	
 	<bean id="pboardSvc" class="board.PboardService">
 		<constructor-arg ref="pboardDao" />
 	</bean>
 	
-	<bean id="memberSvc" class="member.MemberService">
-		<constructor-arg  ref="memberDao" />
-	</bean>
 	
 </beans>
