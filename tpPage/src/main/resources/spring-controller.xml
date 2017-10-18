@@ -18,7 +18,7 @@
 		<property name="mainService" ref="mainSvc" />
 	</bean>
 	
-	<bean class="controller.PboardController">
+	<bean class="controller.BoardController">
 		<property name="pboardSvc" ref="pboardSvc" />
 	</bean>
 	
