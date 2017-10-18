@@ -1,10 +1,15 @@
 @charset "UTF-8";
 
-.header {
+#header {
 	position: relative;
 	width: 100%;
+	height: 100px;
 	float: left;
 	background: grey;
+}
+
+#pagemainbox {
+	position
 }
 
 #pageleftbox {
@@ -24,9 +29,10 @@
 	float: right;
 }
 
-.footer {
+#footer {
 	position: relative;
 	width: 100%;
+	height 50px;
 	float: left;
 	background: grey;
 }

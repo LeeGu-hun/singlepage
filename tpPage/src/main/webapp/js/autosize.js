@@ -1,4 +1,4 @@
-/*function autoResizeDiv() {
+/*function autoDiv() {
 	mainBoxHeight = $('#contentBox').height();
 	windowHeight  = $(window).height() - $('#footer').height();
 	if(mainBoxHeight < windowHeight){
@@ -7,10 +7,6 @@
 		$('#mainBox').css('height', mainBoxHeight);
 	}
 }
-
-$(document).ready(function() {
-	autoResizeDiv();
-});
 */
 
 function autolayout() {
@@ -21,10 +17,12 @@ function autolayout() {
 }
 
 $(document).ready(function() {
+	/*autoDiv();*/
 	autolayout();
 });
 
 $(window).resize(function () {
+	/*autoDiv();*/
 	autolayout();
 });
 
