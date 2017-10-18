@@ -5,7 +5,7 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
-누구님의 페이지 게시판입니다.
+page board
 <form:form commandName="pboardcmd" action="pbwrite"
 	enctype="multipart/form-data">
 	<form:input path="pbsubject" />
@@ -16,6 +16,6 @@
 	<br>
 	<input type="file" id="pbfile" name="pbfile" onchange="readURL(this);" />
 	<input type="hidden" id="pbupdir" name="pbupdir"
-		value="<%=request.getRealPath("/pbuploads/")%>" />
+		value="<%=request.getRealPath("/buploads/pbuploads")%>" />
 	<input type="submit" value="등록" />
 </form:form>
