@@ -5,20 +5,28 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
+
 <script>
 jQuery(document).on('click', '.mega-dropdown', function(e) {
 	  e.stopPropagation()
 	})
 </script>
 
+
 <div class="container">
 <%@ include file="./menubar.jsp" %>
 
-<div align="center">
-<div class="col-md-4" style="border: 1px solid #cccccc;height: 300px"></div>
-<div class="col-md-4" style="border: 1px solid #cccccc;height: 300px"></div>
-<div class="col-md-4" style="border: 1px solid #cccccc;height: 300px"></div>
+
+
+<div class="grid">
+<c:forEach var="list" items="${boardList }">
+<div class="gird-item">
+<c:out value="${list.pbid }" />
 </div>
-<!-- 메인영역 끝 -->
+</c:forEach>
+</div>
+<!-- 랜덤 영역 끝 -->
+
+
 
 </div>

@@ -1,8 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/ptop.css?ver=33" />
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+<<<<<<< HEAD
 <script src="<%=request.getContextPath()%>/js/page.js?ver=1211"></script>
+=======
+<script src="<%=request.getContextPath()%>/js/ptop.js?ver=12211"></script>
+>>>>>>> branch 'temp' of https://github.com/LeeGu-hun/singlepage.git
 
 <div class='row' style="width:auto; margin:0px 0px 0px 0px">
     <div class='col-md-12'>

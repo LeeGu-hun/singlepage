@@ -10,17 +10,17 @@
 
 <!-- 	<mvc:view-controller path="/main" view-name="main" /> -->
 
-	<bean class="controller.LoginController">
-		<property name="memberDao" ref="memberDao" />
+	<bean class="controller.MemberController">
+		<property name="memberSvc" ref="memberSvc" />
 	</bean>
 
 	<bean class="controller.MainController">
 		<property name="mainService" ref="mainSvc" />
 	</bean>
 	
-	<bean class="controller.PboardController">
+	<bean class="controller.BoardController">
 		<property name="pboardSvc" ref="pboardSvc" />
 	</bean>
-	
+
 
 </beans>

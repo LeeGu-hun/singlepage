@@ -23,13 +23,21 @@
 	}
 </script>
 
-누구님의 페이지 게시판입니다.
+<div>
+	<ul class="nav nav-tabs" role="tablist">
+		<li role="presentation" class="active"><a href="#page"
+			aria-controls="page" role="tab" data-toggle="tab">page</a></li>
+		<li role="presentation"><a href="#member"
+			aria-controls="member" role="tab" data-toggle="tab">member</a></li>
+	</ul>
 
-<form:form commandName="pboardcmd" action="pbwrite" enctype="multipart/form-data">
-	<form:input path="pbsubject"/>
-	<br><form:textarea path="pbcontent"></form:textarea>
-	<br><img id="pbuploadImg" name="pbuploadImg" />
-	<br><input type="file" id="pbfile" name="pbfile" onchange="readURL(this);" />
-	<input type="hidden" id="pbupdir" name="pbupdir" value="<%=request.getRealPath("/pbuploads/") %>" />
-	<input type="submit" value="등록" />
-</form:form>
+	<div class="tab-content">
+		<div role="tabpanel" class="tab-pane active" id="page">
+			<%@ include file="/page/pboard.jsp" %>
+		</div>
+		
+		<div role="tabpanel" class="tab-pane" id="member">
+			<%@ include file="/page/mboard.jsp" %>
+		</div>
+	</div>
+</div>	

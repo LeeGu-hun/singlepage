@@ -68,3 +68,47 @@ pbid_seq.nextval, 'subject', 'content', 'file', 'newfile', 0, 0, 0, 0, sysdate, 
 insert into pboard (pbid, pbsubject, pbcontent, pbfile, pbnewfile, pbre_ref, pbre_lev, pbre_seq, pbreadcount, pbdate, pbhostid, pbwriterid)
 values(pbid_seq.nextval, 'subject', 'content', 'file', 'newfile', 0, 0, 0, 0, sysdate, 1, 1);
 
+
+create table mboard(
+mbid number not null,
+mbsubject varchar2(200) not null,
+mbcontent varchar2(3000) not null,
+mbfile varchar2(100),
+mbnewfile varchar2(100),
+mbre_ref int,
+mbre_lev int,
+mbre_seq int,
+mbreadcount int,
+mbdate date,
+mbhostid int,
+mbwriterid int,
+constraint pk_mboard primary key(mbid),
+constraint fk_mboard_hostid foreign key(mbhostid) references page(pid),
+constraint fk_mboard_writerid foreign key(mbwriterid) references member(mid)
+);
+
+create sequence mbid_seq increment by 1 start with 1 maxvalue 30000;
+
+insert into mboard values(
+mbid_seq.nextval, 'subject', 'content', 'file', 'newfile', 0, 0, 0, 0, sysdate, 1, 1);
+
+insert into mboard (mbid, mbsubject, mbcontent, mbfile, mbnewfile, mbre_ref, mbre_lev, mbre_seq, mbreadcount, mbdate, mbhostid, mbwriterid)
+values(mbid_seq.nextval, 'subject', 'content', 'file', 'newfile', 0, 0, 0, 0, sysdate, 1, 1);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

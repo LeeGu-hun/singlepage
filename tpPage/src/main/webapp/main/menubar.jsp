@@ -5,21 +5,20 @@
 	<div class="collapse navbar-collapse js-navbar-collapse">
 		<ul class="nav navbar-nav">
 			<li class="dropdown mega-dropdown">
-				<a href="#" class="dropdown-toggle" data-toggle="dropdown">메뉴 <span class="caret"></span></a>				
+				<a href="#" class="dropdown-toggle" data-toggle="dropdown">카테고리 <span class="caret"></span></a>				
 				<ul class="dropdown-menu mega-dropdown-menu">
 					<li class="col-sm-3">
 						<ul>
 							<li class="dropdown-header">지역별</li>
-							<li><a href="#">서울</a></li>
-                            <li><a href="#">인천</a></li>
-							<li><a href="#">대전</a></li>
-							<li><a href="#">광주</a></li>
-							<li><a href="#">대구</a></li>
-							<li><a href="#">부산</a></li>
-							<li><a href="#">울산</a></li>
-							<li><a href="#">전국</a></li>
+							<li><a href="./srch?city=seoul">서울</a></li>
+                            <li><a href="./srch?city=incheon">인천</a></li>
+							<li><a href="./srch?city=daejeon">대전</a></li>
+							<li><a href="./srch?city=kwangju">광주</a></li>
+							<li><a href="./srch?city=daegu">대구</a></li>
+							<li><a href="./srch?city=pusan">부산</a></li>
+							<li><a href="./srch?city=ulsan">울산</a></li>
 							<li class="divider"></li>
-							<li><a href="#">더보기</a></li>
+							<li><a href="./srch?city=more">더보기</a></li>
 						</ul>
 					</li>
 					<li class="col-sm-3">
