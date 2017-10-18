@@ -45,4 +45,8 @@
 		<constructor-arg ref="pboardDao" />
 	</bean>
 	
+	<bean id="memberSvc" class="member.MemberService">
+		<constructor-arg  ref="memberDao" />
+	</bean>
+	
 </beans>

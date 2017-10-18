@@ -11,7 +11,7 @@ import board.PboardCommand;
 import board.PboardService;
 
 @Controller
-public class PboardController {
+public class BoardController {
 	
 	private PboardService pboardSvc;
 
