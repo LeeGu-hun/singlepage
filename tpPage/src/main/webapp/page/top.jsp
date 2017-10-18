@@ -52,4 +52,4 @@
         <a data-slide="next" href="#media" class="right carousel-control">›</a>
       </div>                          
     </div>
-  <	
+  </div>	
