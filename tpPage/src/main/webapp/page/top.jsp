@@ -2,10 +2,10 @@
     pageEncoding="UTF-8"%>
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/ptop.css?ver=33" />
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
-<script src="<%=request.getContextPath()%>/js/ptop.js?ver=1111"></script>
+<script src="<%=request.getContextPath()%>/js/ptop.js?ver=1211"></script>
 
-<div class='row'>
-    <div class='col-md-8'>
+<div class='row' style="width:auto; margin:0px 0px 0px 0px">
+    <div class='col-md-12'>
       <div class="carousel slide media-carousel" id="media">
         <div class="carousel-inner">
           <div class="item  active">
@@ -52,4 +52,4 @@
         <a data-slide="next" href="#media" class="right carousel-control">›</a>
       </div>                          
     </div>
-  <	
+  </div>	
