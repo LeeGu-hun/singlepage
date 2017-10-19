@@ -16,6 +16,6 @@ page board
 	<br>
 	<input type="file" id="pbfile" name="pbfile" onchange="readURL(this);" />
 	<input type="hidden" id="pbupdir" name="pbupdir"
-		value="<%=request.getRealPath("/buploads/pbuploads")%>" />
+		value="<%=request.getRealPath("/buploads/pbuploads/")%>" />
 	<input type="submit" value="등록" />
 </form:form>

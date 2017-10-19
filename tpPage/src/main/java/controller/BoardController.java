@@ -8,14 +8,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
 
 import board.PboardCommand;
-import board.PboardService;
+import board.BoardService;
 
 @Controller
 public class BoardController {
 	
-	private PboardService pboardSvc;
+	private BoardService pboardSvc;
 
-	public void setPboardSvc(PboardService pboardSvc) {
+	public void setPboardSvc(BoardService pboardSvc) {
 		this.pboardSvc = pboardSvc;
 	}
 	

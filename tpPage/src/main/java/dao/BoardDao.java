@@ -12,11 +12,11 @@ import org.springframework.transaction.annotation.Transactional;
 
 import board.Pboard;
 
-public class PboardDao {
+public class BoardDao {
 
 	private JdbcTemplate jdbcTemplate;
 
-	public PboardDao(DataSource dataSource) {
+	public BoardDao(DataSource dataSource) {
 		this.jdbcTemplate = new JdbcTemplate(dataSource);
 	}
 	
