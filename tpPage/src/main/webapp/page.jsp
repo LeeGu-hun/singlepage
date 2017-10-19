@@ -14,6 +14,7 @@
 	crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 <script src="<%=request.getContextPath()%>/js/autosize.js?ver=3"></script>
+<script type="text/javascript" src="<%=request.getContextPath()%>/js/left.js?ver=5544"></script>
 
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>SinglePage</title>
@@ -44,21 +45,27 @@
 <div class="reveal-modal" id="myModal">
 	<label>후원금액</label><br /> 
 	
-	<input id="oneth" type="radio" name="money" value="one" /> 
-	<label for="oneth">1000원</label> 
+	<div onchange="donate()">
+		<input id="oneth" type="radio" name="money" value="1000" /> 1000원
+		
+		<input id="thrth" type="radio" name="money" value="3000" /> 3000원
+		
+		<input id="fivth" type="radio" name="money" value="5000" /> 5000원<br /> 
+		
+		<input id="tenth" type="radio" name="money" value="10000" /> 10000원
+		
+		<input id="in" type="radio" name="money" value="in" /> 직접입력
+		<input id="in_money" type="text" name="in_money" disabled /><label>원</label>
+	</div>
 	
-	<input id="thrth" type="radio" name="money" value="three" /> 
-	<label for="thrth">3000원</label>
-	
-	<input id="fivth" type="radio" name="money" value="five" /> 
-	<label for="fivth">5000원</label><br /> 
-	
-	<input id="tenth" type="radio" name="money" value="ten" /> 
-	<label for="tenth">10000원</label> 
-	
-	<input id="in" type="radio" name="money" value="in" /> 
-	<label for="in">직접입력</label>
-	<input id="in_money" type="text" name="in_money" /><label>원</label>
+	<div style="text-align:right">
+		<label for="current_money">보유 포인트</label>
+		<input type="text" id="cmoney" name="cmoney" value="" readonly/>원<br/>
+		<label for="donate_money">- 후원 포인트</label>
+		<input type="text" id="dmoney" name="dmoney" value="" readonly/>원<br/>
+		<label for="after_money">= 예상 포인트</label>
+		<input type="text" id="amoney" name="amoney" value="" readonly/>원
+	</div>
 	<a class="close-reveal-modal">&#215;</a>
 </div>
 
