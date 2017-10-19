@@ -6,16 +6,15 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 member board
-<%-- <form:form commandName="mboardcmd" action="mbwrite"
-	enctype="multipart/form-data">
-	<form:input path="mbsubject" />
+<form id="mboardform" name="mboardform" method="Post" enctype="multipart/form-data">
+	<input type="text" id="mbsubject" name="mbsubject" />
 	<br>
-	<form:textarea path="mbcontent"></form:textarea>
+	<textarea id="mbcontent" name="mbcontent"></textarea>
 	<br>
 	<img id="mbuploadImg" name="mbuploadImg" />
 	<br>
 	<input type="file" id="mbfile" name="mbfile" onchange="readURL(this);" />
 	<input type="hidden" id="mbupdir" name="mbupdir"
 		value="<%=request.getRealPath("/buploads/mbuploads/")%>" />
-	<input type="submit" value="등록" />
-</form:form> --%>
+	<input type="button" value="등록" onclick="mbwrite();" />
+</form>
