@@ -24,7 +24,7 @@ public class BoardController {
 		this.boardSvc = boardSvc;
 	}
 
-	@RequestMapping("/pbwrite")
+	/*@RequestMapping("/pbwrite")
 	public String pboardWrite(@ModelAttribute("pboardcmd") PboardCommand pbc) {
 		int pbhostid = 1;
 		int pbwriterid = 1;
@@ -45,7 +45,7 @@ public class BoardController {
 		}
 		return "redirect:/page";
 	}
-	
+	*/
 	@RequestMapping(value="/mbwrite", method=RequestMethod.POST, produces="text/plain")
 	public String MboardWrite(MultipartHttpServletRequest requset) {
 		

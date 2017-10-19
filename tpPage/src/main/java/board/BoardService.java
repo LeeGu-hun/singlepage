@@ -13,7 +13,7 @@ public class BoardService {
 		this.boardDao = boardDao;
 	}
 
-	@Transactional
+/*	@Transactional
 	public void pboardWrite(int pbhostid, int pbwriterid, String pbsubject, String pbcontent,
 			String pbfile, String pbnewfile) {
 		
@@ -26,6 +26,6 @@ public class BoardService {
 			String mbfile, String mbnewfile) {
 		
 		Mboard mboard = new Mboard(mbhostid, mbwriterid, mbsubject, mbcontent, mbfile, mbnewfile);
-		boardDao.MboardWrite(mboard);
-	}
+		boardDao.MboardWrite(mboard);*/
+	
 }
