@@ -5,11 +5,6 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
-<script 
-	src="https://code.jquery.com/jquery-3.2.1.min.js"
-	integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
-	crossorigin="anonymous"></script>
-
 <script>
 	function readURL(input) {
 		if(input.files && input.files[0]) {
@@ -17,6 +12,8 @@
 			reader.onload = function(e) {
 				$('#pbuploadImg').attr('src', e.target.result);
 				$('#pbuploadImg').attr('width', 300);
+				$('#mbuploadImg').attr('src', e.target.result);
+				$('#mbuploadImg').attr('width', 300);
 			}
 			reader.readAsDataURL(input.files[0]);
 		}

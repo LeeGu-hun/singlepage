@@ -2,14 +2,14 @@ package board;
 
 import org.springframework.transaction.annotation.Transactional;
 
-import dao.PboardDao;
+import dao.BoardDao;
 
-public class PboardService {
+public class BoardService {
 	
-	private PboardDao pboardDao;
+	private BoardDao boardDao;
 	
-	public PboardService(PboardDao pboardDao) {
-		this.pboardDao = pboardDao;
+	public BoardService(BoardDao boardDao) {
+		this.boardDao = boardDao;
 	}
 	
 	@Transactional
@@ -18,6 +18,6 @@ public class PboardService {
 		
 		Pboard pboard;
 		pboard = new Pboard(pbhostid, pbwriterid, pbsubject, pbcontent, pbfile, pbnewfile);
-		pboardDao.PboardWrite(pboard);
+		boardDao.PboardWrite(pboard);
 	}
 }
