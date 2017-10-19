@@ -40,6 +40,29 @@
 	</div>
 </div>
 
+
+<div class="reveal-modal" id="myModal">
+	<label>후원금액</label><br /> 
+	
+	<input id="oneth" type="radio" name="money" value="one" /> 
+	<label for="oneth">1000원</label> 
+	
+	<input id="thrth" type="radio" name="money" value="three" /> 
+	<label for="thrth">3000원</label>
+	
+	<input id="fivth" type="radio" name="money" value="five" /> 
+	<label for="fivth">5000원</label><br /> 
+	
+	<input id="tenth" type="radio" name="money" value="ten" /> 
+	<label for="tenth">10000원</label> 
+	
+	<input id="in" type="radio" name="money" value="in" /> 
+	<label for="in">직접입력</label>
+	<input id="in_money" type="text" name="in_money" /><label>원</label>
+	<a class="close-reveal-modal">&#215;</a>
+</div>
+
+
 <%@ include file="./include/footer.jsp" %>
 </body>
 </html>
