@@ -18,8 +18,13 @@ public class BoardDao {
 	@Transactional
 	public void PboardWrite(final Pboard pboard) {
 		jdbcTemplate.update("insert into pboard values(pbid_seq.nextval, ?, ?, ?, ?, 0, 0, 0, 0, sysdate, ?, ?)",
+<<<<<<< HEAD
 				pboard.getPbsubject(), pboard.getPbcontent(), pboard.getPbfile(), pboard.getPbnewfile(), 1, 1);
 		Integer currpbid = jdbcTemplate.queryForObject("select pbid_seq.currval from dual", Integer.class);
+=======
+				pboard.getPbsubject(), pboard.getPbcontent(), pboard.getPbfile(), pboard.getPbnewfile(), 2, 3);
+		int currpbid = jdbcTemplate.queryForInt("select pbid_seq.currval from dual");
+>>>>>>> branch 'temp' of https://github.com/LeeGu-hun/singlepage.git
 		jdbcTemplate.update("update pboard set pbre_ref = ? where pbid = ?",
 				currpbid, currpbid);
 	}
