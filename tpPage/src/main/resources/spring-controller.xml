@@ -23,7 +23,7 @@
 	</bean>
 	
 	<bean class="controller.BoardController">
-		<property name="pboardSvc" ref="pboardSvc" />
+		<property name="boardSvc" ref="boardSvc" />
 	</bean>
 
 

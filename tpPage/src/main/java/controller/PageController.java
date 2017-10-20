@@ -21,15 +21,6 @@ public class PageController {
 
 	@RequestMapping("/page")
 	public String pageLoad(@ModelAttribute("pboardcmd") PboardCommand pbc, Model model, HttpServletRequest request) {
-		
-		
-		
-		
-		
-		
-		
-		
-		
 		return "page";
 	}
 }
