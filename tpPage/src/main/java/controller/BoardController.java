@@ -46,15 +46,33 @@ public class BoardController {
 		return "redirect:/page";
 	}
 	
-	@RequestMapping(value="/mbwrite", method=RequestMethod.POST, produces="text/plain")
-	public String MboardWrite(MultipartHttpServletRequest requset) {
+	@RequestMapping("/mbwrite")
+	public String MboardWrite(MultipartHttpServletRequest request) {
+		int mbhostid = 1;
+		int mbwriterid = 1;
+		String mbsubject = request.getParameter("mbsubject");
+		System.out.println(mbsubject);
 		
-		/*MultipartFile multi = requset.getFile();
-		String pbfile = multi.getOriginalFilename();
 		
-		System.out.println(pbfile);*/
+		/*Iterator<String> iter = request.getFileNames();
+		String str = iter.next();
+		MultipartFile multi = request.getFile(str);
+		String mbfile = multi.getOriginalFilename();
+		if(!(mbfile.equals(""))) {
+			String mbnewfile = System.currentTimeMillis() + "_" + mbfile;
+			boardSvc.pboardWrite(mbhostid, mbwriterid, pbc.getPbsubject(), pbc.getPbcontent(), mbfile, mbnewfile);
+			String path = pbc.getPbupdir() + pbnewfile;
+			try {
+				File file = new File(path);
+				multi.transferTo(file);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		} else {
+			boardSvc.pboardWrite(pbhostid, pbwriterid, pbc.getPbsubject(), pbc.getPbcontent(), null, null);
+		}*/
 		
-		return "redirect:/page";
+		return "page/mboardR";
 	}
 }
 

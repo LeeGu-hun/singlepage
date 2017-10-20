@@ -1,5 +1,5 @@
-function mbwrite() {
-	var mboardform = $('#mboardform')[0];
+/*function mbwrite() {
+	var mboardform = $('#mboardform');
 	var formData = new FormData(mboardform);
 	
 	console.log(formData);
@@ -21,3 +21,4 @@ function mbwrite() {
 		
 	});
 }
+*/
