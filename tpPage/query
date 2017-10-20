@@ -96,6 +96,45 @@ insert into mboard (mbid, mbsubject, mbcontent, mbfile, mbnewfile, mbre_ref, mbr
 values(mbid_seq.nextval, 'subject', 'content', 'file', 'newfile', 0, 0, 0, 0, sysdate, 1, 1);
 
 
+create table mem_point (
+mid number not null,
+money number not null,
+m_deal_type varchar2(6) not null,
+m_deal_date date not null,
+pid number,
+constraint fk_mp_mid foreign key(mid) references member(mid),
+constraint m_type check(m_deal_type in('charge', 'donate')),
+constraint fk_mp_pid foreign key(pid) references page(pid));
+
+create table page_point (
+pid number not null,
+money number not null,
+p_deal_type varchar2(7) not null,
+p_deal_date date not null,
+mid number,
+constraint fk_pp_mid foreign key(mid) references member(mid),
+constraint p_type check(p_deal_type in('donate', 'realize ')),
+constraint fk_pp_pid foreign key(pid) references page(pid));
+
+create table page_like (
+mid number not null,
+plike char(1) not null,
+pid number not null,
+plike_date date not null,
+constraint fk_plike_mid foreign key(mid) references member(mid),
+constraint fk_plike_pid foreign key(pid) references page(pid),
+constraint plike_status check(plike in('0', '1')));
+
+create table board_like (
+mid number not null,
+blike char(1) not null,
+mbid number,
+pbid number,
+blike_date date not null,
+constraint fk_blike_mid foreign key(mid) references member(mid),
+constraint fk_blike_mbid foreign key(mbid) references mboard(mbid),
+constraint fk_blike_pbid foreign key(pbid) references pboard(pbid),
+constraint blike_status check(blike in('0', '1')));
 
 
 
