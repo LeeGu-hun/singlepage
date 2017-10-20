@@ -9,7 +9,7 @@
 </head>
 <body>
 
-	<form:form>
+	<form:form commandName="logincmd" action="memberLogin">
 	<p>
 		<label>email:<br>
 			<form:input path="memail" />
