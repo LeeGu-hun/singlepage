@@ -56,4 +56,10 @@ public class MemberController {
 			}
 		}	
 	}
+	
+	@RequestMapping("/logout")
+	public String logout(HttpSession session) {
+		session.invalidate();
+		return "redirect:/home";
+	}
 }
