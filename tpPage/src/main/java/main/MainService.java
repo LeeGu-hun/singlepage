@@ -41,6 +41,14 @@ public class MainService {
 		return boardList;
 	}
 	
+	public List<Pboard> search(String code, String option) {
+		List<Pboard> boardList = new ArrayList<Pboard>();
+		
+		
+		
+		return boardList;
+	}
+	
 	
 	
 }

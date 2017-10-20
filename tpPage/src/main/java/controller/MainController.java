@@ -1,5 +1,6 @@
 package controller;
 
+import java.util.Enumeration;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.stereotype.Controller;
@@ -26,7 +27,17 @@ public class MainController {
 	@RequestMapping("/srch")
 	public String srch(HttpServletRequest req) {
 		String city = req.getParameter("city");
-		System.out.println(city);
+		Enumeration<String> e = req.getParameterNames();
+		while (e.hasMoreElements()) {
+			String name = e.nextElement();
+			String[] data = req.getParameterValues(name);
+			if(data!=null) {
+				for(String eachData : data) {
+					System.out.print(eachData + "/");
+				}
+				System.out.println("");
+			}
+		}
 
 		return "home";
 	}
