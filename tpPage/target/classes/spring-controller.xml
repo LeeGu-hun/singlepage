@@ -18,8 +18,12 @@
 		<property name="mainService" ref="mainSvc" />
 	</bean>
 	
-	<bean class="controller.PboardController">
-		<property name="pboardSvc" ref="pboardSvc" />
+	<bean class="controller.PageController">
+		<property name="pageSvc" ref="pageSvc" />
+	</bean>
+	
+	<bean class="controller.BoardController">
+		<property name="boardSvc" ref="boardSvc" />
 	</bean>
 
 

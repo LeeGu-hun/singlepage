@@ -17,6 +17,26 @@ public class Pboard {
 		this.pbfile = pbfile;
 		this.pbnewfile = pbnewfile;
 	}
+	
+	
+
+	public Pboard(int pbid, int pbre_ref, int pbre_lev, int pbre_seq, int pbreadcount, int pbhostid, int pbwriterid,
+			String pbsubject, String pbcontent, String pbfile, String pbnewfile, Date pbdate) {
+		this.pbid = pbid;
+		this.pbre_ref = pbre_ref;
+		this.pbre_lev = pbre_lev;
+		this.pbre_seq = pbre_seq;
+		this.pbreadcount = pbreadcount;
+		this.pbhostid = pbhostid;
+		this.pbwriterid = pbwriterid;
+		this.pbsubject = pbsubject;
+		this.pbcontent = pbcontent;
+		this.pbfile = pbfile;
+		this.pbnewfile = pbnewfile;
+		this.pbdate = pbdate;
+	}
+
+
 
 	public int getPbid() {
 		return pbid;

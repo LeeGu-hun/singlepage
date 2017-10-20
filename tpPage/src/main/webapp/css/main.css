@@ -1,13 +1,52 @@
 @charset "UTF-8";
 @import url(http://fonts.googleapis.com/css?family=Open+Sans:400,700);
-body {
-  font-family: 'Open Sans', 'sans-serif';
+
+.grid{
+	padding-left: 3px;
 }
+
+.grid-item:nth-child(3n+1) {
+	padding: 10px 10px 10px 0;
+}
+
+.grid-item:nth-child(3n+2) {
+	padding: 10px 10px 10px 10px;
+}
+
+.grid-item:nth-child(3n+3) {
+	padding: 10px 0 10px 10px;
+}
+
+.grid-item {
+  float: left;
+  width: 33%;
+  min-width:340px;
+  overflow: auto;
+}
+
+
+
+.inner-item{
+	padding:5px;
+	border: 2px solid #cccccc;
+	border-radius: 10px;	
+}
+
+.title {
+	color: red;
+}
+
+.content img {
+	border-radius: 10px;
+	max-width:330px; 
+}
+
+
 
 .navbar {
+	font-family: 'Open Sans', 'sans-serif';
 	background: #492343;
 }
-
 
 .mega-dropdown {
   position: static !important;
@@ -60,3 +99,5 @@ body {
   color: #333;
   border: 1px solid #ddd;
 }
+
+/* ---menubar 끝--- */
