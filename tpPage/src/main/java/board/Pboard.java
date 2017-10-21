@@ -1,11 +1,12 @@
 package board;
 
+import java.sql.Timestamp;
 import java.util.Date;
 
 public class Pboard {
 	
 	private int pbid, pbre_ref, pbre_lev, pbre_seq, pbreadcount, pbhostid, pbwriterid;
-	private String pbsubject, pbcontent, pbfile, pbnewfile;
+	private String pbsubject, pbcontent, pbfile, pbnewfile, pname, mname;
 	private Date pbdate;
 	
 	public Pboard(int pbhostid, int pbwriterid, String pbsubject, String pbcontent, String pbfile,
@@ -18,8 +19,6 @@ public class Pboard {
 		this.pbnewfile = pbnewfile;
 	}
 	
-	
-
 	public Pboard(int pbid, int pbre_ref, int pbre_lev, int pbre_seq, int pbreadcount, int pbhostid, int pbwriterid,
 			String pbsubject, String pbcontent, String pbfile, String pbnewfile, Date pbdate) {
 		this.pbid = pbid;
@@ -36,7 +35,20 @@ public class Pboard {
 		this.pbdate = pbdate;
 	}
 
-
+	public Pboard(int pbid, String pbsubject, String pbcontent, String pbfile, String pbnewfile, int pbreadcount, Date pbdate,
+			int pbhostid, int pbwriterid, String pname, String mname) {
+		this.pbid = pbid;
+		this.pbsubject = pbsubject;
+		this.pbcontent = pbcontent;
+		this.pbfile = pbfile;
+		this.pbnewfile = pbnewfile;
+		this.pbreadcount = pbreadcount;
+		this.pbdate = pbdate;
+		this.pbhostid = pbhostid;
+		this.pbwriterid = pbwriterid;
+		this.pname = pname;
+		this.mname = mname;
+	}
 
 	public int getPbid() {
 		return pbid;
@@ -124,6 +136,22 @@ public class Pboard {
 
 	public void setPbnewfile(String pbnewfile) {
 		this.pbnewfile = pbnewfile;
+	}
+
+	public String getPname() {
+		return pname;
+	}
+
+	public void setPname(String pname) {
+		this.pname = pname;
+	}
+
+	public String getMname() {
+		return mname;
+	}
+
+	public void setMname(String mname) {
+		this.mname = mname;
 	}
 
 	public Date getPbdate() {

@@ -20,6 +20,7 @@
 	
 	<bean class="controller.PageController">
 		<property name="pageSvc" ref="pageSvc" />
+		<property name="boardSvc" ref="boardSvc" />
 	</bean>
 	
 	<bean class="controller.BoardController">
