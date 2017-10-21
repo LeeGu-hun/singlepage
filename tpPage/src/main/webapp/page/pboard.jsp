@@ -6,15 +6,14 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 page board
-<form:form commandName="pboardcmd" action="pbwrite"
-	enctype="multipart/form-data">
+<form:form commandName="pboardcmd" action="pbwrite" enctype="multipart/form-data">
 	<form:input path="pbsubject" />
 	<br>
 	<form:textarea path="pbcontent"></form:textarea>
 	<br>
 	<img id="pbuploadImg" name="pbuploadImg" />
 	<br>
-	<input type="file" id="pbfile" name="pbfile" onchange="readURL(this);" />
+	<input type="file" id="pbfile" name="pbfile" onchange="pbreadURL(this);" />
 	<input type="hidden" id="pbupdir" name="pbupdir"
 		value="<%=request.getRealPath("/buploads/pbuploads/")%>" />
 	<input type="submit" value="등록" />

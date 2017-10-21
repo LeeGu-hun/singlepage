@@ -13,6 +13,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import board.PboardCommand;
+import member.AuthInfo;
 import board.BoardService;
 
 @Controller
@@ -25,54 +26,59 @@ public class BoardController {
 	}
 
 	@RequestMapping("/pbwrite")
-	public String pboardWrite(@ModelAttribute("pboardcmd") PboardCommand pbc) {
-		int pbhostid = 1;
-		int pbwriterid = 1;
-		MultipartFile multi = pbc.getPbfile();
-		String pbfile = multi.getOriginalFilename();
-		if(!(pbfile.equals(""))) {
-			String pbnewfile = System.currentTimeMillis() + "_" + pbfile;
-			boardSvc.pboardWrite(pbhostid, pbwriterid, pbc.getPbsubject(), pbc.getPbcontent(), pbfile, pbnewfile);
-			String path = pbc.getPbupdir() + pbnewfile;
-			try {
-				File file = new File(path);
-				multi.transferTo(file);
-			} catch (Exception e) {
-				e.printStackTrace();
+	public String pboardWrite(@ModelAttribute("pboardcmd") PboardCommand pbc, HttpServletRequest request) {
+		AuthInfo authinfo = (AuthInfo) request.getSession().getAttribute("authInfo");
+		if(authinfo == null) {
+			return "redirect:/login";
+		} else { 
+			int pbhostid = 1;
+			int pbwriterid = authinfo.getMid();
+			MultipartFile multi = pbc.getPbfile();
+			String pbfile = multi.getOriginalFilename();
+				if(!(pbfile.equals(""))) {
+				String pbnewfile = System.currentTimeMillis() + "_" + pbfile;
+				boardSvc.pboardWrite(pbhostid, pbwriterid, pbc.getPbsubject(), pbc.getPbcontent(), pbfile, pbnewfile);
+				String path = pbc.getPbupdir() + pbnewfile;
+				try {
+					File file = new File(path);
+					multi.transferTo(file);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			} else {
+				boardSvc.pboardWrite(pbhostid, pbwriterid, pbc.getPbsubject(), pbc.getPbcontent(), null, null);
 			}
-		} else {
-			boardSvc.pboardWrite(pbhostid, pbwriterid, pbc.getPbsubject(), pbc.getPbcontent(), null, null);
+			return "redirect:/page";
 		}
-		return "redirect:/page";
 	}
 	
 	@RequestMapping("/mbwrite")
 	public String MboardWrite(MultipartHttpServletRequest request) {
-		int mbhostid = 1;
-		int mbwriterid = 1;
-		String mbsubject = request.getParameter("mbsubject");
-		System.out.println(mbsubject);
-		
-		
-		/*Iterator<String> iter = request.getFileNames();
-		String str = iter.next();
-		MultipartFile multi = request.getFile(str);
-		String mbfile = multi.getOriginalFilename();
-		if(!(mbfile.equals(""))) {
-			String mbnewfile = System.currentTimeMillis() + "_" + mbfile;
-			boardSvc.pboardWrite(mbhostid, mbwriterid, pbc.getPbsubject(), pbc.getPbcontent(), mbfile, mbnewfile);
-			String path = pbc.getPbupdir() + pbnewfile;
-			try {
-				File file = new File(path);
-				multi.transferTo(file);
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
+		AuthInfo authInfo = (AuthInfo) request.getSession().getAttribute("authInfo");
+		if(authInfo == null) {
+			return "page/mboardR";
 		} else {
-			boardSvc.pboardWrite(pbhostid, pbwriterid, pbc.getPbsubject(), pbc.getPbcontent(), null, null);
-		}*/
-		
-		return "page/mboardR";
+			int mbhostid = 1;
+			int mbwriterid = authInfo.getMid();
+			if(!(request.getFileNames().hasNext() == false)) {
+				Iterator<String> itr = request.getFileNames();
+				String str = itr.next();
+				MultipartFile multi = request.getFile(str);
+				String mbfile = multi.getOriginalFilename();
+				String mbnewfile = System.currentTimeMillis() + "_" + mbfile;
+				boardSvc.mboardWrite(mbhostid, mbwriterid, request.getParameter("mbsubject"), request.getParameter("mbcontent"), mbfile, mbnewfile);
+				String path = request.getParameter("mbupdir") + mbnewfile;
+				try {
+					File file = new File(path);
+					multi.transferTo(file);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			} else {
+				boardSvc.mboardWrite(mbhostid, mbwriterid, request.getParameter("mbsubject"), request.getParameter("mbcontent"), null, null);
+			}
+			return "page/mboardR";
+		}
 	}
 }
 

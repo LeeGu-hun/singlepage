@@ -18,6 +18,4 @@
 <label>로그인 되었다.</label>
 </c:if>
 
-
-
 </div>
