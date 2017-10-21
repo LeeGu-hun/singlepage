@@ -12,6 +12,8 @@
 			reader.onload = function(e) {
 				$('#pbuploadImg').attr('src', e.target.result);
 				$('#pbuploadImg').attr('width', 300);
+				$('#mbuploadImg').attr('src', e.target.result);
+				$('#mbuploadImg').attr('width', 300);
 			}
 			reader.readAsDataURL(input.files[0]);
 		}

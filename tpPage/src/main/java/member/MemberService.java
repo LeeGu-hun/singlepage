@@ -15,4 +15,11 @@ public class MemberService {
 		Member member = new Member(mname, memail, mpw);
 		memberDao.memberJoin(member);
 	}
+
+	public Member memberLogin(String memail) {
+		
+		Member chkmember = new Member(memail);
+		Member member = memberDao.memberLogin(chkmember);
+		return member;
+	}
 }

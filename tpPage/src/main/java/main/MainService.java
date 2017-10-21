@@ -31,10 +31,21 @@ public class MainService {
 	
 	public List<Pboard> getRandom(int page, int limit) {
 		List<Pboard> boardList = new ArrayList<Pboard>();
-		for (int i = page; i <= limit; i++) {
-			Pboard newboard = mainDao.getBoardListRandom();
-			boardList.add(newboard);
+		
+		if (mainDao.count()>0) {
+			for (int i = page; i <= limit; i++) {
+				Pboard newboard = mainDao.getBoardListRandom();
+				boardList.add(newboard);
+			}
 		}
+		return boardList;
+	}
+	
+	public List<Pboard> search(String code, String option) {
+		List<Pboard> boardList = new ArrayList<Pboard>();
+		
+		
+		
 		return boardList;
 	}
 	

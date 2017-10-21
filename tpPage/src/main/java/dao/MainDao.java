@@ -35,7 +35,7 @@ public class MainDao {
 	}
 
 	public int count() {
-		Integer count = jdbcTemplate.queryForInt("select count(*) from pboard");
+		Integer count = jdbcTemplate.queryForObject("select count(*) from pboard", Integer.class);
 		return count;
 	}
 	

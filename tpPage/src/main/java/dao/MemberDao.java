@@ -29,11 +29,27 @@ public class MemberDao {
 				member.getMemail(), member.getMname(), member.getMpw());
 	}
 
-//	public int count() {
-//		Integer count = jdbcTemplate.queryForInt("select count(*) from MEMBER");
-//		return count;
-//	}
-//
+	public Member memberLogin(final Member chkmember) {
+		List<Member> results = jdbcTemplate.query("select * from member where memail = ?", 
+				new RowMapper<Member>() {
+			@Override
+			public Member mapRow(ResultSet rs, int rowNum) throws SQLException {
+				Member member = new Member(
+						rs.getInt("mid"), 
+						rs.getString("mname"),
+						rs.getString("memail"),
+						rs.getString("mpw"),
+						rs.getString("mphone"),
+						rs.getInt("mcheck"),
+						rs.getInt("mpoint"),
+						rs.getDate("mdate"));
+				return member;
+			}
+		}, chkmember.getMemail());
+		return results.isEmpty() ? null : results.get(0) ;
+	}
+
+
 //	public Member selectByEmail(String email) {
 //		List<Member> results = jdbcTemplate.query(
 //				"select * from member where memail = ?",
@@ -54,6 +70,12 @@ public class MemberDao {
 //		return results.isEmpty() ? null : results.get(0);
 //	}
 //	
+//public int count() {
+//Integer count = jdbcTemplate.queryForInt("select count(*) from MEMBER");
+//return count;
+//}
+//
+//
 //	public List<Member> selectAll() {
 //		List<Member> results = jdbcTemplate.query("select * from member",
 //				new RowMapper<Member>() {
