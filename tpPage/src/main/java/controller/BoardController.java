@@ -2,10 +2,12 @@ package controller;
 
 import java.io.File;
 import java.util.Iterator;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -13,18 +15,57 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import board.PboardCommand;
+import dao.BoardDao;
 import member.AuthInfo;
 import board.BoardService;
+import board.Pboard;
 
 @Controller
 public class BoardController {
 	
 	private BoardService boardSvc;
+	private BoardDao boardDao;
 
 	public void setBoardSvc(BoardService boardSvc) {
 		this.boardSvc = boardSvc;
 	}
 
+	public void setBoardDao(BoardDao boardDao) {
+		this.boardDao = boardDao;
+	}
+
+	@RequestMapping("/pbmorelist")
+	public String pbMoreList(HttpServletRequest request, Model model) {
+		int pageHostId = 1;
+		int page = Integer.parseInt(request.getParameter("pbPage"));
+		int listCount = boardDao.getPboardListCount(pageHostId);
+		int startPage = 1;
+		int endPage = startPage + (((page - 1) * 10) + 9);
+		if(endPage >= listCount) {
+			page = 0;
+		}
+		List<Pboard> pboardList = boardDao.getPboardList(pageHostId, startPage, endPage);
+		model.addAttribute("pboardList", pboardList);
+		request.setAttribute("pbPage", page);
+		return "page/pbMoreList";
+	}
+	
+	@RequestMapping("/pbmorelistscroll") 
+	public String pbMoreListScroll(HttpServletRequest request, Model model) {
+		int pageHostId = 1;
+		int mpage = Integer.parseInt(request.getParameter("pbPage"));
+		int listCount = boardDao.getPboardListCount(pageHostId);
+		int startPage = ((mpage - 1) * 10) +1;
+		int endPage = startPage + 9;
+		if(endPage >= listCount) {
+			mpage = 0;
+		}
+		List<Pboard> pboardList = boardDao.getPboardList(pageHostId, startPage, endPage);
+		model.addAttribute("pboardList", pboardList);
+		request.setAttribute("pbMpage", mpage);
+		return "page/pbMoreListScroll";
+	}
+	
 	@RequestMapping("/pbwrite")
 	public String pboardWrite(@ModelAttribute("pboardcmd") PboardCommand pbc, HttpServletRequest request) {
 		AuthInfo authinfo = (AuthInfo) request.getSession().getAttribute("authInfo");
