@@ -9,7 +9,7 @@
 				<ul class="dropdown-menu mega-dropdown-menu">
 					<li class="col-sm-3">
 						<ul>
-							<li class="dropdown-header">지역별</li>
+							<li class="dropdown-header"><a href="./srch?city=all">지역별</a></li>
 							<li><a href="./srch?city=seoul">서울</a></li>
                             <li><a href="./srch?city=incheon">인천</a></li>
 							<li><a href="./srch?city=daejeon">대전</a></li>

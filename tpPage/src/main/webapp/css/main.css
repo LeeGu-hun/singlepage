@@ -1,35 +1,42 @@
 @charset "UTF-8";
 @import url(http://fonts.googleapis.com/css?family=Open+Sans:400,700);
 
+
+/* --- 스크롤바 변경 시작--- */
+/* --- IE용 스크롤바 --- */
+.grid { scrollbar-arrow-color: #efefef;
+        scrollbar-Track-Color: #efefef; 
+        scrollbar-base-color: #dfdfdf;
+        scrollbar-Face-Color: #dfdfdf;
+        scrollbar-3dLight-Color: #dfdfdf;         
+        scrollbar-DarkShadow-Color: #dfdfdf;
+        scrollbar-Highlight-Color: #dfdfdf;
+        scrollbar-Shadow-Color: #dfdfdf}
+/* Chrome, Safari용 스크롤 바 */
+.grid ::-webkit-scrollbar {width: 6px; height: 6px; }
+.grid ::-webkit-scrollbar-button:start:decrement, 
+.grid ::-webkit-scrollbar-button:end:increment {display: block; width: 0px;height: 10px; background: url() rgba(0,0,0,0);}
+.grid ::-webkit-scrollbar-track {  background: rgba(0,0,0,0); -webkit-border-radius: 50px; border-radius:50px; }
+.grid ::-webkit-scrollbar-thumb {  width:50px; height:50px; background: #cccccc; -webkit-border-radius: 50px; border-radius:50px;  }
+/* --- 스크롤바 변경 끝--- */
+
 .grid{
 	padding-left: 3px;
-}
-
-.grid-item:nth-child(3n+1) {
-	padding: 10px 10px 10px 0;
-}
-
-.grid-item:nth-child(3n+2) {
-	padding: 10px 10px 10px 10px;
-}
-
-.grid-item:nth-child(3n+3) {
-	padding: 10px 0 10px 10px;
 }
 
 .grid-item {
   float: left;
   width: 33%;
-  min-width:340px;
-  overflow: auto;
+  padding: 10px;
+  min-width:370px;
 }
-
-
 
 .inner-item{
 	padding:5px;
 	border: 2px solid #cccccc;
-	border-radius: 10px;	
+	border-radius: 10px;
+	max-height: 600px;
+	overflow: auto;	
 }
 
 .title {
@@ -43,6 +50,8 @@
 
 
 
+
+/* ---menubar 시작--- */
 .navbar {
 	font-family: 'Open Sans', 'sans-serif';
 	background: #492343;
@@ -79,7 +88,12 @@
   padding: 5px 60px 5px 5px;
   line-height: 30px;
 }
-
+.mega-dropdown-menu .dropdown-header a {
+  display: inline;
+  font-size: inherit;
+  color: inherit;
+  padding: 0px;
+}
 .carousel-control {
   width: 30px;
   height: 30px;

@@ -5,7 +5,7 @@ import java.util.Date;
 public class Mboard {
 	
 	private int mbid, mbre_ref, mbre_lev, mbre_seq, mbreadcount, mbhostid, mbwriterid;
-	private String mbsubject, mbcontent, mbfile, mbnewfile;
+	private String mbsubject, mbcontent, mbfile, mbnewfile, pname, mname;
 	private Date mbdate;
 	
 	public Mboard(int mbhostid, int mbwriterid, String mbsubject, String mbcontent, String mbfile, String mbnewfile) {
@@ -16,6 +16,21 @@ public class Mboard {
 		this.mbcontent = mbcontent;
 		this.mbfile = mbfile;
 		this.mbnewfile = mbnewfile;
+	}
+	
+	public Mboard(int mbid, String mbsubject, String mbcontent, String mbfile, String mbnewfile, int mbreadcount, Date mbdate,
+			int mbhostid, int mbwriterid, String pname, String mname) {
+		this.mbid = mbid;
+		this.mbsubject = mbsubject;
+		this.mbcontent = mbcontent;
+		this.mbfile = mbfile;
+		this.mbnewfile = mbnewfile;
+		this.mbreadcount = mbreadcount;
+		this.mbdate = mbdate;
+		this.mbhostid = mbhostid;
+		this.mbwriterid = mbwriterid;
+		this.pname = pname;
+		this.mname = mname;
 	}
 	
 	public int getMbid() {
@@ -90,6 +105,16 @@ public class Mboard {
 	public void setMbdate(Date mbdate) {
 		this.mbdate = mbdate;
 	}
-	
-	
+	public String getPname() {
+		return pname;
+	}
+	public void setPname(String pname) {
+		this.pname = pname;
+	}
+	public String getMname() {
+		return mname;
+	}
+	public void setMname(String mname) {
+		this.mname = mname;
+	}
 }

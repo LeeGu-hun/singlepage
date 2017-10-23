@@ -29,6 +29,8 @@ public class MainService {
 		
 	}
 	
+	
+	
 	public List<Pboard> getRandom(int page, int limit) {
 		List<Pboard> boardList = new ArrayList<Pboard>();
 		
@@ -38,6 +40,14 @@ public class MainService {
 				boardList.add(newboard);
 			}
 		}
+		return boardList;
+	}
+	
+	public List<Pboard> search(String code, String option) {
+		List<Pboard> boardList = new ArrayList<Pboard>();
+		
+		
+		
 		return boardList;
 	}
 	
