@@ -45,6 +45,10 @@
 		<constructor-arg ref="mainDao" />
 	</bean>
 	
+	<bean id="pageDao" class="dao.PageDao">
+		<constructor-arg ref="dataSource" />
+	</bean>
+	
 	<bean id="pageSvc" class="page.PageService">
 	</bean>
 	

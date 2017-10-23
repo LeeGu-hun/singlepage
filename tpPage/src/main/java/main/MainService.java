@@ -29,6 +29,8 @@ public class MainService {
 		
 	}
 	
+	
+	
 	public List<Pboard> getRandom(int page, int limit) {
 		List<Pboard> boardList = new ArrayList<Pboard>();
 		

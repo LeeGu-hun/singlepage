@@ -6,28 +6,25 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <%
-	int nowPage = Integer.parseInt(request.getAttribute("page").toString());
-%>
-
-page board
-<form:form commandName="pboardcmd" action="pbwrite" enctype="multipart/form-data">
-	<form:input path="pbsubject" />
-	<br>
-	<form:textarea path="pbcontent"></form:textarea>
-	<br>
-	<img id="pbuploadImg" name="pbuploadImg" />
-	<br>
-	<input type="file" id="pbfile" name="pbfile" onchange="pbreadURL(this);" />
-	<input type="hidden" id="pbupdir" name="pbupdir"
-		value="<%=request.getRealPath("/buploads/pbuploads/")%>" />
-	<input type="submit" value="등록" />
-</form:form>
-<br>
-<br>
-<br>
-<table id="plistT" name="plistT" style="width:100%;">
-	<input type="hidden" id="page" name="page" value="1" />
-	<tbody>
+	int nowPbPage = Integer.parseInt(request.getAttribute("pbPage").toString());
+%>  
+	<thead>
+		<tr>
+			<th>pbid</th>
+			<th>pbsubject</th>
+			<th>pbcontent</th>
+			<th>pbfile</th>
+			<th>pbnewfile</th>
+			<th>pbreadcount</th>
+			<th>pbdate</th>
+			<th>pbhostid</th>
+			<th>pbwriterid</th>
+			<th>pname</th>
+			<th>mname</th>
+		</tr>
+	</thead>
+	<input type="hidden" id="pbPage" name="pbPage" value="<%= nowPbPage %>" />
+	<tbody id="pbListTT" name="pbListTT">
 		<c:forEach var="pboard" items="${pboardList }">
 		<tr>
 			<td>${pboard.pbid }</td>
@@ -46,24 +43,33 @@ page board
 			<td>${pboard.mname }</td>
 		</tr>
 		</c:forEach>
-<% if(nowPage == -1) { %>
-		<tr>
-			<td colspan="11">
-				등록된 글이 없습니다.
-			</td>
-		<tr>
-<% } else if(nowPage == 0) { %>		
+<% if(nowPbPage == 0) { %>		
 		<tr>
 			<td colspan="11">
 				마지막 항목입니다.
 			</td>
 		</tr>
-<% } else { %>
-		<tr name="btnRow" id="btnRow">
-			<td>
-				<input type="button" value="더 보기" />                    <!-- onclick="moreList(); " /> -->
-			</td>
-		</tr>
-<% } %>
 	</tbody>
-</table>
+<% } else { %>
+	</tbody>		
+
+<script>
+$(document).ready(function() {
+	$(window).scroll(function() {
+		var scrollHeight = $(window).scrollTop() + $(window).height();
+		var documentheight = $(document).height();
+		var pbPage = $("#pbPage").val();
+		var pbMpage = $("#pbMpage").val();
+		var pbli = $('#pbli').attr('class');
+		if(pbli == 'active') {
+			if(pbPage > 1 && pbMpage != 0) {
+				if(scrollHeight == documentheight) {
+					pbMoreListScroll();					
+				}	
+			}
+		}
+	});
+});
+</script>
+    
+<% } %>

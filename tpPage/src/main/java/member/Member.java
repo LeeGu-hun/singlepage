@@ -108,4 +108,9 @@ public class Member {
 	public void setMdate(Date mdate) {
 		this.mdate = mdate;
 	}
+	
+	public boolean matchPassword(String pwd) {
+		return this.mpw.equals(pwd);
+		
+	}
 }

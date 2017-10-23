@@ -14,6 +14,7 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 
+import board.Pboard;
 import member.Member;
 
 public class MemberDao {
@@ -50,25 +51,28 @@ public class MemberDao {
 	}
 
 
-//	public Member selectByEmail(String email) {
-//		List<Member> results = jdbcTemplate.query(
-//				"select * from member where memail = ?",
-//				new RowMapper<Member>() {
-//					@Override
-//					public Member mapRow(ResultSet rs, int rowNum)
-//							throws SQLException {
-//						Member member = new Member(rs.getString("memail"),
-//								rs.getString("mpw"),
-//								rs.getString("mname"),
-//								rs.getTimestamp("mdate"));
-//						member.setMid(rs.getInt("mid"));
-//						return member;
-//					}
-//				},
-//				email);
-//
-//		return results.isEmpty() ? null : results.get(0);
-//	}
+	public Member selectByEmail(String email) {
+		List<Member> results = jdbcTemplate.query(
+				"select * from member where memail = ?",
+				new RowMapper<Member>() {
+					@Override
+					public Member mapRow(ResultSet rs, int rowNum)
+							throws SQLException {
+						Member member = new Member(rs.getString("memail"));
+						return member;
+					}
+				},
+				email);
+
+		return results.isEmpty() ? null : results.get(0);
+	}
+	
+	public int check(final Pboard idChk) {
+		int id = jdbcTemplate.queryForInt("select pid from page where pmaster = ?", idChk.getPbhostid());
+		return id;
+	}
+	
+	
 //	
 //public int count() {
 //Integer count = jdbcTemplate.queryForInt("select count(*) from MEMBER");

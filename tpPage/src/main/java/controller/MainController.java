@@ -18,27 +18,28 @@ public class MainController {
 	}
 
 	@RequestMapping("/home")
-	public String onLoad(HttpServletRequest req, Model model) {
+	public String onLoad(Model model) {
 		List<Pboard> boardList = mainService.getRandom(1, 6);
 		model.addAttribute("boardList", boardList);
 		return "home";
 	}
 	
 	@RequestMapping("/srch")
-	public String srch(HttpServletRequest req) {
+	public String srch(HttpServletRequest req, Model model) {
 		String city = req.getParameter("city");
 		Enumeration<String> e = req.getParameterNames();
 		while (e.hasMoreElements()) {
 			String name = e.nextElement();
 			String[] data = req.getParameterValues(name);
 			if(data!=null) {
-				for(String eachData : data) {
-					System.out.print(eachData + "/");
+				for(int i = 0; i <= data.length-1; i++) {
+					System.out.print(data[i]);
+					if (i != data.length-1) System.out.print(" / ");
 				}
 				System.out.println("");
 			}
 		}
-
+		
 		return "home";
 	}
 
