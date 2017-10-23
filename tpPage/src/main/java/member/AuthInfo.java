@@ -1,34 +1,51 @@
 package member;
 
+import java.util.Date;
+
 public class AuthInfo {
+	private int mid;
 	private String mname;
 	private String memail;
-	private int mid;
+	private String mphone;
+	private int mcheck;
+	private int mpoint;
+	private Date mdate;
 	
-	public AuthInfo(String mname, String memail, int mid) {
-		super();
-		this.mname = mname;
-		this.memail = memail;
+	public AuthInfo(int mid, String mname, String memail, String mphone, int mcheck, int mpoint, Date mdate) {
 		this.mid = mid;
-	}
-	
-	public String getMname() {
-		return mname;
-	}
-	public void setMname(String mname) {
 		this.mname = mname;
-	}
-	public String getMemail() {
-		return memail;
-	}
-	public void setMemail(String memail) {
 		this.memail = memail;
+		this.mphone = mphone;
+		this.mcheck = mcheck;
+		this.mpoint = mpoint;
+		this.mdate = mdate;
 	}
+
 	public int getMid() {
 		return mid;
 	}
-	public void setMid(int mid) {
-		this.mid = mid;
+
+	public String getMname() {
+		return mname;
 	}
-	
+
+	public String getMemail() {
+		return memail;
+	}
+
+	public String getMphone() {
+		return mphone;
+	}
+
+	public int getMcheck() {
+		return mcheck;
+	}
+
+	public int getMpoint() {
+		return mpoint;
+	}
+
+	public Date getMdate() {
+		return mdate;
+	}
 }

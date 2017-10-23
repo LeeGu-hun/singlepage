@@ -30,7 +30,19 @@ public class Member {
 		this.mname = mname;
 		this.memail = memail;
 		this.mpw = mpw;
+	}
+	
 
+	public Member(String memail) {
+		this.memail = memail;
+
+	}
+
+	public Member(int mid, String mname, String memail, String mpw) {
+		this.mid = mid;
+		this.mname = mname;
+		this.memail = memail;
+		this.mpw = mpw;
 	}
 
 	public int getMid() {
