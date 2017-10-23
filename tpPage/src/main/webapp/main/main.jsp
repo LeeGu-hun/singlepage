@@ -16,15 +16,13 @@
 				제목 : <c:out value="${list.pbsubject}" />
 			</div>
 			<div class="content">
-				내용ddd<br>
+				내용<br>
 				<c:if test="${!empty list.pbnewfile}">
 				<div style="text-align: center;">
 				<img src="./buploads/pbuploads/${list.pbnewfile}" style="align-self: center;">
 				</div>
 				</c:if>
-				<br>
 				<c:out value="${list.pbcontent}" />
-				<br>aaa<br>aaa<br>aaa<br>aaa<br>aaa<br>aaa<br>aaa
 			</div>
 		</div>
 	</div>
