@@ -9,7 +9,7 @@ public class AuthService {
 		this.memberDao = memberDao;
 	}
 //	public AuthInfo authenticate(String memail, String mpw) {
-//		Member member = memberDao.selectByEmail(memail);
+//		Member member = memberDao.memberJoin(member);(memail);
 //		if (member == null) 
 //			throw new MemberNotFoundException();
 //		
