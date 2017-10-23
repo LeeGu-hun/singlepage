@@ -14,14 +14,6 @@
 	crossorigin="anonymous"></script>
 
 <script src="<%=request.getContextPath()%>/js/autosize.js?ver=3"></script>
-<<<<<<< HEAD
-
-<script src="<%=request.getContextPath()%>/js/mbajax.js?ver=3422222325"></script>
-
-<script type="text/javascript" src="<%=request.getContextPath()%>/js/left.js?ver=33"></script>
-
-=======
->>>>>>> branch 'temp' of https://github.com/LeeGu-hun/singlepage.git
 
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>SinglePage</title>
