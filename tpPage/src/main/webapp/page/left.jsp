@@ -5,7 +5,7 @@
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/left.css?ver=1" />
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/reveal.css?" />
 
-<script type="text/javascript" src="<%=request.getContextPath()%>/js/left.js?ver=33"></script>
+<script type="text/javascript" src="<%=request.getContextPath()%>/js/left.js?ver=3223"></script>
 
 <script type="text/javascript" src="http://code.jquery.com/jquery-1.6.min.js"></script>
 <script type="text/javascript" src="<%=request.getContextPath()%>/js/jquery.reveal.js?"></script>
@@ -21,7 +21,7 @@
 	</div>
 	<div>
 		<br/>
-		<a class="btn btn-info btn-sm" href="<c:url value='' />">좋아요</a>&nbsp;&nbsp;
+		<a id="btnLike" class="btn btn-info btn-sm" href="<c:url value='' />" onclick="like(this)">좋아요♡</a>&nbsp;&nbsp;
 		<a class="btn btn-info btn-sm" href="#" data-reveal-id="myModal" data-animation="none" onclick="donate()">후원</a>
 
 	</div>
