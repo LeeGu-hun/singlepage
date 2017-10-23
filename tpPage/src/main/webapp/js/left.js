@@ -16,3 +16,7 @@ function in_donate(point) {
          $('#dmoney').val($('#in_money').val());
     }); 
 }
+
+function like(obj) {
+
+}

@@ -29,6 +29,24 @@ public class MainDao {
 			return board;
 		}
 	};
+//	private RowMapper<Pboard> pRowMapper = new RowMapper<Pboard>() {
+//		@Override
+//		public Pboard mapRow(ResultSet rs, int rowNum) throws SQLException {
+//			Pboard board = new Pboard(rs.getInt("pbid"),
+//					rs.getInt("pbre_ref"),
+//					rs.getInt("pbre_lev"),
+//					rs.getInt("pbre_seq"),
+//					rs.getInt("pbreadcount"),
+//					rs.getInt("pbhostid"),
+//					rs.getInt("pbwriterid"),
+//					rs.getString("pbsubject"),
+//					rs.getString("pbcontent"),
+//					rs.getString("pbfile"),
+//					rs.getString("pbnewfile"),
+//					rs.getTimestamp("pbdate"));
+//			return board;
+//		}
+//	};
 
 	public MainDao(DataSource dataSource) {
 		this.jdbcTemplate = new JdbcTemplate(dataSource);
@@ -50,8 +68,12 @@ public class MainDao {
 		return board; 
 	}
 	
-	public List<Pboard> getBoardListSome(int page, int limit, String where, String what) {
-		List<Pboard> boardList = jdbcTemplate.query("select * from (select rownum rnum, pbid, pbsubject, pbcontent, pbfile, pbnewfile, pbre_ref, pbre_lev, pbre_seq, pbreadcount, pbdate, pbhostid, pbwriterid from (select * from pboard where ? = ? order by pbRE_REF desc, pbRE_SEQ asc)) where rnum >= ? and rnum<= ?", boRowMapper, where, what, page, limit);
+	public List<Pboard> getBoardListSome(int page, int limit, String... args) {
+		String sql = "select * from (select rownum rnum, pbid, pbsubject, pbcontent, pbfile, pbnewfile, pbre_ref, pbre_lev, pbre_seq, pbreadcount, pbdate, pbhostid, pbwriterid from (select * from pboard where "
+				+ " ? = ? " //arg 자리
+				+ "order by pbRE_REF desc, pbRE_SEQ asc)) where rnum >= ? and rnum<= ?";
+		
+		List<Pboard> boardList = jdbcTemplate.query(sql, boRowMapper, page, limit);
 		return boardList;
 	}
 }
