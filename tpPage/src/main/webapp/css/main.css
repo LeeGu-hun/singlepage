@@ -50,6 +50,8 @@
 
 
 
+
+/* ---menubar 시작--- */
 .navbar {
 	font-family: 'Open Sans', 'sans-serif';
 	background: #492343;
@@ -86,7 +88,12 @@
   padding: 5px 60px 5px 5px;
   line-height: 30px;
 }
-
+.mega-dropdown-menu .dropdown-header a {
+  display: inline;
+  font-size: inherit;
+  color: inherit;
+  padding: 0px;
+}
 .carousel-control {
   width: 30px;
   height: 30px;
