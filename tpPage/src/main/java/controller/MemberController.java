@@ -66,9 +66,9 @@ public class MemberController {
 		return "redirect:/home";
 	}
 	
-	@RequestMapping("/pagechk")
-	public Member pageChk(PboardCommand pboardCommand) {
-		Member member = BoardService.pboardWrite()
-		return member;
-	}
+//	@RequestMapping("/pagechk")
+//	public Member pageChk(PboardCommand pboardCommand) {
+//		
+//		return;
+	//}
 }

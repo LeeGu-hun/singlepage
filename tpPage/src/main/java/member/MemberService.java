@@ -28,14 +28,14 @@ public class MemberService {
 		return member;
 	}
 	
-	public int check(PboardCommand pCommand) {
-		int id = memberDao.check(pCommand.getPbhostid());
-		
-		if (id != Pboard.class.equals(getClass())) {
-			return 0;
-		}else {
-			return 1;
-		}
-		
-	}
+//	public int check(PboardCommand pCommand) {
+//		int id = memberDao.check(pCommand.getPbhostid());
+//		
+//		if (id != Pboard.class.equals(getClass())) {
+//			return 0;
+//		}else {
+//			return 1;
+//		}
+//		
+//	}
 }
