@@ -12,16 +12,16 @@
 	src="https://code.jquery.com/jquery-3.2.1.min.js"
 	integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
 	crossorigin="anonymous"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 
-
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js" type="text/javascript"></script>
 <script src="<%=request.getContextPath()%>/js/autosize.js?ver=3"></script>
+<<<<<<< HEAD
 
 <script src="<%=request.getContextPath()%>/js/mbajax.js?ver=3422222325"></script>
 
 <script type="text/javascript" src="<%=request.getContextPath()%>/js/left.js?ver=33"></script>
 
+=======
+>>>>>>> branch 'temp' of https://github.com/LeeGu-hun/singlepage.git
 
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>SinglePage</title>
@@ -48,7 +48,10 @@
 	</div>
 </div>
 
+<%@ include file="./include/footer.jsp" %>
 
+
+<!-- 후원 modal -->
 <div class="reveal-modal" id="myModal">
 	<label>후원금액</label><br /> 
 	
@@ -80,7 +83,5 @@
 	<a class="close-reveal-modal">&#215;</a>
 </div>
 
-
-<%@ include file="./include/footer.jsp" %>
 </body>
 </html>

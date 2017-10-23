@@ -6,6 +6,19 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
+<%
+	AuthInfo authinfo = (AuthInfo) request.getSession().getAttribute("authInfo"); 
+	if(authinfo == null) {
+%>
+
+<script type="text/javascript">
+	location.href="./login";
+</script>
+
+<% 
+	} else {
+%>
+
 member board
 <form id="mboardform" name="mboardform" action="mbwrite" method="Post" enctype="multipart/form-data">
 	<input type="text" id="mbsubject" name="mbsubject" />
@@ -15,3 +28,7 @@ member board
 	<input type="hidden" id="mbupdir" name="mbupdir" value="<%=request.getRealPath("/buploads/mbuploads/")%>" />
 	<input type="submit" value="등록" onclick="mbwrite();" />
 </form>
+
+<%
+	}
+%>
