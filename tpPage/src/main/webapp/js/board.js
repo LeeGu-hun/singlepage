@@ -38,7 +38,6 @@ function pbMoreList() {
 		success : pbMoreListR,
 	});
 }
-
 function pbMoreListR(msg) {
 	$('#pbListT').html(msg)
 }
@@ -54,9 +53,37 @@ function pbMoreListScroll() {
 		success : pbMoreListScrollR,
 	});
 }
-
 function pbMoreListScrollR(msg) {
 	$('#pbListTT').append(msg)
+}
+
+function mbMoreList() {
+	var mbPage = $('#mbPage').val();
+	var newMbPage = Number(mbPage) + 1;
+	$.ajax({
+		type : "POST",
+		url : "./mbmorelist",
+		data : "mbPage=" + newMbPage,
+		success : mbMoreListR,
+	});
+}
+function mbMoreListR(msg) {
+	$('#mbListT').html(msg)
+}
+
+function mbMoreListScroll() {
+	var mbPage = $('#mbPage').val();
+	var newMbPage = Number(mbPage) + 1;
+	$('#mbPage').val(newMbPage);
+	$.ajax({
+		type : "POST",
+		url : "./mbmorelistscroll",
+		data : "mbPage=" + newMbPage,
+		success : mbMoreListScrollR,
+	});
+}
+function mbMoreListScrollR(msg) {
+	$('#mbListTT').append(msg);
 }
 
 

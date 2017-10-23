@@ -33,11 +33,14 @@ public class PageController {
 	@RequestMapping("/page")
 	public String pageLoad(@ModelAttribute("pboardcmd") PboardCommand pbc, Model model, HttpServletRequest request) {
 		int pageHostId = 1;
-		int page = boardSvc.boardpage(pageHostId);
+		int pbPage = boardSvc.pboardpage(pageHostId);
 		List<Pboard> pboardList = boardSvc.getPboardList(pageHostId);
-		/*List<Mboard> mboardList = boardSvc.getMboardList(pageHostId);*/
-		request.setAttribute("page", page);
+		int mbPage = boardSvc.mboardpage(pageHostId);
+		List<Mboard> mboardList = boardSvc.getMboardList(pageHostId);
+		request.setAttribute("pbPage", pbPage);
 		model.addAttribute("pboardList", pboardList);
+		request.setAttribute("mbPage", mbPage);
+		model.addAttribute("mboardList", mboardList);
 		return "page";
 	}
 }

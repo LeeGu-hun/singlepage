@@ -6,7 +6,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <%
-	int nowPbPage = Integer.parseInt(request.getAttribute("page").toString());
+	int nowPbPage = Integer.parseInt(request.getAttribute("pbPage").toString());
 %>
 
 page board

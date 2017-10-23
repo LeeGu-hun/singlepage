@@ -60,11 +60,13 @@ $(document).ready(function() {
 		var documentheight = $(document).height();
 		var pbPage = $("#pbPage").val();
 		var pbMpage = $("#pbMpage").val();
-		if(pbPage > 1 && pbMpage != 0) {
-			if(scrollHeight == documentheight) {
-				pbMoreListScroll();					
+		var pbli = $('#pbli').attr('class');
+		if(pbli == 'active') {
+			if(pbPage > 1 && pbMpage != 0) {
+				if(scrollHeight == documentheight) {
+					pbMoreListScroll();					
+				}	
 			}
-			
 		}
 	});
 });

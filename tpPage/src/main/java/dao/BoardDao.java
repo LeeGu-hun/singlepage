@@ -46,6 +46,32 @@ public class BoardDao {
 		return results;
 	}
 	
+	public int getMboardListCount(int pageHostId) {
+		Integer x = jdbcTemplate.queryForObject("select count(*) from mboard where mbhostid = ?", Integer.class, pageHostId);
+		return x;
+	}
+	
+	public List<Mboard> getMboardList(int pageHostId, int startPage, int endPage) {
+		List<Mboard> results = jdbcTemplate.query("select * "
+				+ "from (select rownum rnum, mbid, mbsubject, mbcontent, mbfile, mbnewfile, "
+				+ "mbre_ref, mbre_lev, mbre_seq, mbreadcount, mbdate, mbhostid, mbwriterid, pname, mname "
+				+ "from (select * from member m, page p, mboard mb where m.mid = mb.mbwriterid and p.pid = mb.mbhostid "
+				+ "and mb.mbhostid = ? order by mbre_ref desc, mbre_seq asc)) where rnum >= ? and rnum <= ?",
+				new RowMapper<Mboard>() {
+					@Override
+					public Mboard mapRow(ResultSet rs, int rowNom) throws SQLException {
+						Mboard mboard = new Mboard(rs.getInt("mbid"), 
+								rs.getString("mbsubject"), rs.getString("mbcontent"),
+								rs.getString("mbfile"), rs.getString("mbnewfile"),
+								rs.getInt("mbreadcount"), rs.getTimestamp("mbdate"),
+								rs.getInt("mbhostid"), rs.getInt("mbwriterid"),
+								rs.getString("pname"), rs.getString("mname"));
+						return mboard;
+					}
+				}, pageHostId, startPage, endPage);
+		return results;
+	}
+	
 	@Transactional
 	public void PboardWrite(final Pboard pboard) {
 		jdbcTemplate.update("insert into pboard values(pbid_seq.nextval, ?, ?, ?, ?, 0, 0, 0, 0, sysdate, ?, ?)",
@@ -65,5 +91,4 @@ public class BoardDao {
 		
 		jdbcTemplate.update("update mboard set mbre_ref = ? where mbid = ?", currmbid, currmbid);	
 	}
-
 }
