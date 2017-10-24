@@ -17,13 +17,12 @@
 	<div>
 		<br/>	
 		<a href="#">페이지 이름</a><br/><br/>
-		<textarea>페이지 소개</textarea>
+		<textarea readonly>페이지 소개</textarea>
 	</div>
 	<div>
 		<br/>
-		<a id="btnLike" class="btn btn-info btn-sm" href="<c:url value='' />" onclick="like(this)">좋아요♡</a>&nbsp;&nbsp;
+		<a id="btnLike" class="btn btn-info btn-sm" href="#" onclick="like()">좋아요♡</a>&nbsp;&nbsp;
 		<a class="btn btn-info btn-sm" href="#" data-reveal-id="myModal" data-animation="none" onclick="donate()">후원</a>
-
 	</div>
 	<div>
 		<br/>

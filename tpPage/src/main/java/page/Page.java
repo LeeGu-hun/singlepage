@@ -7,10 +7,6 @@ public class Page {
 	private String pname, pnick, pintro, pgenre, ploc, pperiod, pshowtime;
 	private Date pdate;
 
-	public Page() {
-		super();
-	}
-	
 	public int getPid() {
 		return pid;
 	}

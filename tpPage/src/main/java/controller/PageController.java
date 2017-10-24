@@ -43,4 +43,6 @@ public class PageController {
 		model.addAttribute("mboardList", mboardList);
 		return "page";
 	}
+	
+	
 }
