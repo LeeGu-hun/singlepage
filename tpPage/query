@@ -36,10 +36,10 @@ constraint fk_page foreign key(pmaster) references member(mid)
 
 create sequence pid_seq increment by 1 start with 1 maxvalue 30000;
 
-insert into page values(pid_seq.nextval, 'name', 'nick', 'intoro', null, null, null, null, null, sysdate, '1');
+insert into page values(pid_seq.nextval, 'name', 'nick', 'intoro', null, null, null, null, null, sysdate, '1', null, null);
 
-insert into page(pid, pname, pnick, pintro, pgenre, ploc, pperiod, pshowtime, ppoint, pdate, pmaster)
-values(pid_seq.nextval, 'name', 'nick', 'intoro', null, null, null, null, null, sysdate, '1');
+insert into page(pid, pname, pnick, pintro, pgenre, ploc, pperiod, pshowtime, ppoint, pdate, pmaster, pfile, pnewfile)
+values(pid_seq.nextval, 'name', 'nick', 'intoro', null, null, null, null, null, sysdate, '1', null, null);
 
 
 create table pboard(
@@ -59,6 +59,8 @@ constraint pk_pboard primary key(pbid),
 constraint fk_pboard_hostid foreign key(pbhostid) references page(pid),
 constraint fk_pboard_writerid foreign key(pbwriterid) references member(mid)
 );
+
+alter table page add(pfile varchar2(100), pnewfile varchar2(100));
 
 create sequence pbid_seq increment by 1 start with 1 maxvalue 30000;
 

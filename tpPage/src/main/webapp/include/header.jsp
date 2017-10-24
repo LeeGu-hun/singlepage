@@ -24,7 +24,7 @@
 <%
 	if(authInfo.getPid() == 0) {
 %>
-<a href="#" class="btn btn-primary">page 만들기</a>
+<a href="./pagemaker" class="btn btn-primary">page 만들기</a>
 <%
 	} else {
 %>		

@@ -4,6 +4,7 @@ package dao;
 import javax.sql.DataSource;
 
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.transaction.annotation.Transactional;
 
 import page.Page;
 import page.PageLike;
@@ -28,4 +29,15 @@ public class PageDao {
 	public void plikeToggle() {
 		jdbcTemplate.update("insert into page_like values(?, ?, ?, sysdate)", 1, 1, 1);
 	}
+
+	@Transactional
+	public int makePage(final Page page) {
+		jdbcTemplate.update("insert into page values(pid_seq.nextval, ?, ?, ?, ?, ?, sysdate, '00:00', 0, sysdate, ?, ?, ?)",
+				page.getPname(), page.getPnick(), page.getPintro(), page.getPgenre(), page.getPloc(), page.getPmaster(),
+				page.getPfile(), page.getPnewfile());
+		
+		Integer pid = jdbcTemplate.queryForObject("select pid from page where pmaster = ?", Integer.class, page.getPmaster());
+		return pid;
+	}
 }
+
