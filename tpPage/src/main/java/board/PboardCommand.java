@@ -50,5 +50,4 @@ public class PboardCommand {
 	public void setPbfile(MultipartFile pbfile) {
 		this.pbfile = pbfile;
 	}
-	
 }

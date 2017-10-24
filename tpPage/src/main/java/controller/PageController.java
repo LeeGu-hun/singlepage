@@ -14,6 +14,7 @@ import board.Mboard;
 import board.Pboard;
 import board.PboardCommand;
 import member.AuthInfo;
+import page.PageCommand;
 import page.PageService;
 
 @Controller
@@ -43,4 +44,21 @@ public class PageController {
 		model.addAttribute("mboardList", mboardList);
 		return "page";
 	}
+	
+	@RequestMapping("/pagemaker")
+	public String pageMaker(@ModelAttribute("pagecmd") PageCommand pmc) {
+		return "page/pageMaker";
+	}
+	
+	@RequestMapping("/makepage")
+	public String makePage(@ModelAttribute("pagecmd") PageCommand pmc,
+			HttpServletRequest request) {
+		AuthInfo authInfo = (AuthInfo) request.getSession().getAttribute("authInfo");
+		if(authInfo == null) {
+			return "redirect:/login";
+		} else {
+			pageSvc.makePage(authInfo, pmc, request);
+			return "redirect:/home";
+		}
+	}	
 }
