@@ -1,6 +1,5 @@
 package member;
 
-import java.sql.Timestamp;
 import java.util.Date;
 
 public class Member {
@@ -22,28 +21,28 @@ public class Member {
 		this.mphone = mphone;
 		this.mcheck = mcheck;
 		this.mpoint = mpoint;
-		this.mdate = mdate;
+		this.mdate = mdate;									//AuthInfo에 담길 것들
 	}
 
 	public Member(String mname, String memail, String mpw) {
 
 		this.mname = mname;
 		this.memail = memail;
-		this.mpw = mpw;
+		this.mpw = mpw;										//회원가입 할때
 	}
 	
 
 	public Member(String memail) {
-		this.memail = memail;
+		this.memail = memail;                   	        //mpw 비교할때
 
 	}
 
-	public Member(int mid, String mname, String memail, String mpw) {
+	/*public Member(int mid, String mname, String memail, String mpw) {
 		this.mid = mid;
 		this.mname = mname;
 		this.memail = memail;
-		this.mpw = mpw;
-	}
+		this.mpw = mpw;                       				
+	}*/
 
 	public int getMid() {
 		return mid;
