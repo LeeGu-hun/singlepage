@@ -46,8 +46,13 @@ public class PageController {
 	}
 	
 	@RequestMapping("/pagemaker")
-	public String pageMaker(@ModelAttribute("pagecmd") PageCommand pmc) {
-		return "page/pageMaker";
+	public String pageMaker(@ModelAttribute("pagecmd") PageCommand pmc, HttpServletRequest request) {
+		AuthInfo authInfo = (AuthInfo) request.getSession().getAttribute("authInfo");
+		if(authInfo == null) {
+			return "redirect:/login";
+		} else {
+			return "page/pageMaker";
+		}		
 	}
 	
 	@RequestMapping("/makepage")
