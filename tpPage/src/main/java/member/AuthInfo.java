@@ -10,8 +10,9 @@ public class AuthInfo {
 	private int mcheck;
 	private int mpoint;
 	private Date mdate;
+	private int pid;
 	
-	public AuthInfo(int mid, String mname, String memail, String mphone, int mcheck, int mpoint, Date mdate) {
+	public AuthInfo(int mid, String mname, String memail, String mphone, int mcheck, int mpoint, Date mdate, int pid) {
 		this.mid = mid;
 		this.mname = mname;
 		this.memail = memail;
@@ -19,6 +20,7 @@ public class AuthInfo {
 		this.mcheck = mcheck;
 		this.mpoint = mpoint;
 		this.mdate = mdate;
+		this.pid = pid;
 	}
 
 	public int getMid() {
@@ -48,4 +50,9 @@ public class AuthInfo {
 	public Date getMdate() {
 		return mdate;
 	}
+
+	public int getPid() {
+		return pid;
+	}
+	
 }
