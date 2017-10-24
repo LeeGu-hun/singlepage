@@ -113,7 +113,7 @@ p_deal_type varchar2(7) not null,
 p_deal_date date not null,
 mid number,
 constraint fk_pp_mid foreign key(mid) references member(mid),
-constraint p_type check(p_deal_type in('donate', 'realize ')),
+constraint p_type check(p_deal_type in('donate', 'realize')),
 constraint fk_pp_pid foreign key(pid) references page(pid));
 
 create table page_like (
@@ -136,7 +136,9 @@ constraint fk_blike_mbid foreign key(mbid) references mboard(mbid),
 constraint fk_blike_pbid foreign key(pbid) references pboard(pbid),
 constraint blike_status check(blike in('0', '1')));
 
+alter table member modify (mpoint default 0);
 
+alter table page modify (ppoint default 0);
 
 
 
