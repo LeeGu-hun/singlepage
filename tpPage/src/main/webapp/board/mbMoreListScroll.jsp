@@ -7,6 +7,10 @@
 
 <%
 	int nowMbPage = Integer.parseInt(request.getAttribute("mbMpage").toString());
+	int nowMbPageR = -10;
+	if(nowMbPage == 0) {
+		nowMbPageR = -1;
+	}
 %>
 
 	<c:forEach var="mboard" items="${mboardList }">

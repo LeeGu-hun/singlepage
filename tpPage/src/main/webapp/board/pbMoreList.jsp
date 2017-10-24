@@ -56,13 +56,13 @@
 <script>
 $(document).ready(function() {
 	$(window).scroll(function() {
-		var scrollHeight = $(window).scrollTop() + $(window).height();
-		var documentheight = $(document).height();
-		var pbPage = $("#pbPage").val();
-		var pbMpage = $("#pbMpage").val();
 		var pbli = $('#pbli').attr('class');
 		if(pbli == 'active') {
+			var pbPage = $("#pbPage").val();
+			var pbMpage = $("#pbMpage").val();
 			if(pbPage > 1 && pbMpage != 0) {
+				var scrollHeight = $(window).scrollTop() + $(window).height();
+				var documentheight = $(document).height();
 				if(scrollHeight == documentheight) {
 					pbMoreListScroll();					
 				}	

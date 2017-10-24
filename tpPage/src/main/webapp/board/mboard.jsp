@@ -71,9 +71,9 @@ member board
 			</td>
 		</tr>
 <% } else { %>
-		<tr name="mbBtnRow" id="mbBtnRow">
+		<tr>
 			<td>
-				<input type="button" value="더 보기" onclick="mbMoreList();" />                    
+				<input type="button" id="btnmb" value="더 보기" onclick="mbMoreList();" />                    
 			</td>
 		</tr>
 <% } %>

@@ -54,21 +54,8 @@
 	</tbody>		
 
 <script>
-$(document).ready(function() {
-	$(window).scroll(function() {
-		var scrollHeight = $(window).scrollTop() + $(window).height();
-		var documentheight = $(document).height();
-		var mbPage = $("#mbPage").val();
-		var mbMpage = $("#mbMpage").val();
-		var mbli = $('#mbli').attr('class');
-		if(mbli == 'active') {
-			if(mbPage > 1 && mbMpage != 0) {
-				if(scrollHeight == documentheight) {
-					mbMoreListScroll();					
-				}	
-			}
-		}	
-	});
+$(window).scroll(function() {
+	Scroll();
 });
 </script>
     
