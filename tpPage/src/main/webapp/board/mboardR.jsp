@@ -17,8 +17,10 @@
 
 <% 
 	} else {
-	
-	int nowMbPage = Integer.parseInt(request.getAttribute("mbPage").toString());
+%>
+
+<%
+	int nowMbPageR = Integer.parseInt(request.getAttribute("mbPageR").toString());
 %>
 
 member board
@@ -69,22 +71,22 @@ member board
 			<td>${mboard.mname }</td>
 		</tr>
 		</c:forEach>
-<% if(nowMbPage == -1) { %>
+<% if(nowMbPageR == -1) { %>
 		<tr>
 			<td colspan="11">
 				등록된 글이 없습니다.
 			</td>
 		<tr>
-<% } else if(nowMbPage == 0) { %>		
+<% } else if(nowMbPageR == 0) { %>		
 		<tr>
 			<td colspan="11">
 				마지막 항목입니다.
 			</td>
 		</tr>
 <% } else { %>
-		<tr name="mbBtnRow" id="mbBtnRow">
+		<tr>
 			<td>
-				<input type="button" value="더 보기" onclick="mbMoreList();" />                    
+				<input type="button" id="btnmbR" value="더 보기" onclick="mbMoreList();" />                    
 			</td>
 		</tr>
 <% } %>

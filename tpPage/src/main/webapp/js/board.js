@@ -20,6 +20,21 @@ function mbreadURL(input) {
 	}
 }
 
+function Scroll() {
+	var scrollHeight = $(window).scrollTop() + $(window).height();
+	var documentheight = $(document).height();
+	if(scrollHeight == documentheight) {
+		var mbli = $('#mbli').attr('class');
+		if(mbli == 'active') {
+			var mbPage = $("#mbPage").val();
+			var mbMpage = $("#mbMpage").val();
+			if(mbPage > 1 && mbMpage != 0) {
+					mbMoreListScroll();					
+			}
+		}
+	}
+}
+
 function mbwrite() {
 	$('#mboardform').ajaxForm({
 			success:function(msg) {
@@ -60,6 +75,7 @@ function pbMoreListScrollR(msg) {
 function mbMoreList() {
 	var mbPage = $('#mbPage').val();
 	var newMbPage = Number(mbPage) + 1;
+	console.log(newMbPage);
 	$.ajax({
 		type : "POST",
 		url : "./mbmorelist",
@@ -75,6 +91,7 @@ function mbMoreListScroll() {
 	var mbPage = $('#mbPage').val();
 	var newMbPage = Number(mbPage) + 1;
 	$('#mbPage').val(newMbPage);
+	console.log(newMbPage);
 	$.ajax({
 		type : "POST",
 		url : "./mbmorelistscroll",
@@ -85,6 +102,3 @@ function mbMoreListScroll() {
 function mbMoreListScrollR(msg) {
 	$('#mbListTT').append(msg);
 }
-
-
-

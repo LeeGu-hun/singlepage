@@ -7,6 +7,13 @@ public class Page {
 	private String pname, pnick, pintro, pgenre, ploc, pperiod, pshowtime;
 	private Date pdate;
 
+<<<<<<< HEAD
+=======
+	public Page(int pid) {
+		this.pid = pid;
+	}
+
+>>>>>>> branch 'temp' of https://github.com/LeeGu-hun/singlepage.git
 	public int getPid() {
 		return pid;
 	}
