@@ -66,4 +66,10 @@ public class PageController {
 			return "redirect:/home";
 		}
 	}	
+	
+	@RequestMapping("/modify") 
+	public String pageModify() {
+		
+		return "page/pageModify";
+	}
 }
