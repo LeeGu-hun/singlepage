@@ -6,26 +6,10 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <%
-	int nowMbPage = Integer.parseInt(request.getAttribute("mbPage").toString());
+	int nowMbPageW = Integer.parseInt(request.getAttribute("mbMpageW").toString());
 %>
-	<thead>
-		<tr>
-			<th>mbid</th>
-			<th>mbsubject</th>
-			<th>mbcontent</th>
-			<th>mbfile</th>
-			<th>mbnewfile</th>
-			<th>mbreadcount</th>
-			<th>mbdate</th>
-			<th>mbhostid</th>
-			<th>mbwriterid</th>
-			<th>pname</th>
-			<th>mname</th>
-		</tr>
-	</thead>
-	<input type="hidden" id="mbPage" name="mbPage" value="<%= nowMbPage %>" />
-	<tbody id="mbListTT" name="mbListTT">
-		<c:forEach var="mboard" items="${mboardList }">
+
+	<c:forEach var="mboard" items="${mboardList }">
 		<tr>
 			<td>${mboard.mbid }</td>
 			<td>${mboard.mbsubject }</td>
@@ -43,24 +27,11 @@
 			<td>${mboard.mname }</td>
 		</tr>
 		</c:forEach>
-<% if(nowMbPage == 0) { %>		
+<% if(nowMbPageW == -1) { %>		
 		<tr>
 			<td colspan="11">
 				마지막 항목입니다.
 			</td>
 		</tr>
-	</tbody>
-<% } else { %>
-	</tbody>		
-<tbody class="scroll">
-<tr>
-<td>
-<script>
-$(window).scroll(function() {
-	mbScroll();
-});
-</script>
-</td>
-</tr>
-</tbody>
+	<input type="hidden" name="mbMpageW" id="mbMpageW" value="<%=nowMbPageW %>" />
 <% } %>

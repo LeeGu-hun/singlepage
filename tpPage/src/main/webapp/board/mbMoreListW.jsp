@@ -6,7 +6,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <%
-	int nowMbPage = Integer.parseInt(request.getAttribute("mbPage").toString());
+	int nowMbPageW = Integer.parseInt(request.getAttribute("mbPageW").toString());
 %>
 	<thead>
 		<tr>
@@ -23,8 +23,8 @@
 			<th>mname</th>
 		</tr>
 	</thead>
-	<input type="hidden" id="mbPage" name="mbPage" value="<%= nowMbPage %>" />
-	<tbody id="mbListTT" name="mbListTT">
+	<input type="hidden" id="mbPageW" name="mbPageW" value="<%= nowMbPageW %>" />
+	<tbody id="mbListWTT" name="mbListWTT">
 		<c:forEach var="mboard" items="${mboardList }">
 		<tr>
 			<td>${mboard.mbid }</td>
@@ -43,7 +43,7 @@
 			<td>${mboard.mname }</td>
 		</tr>
 		</c:forEach>
-<% if(nowMbPage == 0) { %>		
+<% if(nowMbPageW == 0) { %>		
 		<tr>
 			<td colspan="11">
 				마지막 항목입니다.
@@ -57,7 +57,7 @@
 <td>
 <script>
 $(window).scroll(function() {
-	mbScroll();
+	mbScrollW();
 });
 </script>
 </td>
