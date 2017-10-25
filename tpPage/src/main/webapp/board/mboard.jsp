@@ -73,7 +73,7 @@ member board
 <% } else { %>
 		<tr>
 			<td>
-				<input type="button" id="btnmb" value="더 보기" onclick="mbMoreList();" />                    
+				<input type="button" value="더 보기" onclick="mbMoreList();" />                    
 			</td>
 		</tr>
 <% } %>
