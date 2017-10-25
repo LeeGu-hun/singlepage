@@ -28,6 +28,8 @@
 	</div>
 	</c:forEach>
 </div>
+<div class="inner-content"></div>
+<div class="inner-back"></div>
 <!-- 랜덤 영역 끝 -->
 
 <script>
