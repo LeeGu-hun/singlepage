@@ -26,7 +26,7 @@
 	</div>
 	<div>
 		<br/>
-		<a class="btn btn-info btn-sm" href="./modify">수정</a>&nbsp;&nbsp;
+		<a class="btn btn-info btn-sm" href="./modify">관리</a>&nbsp;&nbsp;
 	</div>
 </div>
 
