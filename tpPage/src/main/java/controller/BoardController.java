@@ -39,7 +39,7 @@ public class BoardController {
 	@RequestMapping("/pbmorelist")
 	public String pbMoreList(HttpServletRequest request, Model model) {
 		int pageHostId = 1;
-		int page = Integer.parseInt(request.getParameter("pbPage"));
+		int page = Integer.parseInt(request.getParameter("pbPage")) + 1;
 		int listCount = boardDao.getPboardListCount(pageHostId);
 		int startPage = 1;
 		int endPage = startPage + (((page - 1) * 10) + 9);
@@ -55,7 +55,7 @@ public class BoardController {
 	@RequestMapping("/pbmorelistscroll") 
 	public String pbMoreListScroll(HttpServletRequest request, Model model) {
 		int pageHostId = 1;
-		int mpage = Integer.parseInt(request.getParameter("pbPage"));
+		int mpage = Integer.parseInt(request.getParameter("pbPage")) + 1;
 		int listCount = boardDao.getPboardListCount(pageHostId);
 		int startPage = ((mpage - 1) * 10) +1;
 		int endPage = startPage + 9;
@@ -150,16 +150,16 @@ public class BoardController {
 					e.printStackTrace();
 				}
 				int pageHostId = 1;
-				int mbPage = boardSvc.mboardpage(pageHostId);
+				int mbPageR = boardSvc.mboardpage(pageHostId);
 				List<Mboard> mboardList = boardSvc.getMboardList(pageHostId);
-				request.setAttribute("mbPage", mbPage);
+				request.setAttribute("mbPageR", mbPageR);
 				model.addAttribute("mboardList", mboardList);
 			} else {
 				boardSvc.mboardWrite(mbhostid, mbwriterid, mrequest.getParameter("mbsubject"), mrequest.getParameter("mbcontent"), null, null);
 				int pageHostId = 1;
-				int mbPage = boardSvc.mboardpage(pageHostId);
+				int mbPageR = boardSvc.mboardpage(pageHostId);
 				List<Mboard> mboardList = boardSvc.getMboardList(pageHostId);
-				request.setAttribute("mbPage", mbPage);
+				request.setAttribute("mbPageR", mbPageR);
 				model.addAttribute("mboardList", mboardList);
 			}
 			return "board/mboardR";
