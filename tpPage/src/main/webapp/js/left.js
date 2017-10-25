@@ -1,20 +1,22 @@
 function donate(){
 	var ck = $('input:radio[name="money"]:checked').val();
-//	var cmoney = $('#cmoney').val(10000);
+	var cmoney = $('#cmoney').val(10000);
 
 	if(ck == "in") {
 		  $("#in_money").attr("disabled",false);
 		  $('#dmoney').val($('#in_money').val());
-//		  var dmoney = $('#dmoney').val();
-//		  var amoney = Number(cmoney) - Number(dmoney);
-//		  $('#amoney').val(amoney);
+		  var dmoney = $('#dmoney').val();
+		  var cmoney = $('#cmoney').val();
+		  var amoney = Number(cmoney) - Number(dmoney);
+		  $('#amoney').val(amoney);
 	} else {
 		$('#dmoney').val(ck);
-//		var dmoney = $('#dmoney').val();
+		var dmoney = $('#dmoney').val();
+		var cmoney = $('#cmoney').val();
 		$("#in_money").val("");
 		$("#in_money").attr("disabled",true)
-//		var amoney = Number(cmoney) - Number(dmoney);
-//		$('#amoney').val(amoney);;
+		var amoney = Number(cmoney) - Number(dmoney);
+		$('#amoney').val(amoney);;
 	}
 }
 

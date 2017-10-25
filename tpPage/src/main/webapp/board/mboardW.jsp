@@ -20,7 +20,7 @@
 %>
 
 <%
-	int nowMbPageR = Integer.parseInt(request.getAttribute("mbPageR").toString());
+	int nowMbPageW = Integer.parseInt(request.getAttribute("mbPageW").toString());
 %>
 
 member board
@@ -35,7 +35,7 @@ member board
 <br>
 <br>
 <br>
-<table id="mbListT" name="mbListT" style="width:100%;">
+<table id="mbListWT" name="mbListWT" style="width:100%;">
 	<thead>
 		<tr>
 			<th>mbid</th>
@@ -51,7 +51,7 @@ member board
 			<th>mname</th>
 		</tr>
 	</thead>
-	<input type="hidden" id="mbPage" name="mbPage" value="1" />
+	<input type="hidden" id="mbPageW" name="mbPageW" value="1" />
 	<tbody>
 		<c:forEach var="mboard" items="${mboardList }">
 		<tr>
@@ -71,13 +71,13 @@ member board
 			<td>${mboard.mname }</td>
 		</tr>
 		</c:forEach>
-<% if(nowMbPageR == -1) { %>
+<% if(nowMbPageW == -1) { %>
 		<tr>
 			<td colspan="11">
 				등록된 글이 없습니다.
 			</td>
 		<tr>
-<% } else if(nowMbPageR == 0) { %>		
+<% } else if(nowMbPageW == 0) { %>		
 		<tr>
 			<td colspan="11">
 				마지막 항목입니다.
@@ -86,7 +86,7 @@ member board
 <% } else { %>
 		<tr>
 			<td>
-				<input type="button" id="btnmbR" value="더 보기" onclick="mbMoreList();" />                    
+				<input type="button" value="더 보기" onclick="mbMoreListW();" />                    
 			</td>
 		</tr>
 <% } %>

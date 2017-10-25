@@ -52,24 +52,15 @@
 	</tbody>
 <% } else { %>
 	</tbody>		
-
+<tbody class="scroll">
+<tr>
+<td>
 <script>
-$(document).ready(function() {
-	$(window).scroll(function() {
-		var pbli = $('#pbli').attr('class');
-		if(pbli == 'active') {
-			var pbPage = $("#pbPage").val();
-			var pbMpage = $("#pbMpage").val();
-			if(pbPage > 1 && pbMpage != 0) {
-				var scrollHeight = $(window).scrollTop() + $(window).height();
-				var documentheight = $(document).height();
-				if(scrollHeight == documentheight) {
-					pbMoreListScroll();					
-				}	
-			}
-		}
-	});
+$(window).scroll(function() {
+	pbScroll();
 });
 </script>
-    
+</td>
+</tr>
+</tbody>
 <% } %>
