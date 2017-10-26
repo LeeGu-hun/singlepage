@@ -13,8 +13,10 @@ import board.BoardService;
 import board.Mboard;
 import board.Pboard;
 import board.PboardCommand;
+import dao.PageDao;
 import member.AuthInfo;
 import page.PageCommand;
+import page.PageLike;
 import page.PageService;
 
 @Controller
@@ -22,6 +24,7 @@ public class PageController {
 
 	private PageService pageSvc;
 	private BoardService boardSvc;
+	private PageDao pageDao;
 	
 	public void setPageSvc(PageService pageSvc) {
 		this.pageSvc = pageSvc;
@@ -29,6 +32,10 @@ public class PageController {
 	
 	public void setBoardSvc(BoardService boardSvc) {
 		this.boardSvc = boardSvc;
+	}
+
+	public void setPageDao(PageDao pageDao) {
+		this.pageDao = pageDao;
 	}
 
 	@RequestMapping("/page")
@@ -42,6 +49,19 @@ public class PageController {
 		model.addAttribute("pboardList", pboardList);
 		request.setAttribute("mbPage", mbPage);
 		model.addAttribute("mboardList", mboardList);
+		
+		AuthInfo authInfo = (AuthInfo) request.getSession().getAttribute("authInfo");
+		if (authInfo !=null) {
+			int memId = authInfo.getMid();
+			int pageId = authInfo.getPid();
+			List<PageLike> ckList = pageDao.plikeCheck(memId, pageId);
+			if (ckList.size() == 0) {
+				model.addAttribute("ck", 0);
+			} else {
+				int ck = ckList.get(0).getPlike();
+				model.addAttribute("ck", ck);
+			} 
+		}
 		return "page";
 	}
 	
@@ -66,6 +86,22 @@ public class PageController {
 			return "redirect:/home";
 		}
 	}	
+	
+	@RequestMapping("/chklike")
+	public String chkLike(HttpServletRequest request, Model model) {
+		int memId = Integer.parseInt(request.getParameter("mid"));
+		int pageId = Integer.parseInt(request.getParameter("pid"));
+		int ck = Integer.parseInt(request.getParameter("ck"));
+		if (ck == 0) {
+			pageDao.plikeToggle(1, memId, pageId);
+		} else {
+			pageDao.plikeToggle(0, memId, pageId);
+		}
+		
+		List<PageLike> ckList = pageDao.plikeCheck(memId, pageId);
+		model.addAttribute("ck", ckList.get(0).getPlike());
+		return "page/ck";
+	}
 	
 	@RequestMapping("/modify") 
 	public String pageModify() {

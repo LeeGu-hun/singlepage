@@ -11,10 +11,10 @@ import member.AuthInfo;
 
 public class PageService {
 
-	PageDao pageDoa;
+	PageDao pageDao;
 	
-	public PageService(PageDao pageDoa) {
-		this.pageDoa = pageDoa;
+	public PageService(PageDao pageDao) {
+		this.pageDao = pageDao;
 	}
 
 	public void makePage(AuthInfo authInfo, PageCommand pmc, HttpServletRequest request) {
@@ -25,7 +25,7 @@ public class PageService {
 			String pnewfile = System.currentTimeMillis() + "_" + pfile;
 			Page page = new Page(pmaster, pmc.getPname(), pmc.getPnick(), pmc.getPintro(),
 					pmc.getPgenre(), pmc.getPloc(), pfile, pnewfile, null, null);
-			int pid = pageDoa.makePage(page);
+			int pid = pageDao.makePage(page);
 			String path = pmc.getPupdir() + pnewfile;
 			try {
 				File file = new File(path);
@@ -39,7 +39,7 @@ public class PageService {
 		} else {
 			Page page = new Page(pmaster, pmc.getPname(), pmc.getPnick(), pmc.getPintro(),
 					pmc.getPgenre(), pmc.getPloc(), null, null, null, null);
-			int pid = pageDoa.makePage(page);
+			int pid = pageDao.makePage(page);
 			authInfo = new AuthInfo(authInfo.getMid(), authInfo.getMname(), authInfo.getMemail(), authInfo.getMphone(),
 					authInfo.getMcheck(), authInfo.getMpoint(), authInfo.getMdate(), pid);
 			request.getSession().setAttribute("authInfo", authInfo);

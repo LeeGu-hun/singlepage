@@ -27,21 +27,24 @@ function in_donate(point) {
     }); 
 }
 
-//function like() {
-//	var pid = ;
-//	var mid = ;
-//	$.ajax({
-//		type : "POST",
-//		url : "",
-//		data : ,
-//		success : changeHeart
-//	});
-//	function changeHeart() {
-//		if( == 0){
-//			$('#btnLike').text('좋아요♡');
-//		}
-//		else {
-//			$('#btnLike').text('좋아요♥');
-//		}
-//	}
-//}
+function like() {
+	var pid = $('#pid').val();
+	var mid = $('#mid').val();
+	var ck = $('#ck').val();
+	$.ajax({
+		type : "POST",
+		url : "./chklike",
+		data : "pid=" + pid + "&mid=" + mid + "&ck=" + $.trim(ck),
+		success : changeHeart
+	});
+	function changeHeart(ck) {
+		ck = $.trim(ck);
+		$('#ck').val(ck);
+		if( ck == 0 ){
+			$('#btnLike').text('좋아요♡');
+		}
+		else {
+			$('#btnLike').text('좋아요♥');
+		}
+	}
+}

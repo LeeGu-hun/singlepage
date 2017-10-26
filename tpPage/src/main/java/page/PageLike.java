@@ -14,6 +14,10 @@ public class PageLike {
 		this.plike_date = plike_date;
 	}
 	
+	public PageLike(int plike) {
+		this.plike = plike;
+	}
+	
 	public int getMid() {
 		return mid;
 	}

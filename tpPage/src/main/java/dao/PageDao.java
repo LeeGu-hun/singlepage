@@ -1,9 +1,14 @@
 package dao;
 
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.List;
+
 import javax.sql.DataSource;
 
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.transaction.annotation.Transactional;
 
 import page.Page;
@@ -16,14 +21,22 @@ public class PageDao {
 		this.jdbcTemplate = new JdbcTemplate(dataSource);
 	}
 
-	public int plikeCheck() {
-		int ck = jdbcTemplate.queryForObject("select plike from (select * from page_like where mid=? and pid=? "
-				+ "order by plike_date desc) where rownum = 1", Integer.class, 1, 1);
+	public List<PageLike> plikeCheck(int memId, int pageId) {
+		List<PageLike> ck = jdbcTemplate.query("select plike from (select * from page_like where mid=? and pid=? "
+				+ "order by plike_date desc) where rownum = 1", new RowMapper<PageLike>() {
+					@Override
+					public PageLike mapRow(ResultSet rs, int rowNum) throws SQLException {
+						PageLike pageLike = new PageLike(
+								rs.getInt("plike"));
+						return pageLike;
+					}
+				}, memId, pageId);
 		return ck;
 	}
 	
-	public void plikeToggle() {
-		jdbcTemplate.update("insert into page_like values(?, ?, ?, sysdate)", 1, 1, 1);
+	public void plikeToggle(int ck, int memId, int pageId) {
+
+		jdbcTemplate.update("insert into page_like values(?, ?, ?, sysdate)", memId, ck, pageId);
 	}
 
 	@Transactional
