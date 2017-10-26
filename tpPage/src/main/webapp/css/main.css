@@ -31,7 +31,7 @@
   min-width:370px;
 }
 
-.inner-item{
+.inner-item {
 	padding:5px;
 	border: 2px solid #cccccc;
 	border-radius: 10px;
@@ -40,7 +40,7 @@
 	cursor: pointer;
 }
 
-.inner-content{
+.inner-content {
 	z-index:2;
 	float: left; 
 	position: absolute; 
@@ -49,6 +49,23 @@
 	border-radius:10px;
 	background:white;
 	display:none;
+}
+
+.inner-content .close-btn {
+	font-size: 22px;
+	line-height: .5;
+	position: absolute;
+	top: 8px;
+	right: 11px;
+	color: #aaa;
+	text-shadow: 0 -1px 1px rbga(0,0,0,.6);
+	font-weight: bold;
+	cursor: pointer;
+}
+
+.inner-content img {
+	border-radius: 0px;
+	max-width:100%; 
 }
 
 .inner-back{
@@ -71,7 +88,7 @@
 	color: red;
 }
 
-.content img {
+.inner-item img {
 	border-radius: 10px;
 	max-width:330px; 
 }
