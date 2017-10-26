@@ -8,7 +8,7 @@
 <script src="http://code.jquery.com/jquery-3.1.1.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 <script src="<%=request.getContextPath()%>/js/masonry.pkgd.js"></script>
-<script src="<%=request.getContextPath()%>/js/main.js?ver=231"></script>
+<script src="<%=request.getContextPath()%>/js/main.js?ver=21"></script>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>SinglePage</title>
 </head>

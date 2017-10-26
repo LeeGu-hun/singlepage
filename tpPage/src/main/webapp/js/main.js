@@ -17,6 +17,8 @@ $(document).ready(function(){
 		$('.inner-back').addClass('on');
 		var totalw = $(window).width();
 		var totalh = $(window).height();
+		var ow = $('.inner-item').width();
+		$('.inner-content').css('width', ow*2);
 		$('.inner-back').css('width', totalw);
 		$('.inner-back').css('height', totalh);
 		var w = $('.inner-content').width();
