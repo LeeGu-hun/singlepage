@@ -12,25 +12,15 @@
 	<c:forEach var="list" items="${boardList }">
 	<div class="grid-item">
 		<div class="inner-item">
-			<div class="title">
-				제목 : <c:out value="${list.pbsubject}" />
-			</div>
-			<div class="content">
-				내용<br>
-				<c:if test="${!empty list.pbnewfile}">
-				<div style="text-align: center;">
-				<img src="./buploads/pbuploads/${list.pbnewfile}" style="align-self: center;">
-				</div>
-				</c:if>
-				<c:out value="${list.pbcontent}" />
-			</div>
+			<div class="title">제목 : <c:out value="${list.pbsubject}" /></div>
+			<div class="content">내용<br><c:if test="${!empty list.pbnewfile}"><div style="text-align: center;"><img src="./buploads/pbuploads/${list.pbnewfile}"></div></c:if><c:out value="${list.pbcontent}" /></div>
 		</div>
 	</div>
 	</c:forEach>
 </div>
 <div class="inner-content"></div>
 <div class="inner-back"></div>
-<!-- 랜덤 영역 끝 -->
+<!-- 아이템 영역 끝 -->
 
 <script>
 jQuery(document).on('click', '.mega-dropdown', function(e) {

@@ -13,6 +13,11 @@ $(document).ready(function(){
 	$('.inner-item').on('click', function(){
 		var content = $(this).children().clone();
 		$('.inner-content').html(content);
+		$('.inner-content').append('<div class="close-btn">&#215;</div>');
+		$('.close-btn').on('click', function(){
+			$('.inner-content').removeClass('on');
+			$('.inner-back').removeClass('on');
+		});
 		$('.inner-content').addClass('on');
 		$('.inner-back').addClass('on');
 		var totalw = $(window).width();
@@ -30,4 +35,5 @@ $(document).ready(function(){
 		$('.inner-content').removeClass('on');
 		$('.inner-back').removeClass('on');
 	});
+
 });
