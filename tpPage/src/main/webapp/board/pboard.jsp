@@ -1,3 +1,4 @@
+<%@page import="member.AuthInfo"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -9,7 +10,8 @@
 	int nowPbPage = Integer.parseInt(request.getAttribute("pbPage").toString());
 %>
 
-page board
+<c:out value="${page.pid }" /> page board
+<c:if test="${page.pid == authInfo.pid }">
 <form:form commandName="pboardcmd" action="pbwrite" enctype="multipart/form-data">
 	<form:input path="pbsubject" />
 	<br>
@@ -20,11 +22,14 @@ page board
 	<input type="file" id="pbfile" name="pbfile" onchange="pbreadURL(this);" />
 	<input type="hidden" id="pbupdir" name="pbupdir"
 		value="<%=request.getRealPath("/buploads/pbuploads/")%>" />
+	<input type="hidden" id="pbhostid" name="pbhostid" value="<c:out value='${page.pid }' />" />
 	<input type="submit" value="등록" />
 </form:form>
+</c:if>
 <br>
 <br>
 <br>
+<input type="hidden" id="pbhostid" name="pbhostid" value="<c:out value='${page.pid }' />" />
 <table id="pbListT" name="pbListT" style="width:100%;">
 	<thead>
 		<tr>

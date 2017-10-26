@@ -1,11 +1,17 @@
 package dao;
 
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.List;
+
 import javax.sql.DataSource;
 
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.transaction.annotation.Transactional;
 
+import board.Pboard;
 import page.Page;
 import page.PageLike;
 
@@ -34,6 +40,23 @@ public class PageDao {
 		
 		Integer pid = jdbcTemplate.queryForObject("select pid from page where pmaster = ?", Integer.class, page.getPmaster());
 		return pid;
+	}
+
+	public Page getPage(int pageHostId) {
+		List<Page> results = jdbcTemplate.query("select * from page where pid = ?",
+				new RowMapper<Page>() {
+					@Override
+					public Page mapRow(ResultSet rs, int rowNom) throws SQLException {
+						Page page = new Page(rs.getInt("pid"),
+								rs.getInt("ppoint"), rs.getInt("pmaster"),
+								rs.getString("pname"), rs.getString("pnick"),
+								rs.getString("pintro"), rs.getString("pgenre"),
+								rs.getString("ploc"), rs.getString("pfile"), rs.getString("pnewfile"),
+								rs.getString("pshowtime"), rs.getTimestamp("pdate"), rs.getTimestamp("pperiod"));
+						return page;
+					}
+		}, pageHostId);
+		return results.isEmpty() ? null : results.get(0);
 	}
 }
 

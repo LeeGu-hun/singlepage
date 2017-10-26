@@ -28,7 +28,7 @@
 <%
 	} else {
 %>		
-<a href="#" class="btn btn-primary">내 page 이동</a>		
+<a href="./page?host=${authInfo.pid }" class="btn btn-primary">내 page 이동</a>		
 <%
 	}
 %>

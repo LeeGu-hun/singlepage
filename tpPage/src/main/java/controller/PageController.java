@@ -7,22 +7,31 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import board.BoardService;
 import board.Mboard;
 import board.Pboard;
 import board.PboardCommand;
+import dao.PageDao;
 import member.AuthInfo;
+import page.Page;
 import page.PageCommand;
 import page.PageService;
 
 @Controller
 public class PageController {
 
+	private PageDao pageDao;
 	private PageService pageSvc;
 	private BoardService boardSvc;
 	
+	public void setPageDao(PageDao pageDao) {
+		this.pageDao = pageDao;
+	}
+
 	public void setPageSvc(PageService pageSvc) {
 		this.pageSvc = pageSvc;
 	}
@@ -32,8 +41,28 @@ public class PageController {
 	}
 
 	@RequestMapping("/page")
-	public String pageLoad(@ModelAttribute("pboardcmd") PboardCommand pbc, Model model, HttpServletRequest request) {
-		int pageHostId = 1;
+	public String pageLoad(@RequestParam("host") int host, @ModelAttribute("pboardcmd") PboardCommand pbc, Model model, HttpServletRequest request) {
+		int pageHostId = host;
+		Page page = pageDao.getPage(pageHostId);
+		if(page == null) {
+			return "redirect:/home"; 
+		} else {	
+			int pbPage = boardSvc.pboardpage(pageHostId);
+			List<Pboard> pboardList = boardSvc.getPboardList(pageHostId);
+			int mbPage = boardSvc.mboardpage(pageHostId);
+			List<Mboard> mboardList = boardSvc.getMboardList(pageHostId);
+			model.addAttribute("page", page);
+			request.setAttribute("pbPage", pbPage);
+			model.addAttribute("pboardList", pboardList);
+			request.setAttribute("mbPage", mbPage);
+			model.addAttribute("mboardList", mboardList);
+			return "page";
+		}
+	}
+	
+	/*@RequestMapping("/page/{pid}")
+	public String pageLoadp(@PathVariable int pid, @ModelAttribute("pboardcmd") PboardCommand pbc, Model model, HttpServletRequest request) {
+		int pageHostId = pid;
 		int pbPage = boardSvc.pboardpage(pageHostId);
 		List<Pboard> pboardList = boardSvc.getPboardList(pageHostId);
 		int mbPage = boardSvc.mboardpage(pageHostId);
@@ -43,7 +72,7 @@ public class PageController {
 		request.setAttribute("mbPage", mbPage);
 		model.addAttribute("mboardList", mboardList);
 		return "page";
-	}
+	}*/
 	
 	@RequestMapping("/pagemaker")
 	public String pageMaker(@ModelAttribute("pagecmd") PageCommand pmc, HttpServletRequest request) {
