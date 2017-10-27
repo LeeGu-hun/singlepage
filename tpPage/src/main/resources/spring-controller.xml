@@ -7,8 +7,8 @@
 		http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/mvc
 		http://www.springframework.org/schema/mvc/spring-mvc.xsd">
-
-<!-- 	<mvc:view-controller path="/main" view-name="main" /> -->
+		
+	<!-- <mvc:view-controller path="/home" view-name="/home" /> -->
 
 	<bean class="controller.MemberController">
 		<property name="memberDao" ref="memberDao" />
@@ -20,11 +20,13 @@
 	</bean>
 	
 	<bean class="controller.PageController">
+		<property name="pageDao" ref ="pageDao" />
 		<property name="pageSvc" ref="pageSvc" />
 		<property name="boardSvc" ref="boardSvc" />
 	</bean>
 	
 	<bean class="controller.BoardController">
+		<property name="pageDao" ref="pageDao" />
 		<property name="boardSvc" ref="boardSvc" />
 		<property name="boardDao" ref="boardDao" />
 	</bean>
