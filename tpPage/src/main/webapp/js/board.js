@@ -37,50 +37,37 @@ function pbScroll() {
 	}
 }
 
-function mbScroll(event) {
-	var scrollHeight = $(window).scrollTop() + $(window).height();
-	var documentheight = $(document).height();
-	if(scrollHeight == documentheight) {
-		var mbli = $('#mbli').attr('class');
-		if(mbli == 'active') {
-			var mbPage = $("#mbPage").val();
-			var mbMpage = $("#mbMpage").val();
-			if(mbPage > 1 && mbMpage != -1) {
-				$('.scroll').remove();
-				mbMoreListScroll();
-				 event.preventDefault(); 
-			} else if(mbMpage == -1) {				
-				$('.scroll').remove();
-				 event.preventDefault(); 
-			}
-		}
-	}
-}
-
-function mbScrollW() {
+function mbScroll() {
 	var mbli = $('#mbli').attr('class');
 	if(mbli == 'active') {
-		var mbPageW = $("#mbPageW").val();
-		var mbMpageW = $("#mbMpageW").val();
-		if(mbPageW > 1 && mbMpageW != -1) {
+		var mbPage = $("#mbPage").val();
+		var mbMpage = $("#mbMpage").val();
+		if(mbPage > 1 && mbMpage != -1) {
 			var scrollHeight = $(window).scrollTop() + $(window).height();
 			var documentheight = $(document).height();
 			if(scrollHeight == documentheight) {
-				mbMoreListScrollW();					
+				mbMoreListScroll();					
 			}
-		} else if(mbMpageW == -1) {
+		} else if(mbMpage == -1) {
 			$('.scroll').remove();
 		}
 	}
 }
 
-function mbwrite() {
+/*$(document).ready(function() {
+	var mbTab = $('#rMbTab').val();
+	if(mbTab == 'active') {
+		$("#bTab a[href='#memberboard']").tab("show");
+	}
+});*/
+
+/*function mbwrite() {
 	$('#mboardform').ajaxForm({
 			success:function(msg) {
 				$('#memberboard').html(msg)
 		}
 	});
-}
+}*/
 
 function pbMoreList() {
 	var pbhostid = $('#pbhostid').val();
@@ -144,33 +131,3 @@ function mbMoreListScrollR(msg) {
 	$('#mbListTT').append(msg);
 }
 
-/*function mbMoreListW() {
-	var mbhostid = $('#mbhostid').val();
-	var mbPageW = $('#mbPageW').val();
-	var newMbPageW = Number(mbPageW) + 1;
-	$.ajax({
-		type : "POST",
-		url : "./mbmorelistW",
-		data : "mbPageW=" + newMbPageW + "&mbhostid=" + mbhostid,
-		success : mbMoreListWR,
-	});
-}
-function mbMoreListWR(msg) {
-	$('#mbListWT').html(msg)
-}
-
-function mbMoreListScrollW() {
-	var mbhostid = $('#mbhostid').val();
-	var mbPageW = $('#mbPageW').val();
-	var newMbPageW = Number(mbPageW) + 1;
-	$('#mbPageW').val(newMbPageW);
-	$.ajax({
-		type : "POST",
-		url : "./mbmorelistscrollW",
-		data : "mbPageW=" + newMbPageW + "&mbhostid=" + mbhostid,
-		success : mbMoreListScrollWR,
-	});
-}
-function mbMoreListScrollWR(msg) {
-	$('#mbListWTT').append(msg);
-}*/

@@ -26,7 +26,6 @@
 	</bean>
 	
 	<bean class="controller.BoardController">
-		<property name="pageDao" ref="pageDao" />
 		<property name="boardSvc" ref="boardSvc" />
 		<property name="boardDao" ref="boardDao" />
 	</bean>
