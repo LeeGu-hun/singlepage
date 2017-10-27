@@ -10,13 +10,13 @@
 					<li class="col-sm-3">
 						<ul>
 							<li class="dropdown-header"><a href="./srch?ploc=all">지역별</a></li>
-							<li><a href="./srch?ploc=seoul">서울</a></li>
-                            <li><a href="./srch?ploc=incheon">인천</a></li>
-							<li><a href="./srch?ploc=daejeon">대전</a></li>
-							<li><a href="./srch?ploc=kwangju">광주</a></li>
-							<li><a href="./srch?ploc=daegu">대구</a></li>
-							<li><a href="./srch?ploc=pusan">부산</a></li>
-							<li><a href="./srch?ploc=ulsan">울산</a></li>
+							<li><a href="./srch?ploc=서울">서울</a></li>
+                            <li><a href="./srch?ploc=인천">인천</a></li>
+							<li><a href="./srch?ploc=대전">대전</a></li>
+							<li><a href="./srch?ploc=광주">광주</a></li>
+							<li><a href="./srch?ploc=대구">대구</a></li>
+							<li><a href="./srch?ploc=부산">부산</a></li>
+							<li><a href="./srch?ploc=울산">울산</a></li>
 							<li class="divider"></li>
 							<li><a href="./srch?ploc=more">더보기</a></li>
 						</ul>

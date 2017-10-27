@@ -1,6 +1,6 @@
 function donate(){
 	var ck = $('input:radio[name="money"]:checked').val();
-	var cmoney = $('#cmoney').val(10000);
+	var cmoney = $('#cmoney').val();
 
 	if(ck == "in") {
 		  $("#in_money").attr("disabled",false);
@@ -8,15 +8,22 @@ function donate(){
 		  var dmoney = $('#dmoney').val();
 		  var cmoney = $('#cmoney').val();
 		  var amoney = Number(cmoney) - Number(dmoney);
-		  $('#amoney').val(amoney);
+		  if(Number(amoney) >= 0) {
+			  $('#amoney').val(amoney);  
+		  } else {
+			  $('#amoney').val(0);
+		  }	  
 	} else {
 		$('#dmoney').val(ck);
 		var dmoney = $('#dmoney').val();
 		var cmoney = $('#cmoney').val();
 		$("#in_money").val("");
 		$("#in_money").attr("disabled",true)
-		var amoney = Number(cmoney) - Number(dmoney);
-		$('#amoney').val(amoney);;
+		if(Number(amoney) >= 0) {
+			  $('#amoney').val(amoney);  
+		  } else {
+			  $('#amoney').val(0);
+		  }	  
 	}
 }
 
@@ -30,6 +37,7 @@ function in_donate(point) {
 function like() {
 	var pid = $('#pid').val();
 	var mid = $('#mid').val();
+	console.log(mid);
 	var ck = $('#ck').val();
 	$.ajax({
 		type : "POST",
@@ -47,4 +55,16 @@ function like() {
 			$('#btnLike').text('좋아요♥');
 		}
 	}
+}
+
+function donateOK() {
+	$( "#dialog" ).dialog({ 
+		autoOpen: false,
+		width: 400, 
+		modal: true,
+		buttons: [{ text: "Ok", 
+					click: function() { $( this ).dialog( "close" ); } }, 
+				  { text: "Cancel", 
+					click: function() { $( this ).dialog( "close" ); } }] 
+	});		
 }
