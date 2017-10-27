@@ -57,6 +57,19 @@ public class PageController {
 			model.addAttribute("pboardList", pboardList);
 			request.setAttribute("mbPage", mbPage);
 			model.addAttribute("mboardList", mboardList);
+			
+			AuthInfo authInfo = (AuthInfo) request.getSession().getAttribute("authInfo");
+			if (authInfo !=null) {
+				int memId = authInfo.getMid();
+				int pageId = authInfo.getPid();
+				List<PageLike> ckList = pageDao.plikeCheck(memId, pageId);
+				if (ckList.size() == 0) {
+					model.addAttribute("ck", 0);
+				} else {
+					int ck = ckList.get(0).getPlike();
+					model.addAttribute("ck", ck);
+				} 
+			}
 			return "page";
 		}
 	}
