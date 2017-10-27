@@ -61,8 +61,7 @@ public class PageController {
 			AuthInfo authInfo = (AuthInfo) request.getSession().getAttribute("authInfo");
 			if (authInfo !=null) {
 				int memId = authInfo.getMid();
-				int pageId = authInfo.getPid();
-				List<PageLike> ckList = pageDao.plikeCheck(memId, pageId);
+				List<PageLike> ckList = pageDao.plikeCheck(memId, pageHostId);
 				if (ckList.size() == 0) {
 					model.addAttribute("ck", 0);
 				} else {
