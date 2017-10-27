@@ -37,19 +37,22 @@ function pbScroll() {
 	}
 }
 
-function mbScroll() {
-	var mbli = $('#mbli').attr('class');
-	if(mbli == 'active') {
-		var mbPage = $("#mbPage").val();
-		var mbMpage = $("#mbMpage").val();
-		if(mbPage > 1 && mbMpage != -1) {
-			var scrollHeight = $(window).scrollTop() + $(window).height();
-			var documentheight = $(document).height();
-			if(scrollHeight == documentheight) {
-				mbMoreListScroll();					
+function mbScroll(event) {
+	var scrollHeight = $(window).scrollTop() + $(window).height();
+	var documentheight = $(document).height();
+	if(scrollHeight == documentheight) {
+		var mbli = $('#mbli').attr('class');
+		if(mbli == 'active') {
+			var mbPage = $("#mbPage").val();
+			var mbMpage = $("#mbMpage").val();
+			if(mbPage > 1 && mbMpage != -1) {
+				$('.scroll').remove();
+				mbMoreListScroll();
+				 event.preventDefault(); 
+			} else if(mbMpage == -1) {				
+				$('.scroll').remove();
+				 event.preventDefault(); 
 			}
-		} else if(mbMpage == -1) {
-			$('.scroll').remove();
 		}
 	}
 }
@@ -141,7 +144,7 @@ function mbMoreListScrollR(msg) {
 	$('#mbListTT').append(msg);
 }
 
-function mbMoreListW() {
+/*function mbMoreListW() {
 	var mbhostid = $('#mbhostid').val();
 	var mbPageW = $('#mbPageW').val();
 	var newMbPageW = Number(mbPageW) + 1;
@@ -170,4 +173,4 @@ function mbMoreListScrollW() {
 }
 function mbMoreListScrollWR(msg) {
 	$('#mbListWTT').append(msg);
-}
+}*/

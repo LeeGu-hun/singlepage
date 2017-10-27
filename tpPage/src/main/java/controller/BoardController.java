@@ -135,7 +135,7 @@ public class BoardController {
 		return "board/mbMoreListScroll";
 	}
 	
-	@RequestMapping("/mbmorelistW")
+	/*@RequestMapping("/mbmorelistW")
 	public String mbMoreListW(HttpServletRequest request, Model model) {
 		int pageHostId = Integer.parseInt(request.getParameter("mbhostid"));
 		int page = Integer.parseInt(request.getParameter("mbPageW"));
@@ -165,7 +165,7 @@ public class BoardController {
 		model.addAttribute("mboardList", mboardList);
 		request.setAttribute("mbMpageW", mpage);
 		return "board/mbMoreListScrollW";
-	}
+	}*/
 	
 	@RequestMapping("/mbwrite")
 	public String MboardWrite(MultipartHttpServletRequest mrequest, Model model, HttpServletRequest request) {
@@ -190,17 +190,17 @@ public class BoardController {
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
-				int mbPageW = boardSvc.mboardpage(mbhostid);
+				int mbPage = boardSvc.mboardpage(mbhostid);
 				model.addAttribute("page", page);
 				List<Mboard> mboardList = boardSvc.getMboardList(mbhostid);
-				request.setAttribute("mbPageW", mbPageW);
+				request.setAttribute("mbPageW", mbPage);
 				model.addAttribute("mboardList", mboardList);
 			} else {
 				boardSvc.mboardWrite(mbhostid, mbwriterid, mrequest.getParameter("mbsubject"), mrequest.getParameter("mbcontent"), null, null);
-				int mbPageW = boardSvc.mboardpage(mbhostid);
+				int mbPage = boardSvc.mboardpage(mbhostid);
 				model.addAttribute("page", page);
 				List<Mboard> mboardList = boardSvc.getMboardList(mbhostid);
-				request.setAttribute("mbPageW", mbPageW);
+				request.setAttribute("mbPage", mbPage);
 				model.addAttribute("mboardList", mboardList);
 			}
 			return "board/mboardW";
