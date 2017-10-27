@@ -24,6 +24,24 @@ public class Page {
 		this.pperiod = pperiod;
 		this.pshowtime = pshowtime;
 	}
+	
+	public Page(int pid, int ppoint, int pmaster, String pname, String pnick, String pintro, String pgenre, String ploc,
+			String pfile, String pnewfile, String pshowtime, Date pdate, Date pperiod) {
+		super();
+		this.pid = pid;
+		this.ppoint = ppoint;
+		this.pmaster = pmaster;
+		this.pname = pname;
+		this.pnick = pnick;
+		this.pintro = pintro;
+		this.pgenre = pgenre;
+		this.ploc = ploc;
+		this.pfile = pfile;
+		this.pnewfile = pnewfile;
+		this.pshowtime = pshowtime;
+		this.pdate = pdate;
+		this.pperiod = pperiod;
+	}
 
 	public int getPid() {
 		return pid;

@@ -12,12 +12,15 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import board.PboardCommand;
 import dao.BoardDao;
+import dao.PageDao;
 import member.AuthInfo;
+import page.Page;
 import board.BoardService;
 import board.Mboard;
 import board.Pboard;
@@ -25,8 +28,13 @@ import board.Pboard;
 @Controller
 public class BoardController {
 	
+	private PageDao pageDao;
 	private BoardService boardSvc;
 	private BoardDao boardDao;
+
+	public void setPageDao(PageDao pageDao) {
+		this.pageDao = pageDao;
+	}
 
 	public void setBoardSvc(BoardService boardSvc) {
 		this.boardSvc = boardSvc;
@@ -38,7 +46,7 @@ public class BoardController {
 
 	@RequestMapping("/pbmorelist")
 	public String pbMoreList(HttpServletRequest request, Model model) {
-		int pageHostId = 1;
+		int pageHostId = Integer.parseInt(request.getParameter("pbhostid"));
 		int page = Integer.parseInt(request.getParameter("pbPage"));
 		int listCount = boardDao.getPboardListCount(pageHostId);
 		int startPage = 1;
@@ -54,7 +62,7 @@ public class BoardController {
 	
 	@RequestMapping("/pbmorelistscroll") 
 	public String pbMoreListScroll(HttpServletRequest request, Model model) {
-		int pageHostId = 1;
+		int pageHostId = Integer.parseInt(request.getParameter("pbhostid"));
 		int mpage = Integer.parseInt(request.getParameter("pbPage"));
 		int listCount = boardDao.getPboardListCount(pageHostId);
 		int startPage = ((mpage - 1) * 10) +1;
@@ -74,7 +82,7 @@ public class BoardController {
 		if(authinfo == null) {
 			return "redirect:/login";
 		} else { 
-			int pbhostid = 1;
+			int pbhostid = pbc.getPbhostid();
 			int pbwriterid = authinfo.getMid();
 			MultipartFile multi = pbc.getPbfile();
 			String pbfile = multi.getOriginalFilename();
@@ -91,13 +99,13 @@ public class BoardController {
 			} else {
 				boardSvc.pboardWrite(pbhostid, pbwriterid, pbc.getPbsubject(), pbc.getPbcontent(), null, null);
 			}
-			return "redirect:/page";
+			return "redirect:/page?host=" + pbhostid;
 		}
 	}
 	
 	@RequestMapping("/mbmorelist")
 	public String mbMoreList(HttpServletRequest request, Model model) {
-		int pageHostId = 1;
+		int pageHostId = Integer.parseInt(request.getParameter("mbhostid"));
 		int page = Integer.parseInt(request.getParameter("mbPage"));
 		int listCount = boardDao.getMboardListCount(pageHostId);
 		int startPage = 1;
@@ -113,7 +121,7 @@ public class BoardController {
 	
 	@RequestMapping("/mbmorelistscroll") 
 	public String mbMoreListScroll(HttpServletRequest request, Model model) {
-		int pageHostId = 1;
+		int pageHostId = Integer.parseInt(request.getParameter("mbhostid"));
 		int mpage = Integer.parseInt(request.getParameter("mbPage"));
 		int listCount = boardDao.getMboardListCount(pageHostId);
 		int startPage = ((mpage - 1) * 10) +1;
@@ -129,7 +137,7 @@ public class BoardController {
 	
 	@RequestMapping("/mbmorelistW")
 	public String mbMoreListW(HttpServletRequest request, Model model) {
-		int pageHostId = 1;
+		int pageHostId = Integer.parseInt(request.getParameter("mbhostid"));
 		int page = Integer.parseInt(request.getParameter("mbPageW"));
 		int listCount = boardDao.getMboardListCount(pageHostId);
 		int startPage = 1;
@@ -145,7 +153,7 @@ public class BoardController {
 	
 	@RequestMapping("/mbmorelistscrollW") 
 	public String mbMoreListScrollW(HttpServletRequest request, Model model) {
-		int pageHostId = 1;
+		int pageHostId = Integer.parseInt(request.getParameter("mbhostid"));
 		int mpage = Integer.parseInt(request.getParameter("mbPageW"));
 		int listCount = boardDao.getMboardListCount(pageHostId);
 		int startPage = ((mpage - 1) * 10) +1;
@@ -165,7 +173,8 @@ public class BoardController {
 		if(authInfo == null) {
 			return "board/mboardW";
 		} else {
-			int mbhostid = 1;
+			int mbhostid = Integer.parseInt(mrequest.getParameter("mbhostid"));
+			Page page = pageDao.getPage(mbhostid);
 			int mbwriterid = authInfo.getMid();
 			if(!(mrequest.getFileNames().hasNext() == false)) {
 				Iterator<String> itr = mrequest.getFileNames();
@@ -181,16 +190,16 @@ public class BoardController {
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
-				int pageHostId = 1;
-				int mbPageW = boardSvc.mboardpage(pageHostId);
-				List<Mboard> mboardList = boardSvc.getMboardList(pageHostId);
+				int mbPageW = boardSvc.mboardpage(mbhostid);
+				model.addAttribute("page", page);
+				List<Mboard> mboardList = boardSvc.getMboardList(mbhostid);
 				request.setAttribute("mbPageW", mbPageW);
 				model.addAttribute("mboardList", mboardList);
 			} else {
 				boardSvc.mboardWrite(mbhostid, mbwriterid, mrequest.getParameter("mbsubject"), mrequest.getParameter("mbcontent"), null, null);
-				int pageHostId = 1;
-				int mbPageW = boardSvc.mboardpage(pageHostId);
-				List<Mboard> mboardList = boardSvc.getMboardList(pageHostId);
+				int mbPageW = boardSvc.mboardpage(mbhostid);
+				model.addAttribute("page", page);
+				List<Mboard> mboardList = boardSvc.getMboardList(mbhostid);
 				request.setAttribute("mbPageW", mbPageW);
 				model.addAttribute("mboardList", mboardList);
 			}
