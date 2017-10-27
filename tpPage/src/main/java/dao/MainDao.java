@@ -9,6 +9,7 @@ import javax.sql.DataSource;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import board.Pboard;
+import main.Loc;
 
 public class MainDao {
 	private JdbcTemplate jdbcTemplate;
@@ -30,24 +31,14 @@ public class MainDao {
 			return board;
 		}
 	};
-//	private RowMapper<Pboard> pRowMapper = new RowMapper<Pboard>() {
-//		@Override
-//		public Pboard mapRow(ResultSet rs, int rowNum) throws SQLException {
-//			Pboard board = new Pboard(rs.getInt("pbid"),
-//					rs.getInt("pbre_ref"),
-//					rs.getInt("pbre_lev"),
-//					rs.getInt("pbre_seq"),
-//					rs.getInt("pbreadcount"),
-//					rs.getInt("pbhostid"),
-//					rs.getInt("pbwriterid"),
-//					rs.getString("pbsubject"),
-//					rs.getString("pbcontent"),
-//					rs.getString("pbfile"),
-//					rs.getString("pbnewfile"),
-//					rs.getTimestamp("pbdate"));
-//			return board;
-//		}
-//	};
+	private RowMapper<Loc> locRowMapper = new RowMapper<Loc>() {
+		@Override
+		public Loc mapRow(ResultSet rs, int rowNum) throws SQLException {
+			Loc loc = new Loc(rs.getString(1), rs.getString(2)); 
+			return loc;
+		}
+	};
+	
 
 	public MainDao(DataSource dataSource) {
 		this.jdbcTemplate = new JdbcTemplate(dataSource);
@@ -59,7 +50,7 @@ public class MainDao {
 	}
 	
 	public List<Pboard> getBoardListAll(int page, int limit) {
-		List<Pboard> boardList = jdbcTemplate.query("sel1ect * from (select rownum rnum, pbid, pbsubject, pbcontent, pbfile, pbnewfile, pbre_ref, pbre_lev, pbre_seq, pbreadcount, pbdate, pbhostid, pbwriterid from (select * from pboard order by pbRE_REF desc, pbRE_SEQ asc)) where rnum >= ? and rnum<= ?", boRowMapper, page, limit);
+		List<Pboard> boardList = jdbcTemplate.query("select * from (select rownum rnum, pbid, pbsubject, pbcontent, pbfile, pbnewfile, pbre_ref, pbre_lev, pbre_seq, pbreadcount, pbdate, pbhostid, pbwriterid from (select * from pboard order by pbRE_REF desc, pbRE_SEQ asc)) where rnum >= ? and rnum<= ?", boRowMapper, page, limit);
 		return boardList; 
 	}
 	
@@ -76,17 +67,22 @@ public class MainDao {
 			String code = opts.get(i).split("=")[0];
 			String[] val = opts.get(i).split("=")[1].split(",");
 			for (int j=0; j <=val.length-1;j++) {
-				sql += code.trim() + "=";
-				sql += "'" + val[j].trim() + "'";
+				sql += code.trim() + " like ";
+				sql += "'%" + val[j].trim() + "%'";
 				if(j != val.length-1) sql += " and ";
 			}
 			if (i != opts.size()-1) sql += " and ";
 		}
 		sql += " order by pbRE_REF desc, pbRE_SEQ asc)) where rnum >= ? and rnum<= ?";
 		
-		System.out.println(sql);
+
 		
 		List<Pboard> boardList = jdbcTemplate.query(sql, boRowMapper, page, limit);
 		return boardList;
+	}
+	
+	public List<Loc> getLocList(String sido) {
+		List<Loc> locList = jdbcTemplate.query("select * from locdb where sido = ?", locRowMapper, sido);
+		return locList;
 	}
 }

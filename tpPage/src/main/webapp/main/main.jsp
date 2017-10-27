@@ -8,6 +8,11 @@
 <div class="container">
 <%@ include file="./menubar.jsp" %>
 
+<%@ include file="./search.jsp" %>
+</div>
+
+
+<div class="container">
 <div class="grid">
 	<c:forEach var="list" items="${boardList }">
 	<div class="grid-item">
