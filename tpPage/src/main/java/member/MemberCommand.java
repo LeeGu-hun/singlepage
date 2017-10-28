@@ -3,7 +3,7 @@ package member;
 import org.springframework.web.bind.annotation.ModelAttribute;
 
 public class MemberCommand {
-	private int mid;
+	private int mid, nowpid;
 	private String mname, memail, mpw, mpwconf;
 	
 	public int getMid() {
@@ -38,6 +38,12 @@ public class MemberCommand {
 	}
 	public boolean isPasswordEqualToConfirmPassword() {
 		return mpw.equals(mpwconf);
+	}
+	public int getNowpid() {
+		return nowpid;
+	}
+	public void setNowpid(int nowpid) {
+		this.nowpid = nowpid;
 	}
 
 }

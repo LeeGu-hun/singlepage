@@ -1,11 +1,15 @@
 package controller;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import board.BoardService;
 import board.PboardCommand;
@@ -47,28 +51,49 @@ public class MemberController {
 	}
 
 	@RequestMapping("/login")
-	public String login(@ModelAttribute("logincmd") MemberCommand membercmd) {
+	public String login(@ModelAttribute("logincmd") MemberCommand membercmd, Model model, HttpServletRequest request) {
+		if (request.getParameter("pid") != null) {
+			int nowpid = Integer.parseInt(request.getParameter("pid"));
+			model.addAttribute("nowpid", nowpid);
+			return "member/login";
+//				return "redirect:/page?host="+nowpid;
+		}
 		return "member/login";
 	}
 
 	@RequestMapping("/memberLogin")
-	public String MemberLogin(@ModelAttribute("logincmd") MemberCommand membercmd, HttpSession session) {
+	public String MemberLogin(@ModelAttribute("logincmd") MemberCommand membercmd, HttpSession session, HttpServletRequest request) {
 		Member member = memberSvc.memberLogin(membercmd.getMemail());  
 		if (member == null) {
 			return "redirect:/login";
 		} else {
 			if (membercmd.getMpw().equals(member.getMpw())) {
 				Page pid = memberDao.getMemberPid(member.getMid());
-				if(pid == null) {
-					AuthInfo authInfo = new AuthInfo(member.getMid(), member.getMname(), member.getMemail(),
-							member.getMphone(), member.getMcheck(), member.getMpoint(), member.getMdate(), 0);
-					session.setAttribute("authInfo", authInfo);
-					return "redirect:/home";
+				int npid = membercmd.getNowpid();
+				if(npid == 0) {
+					if(pid == null) {
+						AuthInfo authInfo = new AuthInfo(member.getMid(), member.getMname(), member.getMemail(),
+								member.getMphone(), member.getMcheck(), member.getMpoint(), member.getMdate(), 0);
+						session.setAttribute("authInfo", authInfo);
+						return "redirect:/home";
+					} else {
+						AuthInfo authInfo = new AuthInfo(member.getMid(), member.getMname(), member.getMemail(),
+								member.getMphone(), member.getMcheck(), member.getMpoint(), member.getMdate(), pid.getPid());
+						session.setAttribute("authInfo", authInfo);
+						return "redirect:/home";
+					}
 				} else {
-					AuthInfo authInfo = new AuthInfo(member.getMid(), member.getMname(), member.getMemail(),
-							member.getMphone(), member.getMcheck(), member.getMpoint(), member.getMdate(), pid.getPid());
-					session.setAttribute("authInfo", authInfo);
-					return "redirect:/home";
+					if(pid == null) {
+						AuthInfo authInfo = new AuthInfo(member.getMid(), member.getMname(), member.getMemail(),
+								member.getMphone(), member.getMcheck(), member.getMpoint(), member.getMdate(), 0);
+						session.setAttribute("authInfo", authInfo);
+						return "redirect:/page?host=" + npid;
+					} else {
+						AuthInfo authInfo = new AuthInfo(member.getMid(), member.getMname(), member.getMemail(),
+								member.getMphone(), member.getMcheck(), member.getMpoint(), member.getMdate(), pid.getPid());
+						session.setAttribute("authInfo", authInfo);
+						return "redirect:/page?host=" + npid;
+					}
 				}
 			} else {
 				return "redirect:/login";

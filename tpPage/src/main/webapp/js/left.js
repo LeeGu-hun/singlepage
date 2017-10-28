@@ -37,24 +37,31 @@ function in_donate(point) {
 function like() {
 	var pid = $('#pid').val();
 	var mid = $('#mid').val();
+	console.log(pid);
 	console.log(mid);
 	var ck = $('#ck').val();
-	$.ajax({
-		type : "POST",
-		url : "./chklike",
-		data : "pid=" + pid + "&mid=" + mid + "&ck=" + $.trim(ck),
-		success : changeHeart
-	});
-	function changeHeart(ck) {
-		ck = $.trim(ck);
-		$('#ck').val(ck);
-		if( ck == 0 ){
-			$('#btnLike').text('좋아요♡');
-		}
-		else {
-			$('#btnLike').text('좋아요♥');
+	if(mid == "/"){
+		console.log("ssss");
+		location.href = './login?pid='+pid;
+	} else {
+		$.ajax({
+			type : "POST",
+			url : "./chklike",
+			data : "pid=" + pid + "&mid=" + mid + "&ck=" + $.trim(ck),
+			success : changeHeart
+		});
+		function changeHeart(ck) {
+			ck = $.trim(ck);
+			$('#ck').val(ck);
+			if( ck == 0 ){
+				$('#btnLike').text('좋아요♡');
+			}
+			else {
+				$('#btnLike').text('좋아요♥');
+			}
 		}
 	}
+	
 }
 
 function donateOK() {
