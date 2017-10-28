@@ -17,17 +17,20 @@
 
 <% 
 	} else {
-	
+%>
+
+<%
 	int nowMbPage = Integer.parseInt(request.getAttribute("mbPage").toString());
 %>
 
-member board
+<c:out value="${page.pid }" /> member board
 <form id="mboardform" name="mboardform" action="mbwrite" method="Post" enctype="multipart/form-data">
 	<input type="text" id="mbsubject" name="mbsubject" />
 	<br><textarea id="mbcontent" name="mbcontent"></textarea>
 	<br><img id="mbuploadImg" name="mbuploadImg" />
 	<br><input type="file" id="mbfile" name="mbfile" onchange="mbreadURL(this);" />
 	<input type="hidden" id="mbupdir" name="mbupdir" value="<%=request.getRealPath("/buploads/mbuploads/")%>" />
+	<input type="hidden" id="mbhostid" name="mbhostid" value="<c:out value='${page.pid }' />" />
 	<input type="submit" value="등록" onclick="mbwrite();" />
 </form>
 <br>
@@ -82,7 +85,7 @@ member board
 			</td>
 		</tr>
 <% } else { %>
-		<tr name="mbBtnRow" id="mbBtnRow">
+		<tr>
 			<td>
 				<input type="button" value="더 보기" onclick="mbMoreList();" />                    
 			</td>

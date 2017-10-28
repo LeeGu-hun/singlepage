@@ -28,11 +28,11 @@
 <%
 	if(authInfo.getPid() == 0) {
 %>
-<a href="#" class="btn btn-primary">page 만들기</a>
+<a href="./pagemaker" class="btn btn-primary">page 만들기</a>
 <%
 	} else {
 %>		
-<a href="#" class="btn btn-primary">내 page 이동</a>		
+<a href="./page?host=${authInfo.pid }" class="btn btn-primary">내 page 이동</a>		
 <%
 	}
 %>

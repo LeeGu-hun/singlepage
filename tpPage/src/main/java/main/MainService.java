@@ -43,12 +43,15 @@ public class MainService {
 		return boardList;
 	}
 	
-	public List<Pboard> search(String code, String option) {
-		List<Pboard> boardList = new ArrayList<Pboard>();
+	public List<Pboard> search(ArrayList<String> opts, int page, int limit) {
+		return mainDao.getBoardListSome(page, limit, opts);
+	}
+	
+	public List getCage(String cate) {
+		List results = new ArrayList();
 		
 		
-		
-		return boardList;
+		return results;
 	}
 	
 	

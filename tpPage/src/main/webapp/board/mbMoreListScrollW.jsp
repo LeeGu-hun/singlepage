@@ -6,7 +6,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <%
-	int nowMbPage = Integer.parseInt(request.getAttribute("mbMpage").toString());
+	int nowMbPageW = Integer.parseInt(request.getAttribute("mbMpageW").toString());
 %>
 
 	<c:forEach var="mboard" items="${mboardList }">
@@ -27,11 +27,11 @@
 			<td>${mboard.mname }</td>
 		</tr>
 		</c:forEach>
-<% if(nowMbPage == -1) { %>		
+<% if(nowMbPageW == -1) { %>		
 		<tr>
 			<td colspan="11">
 				마지막 항목입니다.
 			</td>
 		</tr>
-	<input type="hidden" name="mbMpage" id="mbMpage" value="<%=nowMbPage %>" />
+	<input type="hidden" name="mbMpageW" id="mbMpageW" value="<%=nowMbPageW %>" />
 <% } %>

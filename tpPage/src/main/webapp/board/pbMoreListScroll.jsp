@@ -27,7 +27,7 @@
 			<td>${pboard.mname }</td>
 		</tr>
 		</c:forEach>
-<% if(nowPbPage == 0) { %>		
+<% if(nowPbPage == -1) { %>		
 		<tr>
 			<td colspan="11">
 				마지막 항목입니다.
