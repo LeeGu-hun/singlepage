@@ -10,21 +10,25 @@
 	<p>
 		<label>이멜:<br>
 		<form:input path="memail" />
+		<form:errors path="memail" />
 		</label>
 	</p>
 	<p>
 		<label>이름:<br>
 		<form:input path="mname" />
+		<form:errors path="mname" />
 		</label>
 	</p>
 	<p>
 		<label>비밀번호:<br>
 		<form:password path="mpw" />
+		<form:errors path="mpw" />
 		</label>
 	</p>
 	<p>
 		<label>비밀번호 확인:<br>
 		<form:password path="mpwconf" />
+		<form:errors path="mpwconf" />
 		</label>
 	</p>
 	

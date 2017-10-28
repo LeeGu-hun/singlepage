@@ -1,10 +1,8 @@
 package member;
 
-import org.springframework.web.bind.annotation.ModelAttribute;
-
 public class MemberCommand {
 	private int mid;
-	private String mname, memail, mpw, mpwconf;
+	private String mname, memail, mpw, mpwconf, mphone, newmpw, newmpwconf;
 	
 	public int getMid() {
 		return mid;
@@ -36,8 +34,31 @@ public class MemberCommand {
 	public void setMpwconf(String mpwconf) {
 		this.mpwconf = mpwconf;
 	}
+	public String getMphone() {
+		return mphone;
+	}
+	public void setMphone(String mphone) {
+		this.mphone = mphone;
+	}
+	public String getNewmpw() {
+		return newmpw;
+	}
+	public void setNewmpw(String newmpw) {
+		this.newmpw = newmpw;
+	}
+	public String getNewmpwconf() {
+		return newmpwconf;
+	}
+	public void setNewmpwconf(String newmpwconf) {
+		this.newmpwconf = newmpwconf;
+	}
 	public boolean isPasswordEqualToConfirmPassword() {
 		return mpw.equals(mpwconf);
 	}
-
+	public boolean isoldmpwEqualTonewmpw() {
+		return mpw.equals(newmpw);
+	}
+	public boolean isnewmpwEqualTonewmpwconf() {
+		return newmpw.equals(newmpwconf);
+	}
 }
