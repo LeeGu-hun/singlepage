@@ -51,43 +51,19 @@
 		</tr>
 	</tbody>
 <% } else { %>
-		<tr class="scroll">
-			<td>
-<script>
 
-$(document).ready(function() {
-	$(window).scroll(function() {				
-			
-		
-		
-		var mbli = $('#mbli').attr('class');
-		if (mbli == 'active') {
-			var mbPage = $("#mbPage").val();
-			var mbMpage = $("#mbMpage").val();
-			if (mbPage > 1 && mbMpage != -1) {
-				var scrollHeight = $(window).scrollTop() + $(window).height();
-				var documentheight = $(document).height();
-					/* $(window).scroll(function() { */	
-				if (scrollHeight + 100 >= documentheight) {
-						mbMoreListScroll();
-						$('.scroll').remove();
-				}
-					/* }) */;
-			} else if (mbMpage == -1) {
-				$('.scroll').remove();
-			}
-			
-		}
-	
-		
-	});
-});
-</script>			
-		
-			</td>
-		</tr>
 	</tbody>		
-	
+<tbody class="scroll">
+<tr>
+<td>
+<script>
+$(window).scroll(function() {
+	mbScroll();
+});
+</script>
+</td>
+</tr>
+</tbody>	
 <% } %>
 
 

@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import board.BoardService;
 import board.Mboard;
+import board.MboardCommand;
 import board.Pboard;
 import board.PboardCommand;
 import dao.PageDao;
@@ -42,7 +43,8 @@ public class PageController {
 	}
 
 	@RequestMapping("/page")
-	public String pageLoad(@RequestParam("host") int host, @ModelAttribute("pboardcmd") PboardCommand pbc, Model model, HttpServletRequest request) {
+	public String pageLoad(@RequestParam("host") int host, @ModelAttribute("pboardcmd") PboardCommand pbc,
+			@ModelAttribute("mboardcmd") MboardCommand mbc, Model model, HttpServletRequest request) {
 		int pageHostId = host;
 		Page page = pageDao.getPage(pageHostId);
 		if(page == null) {

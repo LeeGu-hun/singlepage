@@ -5,12 +5,14 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js" type="text/javascript"></script>
 <script src="http://malsup.github.com/jquery.form.js"></script>
-<script src="<%=request.getContextPath()%>/js/board.js?ver=135424"></script>
+
+<script src="<%=request.getContextPath()%>/js/board.js?ver=13534324"></script>
 
 <div>
-	<ul class="nav nav-tabs" role="tablist">
+	<ul id="bTab" class="nav nav-tabs" role="tablist">
 		<li id="pbli" role="presentation" class="active"><a href="#pageboard"
 			aria-controls="pageboard" role="tab" data-toggle="tab">page</a></li>
 		<li id="mbli" role="presentation"><a href="#memberboard"
