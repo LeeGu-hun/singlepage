@@ -1,7 +1,5 @@
 package member;
 
-import org.springframework.web.bind.annotation.ModelAttribute;
-
 public class MemberCommand {
 	private int mid, nowpid;
 	private String mname, memail, mpw, mpwconf, mphone, newmpw, newmpwconf;
@@ -26,6 +24,24 @@ public class MemberCommand {
 	}
 	public String getMpw() {
 		return mpw;
+	}
+	public String getMphone() {
+		return mphone;
+	}
+	public void setMphone(String mphone) {
+		this.mphone = mphone;
+	}
+	public String getNewmpw() {
+		return newmpw;
+	}
+	public void setNewmpw(String newmpw) {
+		this.newmpw = newmpw;
+	}
+	public String getNewmpwconf() {
+		return newmpwconf;
+	}
+	public void setNewmpwconf(String newmpwconf) {
+		this.newmpwconf = newmpwconf;
 	}
 	public void setMpw(String mpw) {
 		this.mpw = mpw;
