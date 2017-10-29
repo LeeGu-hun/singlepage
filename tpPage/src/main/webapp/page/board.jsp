@@ -5,36 +5,27 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
-<script>
-	function readURL(input) {
-		if(input.files && input.files[0]) {
-			var reader = new FileReader();
-			reader.onload = function(e) {
-				$('#pbuploadImg').attr('src', e.target.result);
-				$('#pbuploadImg').attr('width', 300);
-				$('#mbuploadImg').attr('src', e.target.result);
-				$('#mbuploadImg').attr('width', 300);
-			}
-			reader.readAsDataURL(input.files[0]);
-		}
-	}
-</script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js" type="text/javascript"></script>
+<script src="http://malsup.github.com/jquery.form.js"></script>
+
+<script src="<%=request.getContextPath()%>/js/board.js?ver=13534324"></script>
 
 <div>
-	<ul class="nav nav-tabs" role="tablist">
-		<li role="presentation" class="active"><a href="#page"
-			aria-controls="page" role="tab" data-toggle="tab">page</a></li>
-		<li role="presentation"><a href="#member"
-			aria-controls="member" role="tab" data-toggle="tab">member</a></li>
+	<ul id="bTab" class="nav nav-tabs" role="tablist">
+		<li id="pbli" role="presentation" class="active"><a href="#pageboard"
+			aria-controls="pageboard" role="tab" data-toggle="tab">page</a></li>
+		<li id="mbli" role="presentation"><a href="#memberboard"
+			aria-controls="memberboard" role="tab" data-toggle="tab">member</a></li>
 	</ul>
 
 	<div class="tab-content">
-		<div role="tabpanel" class="tab-pane active" id="page">
-			<%@ include file="/page/pboard.jsp" %>
+		<div role="tabpanel" class="tab-pane active" id="pageboard">
+			<%@ include file="/board/pboard.jsp" %>
 		</div>
 		
-		<div role="tabpanel" class="tab-pane" id="member">
-			<%@ include file="/page/mboard.jsp" %>
+		<div role="tabpanel" class="tab-pane" id="memberboard">
+			<%@ include file="/board/mboard.jsp" %>
 		</div>
 	</div>
 </div>	

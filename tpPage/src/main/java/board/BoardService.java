@@ -1,5 +1,7 @@
 package board;
 
+import java.util.List;
+
 import org.springframework.transaction.annotation.Transactional;
 
 import dao.BoardDao;
@@ -13,6 +15,64 @@ public class BoardService {
 		this.boardDao = boardDao;
 	}
 
+	public int pboardpage(int pageHostId) {
+		int page = 1;
+		int listCount = boardDao.getPboardListCount(pageHostId);
+		int startPage = 1;
+		int endPage = startPage + 9;
+		if(endPage >= listCount) {
+			page = 0;
+		}
+		if(listCount == 0) {
+			page = -1;
+		}
+		return page;
+	}
+
+	public List<Pboard> getPboardList(int pageHostId) {
+		int page = 1;
+		int listCount = boardDao.getPboardListCount(pageHostId);
+		int startPage = 1;
+		int endPage = startPage + 9;
+		if(endPage >= listCount) {
+			page = 0;
+		}
+		if(listCount == 0) {
+			page = -1;
+		}
+		List<Pboard> pboardList = boardDao.getPboardList(pageHostId, startPage, endPage);
+		return pboardList;
+	}
+	
+	public int mboardpage(int pageHostId) {
+		int page = 1;
+		int listCount = boardDao.getMboardListCount(pageHostId);
+		int startPage = 1;
+		int endPage = startPage + 9;
+		if(endPage >= listCount) {
+			page = 0;
+		}
+		if(listCount == 0) {
+			page = -1;
+		}
+		return page;
+	}
+	
+	public List<Mboard> getMboardList(int pageHostId) {
+		int page = 1;
+		int listCount = boardDao.getMboardListCount(pageHostId);
+		int startPage = 1;
+		int endPage = startPage + 9;
+		if(endPage >= listCount) {
+			page = 0;
+		}
+		if(listCount == 0) {
+			page = -1;
+		}
+		List<Mboard> mboardList = boardDao.getMboardList(pageHostId, startPage, endPage);
+		return mboardList;
+	}
+	
 	@Transactional
 	public void pboardWrite(int pbhostid, int pbwriterid, String pbsubject, String pbcontent,
 			String pbfile, String pbnewfile) {
@@ -29,3 +89,6 @@ public class BoardService {
 		boardDao.MboardWrite(mboard);
 	}
 }
+
+
+

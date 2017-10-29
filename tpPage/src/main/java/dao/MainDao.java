@@ -2,12 +2,14 @@ package dao;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.sql.DataSource;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import board.Pboard;
+import main.Loc;
 
 public class MainDao {
 	private JdbcTemplate jdbcTemplate;
@@ -29,6 +31,14 @@ public class MainDao {
 			return board;
 		}
 	};
+	private RowMapper<Loc> locRowMapper = new RowMapper<Loc>() {
+		@Override
+		public Loc mapRow(ResultSet rs, int rowNum) throws SQLException {
+			Loc loc = new Loc(rs.getString(1), rs.getString(2)); 
+			return loc;
+		}
+	};
+	
 
 	public MainDao(DataSource dataSource) {
 		this.jdbcTemplate = new JdbcTemplate(dataSource);
@@ -50,8 +60,29 @@ public class MainDao {
 		return board; 
 	}
 	
-	public List<Pboard> getBoardListSome(int page, int limit, String where, String what) {
-		List<Pboard> boardList = jdbcTemplate.query("select * from (select rownum rnum, pbid, pbsubject, pbcontent, pbfile, pbnewfile, pbre_ref, pbre_lev, pbre_seq, pbreadcount, pbdate, pbhostid, pbwriterid from (select * from pboard where ? = ? order by pbRE_REF desc, pbRE_SEQ asc)) where rnum >= ? and rnum<= ?", boRowMapper, where, what, page, limit);
+	public List<Pboard> getBoardListSome(int page, int limit, ArrayList<String> opts) {
+		String sql = "select * from (select rownum rnum, pbid, pbsubject, pbcontent, pbfile, pbnewfile, pbre_ref, pbre_lev, pbre_seq, pbreadcount, pbdate, pbhostid, pbwriterid from (select * from pboard pb, page p where pb.pbhostid = p.pid ";
+		if (!opts.isEmpty()) sql += " and ";
+		for (int i=0; i <= opts.size()-1; i++) {
+			String code = opts.get(i).split("=")[0];
+			String[] val = opts.get(i).split("=")[1].split(",");
+			for (int j=0; j <=val.length-1;j++) {
+				sql += code.trim() + " like ";
+				sql += "'%" + val[j].trim() + "%'";
+				if(j != val.length-1) sql += " and ";
+			}
+			if (i != opts.size()-1) sql += " and ";
+		}
+		sql += " order by pbRE_REF desc, pbRE_SEQ asc)) where rnum >= ? and rnum<= ?";
+		
+
+		
+		List<Pboard> boardList = jdbcTemplate.query(sql, boRowMapper, page, limit);
 		return boardList;
+	}
+	
+	public List<Loc> getLocList(String sido) {
+		List<Loc> locList = jdbcTemplate.query("select * from locdb where sido = ?", locRowMapper, sido);
+		return locList;
 	}
 }

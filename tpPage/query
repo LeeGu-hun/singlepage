@@ -5,17 +5,19 @@ mname varchar2(30) not null,
 mpw varchar2(30) not null,
 mphone varchar2(20),
 mcheck number,
-mpoint number,
+mpoint number default 0 not null,
 mdate date,
 constraint pk_mem primary key(mid)
 );
 
+alter table member modify mpoint not null;
+
 create sequence mid_seq increment by 1 start with 1 maxvalue 30000;
 
-insert into member values(mid_seq.nextval, 'email', 'name', 'pw', null, null, null, sysdate);
+insert into member values(mid_seq.nextval, 'email', 'name', 'pw', null, null, 0, sysdate);
 
 insert into member (mid, memail, mname, mpw, mphone, mcheck, mpoint, mdate)
-values(mid_seq.nextval, 'email', 'name', 'pw', null, null, null, sysdate); 
+values(mid_seq.nextval, 'email', 'name', 'pw', null, null, 0, sysdate); 
 
 
 create table page(
@@ -27,19 +29,21 @@ pgenre varchar2(50),
 ploc varchar2(100),
 pperiod date,
 pshowtime varchar2(30),
-ppoint number,
+ppoint number default 0 not null,
 pdate date,
 pmaster number,
 constraint pk_page primary key(pid),
 constraint fk_page foreign key(pmaster) references member(mid)
 );
 
+alter table page modify ppoint not null;
+
 create sequence pid_seq increment by 1 start with 1 maxvalue 30000;
 
-insert into page values(pid_seq.nextval, 'name', 'nick', 'intoro', null, null, null, null, null, sysdate, '1');
+insert into page values(pid_seq.nextval, 'name', 'nick', 'intoro', null, null, null, null, 0, sysdate, '1', null, null);
 
-insert into page(pid, pname, pnick, pintro, pgenre, ploc, pperiod, pshowtime, ppoint, pdate, pmaster)
-values(pid_seq.nextval, 'name', 'nick', 'intoro', null, null, null, null, null, sysdate, '1');
+insert into page(pid, pname, pnick, pintro, pgenre, ploc, pperiod, pshowtime, ppoint, pdate, pmaster, pfile, pnewfile)
+values(pid_seq.nextval, 'name', 'nick', 'intoro', null, null, null, null, 0, sysdate, '1', null, null);
 
 
 create table pboard(
@@ -59,6 +63,8 @@ constraint pk_pboard primary key(pbid),
 constraint fk_pboard_hostid foreign key(pbhostid) references page(pid),
 constraint fk_pboard_writerid foreign key(pbwriterid) references member(mid)
 );
+
+alter table page add(pfile varchar2(100), pnewfile varchar2(100));
 
 create sequence pbid_seq increment by 1 start with 1 maxvalue 30000;
 
@@ -113,7 +119,7 @@ p_deal_type varchar2(7) not null,
 p_deal_date date not null,
 mid number,
 constraint fk_pp_mid foreign key(mid) references member(mid),
-constraint p_type check(p_deal_type in('donate', 'realize ')),
+constraint p_type check(p_deal_type in('donate', 'realize')),
 constraint fk_pp_pid foreign key(pid) references page(pid));
 
 create table page_like (
@@ -136,18 +142,7 @@ constraint fk_blike_mbid foreign key(mbid) references mboard(mbid),
 constraint fk_blike_pbid foreign key(pbid) references pboard(pbid),
 constraint blike_status check(blike in('0', '1')));
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+create table locdb(
+sido varchar2(100),
+gungu varchar2(100)
+);
