@@ -140,9 +140,9 @@ public class PageController {
 		return "page/ck";
 	}
 	
-	@RequestMapping("/modify") 
-	public String pageModify() {
-		
-		return "page/pageModify";
-	}
+//	@RequestMapping("/modify") 
+//	public String pageModify() {
+//		
+//		return "page/pageModify";
+//	}
 }
