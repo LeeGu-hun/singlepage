@@ -54,38 +54,29 @@ function mbScroll() {
 	}
 }
 
-function mbScrollW() {
-	var mbli = $('#mbli').attr('class');
-	if(mbli == 'active') {
-		var mbPageW = $("#mbPageW").val();
-		var mbMpageW = $("#mbMpageW").val();
-		if(mbPageW > 1 && mbMpageW != -1) {
-			var scrollHeight = $(window).scrollTop() + $(window).height();
-			var documentheight = $(document).height();
-			if(scrollHeight == documentheight) {
-				mbMoreListScrollW();					
-			}
-		} else if(mbMpageW == -1) {
-			$('.scroll').remove();
-		}
+/*$(document).ready(function() {
+	var mbTab = $('#rMbTab').val();
+	if(mbTab == 'active') {
+		$("#bTab a[href='#memberboard']").tab("show");
 	}
-}
+});*/
 
-function mbwrite() {
+/*function mbwrite() {
 	$('#mboardform').ajaxForm({
 			success:function(msg) {
 				$('#memberboard').html(msg)
 		}
 	});
-}
+}*/
 
 function pbMoreList() {
+	var pbhostid = $('#pbhostid').val();
 	var pbPage = $('#pbPage').val();
 	var newPbPage = Number(pbPage) + 1;
 	$.ajax({
 		type : "POST",
 		url : "./pbmorelist",
-		data : "pbPage=" + newPbPage,
+		data : "pbPage=" + newPbPage + "&pbhostid=" + pbhostid,
 		success : pbMoreListR,
 	});
 }
@@ -94,13 +85,14 @@ function pbMoreListR(msg) {
 }
 
 function pbMoreListScroll() {
+	var pbhostid = $('#pbhostid').val();
 	var pbPage = $('#pbPage').val();
 	var newPbPage = Number(pbPage) + 1;
 	$('#pbPage').val(newPbPage);
 	$.ajax({
 		type : "POST",
 		url : "./pbmorelistscroll",
-		data : "pbPage=" + newPbPage,
+		data : "pbPage=" + newPbPage + "&pbhostid=" + pbhostid,
 		success : pbMoreListScrollR,
 	});
 }
@@ -109,12 +101,13 @@ function pbMoreListScrollR(msg) {
 }
 
 function mbMoreList() {
+	var mbhostid = $('#mbhostid').val();
 	var mbPage = $('#mbPage').val();
 	var newMbPage = Number(mbPage) + 1;
 	$.ajax({
 		type : "POST",
 		url : "./mbmorelist",
-		data : "mbPage=" + newMbPage,
+		data : "mbPage=" + newMbPage + "&mbhostid=" + mbhostid,
 		success : mbMoreListR,
 	});
 }
@@ -123,13 +116,14 @@ function mbMoreListR(msg) {
 }
 
 function mbMoreListScroll() {
+	var mbhostid = $('#mbhostid').val();
 	var mbPage = $('#mbPage').val();
 	var newMbPage = Number(mbPage) + 1;
 	$('#mbPage').val(newMbPage);
 	$.ajax({
 		type : "POST",
 		url : "./mbmorelistscroll",
-		data : "mbPage=" + newMbPage,
+		data : "mbPage=" + newMbPage + "&mbhostid=" + mbhostid,
 		success : mbMoreListScrollR,
 	});
 }
@@ -137,31 +131,3 @@ function mbMoreListScrollR(msg) {
 	$('#mbListTT').append(msg);
 }
 
-function mbMoreListW() {
-	var mbPageW = $('#mbPageW').val();
-	var newMbPageW = Number(mbPageW) + 1;
-	$.ajax({
-		type : "POST",
-		url : "./mbmorelistW",
-		data : "mbPageW=" + newMbPageW,
-		success : mbMoreListWR,
-	});
-}
-function mbMoreListWR(msg) {
-	$('#mbListWT').html(msg)
-}
-
-function mbMoreListScrollW() {
-	var mbPageW = $('#mbPageW').val();
-	var newMbPageW = Number(mbPageW) + 1;
-	$('#mbPageW').val(newMbPageW);
-	$.ajax({
-		type : "POST",
-		url : "./mbmorelistscrollW",
-		data : "mbPageW=" + newMbPageW,
-		success : mbMoreListScrollWR,
-	});
-}
-function mbMoreListScrollWR(msg) {
-	$('#mbListWTT').append(msg);
-}

@@ -75,7 +75,7 @@ public class BoardDao {
 	@Transactional
 	public void PboardWrite(final Pboard pboard) {
 		jdbcTemplate.update("insert into pboard values(pbid_seq.nextval, ?, ?, ?, ?, 0, 0, 0, 0, sysdate, ?, ?)",
-				pboard.getPbsubject(), pboard.getPbcontent(), pboard.getPbfile(), pboard.getPbnewfile(), 1, pboard.getPbwriterid());
+				pboard.getPbsubject(), pboard.getPbcontent(), pboard.getPbfile(), pboard.getPbnewfile(), pboard.getPbhostid(), pboard.getPbwriterid());
 		
 		Integer currpbid = jdbcTemplate.queryForObject("select pbid_seq.currval from dual", Integer.class);
 
@@ -85,7 +85,7 @@ public class BoardDao {
 	@Transactional
 	public void MboardWrite(final Mboard mboard) {
 		jdbcTemplate.update("insert into mboard values(mbid_seq.nextval, ?, ?, ?, ?, 0, 0, 0, 0, sysdate, ?, ?)",
-				mboard.getMbsubject(), mboard.getMbcontent(), mboard.getMbfile(), mboard.getMbnewfile(), 1, mboard.getMbwriterid());
+				mboard.getMbsubject(), mboard.getMbcontent(), mboard.getMbfile(), mboard.getMbnewfile(), mboard.getMbhostid(), mboard.getMbwriterid());
 		
 		Integer currmbid = jdbcTemplate.queryForObject("select mbid_seq.currval from dual", Integer.class);
 		

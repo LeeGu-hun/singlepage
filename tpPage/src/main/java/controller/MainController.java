@@ -8,6 +8,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import board.Pboard;
+import dao.MainDao;
+import main.Loc;
 import main.MainService;
 
 @Controller
@@ -49,11 +51,10 @@ public class MainController {
 				list.add(srchOpt);
 			}
 		}
-		for(int i = 0; i <=list.size()-1; i++) {
-			System.out.println(list.get(i));
-		}
 		List<Pboard> boardList = mainService.search(list, page, limit);
+//		List<Loc> locList = mainService.getLoc(sido);
 		model.addAttribute("boardList", boardList);
+//		model.addAttribute("locList", locList);
 		return "home";
 	}
 }

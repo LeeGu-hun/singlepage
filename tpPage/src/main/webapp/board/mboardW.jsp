@@ -20,22 +20,23 @@
 %>
 
 <%
-	int nowMbPageW = Integer.parseInt(request.getAttribute("mbPageW").toString());
+	int nowMbPage = Integer.parseInt(request.getAttribute("mbPage").toString());
 %>
 
-member board
+<c:out value="${page.pid }" /> member board
 <form id="mboardform" name="mboardform" action="mbwrite" method="Post" enctype="multipart/form-data">
 	<input type="text" id="mbsubject" name="mbsubject" />
 	<br><textarea id="mbcontent" name="mbcontent"></textarea>
 	<br><img id="mbuploadImg" name="mbuploadImg" />
 	<br><input type="file" id="mbfile" name="mbfile" onchange="mbreadURL(this);" />
 	<input type="hidden" id="mbupdir" name="mbupdir" value="<%=request.getRealPath("/buploads/mbuploads/")%>" />
+	<input type="hidden" id="mbhostid" name="mbhostid" value="<c:out value='${page.pid }' />" />
 	<input type="submit" value="등록" onclick="mbwrite();" />
 </form>
 <br>
 <br>
 <br>
-<table id="mbListWT" name="mbListWT" style="width:100%;">
+<table id="mbListT" name="mbListT" style="width:100%;">
 	<thead>
 		<tr>
 			<th>mbid</th>
@@ -51,7 +52,7 @@ member board
 			<th>mname</th>
 		</tr>
 	</thead>
-	<input type="hidden" id="mbPageW" name="mbPageW" value="1" />
+	<input type="hidden" id="mbPage" name="mbPage" value="1" />
 	<tbody>
 		<c:forEach var="mboard" items="${mboardList }">
 		<tr>
@@ -71,13 +72,13 @@ member board
 			<td>${mboard.mname }</td>
 		</tr>
 		</c:forEach>
-<% if(nowMbPageW == -1) { %>
+<% if(nowMbPage == -1) { %>
 		<tr>
 			<td colspan="11">
 				등록된 글이 없습니다.
 			</td>
 		<tr>
-<% } else if(nowMbPageW == 0) { %>		
+<% } else if(nowMbPage == 0) { %>		
 		<tr>
 			<td colspan="11">
 				마지막 항목입니다.
@@ -86,7 +87,7 @@ member board
 <% } else { %>
 		<tr>
 			<td>
-				<input type="button" value="더 보기" onclick="mbMoreListW();" />                    
+				<input type="button" value="더 보기" onclick="mbMoreList();" />                    
 			</td>
 		</tr>
 <% } %>
