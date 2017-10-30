@@ -23,6 +23,9 @@
 	</div>
 	</c:forEach>
 </div>
+
+<button id="btn" onclick="loadMain()" class="btn btn-md btn-primary">더보기</button>
+
 <div class="inner-content"></div>
 <div class="inner-back"></div>
 <!-- 아이템 영역 끝 -->
@@ -31,11 +34,13 @@
 jQuery(document).on('click', '.mega-dropdown', function(e) {
 	  e.stopPropagation()
 	})
-$('.grid').masonry({
-  // options
-  itemSelector: '.grid-item',
-  percentPosition: true,
-});
+$(window).ready(function(){
+	$('.grid').masonry({
+	  // options
+	  itemSelector: '.grid-item',
+	  percentPosition: true,
+	});
+})
 </script>
 
 </div>

@@ -3,11 +3,13 @@ package dao;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import javax.sql.DataSource;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
+
 import board.Pboard;
 import main.Loc;
 
@@ -54,9 +56,17 @@ public class MainDao {
 		return boardList; 
 	}
 	
-	public Pboard getBoardListRandom() {
-		int i = (int)(Math.random() * count() + 1);
-		Pboard board = jdbcTemplate.queryForObject("select * from (select rownum rnum, pbid, pbsubject, pbcontent, pbfile, pbnewfile, pbre_ref, pbre_lev, pbre_seq, pbreadcount, pbdate, pbhostid, pbwriterid from (select * from pboard order by pbRE_REF desc, pbRE_SEQ asc)) where rnum = ?", boRowMapper, i);
+	public List<Pboard> getBoardListRandom(int number) {
+		Object row[] = new Object[number];
+		String sql = "select * from (select rownum rnum, pbid, pbsubject, pbcontent, pbfile, pbnewfile, pbre_ref, pbre_lev, pbre_seq, pbreadcount, pbdate, pbhostid, pbwriterid from (select * from pboard order by pbRE_REF desc, pbRE_SEQ asc)) where ";
+		for (int i = 0; i < number; i++) {
+			row[i] = (int)(Math.random() * count() + 1);
+			sql += " rnum = ? ";
+			if (i != number-1) {
+				sql += " or ";
+			}
+		}
+		List<Pboard> board = jdbcTemplate.query(sql, row, boRowMapper);
 		return board; 
 	}
 	
