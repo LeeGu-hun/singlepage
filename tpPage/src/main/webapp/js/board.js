@@ -54,30 +54,20 @@ function mbScroll() {
 	}
 }
 
-function mbScrollW() {
-	var mbli = $('#mbli').attr('class');
-	if(mbli == 'active') {
-		var mbPageW = $("#mbPageW").val();
-		var mbMpageW = $("#mbMpageW").val();
-		if(mbPageW > 1 && mbMpageW != -1) {
-			var scrollHeight = $(window).scrollTop() + $(window).height();
-			var documentheight = $(document).height();
-			if(scrollHeight == documentheight) {
-				mbMoreListScrollW();					
-			}
-		} else if(mbMpageW == -1) {
-			$('.scroll').remove();
-		}
+/*$(document).ready(function() {
+	var mbTab = $('#rMbTab').val();
+	if(mbTab == 'active') {
+		$("#bTab a[href='#memberboard']").tab("show");
 	}
-}
+});*/
 
-function mbwrite() {
+/*function mbwrite() {
 	$('#mboardform').ajaxForm({
 			success:function(msg) {
 				$('#memberboard').html(msg)
 		}
 	});
-}
+}*/
 
 function pbMoreList() {
 	var pbhostid = $('#pbhostid').val();
@@ -141,33 +131,3 @@ function mbMoreListScrollR(msg) {
 	$('#mbListTT').append(msg);
 }
 
-function mbMoreListW() {
-	var mbhostid = $('#mbhostid').val();
-	var mbPageW = $('#mbPageW').val();
-	var newMbPageW = Number(mbPageW) + 1;
-	$.ajax({
-		type : "POST",
-		url : "./mbmorelistW",
-		data : "mbPageW=" + newMbPageW + "&mbhostid=" + mbhostid,
-		success : mbMoreListWR,
-	});
-}
-function mbMoreListWR(msg) {
-	$('#mbListWT').html(msg)
-}
-
-function mbMoreListScrollW() {
-	var mbhostid = $('#mbhostid').val();
-	var mbPageW = $('#mbPageW').val();
-	var newMbPageW = Number(mbPageW) + 1;
-	$('#mbPageW').val(newMbPageW);
-	$.ajax({
-		type : "POST",
-		url : "./mbmorelistscrollW",
-		data : "mbPageW=" + newMbPageW + "&mbhostid=" + mbhostid,
-		success : mbMoreListScrollWR,
-	});
-}
-function mbMoreListScrollWR(msg) {
-	$('#mbListWTT').append(msg);
-}

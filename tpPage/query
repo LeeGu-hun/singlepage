@@ -141,3 +141,8 @@ constraint fk_blike_mid foreign key(mid) references member(mid),
 constraint fk_blike_mbid foreign key(mbid) references mboard(mbid),
 constraint fk_blike_pbid foreign key(pbid) references pboard(pbid),
 constraint blike_status check(blike in('0', '1')));
+
+create table locdb(
+sido varchar2(100),
+gungu varchar2(100)
+);

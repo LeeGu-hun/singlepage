@@ -20,6 +20,7 @@
 			<form:password path="mpw" />
 		</label>
 	<p>
+	<form:hidden path="nowpid" value="${nowpid }" />
 	<input type="submit" value="로그인">
 	</form:form>
 </body>

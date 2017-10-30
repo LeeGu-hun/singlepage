@@ -51,6 +51,7 @@
 		</tr>
 	</tbody>
 <% } else { %>
+
 	</tbody>		
 <tbody class="scroll">
 <tr>
@@ -62,5 +63,9 @@ $(window).scroll(function() {
 </script>
 </td>
 </tr>
-</tbody>
+</tbody>	
 <% } %>
+
+
+
+

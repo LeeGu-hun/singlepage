@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import board.BoardService;
 import board.Mboard;
+import board.MboardCommand;
 import board.Pboard;
 import board.PboardCommand;
 import dao.PageDao;
@@ -42,7 +43,8 @@ public class PageController {
 	}
 
 	@RequestMapping("/page")
-	public String pageLoad(@RequestParam("host") int host, @ModelAttribute("pboardcmd") PboardCommand pbc, Model model, HttpServletRequest request) {
+	public String pageLoad(@RequestParam("host") int host, @ModelAttribute("pboardcmd") PboardCommand pbc,
+			@ModelAttribute("mboardcmd") MboardCommand mbc, Model model, HttpServletRequest request) {
 		int pageHostId = host;
 		Page page = pageDao.getPage(pageHostId);
 		if(page == null) {
@@ -57,6 +59,18 @@ public class PageController {
 			model.addAttribute("pboardList", pboardList);
 			request.setAttribute("mbPage", mbPage);
 			model.addAttribute("mboardList", mboardList);
+			
+			AuthInfo authInfo = (AuthInfo) request.getSession().getAttribute("authInfo");
+			if (authInfo !=null) {
+				int memId = authInfo.getMid();
+				List<PageLike> ckList = pageDao.plikeCheck(memId, pageHostId);
+				if (ckList.size() == 0) {
+					model.addAttribute("ck", 0);
+				} else {
+					int ck = ckList.get(0).getPlike();
+					model.addAttribute("ck", ck);
+				} 
+			}
 			return "page";
 		}
 	}

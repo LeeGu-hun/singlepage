@@ -1,4 +1,4 @@
-package member;
+package vali_exception;
 
 public class AlreadyExistngMemberException extends RuntimeException{
 
