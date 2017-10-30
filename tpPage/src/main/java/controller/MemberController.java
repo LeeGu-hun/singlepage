@@ -44,7 +44,7 @@ public class MemberController {
 
 	@RequestMapping("/memberJoin")
 	public String MemberJoin(@ModelAttribute("joincmd") MemberCommand membercmd, Errors errors) {
-		new JoinValidator().validate(membercmd, errors);
+		/*new JoinValidator().validate(membercmd, errors);*/
 		if(errors.hasErrors())
 			return "member/join";
 		try {
