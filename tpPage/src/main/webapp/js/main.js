@@ -8,7 +8,7 @@ $(document).ready(function(){
 		var documentHeight = $(document).height();
 		if($(document).height() > $(window).height())
 			$("#btn").css("display", "none");
-		if(scrollHeight == documentHeight){
+		if(scrollHeight >= documentHeight-10){
 			loadMain();
 		}
 	});

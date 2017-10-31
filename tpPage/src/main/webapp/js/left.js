@@ -1,7 +1,7 @@
-// 후원
 function donate(){
 	var ck = $('input:radio[name="money"]:checked').val();
-	
+	var cmoney = $('#cmoney').val();
+
 	if(ck == "in") {
 		  $("#in_money").attr("disabled",false);
 		  $('#dmoney').val($('#in_money').val());
@@ -76,7 +76,7 @@ function like() {
 	var mid = $('#mid').val();
 	var ck = $('#ck').val();
 	if(mid == "/"){
-		location.href = './login?pid='+pid;
+		location.href = './membermanager?pid='+pid;
 	} else {
 		$.ajax({
 			type : "POST",

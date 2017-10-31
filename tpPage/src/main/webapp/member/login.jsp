@@ -8,7 +8,6 @@
 <title>로그인</title>
 </head>
 <body>
-
 	<form:form commandName="logincmd" action="memberLogin">
 	<p>
 		<label>email:<br>
@@ -19,7 +18,7 @@
 		<label>PW:<br>
 			<form:password path="mpw" />
 		</label>
-	<p>
+	</p>
 	<form:hidden path="nowpid" value="${nowpid }" />
 	<input type="submit" value="로그인">
 	</form:form>
