@@ -8,7 +8,7 @@ $(document).ready(function(){
 		var documentHeight = $(document).height();
 		if($(document).height() > $(window).height())
 			$("#btn").css("display", "none");
-		if(scrollHeight >= documentHeight-10){
+		if(scrollHeight == documentHeight){
 			loadMain();
 		}
 	});
@@ -37,19 +37,22 @@ $(document).ready(function(){
 		var totalw = $(window).width();
 		var totalh = $(window).height();
 		var ow = $('.inner-item').width();
-		console.log(ow);
 		$('.inner-content').css('width', ow*2);
 		$('.inner-back').css('width', totalw);
 		$('.inner-back').css('height', totalh);
 		var w = $('.inner-content').width();
 		var h = $('.inner-content').height();
 		$('.inner-content').css('left', totalw/2-w/2-20);
-		console.log($(window).scrollTop());
 		$('.inner-content').css('top', $(window).scrollTop() + $(window).height()/2 - 350);
 	});
 	$('.inner-back').on('click', function(){
 		$('.inner-content').removeClass('on');
 		$('.inner-back').removeClass('on');
+	});
+	$('input:radio[name=sido]').on('click', function(){
+		$('.gunguList').hide();
+		var sido = $('input:radio[name=sido]:checked').val();
+		$('#'+sido).show();
 	});
 
 });

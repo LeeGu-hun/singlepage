@@ -56,18 +56,22 @@ public class MainController {
 			}
 		}
 		List<Pboard> boardList = mainService.search(list, page, limit);
-		
-//		List<Loc> locList = mainService.getLoc(sido);
+		List<Loc> sidoList = mainService.getSidoList();
+		List<Loc> gunguList = mainService.getGunguList();
+
+		model.addAttribute("sidoList", sidoList);
+		model.addAttribute("gunguList", gunguList);
 		model.addAttribute("boardList", boardList);
-		req.setAttribute("searched", boardList);
-//		model.addAttribute("locList", locList);
+		req.setAttribute("searched", sidoList);
 		return "home";
 	}
 	
 	@RequestMapping("/loadMain")
 	public String load(HttpServletRequest req, Model model, @ModelAttribute("logincmd") MemberCommand logincmd) {
-		System.out.println(req.getParameter("page"));
-		int page = Integer.parseInt(req.getParameter("page"));
+		int page = 1;
+		if(req.getParameter("page") != null) {
+			page = Integer.parseInt(req.getParameter("page"));
+		}
 		int startPage = page * 9 + 1;
 		int limit = startPage + 9;
 		String srch = req.getParameter("srch");
