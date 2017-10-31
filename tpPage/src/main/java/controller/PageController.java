@@ -3,6 +3,7 @@ package controller;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,6 +18,7 @@ import board.PboardCommand;
 import dao.MemberDao;
 import dao.PageDao;
 import member.AuthInfo;
+import member.Member;
 import member.MemberCommand;
 import page.Page;
 import page.PageCommand;
@@ -128,14 +130,30 @@ public class PageController {
 	}
 	
 	@RequestMapping("/pointDonate")
-	public String pointDonate(HttpServletRequest request) {
+	public String pointDonate(HttpServletRequest request, AuthInfo authInfo, Page page) {
 		int mid = Integer.parseInt(request.getParameter("mid"));
 		int pid = Integer.parseInt(request.getParameter("pid"));
-		int point = Integer.parseInt(request.getParameter("ppoint"));
+		int ppoint = Integer.parseInt(request.getParameter("ppoint"));
+//		int ppoint = page.getPpoint();
+//		System.out.println(ppoint);
+		int mpoint = authInfo.getMpoint();
 		int dpoint = Integer.parseInt(request.getParameter("dmoney"));
 		
-		pageDao.regDonate(mid, pid, point, dpoint);
+		pageDao.regDonate(mid, pid, ppoint, dpoint);
+		memberDao.regDonate(mid, pid, mpoint, dpoint);
 		return "page";
+	}
+	
+	@RequestMapping("/pointCharge")
+	public void pointCharge(HttpServletRequest request, AuthInfo authInfo, HttpSession session) {
+		int mid = Integer.parseInt(request.getParameter("mid"));
+		int charge = Integer.parseInt(request.getParameter("charge"));
+		int mpoint = authInfo.getMpoint();
+		memberDao.regCharge(mid, charge, mpoint);
+		authInfo = (AuthInfo) session.getAttribute("authInfo");
+		Member member = memberDao.selectByEmail(authInfo.getMemail());
+		authInfo.setMpoint((member.getMpoint()));
+		session.setAttribute("authInfo", authInfo);
 	}
 
 //	@RequestMapping("/modify") 

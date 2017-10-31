@@ -73,7 +73,7 @@ public class PageDao {
 				pid, dmoney, mid);
 		
 		int ppoint=point + dmoney;
-		jdbcTemplate.update("update page set ppoint=?, pdate=sysdate where pid=?", ppoint, pid);
+		jdbcTemplate.update("update page set ppoint=? where pid=?", ppoint, pid);
 	}
 }
 
