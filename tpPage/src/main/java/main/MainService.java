@@ -43,13 +43,12 @@ public class MainService {
 		return mainDao.getBoardListSome(page, limit, opts);
 	}
 	
-	public List getCage(String cate) {
-		List results = new ArrayList();
-		
-		
-		return results;
+	public List<Loc> getSidoList() {
+		return mainDao.getSidoList();
 	}
 	
-	
+	public List<Loc> getGunguList() {
+		return mainDao.getGunguList();
+	}
 	
 }

@@ -80,6 +80,10 @@
 	height: 100%;
 }
 
+.gunguList {
+	display:none; 
+}
+
 .on {
 	display:block;
 }
@@ -92,6 +96,8 @@
 	border-radius: 10px;
 	max-width:330px; 
 }
+
+
 
 
 /* ---searchtab 시작--- */
