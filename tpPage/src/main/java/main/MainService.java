@@ -21,7 +21,7 @@ public class MainService {
 		
 	}
 	
-	public void getWing() {
+	public void getHot() {
 		
 	}
 	
@@ -34,7 +34,7 @@ public class MainService {
 	public List<Pboard> getRandom(int page, int limit) {
 		List<Pboard> boardList = new ArrayList<Pboard>();
 		if (mainDao.count()>0) {
-			boardList = mainDao.getBoardListRandom(6);
+			boardList = mainDao.getBoardListRandom(limit);
 		}
 		return boardList;
 	}
