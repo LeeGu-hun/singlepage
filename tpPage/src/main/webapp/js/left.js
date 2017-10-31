@@ -34,6 +34,51 @@ function in_donate(point) {
     }); 
 }
 
+function donateCheck() {
+	var cmoney = $('#cmoney').val();
+	var dmoney = $('#dmoney').val();
+	var amoney = Number(cmoney) - Number(dmoney);
+	
+	if(Number(cmoney)==0 || Number(amoney) < 0) {
+		$('#dtxtModal').html('포인트를 충전해주세요.');
+		$('#dbtnModal').html("<a href='#' data-dismiss='modal' class='btn'>확인</a>");
+	} else {
+		$('#dtxtModal').html('후원하시겠습니까?');
+		$('#dbtnModal').html("<a href='#' data-dismiss='modal' class='btn'>취소</a>" +
+		"<a href='#' class='btn btn-primary' onclick='donateClose()'>후원</a>");
+	}
+}
+
+function donateClose() {
+	$('#myModal').modal('hide');
+	$('#myModal3').modal('hide');
+	var pid = $('#pid').val();
+	var mid = $('#mid').val();
+	var ppoint = $('#ppoint').val();
+	var dmoney = $('dmoney').val();
+	console.log(ppoint);
+	$.ajax({
+		type : "POST",
+		url : "./pointDonate",
+		data : "pid=" + pid + "&mid=" + mid + "&ppoint=" + ppoint+ "&dmoney=" + dmoney
+	});
+	
+//	$('input:radio[name="money"]').removeAttr("checked");
+}
+
+/*function donateOK() {
+$( "#dialog" ).dialog({ 
+	autoOpen: false,
+	width: 400, 
+	modal: true,
+	buttons: [{ text: "Ok", 
+				click: function() { $( this ).dialog( "close" ); } }, 
+			  { text: "Cancel", 
+				click: function() { $( this ).dialog( "close" ); } }] 
+});		
+}*/
+
+/////////////////////////////////////////////////////////////////////////////////////////
 //포인트 충전
 function charge(){
 	var ck = $('input:radio[name="chmoney"]:checked').val();
@@ -71,6 +116,45 @@ function cin_charge(point) {
     }); 
 }
 
+
+
+function chargeCheck() {
+	var ccmoney = $('#ccmoney').val();
+	var mcheck = $('#mcheck').val();
+	console.log(ccmoney);
+	if(mcheck == "0" && ccmoney != "") {
+		$('#ctxtModal').html('본인 인증하세요.');
+		$('#ctxtModal').append("<div id='mchkTxt'> <label>email:</label>" +
+            		"<input type='text' id='email' name='email' /><br /> <label>password:</label>" + 
+            		"<input type='text' id='pw' name='pw' /><br /> <label>phone:</label>" +
+            		"<input type='text' id='phone' name='phone' /><br /></div>");
+		$('#cbtnModal').html("<a href='#' data-dismiss='modal' class='btn' onclick='memCheck()'>본인 인증</a>" +
+				"<a href='#' data-dismiss='modal' class='btn'>취소</a>");
+	} else {
+		if(ccmoney == "" || Number(ccmoney)==0) {
+			$('#ctxtModal').html('충전할 금액을 선택해주세요.');
+			$('#cbtnModal').html("<a href='#' data-dismiss='modal' class='btn'>확인</a>");
+		} else {
+			$('#ctxtModal').html('충전하시겠습니까?');
+			$('#cbtnModal').html("<a href='#' data-dismiss='modal' class='btn'>취소</a>" +
+			"<a href='#' class='btn btn-primary' onclick='chargeClose()'>충전</a>");
+		}
+	}
+}
+
+function memCheck() {
+	var mid = $('#mid').val();
+	var pid = $('#pid').val();
+	var email = $('#memail').val(); 
+}
+
+function chargeClose() {
+	$('#myModal2').modal('hide');
+	$('#myModal4').modal('hide');
+}
+/////////////////////////////////////////////////////////////////////////////////////////////
+
+//좋아요
 function like() {
 	var pid = $('#pid').val();
 	var mid = $('#mid').val();
@@ -98,56 +182,4 @@ function like() {
 	
 }
 
-//function donateOK() {
-//	$( "#dialog" ).dialog({ 
-//		autoOpen: false,
-//		width: 400, 
-//		modal: true,
-//		buttons: [{ text: "Ok", 
-//					click: function() { $( this ).dialog( "close" ); } }, 
-//				  { text: "Cancel", 
-//					click: function() { $( this ).dialog( "close" ); } }] 
-//	});		
-//}
 
-function donateCheck() {
-	var cmoney = $('#cmoney').val();
-	var dmoney = $('#dmoney').val();
-	var amoney = Number(cmoney) - Number(dmoney);
-	
-	if(Number(cmoney)==0 || Number(amoney) < 0) {
-		$('#dtxtModal').html('포인트를 충전해주세요.');
-		$('#dbtnModal').html("<a href='#' data-dismiss='modal' class='btn'>확인</a>");
-	} else {
-		$('#dtxtModal').html('후원하시겠습니까?');
-		$('#dbtnModal').html("<a href='#' data-dismiss='modal' class='btn'>취소</a>" +
-		"<a href='#' class='btn btn-primary' onclick='donateClose()'>후원</a>");
-	}
-}
-
-function donateClose() {
-	$('#myModal').modal('hide');
-	$('#myModal3').modal('hide');
-	
-	var pid = $('#pid').val();
-	var mid = $('#mid').val();
-	
-}
-
-function chargeCheck() {
-	var ccmoney = $('#ccmoney').val();
-	console.log(ccmoney);
-	if(ccmoney == "" || Number(ccmoney)==0) {
-		$('#ctxtModal').html('충전할 금액을 선택해주세요.');
-		$('#cbtnModal').html("<a href='#' data-dismiss='modal' class='btn'>확인</a>");
-	} else {
-		$('#ctxtModal').html('충전하시겠습니까?');
-		$('#cbtnModal').html("<a href='#' data-dismiss='modal' class='btn'>취소</a>" +
-		"<a href='#' class='btn btn-primary' onclick='chargeClose()'>후원</a>");
-	}
-}
-
-function chargeClose() {
-	$('#myModal2').modal('hide');
-	$('#myModal4').modal('hide');
-}

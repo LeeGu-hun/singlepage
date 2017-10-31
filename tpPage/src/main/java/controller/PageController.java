@@ -140,6 +140,16 @@ public class PageController {
 		return "page/ck";
 	}
 	
+	@RequestMapping("/pointDonate")
+	public String pointDonate(HttpServletRequest request) {
+		int mid = Integer.parseInt(request.getParameter("mid"));
+		int pid = Integer.parseInt(request.getParameter("pid"));
+		int point = Integer.parseInt(request.getParameter("ppoint"));
+		int dpoint = Integer.parseInt(request.getParameter("dmoney"));
+		
+		pageSvc.registerPoint(request);
+		return "page";
+	}
 
 //	@RequestMapping("/modify") 
 //	public String pageModify() {

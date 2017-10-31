@@ -45,4 +45,8 @@ public class PageService {
 			request.getSession().setAttribute("authInfo", authInfo);
 		}
 	}
+	
+	public void registerPoint(HttpServletRequest request) {
+		
+	}
 }

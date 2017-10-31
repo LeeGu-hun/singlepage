@@ -117,6 +117,7 @@
 					<input type="text" id="ccmoney" name="ccmoney" value="" readonly/>원<br/>
 					<label for="cafter_money">= 예상 포인트</label>
 					<input type="text" id="camoney" name="camoney" value="" readonly/>원<br/>
+					<input type="hidden" id="mcheck" name="mcheck" value="${authInfo.mcheck }"/>
 				</div>
 		 	</div>
             <div class="modal-footer">
@@ -152,7 +153,7 @@
               <h4 class="modal-title">충전 확인</h4>
             </div><div class="container"></div>
             <div id="ctxtModal" class="modal-body">
-              	
+              	<input type="hidden"/>
             </div>
             <div id="cbtnModal"class="modal-footer">
 	            
