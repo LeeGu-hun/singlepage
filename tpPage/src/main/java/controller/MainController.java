@@ -6,11 +6,13 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import board.Pboard;
 import dao.MainDao;
 import main.Loc;
 import main.MainService;
+import member.MemberCommand;
 
 @Controller
 public class MainController {
@@ -21,7 +23,7 @@ public class MainController {
 	}
 
 	@RequestMapping("/home")
-	public String onLoad(Model model, HttpServletRequest req) {
+	public String onLoad(@ModelAttribute("logincmd") MemberCommand logincmd, Model model, HttpServletRequest req) {
 //		int page = Integer.parseInt(req.getParameter("page"));
 //		int limit = Integer.parseInt(req.getParameter("limit"));
 		int page = 1; int limit = 6;

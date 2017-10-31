@@ -42,7 +42,7 @@ function like() {
 	var ck = $('#ck').val();
 	if(mid == "/"){
 		console.log("ssss");
-		location.href = './login?pid='+pid;
+		location.href = './membermanager?pid='+pid;
 	} else {
 		$.ajax({
 			type : "POST",

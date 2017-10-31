@@ -41,7 +41,6 @@ public class Member {
 
 	public Member(String memail) {
 		this.memail = memail;                   	        //mpw 비교할때
-
 	}
 
 	/*public Member(int mid, String mname, String memail, String mpw) {
@@ -114,7 +113,7 @@ public class Member {
 	public void setMdate(Date mdate) {
 		this.mdate = mdate;
 	}
-//	
+
 //	public boolean matchPassword(String pwd) {
 //		return this.mpw.equals(pwd);
 //	}

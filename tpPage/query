@@ -36,8 +36,8 @@ constraint pk_page primary key(pid),
 constraint fk_page foreign key(pmaster) references member(mid)
 );
 
-alter table page modify ppoint not null;
-
+alter table page modify ppoint not null; 
+alter table page add(pfile varchar2(100), pnewfile varchar2(100));
 create sequence pid_seq increment by 1 start with 1 maxvalue 30000;
 
 insert into page values(pid_seq.nextval, 'name', 'nick', 'intoro', null, null, null, null, 0, sysdate, '1', null, null);
@@ -64,7 +64,7 @@ constraint fk_pboard_hostid foreign key(pbhostid) references page(pid),
 constraint fk_pboard_writerid foreign key(pbwriterid) references member(mid)
 );
 
-alter table page add(pfile varchar2(100), pnewfile varchar2(100));
+
 
 create sequence pbid_seq increment by 1 start with 1 maxvalue 30000;
 
