@@ -141,18 +141,12 @@ public class PageController {
 		return "page/ck";
 	}
 	
-<<<<<<< HEAD
-//	@RequestMapping("/modify") 
-//	public String pageModify() {
-//		
-//		return "page/pageModify";
-//	}
-=======
 
 //	@RequestMapping("/modify") 
 //	public String pageModify() {
 //		
 //		return "page/pageModify";
 //	}
->>>>>>> branch 'temp' of https://github.com/LeeGu-hun/singlepage.git
+
+
 }

@@ -34,7 +34,7 @@ public class MainController {
 	}
 	
 	@RequestMapping("/srch")
-	public String srch(HttpServletRequest req, Model model) {
+	public String srch(HttpServletRequest req, Model model, @ModelAttribute("logincmd") MemberCommand logincmd) {
 //		int page = Integer.parseInt(req.getParameter("page"));
 //		int limit = Integer.parseInt(req.getParameter("limit"));
 		int page = 1; int limit = 6;
@@ -62,7 +62,7 @@ public class MainController {
 	}
 	
 	@RequestMapping("/loadMain")
-	public String load(HttpServletRequest request, Model model) {
+	public String load(HttpServletRequest request, Model model, @ModelAttribute("logincmd") MemberCommand logincmd) {
 		int page = 1; int limit = 9;
 		List<Pboard> appendList = mainService.getRandom(page, limit);
 
