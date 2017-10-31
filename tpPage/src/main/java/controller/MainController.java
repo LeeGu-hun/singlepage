@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+
 import board.Pboard;
 import dao.MainDao;
 import main.Loc;
@@ -24,7 +25,7 @@ public class MainController {
 	public String onLoad(Model model, HttpServletRequest req) {
 //		int page = Integer.parseInt(req.getParameter("page"));
 //		int limit = Integer.parseInt(req.getParameter("limit"));
-		int page = 1; int limit = 6;
+		int page = 1; int limit = 9;
 		List<Pboard> boardList = mainService.getRandom(page, limit);
 		model.addAttribute("boardList", boardList);
 		return "home";
@@ -56,6 +57,16 @@ public class MainController {
 		model.addAttribute("boardList", boardList);
 //		model.addAttribute("locList", locList);
 		return "home";
+	}
+	
+	@RequestMapping("/loadMain")
+	public String load(HttpServletRequest request, Model model) {
+		int page = 1; int limit = 9;
+		List<Pboard> appendList = mainService.getRandom(page, limit);
+
+		model.addAttribute("appendList", appendList);
+		
+		return "main/load";
 	}
 }
 
