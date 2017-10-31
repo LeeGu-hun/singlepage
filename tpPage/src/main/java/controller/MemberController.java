@@ -41,15 +41,13 @@ public class MemberController {
 	@RequestMapping("/membermanager")
 	public String memberManager(@ModelAttribute("logincmd") MemberCommand mlcmd,
 			@ModelAttribute("joincmd") MemberCommand mjcmd, HttpServletRequest request, Model model) {
-
-		if (request.getParameter("pid") != null) {
-			int nowpid = Integer.parseInt(request.getParameter("pid"));
-			model.addAttribute("nowpid", nowpid);
-			return "member/memberManager";
-			// return "redirect:/page?host="+nowpid;
-		}
-		return "member/memberManager";
+		
+		
+		
+		return "member/membermanager";
 	}
+
+
 
 	@RequestMapping("/memberJoin")
 	public String MemberJoin(@ModelAttribute("joincmd") MemberCommand membercmd, HttpSession session, Errors errors) {

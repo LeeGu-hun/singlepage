@@ -2,10 +2,10 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/left.css?ver=3" />
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/left.css?ver=1" />
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/reveal.css?" />
 
-<script type="text/javascript" src="<%=request.getContextPath()%>/js/left.js?ver=621"></script>
+<script type="text/javascript" src="<%=request.getContextPath()%>/js/left.js?ver=22"></script>
 
 <script type="text/javascript" src="http://code.jquery.com/jquery-1.6.min.js"></script>
 <script type="text/javascript" src="<%=request.getContextPath()%>/js/jquery.reveal.js?"></script>
@@ -32,7 +32,9 @@
 			<a id="btnLike" class="btn btn-info btn-sm" href="#" onclick="like()">좋아요♥</a>&nbsp;&nbsp;
 			</c:otherwise>
 		</c:choose>
-		<a class="btn btn-info btn-sm" href="#" data-reveal-id="myModal" data-animation="none" onclick="donate()">후원</a>
+		<c:if test="${authInfo.mid != null}">
+			<a data-toggle="modal" class="btn btn-info btn-sm" href="#myModal" onclick="donate()">후원</a>
+		</c:if>
 	</div>
 	<div>
 		<br/>
