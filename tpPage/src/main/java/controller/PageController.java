@@ -18,6 +18,7 @@ import board.Pboard;
 import board.PboardCommand;
 import dao.PageDao;
 import member.AuthInfo;
+import member.MemberCommand;
 import page.Page;
 import page.PageCommand;
 import page.PageLike;
@@ -44,7 +45,7 @@ public class PageController {
 
 	@RequestMapping("/page")
 	public String pageLoad(@RequestParam("host") int host, @ModelAttribute("pboardcmd") PboardCommand pbc,
-			@ModelAttribute("mboardcmd") MboardCommand mbc, Model model, HttpServletRequest request) {
+			@ModelAttribute("mboardcmd") MboardCommand mbc, @ModelAttribute("logincmd") MemberCommand logincmd , Model model, HttpServletRequest request) {
 		int pageHostId = host;
 		Page page = pageDao.getPage(pageHostId);
 		if(page == null) {
@@ -140,10 +141,22 @@ public class PageController {
 		return "page/ck";
 	}
 	
+	@RequestMapping("/pointDonate")
+	public String pointDonate(HttpServletRequest request) {
+		int mid = Integer.parseInt(request.getParameter("mid"));
+		int pid = Integer.parseInt(request.getParameter("pid"));
+		int point = Integer.parseInt(request.getParameter("ppoint"));
+		int dpoint = Integer.parseInt(request.getParameter("dmoney"));
+		
+		pageSvc.registerPoint(request);
+		return "page";
+	}
 
 //	@RequestMapping("/modify") 
 //	public String pageModify() {
 //		
 //		return "page/pageModify";
 //	}
+
+
 }

@@ -6,7 +6,22 @@
 	<title>회원가입</title>
 </head>
 <body>
- 	<form:form commandName="joincmd" action="memberJoin">
+	<form:form commandName="loginpluscmd" action="memberjoinpluslogin">
+	<p>
+		<label>email:<br>
+			<form:input path="memail" />
+		</label>
+	</p>
+	<p>
+		<label>PW:<br>
+			<form:password path="mpw" />
+		</label>
+	</p>
+	<form:hidden path="nowpid" value="${nowpid }" />
+	<input type="submit" value="로그인">
+	</form:form>
+
+ 	<form:form commandName="joinpluscmd" action="memberjoinpluslogin">
 	<p>
 		<label>이멜:<br>
 		<form:input path="memail" />

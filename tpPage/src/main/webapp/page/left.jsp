@@ -5,7 +5,7 @@
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/left.css?ver=1" />
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/reveal.css?" />
 
-<script type="text/javascript" src="<%=request.getContextPath()%>/js/left.js?ver=22"></script>
+<script type="text/javascript" src="<%=request.getContextPath()%>/js/left.js?ver=222"></script>
 
 <script type="text/javascript" src="http://code.jquery.com/jquery-1.6.min.js"></script>
 <script type="text/javascript" src="<%=request.getContextPath()%>/js/jquery.reveal.js?"></script>
@@ -22,7 +22,9 @@
 	<div>
 		<br/>
 		<input type="hidden" name="pid" id="pid" value=${page.pid } />
+		<input type="hidden" name="ppoint" id="ppoint" value=${page.ppoint } />
 		<input type="hidden" name="mid" id="mid" value=${authInfo.mid } />
+		<input type="hidden" name="memail" id="memail" value=${authInfo.email } />
 		<input type="hidden" name="ck" id="ck" value=${ck } />
 		<c:choose>
 			<c:when test="${ck == 0 || ck == null}">

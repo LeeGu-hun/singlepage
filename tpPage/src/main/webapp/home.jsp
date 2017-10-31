@@ -6,12 +6,16 @@
 <html lang="ko">
 <head>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
-<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/main.css?ver=42" />
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/main.css?ver=342" />
 <script src="http://code.jquery.com/jquery-3.1.1.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 <script src="<%=request.getContextPath()%>/js/masonry.pkgd.js"></script>
 <script src="<%=request.getContextPath()%>/js/imagesloaded.pkgd.js"></script>
-<script src="<%=request.getContextPath()%>/js/main.js?ver=154"></script>
+<<<<<<< HEAD
+<script src="<%=request.getContextPath()%>/js/main.js?ver=1564"></script>
+=======
+<script src="<%=request.getContextPath()%>/js/main.js?ver=22"></script>
+>>>>>>> branch 'temp' of https://github.com/LeeGu-hun/singlepage.git
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>SinglePage</title>
 </head>

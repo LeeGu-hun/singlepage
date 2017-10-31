@@ -14,7 +14,7 @@
 </head>
 <body>
 
-	<form:form commandName="mpwcmd" action="memberChange">
+	<form:form commandName="mpwcmd" action="mpwchange">
 	<p>
 		<label>현재 비밀번호
 			<form:input path="mpw" />

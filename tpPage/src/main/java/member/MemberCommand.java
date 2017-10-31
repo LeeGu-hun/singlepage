@@ -52,16 +52,16 @@ public class MemberCommand {
 	public void setMpwconf(String mpwconf) {
 		this.mpwconf = mpwconf;
 	}
-	public boolean isPasswordEqualToConfirmPassword() {
-		return mpw.equals(mpwconf);
-	}
 	public int getNowpid() {
 		return nowpid;
 	}
 	public void setNowpid(int nowpid) {
 		this.nowpid = nowpid;
 	}
-	public boolean isoldmpwEqualTonewmpw() {
+	public boolean isPasswordEqualToConfirmPassword() {
+		return mpw.equals(mpwconf);
+	}
+	public boolean ismpwEqualTonewmpw() {
 		return mpw.equals(newmpw);
 	}
 	public boolean isnewmpwEqualTonewmpwconf() {
