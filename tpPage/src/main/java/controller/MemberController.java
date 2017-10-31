@@ -41,13 +41,13 @@ public class MemberController {
 	@RequestMapping("/membermanager")
 	public String memberManager(@ModelAttribute("logincmd") MemberCommand mlcmd,
 			@ModelAttribute("joincmd") MemberCommand mjcmd, HttpServletRequest request, Model model) {
-		
-		
-		
-		return "member/membermanager";
+		if(request.getParameter("pid") != null) {
+			int nowpid = Integer.parseInt(request.getParameter("pid"));
+			model.addAttribute("nowpid", nowpid);
+			return "member/memberManager"; 
+		}
+		return "member/memberManager";
 	}
-
-
 
 	@RequestMapping("/memberJoin")
 	public String MemberJoin(@ModelAttribute("joincmd") MemberCommand membercmd, HttpSession session, Errors errors) {
@@ -121,14 +121,6 @@ public class MemberController {
 		return "redirect:/home";
 	}
 
-	/*
-	 * @RequestMapping("/memInfo") public String memInfo(@ModelAttribute("infocmd")
-	 * MemberCommand infocmd, HttpServletRequest request) { // AuthInfo authInfo =
-	 * (AuthInfo) request.getSession().getAttribute("authInfo"); // Member member =
-	 * memberSvc.memberLogin(authInfo.getMemail()); // request.setAttribute("mpw",
-	 * member.getMpw()); return "member/memInfo"; }
-	 */
-
 	@RequestMapping("/memManager")
 	public String modify(@ModelAttribute("modifycmd") MemberCommand modifycmd, HttpServletRequest request) {
 		return "member/memModify";
@@ -178,6 +170,8 @@ public class MemberController {
 		}
 	}
 
+	
+	
 	// @RequestMapping("/memInfo")
 	// public String memInfo(@ModelAttribute("infocmd") MemberCommand infocmd,
 	// HttpServletRequest request) {

@@ -16,7 +16,7 @@
 <a href="./home" class="btn btn-primary">home</a>
 <a href="./membermanager" class="btn btn-primary">회원가입+로그인</a>
 <form:input path="memail" placeholder="email"/>
-<form:password path="mpw" name="mpw" placeholder="password"/>
+<form:password path="mpw" placeholder="password"/>
 <input type="submit" value="로그인" />
 </p>
 </form:form>

@@ -116,8 +116,6 @@ function cin_charge(point) {
     }); 
 }
 
-
-
 function chargeCheck() {
 	var ccmoney = $('#ccmoney').val();
 	var mcheck = $('#mcheck').val();
