@@ -45,16 +45,11 @@ page maker
 	<p><label>닉넴:<br><form:input path="pnick" /></label></p>
 	<p><label>소개:<br><form:textarea path="pintro" /></label></p>
 	<p><label>장르:<br><form:input path="pgenre" /></label></p>
-	
 
-	<p>map api div start</p>
 	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=f637d5fa5f8a019e35446dc32b94a752&libraries=services"></script>
 	<!-- <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=f637d5fa5f8a019e35446dc32b94a752"></script> -->
 	
 	<div id="map" style="width:500px;height:400px;"></div>
-	<div id="clickLatlng"></div>
-	<div id="juso"></div>
-	
 	<script>
 		var mapContainer = document.getElementById('map'),
     		mapOption = { 
@@ -64,50 +59,37 @@ page maker
 		var map = new daum.maps.Map(mapContainer, mapOption);
 
 		var marker = new daum.maps.Marker({ 
-  			position: map.getCenter(),
-			map : map
-		});
-		
-		
-		daum.maps.event.addListener(map, 'click', function(mouseEvent) {        
-		    
-		    // 클릭한 위도, 경도 정보를 가져옵니다 
-		    var latlng = mouseEvent.latLng; 
-		    
-		    // 마커 위치를 클릭한 위치로 옮깁니다
-		    marker.setPosition(latlng);
-		    
-		    var message = '클릭한 위치의 위도는 ' + latlng.getLat() + ' 이고, ';
-		    message += '경도는 ' + latlng.getLng() + ' 입니다';
-		    
-		    var resultDiv = document.getElementById('clickLatlng'); 
-		    resultDiv.innerHTML = message;
-		    
+  			/* position: map.getCenter(),
+			map : map */
 		});
 		
 		var geocoder = new daum.maps.services.Geocoder();
 		
-		
+		daum.maps.event.addListener(map, 'click', function(mouseEvent) {
+		    searchDetailAddrFromCoords(mouseEvent.latLng, function(result, status) {
+		        if (status === daum.maps.services.Status.OK) {
+		            var detailAddr = !!result[0].road_address ? result[0].road_address.address_name : result[0].address.address_name;
+		         
+		            marker.setPosition(mouseEvent.latLng);
+		            marker.setMap(map);
+		            
+		            document.getElementById('ploc').value = detailAddr;
+		        }   
+		    });
+		});
 
 		
-		
-		
-		
-		
+
+		function searchAddrFromCoords(coords, callback) {
+		    geocoder.coord2RegionCode(coords.getLng(), coords.getLat(), callback);         
+		}
+
+		function searchDetailAddrFromCoords(coords, callback) {
+			geocoder.coord2Address(coords.getLng(), coords.getLat(), callback);
+		}
 	</script>
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	<p>map api div end</p>
-	
-	
-	<p><label>지역:<br><form:input path="ploc" /></label></p>
+	<p><label>지역:<br><form:input path="ploc" style="width:300px;" /></label></p>
 	<p><label>기간:<br><form:input path="pperiod" /></label></p>
 	<p><label>시간:<br><form:input path="phowtime" /></label></p>
 	<p><input type="submit" value="만들기" /></p>
