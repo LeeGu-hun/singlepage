@@ -29,12 +29,6 @@ function pagereadURL(input) {
 
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=f637d5fa5f8a019e35446dc32b94a752&libraries=services"></script>
 
-
-
-
-
-
-
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>page maker</title>
 </head>
@@ -46,20 +40,19 @@ page maker
 	<p><label>사진:<input type="file" id="pfile" name="pfile" onchange="pagereadURL(this);" /></label>
 	<p><input type="hidden" id="pupdir" name="pupdir" 
 		value="<%=request.getRealPath("/puploads/")%>" />
-	<p><label>이름:<br><form:input path="pname" /></label></p>
-	<p><label>닉넴:<br><form:input path="pnick" /></label></p>
-	<p><label>소개:<br><form:textarea path="pintro" /></label></p>
-	<p><label>장르:<br><form:input path="pgenre" /></label></p>
+	<p><label>이름:<br><form:input path="pname" style="width:300px;" /></label></p>
+	<p><label>닉넴:<br><form:input path="pnick" style="width:300px;" /></label></p>
+	<p><label>소개:<br><form:textarea path="pintro" style="width:300px;" /></label></p>
+	<p><label>장르:<br><form:input path="pgenre" style="width:300px;" /></label></p>
+	<div id="map" style="width:500px;height:400px;"></div>
+	<input type="text" id="keyword" style="width:300px;" /> 
+	<input type="button" value="검색" onclick="searchPlaces(); return false;" />
 	<p><label>지역:<br><form:input path="ploc" style="width:300px;" /></label></p>
-	<p><label>좌표:<br><form:input path="latlng" style="width:300px;" /></label></p>
-	<p><label>기간:<br><form:input path="pperiod" /></label></p>
-	<p><label>시간:<br><form:input path="phowtime" /></label></p>
+	<p><label>좌표:<br><form:input path="platlng" style="width:300px;" /></label></p>
+	<p><label>기간:<br><form:input path="pperiod" style="width:300px;" /></label></p>
+	<p><label>시간:<br><form:input path="phowtime" style="width:300px;" /></label></p>
 	<p><input type="submit" value="만들기" /></p>
 </form:form>
-<div id="map" style="width:500px;height:400px;"></div>
-<input type="text" id="keyword" size="15"> 
-<input type="button" value="검색" onclick="searchPlaces(); return false;" />
 <script src="<%=request.getContextPath()%>/js/map.js?ver=3"></script>
-
 </body>
 </html>

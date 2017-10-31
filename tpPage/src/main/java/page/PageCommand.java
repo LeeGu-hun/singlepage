@@ -3,7 +3,7 @@ package page;
 import org.springframework.web.multipart.MultipartFile;
 
 public class PageCommand {
-	private String pname, pnick, pintro, pgenre, ploc, pupdir, pperiod, phowtime, latlng;
+	private String pname, pnick, pintro, pgenre, ploc, pupdir, pperiod, phowtime, platlng;
 	private MultipartFile pfile;
 	
 	public String getPname() {
@@ -60,11 +60,12 @@ public class PageCommand {
 	public void setPfile(MultipartFile pfile) {
 		this.pfile = pfile;
 	}
-	public String getLatlng() {
-		return latlng;
+	public String getPlatlng() {
+		return platlng;
 	}
-	public void setLatlng(String latlng) {
-		this.latlng = latlng;
+	public void setPlatlng(String platlng) {
+		this.platlng = platlng;
 	}
+	
 	
 }
