@@ -2,6 +2,8 @@ package member;
 
 import java.util.Date;
 
+import vali_exception.IdPasswordNotMatchingException;
+
 public class Member {
 	private int mid;
 	private String mname;
@@ -12,6 +14,13 @@ public class Member {
 	private int mpoint;
 	private Date mdate;
 	
+	public Member(String mname, String memail, String mpw, String mphone) {
+		this.mname = mname;
+		this.memail = memail;
+		this.mpw = mpw;
+		this.mphone = mphone;								//회원정보변경
+	}
+
 	public Member(int mid, String mname, String memail, String mpw, String mphone, int mcheck, int mpoint,
 			Date mdate) {
 		this.mid = mid;
@@ -25,16 +34,13 @@ public class Member {
 	}
 
 	public Member(String mname, String memail, String mpw) {
-
 		this.mname = mname;
 		this.memail = memail;
 		this.mpw = mpw;										//회원가입 할때
 	}
-	
 
 	public Member(String memail) {
 		this.memail = memail;                   	        //mpw 비교할때
-
 	}
 
 	/*public Member(int mid, String mname, String memail, String mpw) {
@@ -107,9 +113,8 @@ public class Member {
 	public void setMdate(Date mdate) {
 		this.mdate = mdate;
 	}
-	
-	public boolean matchPassword(String pwd) {
-		return this.mpw.equals(pwd);
-		
-	}
+
+//	public boolean matchPassword(String pwd) {
+//		return this.mpw.equals(pwd);
+//	}
 }

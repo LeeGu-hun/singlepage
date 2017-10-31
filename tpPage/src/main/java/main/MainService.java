@@ -21,7 +21,7 @@ public class MainService {
 		
 	}
 	
-	public void getWing() {
+	public void getHot() {
 		
 	}
 	
@@ -33,12 +33,8 @@ public class MainService {
 	
 	public List<Pboard> getRandom(int page, int limit) {
 		List<Pboard> boardList = new ArrayList<Pboard>();
-		
 		if (mainDao.count()>0) {
-			for (int i = page; i <= limit; i++) {
-				Pboard newboard = mainDao.getBoardListRandom();
-				boardList.add(newboard);
-			}
+			boardList = mainDao.getBoardListRandom(limit);
 		}
 		return boardList;
 	}
@@ -47,13 +43,12 @@ public class MainService {
 		return mainDao.getBoardListSome(page, limit, opts);
 	}
 	
-	public List getCage(String cate) {
-		List results = new ArrayList();
-		
-		
-		return results;
+	public List<Loc> getSidoList() {
+		return mainDao.getSidoList();
 	}
 	
-	
+	public List<Loc> getGunguList() {
+		return mainDao.getGunguList();
+	}
 	
 }

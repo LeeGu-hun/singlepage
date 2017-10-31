@@ -54,5 +54,37 @@ public class AuthInfo {
 	public int getPid() {
 		return pid;
 	}
+
+	public void setMid(int mid) {
+		this.mid = mid;
+	}
+
+	public void setMname(String mname) {
+		this.mname = mname;
+	}
+
+	public void setMemail(String memail) {
+		this.memail = memail;
+	}
+
+	public void setMphone(String mphone) {
+		this.mphone = mphone;
+	}
+
+	public void setMcheck(int mcheck) {
+		this.mcheck = mcheck;
+	}
+
+	public void setMpoint(int mpoint) {
+		this.mpoint = mpoint;
+	}
+
+	public void setMdate(Date mdate) {
+		this.mdate = mdate;
+	}
+
+	public void setPid(int pid) {
+		this.pid = pid;
+	}
 	
 }

@@ -3,21 +3,23 @@ package controller;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-
 import board.BoardService;
 import board.Mboard;
 import board.MboardCommand;
 import board.Pboard;
 import board.PboardCommand;
+import dao.MemberDao;
 import dao.PageDao;
 import member.AuthInfo;
+import member.Member;
+import member.MemberCommand;
 import page.Page;
 import page.PageCommand;
 import page.PageLike;
@@ -29,6 +31,7 @@ public class PageController {
 	private PageDao pageDao;
 	private PageService pageSvc;
 	private BoardService boardSvc;
+	private MemberDao memberDao;
 	
 	public void setPageDao(PageDao pageDao) {
 		this.pageDao = pageDao;
@@ -42,14 +45,20 @@ public class PageController {
 		this.boardSvc = boardSvc;
 	}
 
+	public void setMemberDao(MemberDao memberDao) {
+		this.memberDao = memberDao;
+	}
+
 	@RequestMapping("/page")
 	public String pageLoad(@RequestParam("host") int host, @ModelAttribute("pboardcmd") PboardCommand pbc,
-			@ModelAttribute("mboardcmd") MboardCommand mbc, Model model, HttpServletRequest request) {
+			@ModelAttribute("mboardcmd") MboardCommand mbc, @ModelAttribute("logincmd") MemberCommand logincmd,
+			Model model, HttpServletRequest request) {
 		int pageHostId = host;
 		Page page = pageDao.getPage(pageHostId);
 		if(page == null) {
 			return "redirect:/home"; 
 		} else {	
+			
 			int pbPage = boardSvc.pboardpage(pageHostId);
 			List<Pboard> pboardList = boardSvc.getPboardList(pageHostId);
 			int mbPage = boardSvc.mboardpage(pageHostId);
@@ -60,8 +69,13 @@ public class PageController {
 			request.setAttribute("mbPage", mbPage);
 			model.addAttribute("mboardList", mboardList);
 			
+			
+			
 			AuthInfo authInfo = (AuthInfo) request.getSession().getAttribute("authInfo");
+			
+			
 			if (authInfo !=null) {
+				System.out.println("11");
 				int memId = authInfo.getMid();
 				List<PageLike> ckList = pageDao.plikeCheck(memId, pageHostId);
 				if (ckList.size() == 0) {
@@ -70,37 +84,12 @@ public class PageController {
 					int ck = ckList.get(0).getPlike();
 					model.addAttribute("ck", ck);
 				} 
+				System.out.println("22");
 			}
+			
 			return "page";
 		}
 	}
-	
-	/*@RequestMapping("/page/{pid}")
-	public String pageLoadp(@PathVariable int pid, @ModelAttribute("pboardcmd") PboardCommand pbc, Model model, HttpServletRequest request) {
-		int pageHostId = pid;
-		int pbPage = boardSvc.pboardpage(pageHostId);
-		List<Pboard> pboardList = boardSvc.getPboardList(pageHostId);
-		int mbPage = boardSvc.mboardpage(pageHostId);
-		List<Mboard> mboardList = boardSvc.getMboardList(pageHostId);
-		request.setAttribute("pbPage", pbPage);
-		model.addAttribute("pboardList", pboardList);
-		request.setAttribute("mbPage", mbPage);
-		model.addAttribute("mboardList", mboardList);
-		
-		AuthInfo authInfo = (AuthInfo) request.getSession().getAttribute("authInfo");
-		if (authInfo !=null) {
-			int memId = authInfo.getMid();
-			int pageId = authInfo.getPid();
-			List<PageLike> ckList = pageDao.plikeCheck(memId, pageId);
-			if (ckList.size() == 0) {
-				model.addAttribute("ck", 0);
-			} else {
-				int ck = ckList.get(0).getPlike();
-				model.addAttribute("ck", ck);
-			} 
-		}
-		return "page";
-	}*/
 	
 	@RequestMapping("/pagemaker")
 	public String pageMaker(@ModelAttribute("pagecmd") PageCommand pmc, HttpServletRequest request) {
@@ -140,9 +129,38 @@ public class PageController {
 		return "page/ck";
 	}
 	
-	@RequestMapping("/modify") 
-	public String pageModify() {
+	@RequestMapping("/pointDonate")
+	public String pointDonate(HttpServletRequest request, AuthInfo authInfo, Page page) {
+		int mid = Integer.parseInt(request.getParameter("mid"));
+		int pid = Integer.parseInt(request.getParameter("pid"));
+		int ppoint = Integer.parseInt(request.getParameter("ppoint"));
+//		int ppoint = page.getPpoint();
+//		System.out.println(ppoint);
+		int mpoint = authInfo.getMpoint();
+		int dpoint = Integer.parseInt(request.getParameter("dmoney"));
 		
-		return "page/pageModify";
+		pageDao.regDonate(mid, pid, ppoint, dpoint);
+		memberDao.regDonate(mid, pid, mpoint, dpoint);
+		return "page";
 	}
+	
+	@RequestMapping("/pointCharge")
+	public void pointCharge(HttpServletRequest request, AuthInfo authInfo, HttpSession session) {
+		int mid = Integer.parseInt(request.getParameter("mid"));
+		int charge = Integer.parseInt(request.getParameter("charge"));
+		int mpoint = authInfo.getMpoint();
+		memberDao.regCharge(mid, charge, mpoint);
+		authInfo = (AuthInfo) session.getAttribute("authInfo");
+		Member member = memberDao.selectByEmail(authInfo.getMemail());
+		authInfo.setMpoint((member.getMpoint()));
+		session.setAttribute("authInfo", authInfo);
+	}
+
+//	@RequestMapping("/modify") 
+//	public String pageModify() {
+//		
+//		return "page/pageModify";
+//	}
+
+
 }

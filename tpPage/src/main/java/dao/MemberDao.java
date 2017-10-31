@@ -7,7 +7,9 @@ import java.util.List;
 import javax.sql.DataSource;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.transaction.annotation.Transactional;
 
+import member.AuthInfo;
 import member.Member;
 import page.Page;
 
@@ -25,8 +27,7 @@ public class MemberDao {
 	}
 
 	public Member memberLogin(final Member chkmember) {
-		List<Member> results = jdbcTemplate.query("select * from member where memail = ?",
-				new RowMapper<Member>() {
+		List<Member> results = jdbcTemplate.query("select * from member where memail = ?", new RowMapper<Member>() {
 			@Override
 			public Member mapRow(ResultSet rs, int rowNum) throws SQLException {
 				Member member = new Member(rs.getInt("mid"), rs.getString("mname"), rs.getString("memail"),
@@ -55,12 +56,56 @@ public class MemberDao {
 			public Page mapRow(ResultSet rs, int rowNum) throws SQLException {
 				Page pid = new Page(rs.getInt("pid"));
 				return pid;
-			}	
+			}
 		}, mid);
 		return results.isEmpty() ? null : results.get(0);
 	}
+	
+	public boolean changeMpw(String email, String newMpw) {
+		boolean result = false;
+		int update = jdbcTemplate.update("update member set mpw = ? where memail = ?", newMpw, email);
+		System.out.println(newMpw + "///" + update);
+		if (update > 0) result = true;
+		return result;
+	
+	/*jdbcTemplate.update("update member set mpw = ? where memail = ?", authInfo.getMemail(), authInfo.getmp);*/
+}
 
-	//
+	public void memModify(int mid, String memail, String mname, String mphone) {
+		jdbcTemplate.update("update member set memail = ?, mname = ?, mphone = ? where mid = ?",
+				memail, mname, mphone, mid);
+	}
+	
+	@Transactional
+	public void regDonate(int mid, int pid, int point, int dmoney) {
+		jdbcTemplate.update("insert into mem_point values(?, ?, 'donate', sysdate, ?))", 
+				mid, dmoney, pid);
+		
+		int mpoint = point - dmoney;
+		jdbcTemplate.update("update member set mpoint=? where mid=?", mpoint, mid);
+	}
+	
+	public String memPass(String email) {
+		String pass = jdbcTemplate.queryForObject("select mpw from member where memail = ?", String.class, email);
+		return pass;
+	}
+	
+	public void ckUpdate(String email, String phone) {
+		jdbcTemplate.update("update member set mcheck = 1, mphone=? where memail=?", phone, email);
+	}
+	
+	public void regCharge(int mid, int charge, int mpoint) {
+		jdbcTemplate.update("insert into mem_point values(?, ?, 'charge', sysdate, null))", 
+				mid, charge);
+		int point = charge + mpoint;
+		jdbcTemplate.update("update member set mpoint=? where mid=?", point, mid);
+	}
+
+//	public void memberModify(AuthInfo authInfo) {
+//		jdbcTemplate.update("update member set memail = ?, mname = ?, mpw = ?, mphone=? where memail = ?", authInfo.getMemail(), authInfo.getMname(),
+//				authInfo.get(), authInfo.getMphone());
+//	}
+
 	// public int count() {
 	// Integer count = jdbcTemplate.queryForInt("select count(*) from MEMBER");
 	// return count;
@@ -83,10 +128,4 @@ public class MemberDao {
 	// });
 	// return results;
 	// }
-	//
-	// public void update(Member member) {
-	// jdbcTemplate.update("update member set mname = ?, mpw = ? where memail = ?",
-	// member.getMname(), member.getMpw(), member.getMemail());
-	// }
-
 }

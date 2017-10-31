@@ -14,11 +14,6 @@
 	integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
 	crossorigin="anonymous"></script>
 
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>page maker</title>
-</head>
-<body>
-
 <script>
 function pagereadURL(input) {
 	if(input.files && input.files[0]) {
@@ -32,6 +27,19 @@ function pagereadURL(input) {
 }
 </script>
 
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=f637d5fa5f8a019e35446dc32b94a752&libraries=services"></script>
+
+
+
+
+
+
+
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>page maker</title>
+</head>
+<body>
+
 page maker
 <form:form commandName="pagecmd" action="makepage" enctype="multipart/form-data">
 	<p><img id="puploadImg" name="puploadImg" />
@@ -42,10 +50,16 @@ page maker
 	<p><label>닉넴:<br><form:input path="pnick" /></label></p>
 	<p><label>소개:<br><form:textarea path="pintro" /></label></p>
 	<p><label>장르:<br><form:input path="pgenre" /></label></p>
-	<p><label>지역:<br><form:input path="ploc" /></label></p>
+	<p><label>지역:<br><form:input path="ploc" style="width:300px;" /></label></p>
+	<p><label>좌표:<br><form:input path="latlng" style="width:300px;" /></label></p>
 	<p><label>기간:<br><form:input path="pperiod" /></label></p>
 	<p><label>시간:<br><form:input path="phowtime" /></label></p>
 	<p><input type="submit" value="만들기" /></p>
 </form:form>
+<div id="map" style="width:500px;height:400px;"></div>
+<input type="text" id="keyword" size="15"> 
+<input type="button" value="검색" onclick="searchPlaces(); return false;" />
+<script src="<%=request.getContextPath()%>/js/map.js?ver=3"></script>
+
 </body>
 </html>

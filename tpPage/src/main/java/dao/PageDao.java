@@ -66,5 +66,14 @@ public class PageDao {
 		}, pageHostId);
 		return results.isEmpty() ? null : results.get(0);
 	}
+	
+	@Transactional
+	public void regDonate(int mid, int pid, int point, int dmoney) {
+		jdbcTemplate.update("insert into page_point values(?, ?, 'donate', sysdate, ?))", 
+				pid, dmoney, mid);
+		
+		int ppoint=point + dmoney;
+		jdbcTemplate.update("update page set ppoint=? where pid=?", ppoint, pid);
+	}
 }
 

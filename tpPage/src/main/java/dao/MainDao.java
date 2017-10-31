@@ -3,11 +3,13 @@ package dao;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import javax.sql.DataSource;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
+
 import board.Pboard;
 import main.Loc;
 
@@ -31,13 +33,7 @@ public class MainDao {
 			return board;
 		}
 	};
-	private RowMapper<Loc> locRowMapper = new RowMapper<Loc>() {
-		@Override
-		public Loc mapRow(ResultSet rs, int rowNum) throws SQLException {
-			Loc loc = new Loc(rs.getString(1), rs.getString(2)); 
-			return loc;
-		}
-	};
+
 	
 
 	public MainDao(DataSource dataSource) {
@@ -54,9 +50,17 @@ public class MainDao {
 		return boardList; 
 	}
 	
-	public Pboard getBoardListRandom() {
-		int i = (int)(Math.random() * count() + 1);
-		Pboard board = jdbcTemplate.queryForObject("select * from (select rownum rnum, pbid, pbsubject, pbcontent, pbfile, pbnewfile, pbre_ref, pbre_lev, pbre_seq, pbreadcount, pbdate, pbhostid, pbwriterid from (select * from pboard order by pbRE_REF desc, pbRE_SEQ asc)) where rnum = ?", boRowMapper, i);
+	public List<Pboard> getBoardListRandom(int number) {
+		Object row[] = new Object[number];
+		String sql = "select * from (select rownum rnum, pbid, pbsubject, pbcontent, pbfile, pbnewfile, pbre_ref, pbre_lev, pbre_seq, pbreadcount, pbdate, pbhostid, pbwriterid from (select * from pboard order by pbRE_REF desc, pbRE_SEQ asc)) where ";
+		for (int i = 0; i < number; i++) {
+			row[i] = (int)(Math.random() * count() + 1);
+			sql += " rnum = ? ";
+			if (i != number-1) {
+				sql += " or ";
+			}
+		}
+		List<Pboard> board = jdbcTemplate.query(sql, row, boRowMapper);
 		return board; 
 	}
 	
@@ -74,15 +78,30 @@ public class MainDao {
 			if (i != opts.size()-1) sql += " and ";
 		}
 		sql += " order by pbRE_REF desc, pbRE_SEQ asc)) where rnum >= ? and rnum<= ?";
-		
 
-		
 		List<Pboard> boardList = jdbcTemplate.query(sql, boRowMapper, page, limit);
 		return boardList;
 	}
 	
-	public List<Loc> getLocList(String sido) {
-		List<Loc> locList = jdbcTemplate.query("select * from locdb where sido = ?", locRowMapper, sido);
+	public List<Loc> getSidoList() {
+		List<Loc> locList = jdbcTemplate.query("select distinct sido from locdb", new RowMapper<Loc>() {
+			@Override
+			public Loc mapRow(ResultSet rs, int rowNum) throws SQLException {
+				Loc loc = new Loc(rs.getString("sido"), null); 
+				return loc;
+			}
+		});
+		return locList;
+	}
+	
+	public List<Loc> getGunguList() {
+		List<Loc> locList = jdbcTemplate.query("select * from locdb", new RowMapper<Loc>() {
+			@Override
+			public Loc mapRow(ResultSet rs, int rowNum) throws SQLException {
+				Loc loc = new Loc(rs.getString("sido"), rs.getString("gungu")); 
+				return loc;
+			}
+		});
 		return locList;
 	}
 }
