@@ -16,6 +16,7 @@ import board.Mboard;
 import board.MboardCommand;
 import board.Pboard;
 import board.PboardCommand;
+import dao.MemberDao;
 import dao.PageDao;
 import member.AuthInfo;
 import member.MemberCommand;
@@ -30,6 +31,7 @@ public class PageController {
 	private PageDao pageDao;
 	private PageService pageSvc;
 	private BoardService boardSvc;
+	private MemberDao memberDao;
 	
 	public void setPageDao(PageDao pageDao) {
 		this.pageDao = pageDao;
@@ -41,6 +43,10 @@ public class PageController {
 	
 	public void setBoardSvc(BoardService boardSvc) {
 		this.boardSvc = boardSvc;
+	}
+
+	public void setMemberDao(MemberDao memberDao) {
+		this.memberDao = memberDao;
 	}
 
 	@RequestMapping("/page")
@@ -148,7 +154,7 @@ public class PageController {
 		int point = Integer.parseInt(request.getParameter("ppoint"));
 		int dpoint = Integer.parseInt(request.getParameter("dmoney"));
 		
-		pageSvc.registerPoint(request);
+		pageDao.regDonate(mid, pid, point, dpoint);
 		return "page";
 	}
 
