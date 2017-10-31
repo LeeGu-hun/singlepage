@@ -24,7 +24,7 @@
 		<input type="hidden" name="pid" id="pid" value=${page.pid } />
 		<input type="hidden" name="ppoint" id="ppoint" value=${page.ppoint } />
 		<input type="hidden" name="mid" id="mid" value=${authInfo.mid } />
-		<input type="hidden" name="memail" id="memail" value=${authInfo.email } />
+		<input type="hidden" name="memail" id="memail" value=${authInfo.memail } />
 		<input type="hidden" name="ck" id="ck" value=${ck } />
 		<c:choose>
 			<c:when test="${ck == 0 || ck == null}">
