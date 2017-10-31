@@ -3,6 +3,14 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<c:choose>
+<c:when test="${fn:length(appendList) < 1}">
+<br>
+더 이상 표시할 내용이 없습니다.
+<br><br>
+<input type="hidden" id="end" name="end">
+</c:when>
+<c:otherwise>
 <c:forEach var="list" items="${appendList}">
 	<div class="grid-item">
 		<div class="inner-item">
@@ -11,3 +19,5 @@
 		</div>
 	</div>
 </c:forEach>
+</c:otherwise>
+</c:choose>

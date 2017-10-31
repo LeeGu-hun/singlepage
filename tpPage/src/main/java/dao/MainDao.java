@@ -84,8 +84,7 @@ public class MainDao {
 			if (i != opts.size()-1) sql += " and ";
 		}
 		sql += " order by pbRE_REF desc, pbRE_SEQ asc)) where rnum >= ? and rnum<= ?";
-		
-
+		System.out.println(sql);
 		
 		List<Pboard> boardList = jdbcTemplate.query(sql, boRowMapper, page, limit);
 		return boardList;

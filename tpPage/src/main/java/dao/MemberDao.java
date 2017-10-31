@@ -71,8 +71,8 @@ public class MemberDao {
 }
 
 	public void memModify(int mid, String memail, String mname, String mphone) {
-		
-//		update member set memail = 'b', mname = 'b', mphone = '000' where mid = 63;
+		jdbcTemplate.update("update member set memail = ?, mname = ?, mphone = ? where mid = ?",
+				memail, mname, mphone, mid);
 	}
 
 //	public void memberModify(AuthInfo authInfo) {

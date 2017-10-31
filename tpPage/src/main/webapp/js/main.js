@@ -8,7 +8,7 @@ $(document).ready(function(){
 		var documentHeight = $(document).height();
 		if($(document).height() > $(window).height())
 			$("#btn").css("display", "none");
-		if(scrollHeight == documentHeight){
+		if(scrollHeight >= documentHeight-10){
 			loadMain();
 		}
 	});
@@ -55,11 +55,19 @@ $(document).ready(function(){
 });
 
 function loadMain() {
-	$.ajax({
-		type : "POST",
-		url : "./loadMain",
-		success : appendList
-	});
+	var page = $("#page").val();
+	$("#page").val(Number(page) + 1);
+	console.log($("#page").val());
+	var params = {
+			type : "POST",
+			url : "./loadMain",
+			success : appendList
+		};
+		if ($("#srch").length) {
+		    params.data = "srch=" + $("#srch").val() + "&page=" + page;
+		    console.log(params.data);
+		}
+	$.ajax(params);
 }
 
 function appendList(list) {
@@ -69,6 +77,11 @@ function appendList(list) {
 		var $list = $(list);
 		$list.imagesLoaded(function (){
 			$(".grid").append($list).masonry('appended',$list);
+			$('.grid').masonry({
+				  // options
+				  itemSelector: '.grid-item',
+				  percentPosition: true,
+				});
 		});
 		$('.inner-item').on('click', function(){
 			var content = $(this).children().clone();

@@ -19,7 +19,7 @@ public class MpwValidator implements Validator {
 		ValidationUtils.rejectIfEmpty(errors, "newmpw", "새 비번을 입력하시오.");
 		ValidationUtils.rejectIfEmpty(errors, "newmpwconf", "새비번확인하시오.");
 		if (!memCmd.getMpw().isEmpty()) {
-			if (!memCmd.isoldmpwEqualTonewmpw()) {
+			if (!memCmd.ismpwEqualTonewmpw()) {
 				errors.rejectValue("mpwconf", "비밀번호와 동일하게 입력하시오.");
 			}
 		}
