@@ -166,10 +166,6 @@ public class PageController {
 		model.addAttribute("ck" , authInfo2.getMpoint());
 		return "page/ck";
 	}
-
-//	@RequestMapping("/modify") 
-//	public String pageModify() {
-//		
-//		return "page/pageModify";
-//	}
+	
+	
 }
