@@ -170,7 +170,25 @@ public class MemberController {
 		}
 	}
 
+	@RequestMapping("/memberCheck")
+	public String memberCheck(HttpServletRequest request) {
+		String email = request.getParameter("email");
+		String pw = memberDao.memPass(email);
+		request.setAttribute("ck", pw);
+		return "page/ck";
+	}
 	
+	@RequestMapping("/mchkUpdate")
+	public String mchkUpdate(HttpServletRequest request, HttpSession session) {
+		String email = request.getParameter("email");
+		String phone = request.getParameter("phone");
+		memberDao.ckUpdate(email, phone);
+		AuthInfo authInfo = (AuthInfo) session.getAttribute("authInfo");
+		Member member = memberDao.selectByEmail(authInfo.getMemail());
+		authInfo.setMcheck(member.getMcheck());
+		session.setAttribute("authInfo", authInfo);
+		return "page/ck";
+	}
 	
 	// @RequestMapping("/memInfo")
 	// public String memInfo(@ModelAttribute("infocmd") MemberCommand infocmd,

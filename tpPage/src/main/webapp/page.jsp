@@ -126,7 +126,7 @@
             </div>
           </div>
         </div>
-    </div>
+    </div>	
 
 	<div class="modal" id="myModal3" aria-hidden="true" style="display: none; z-index: 1070;">
     	<div class="modal-dialog">
@@ -150,10 +150,10 @@
           <div class="modal-content">
             <div class="modal-header">
               <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-              <h4 class="modal-title">충전 확인</h4>
+              <h4 id="chTitle" class="modal-title"></h4>
             </div><div class="container"></div>
             <div id="ctxtModal" class="modal-body">
-              	<input type="hidden"/>
+              	
             </div>
             <div id="cbtnModal"class="modal-footer">
 	            

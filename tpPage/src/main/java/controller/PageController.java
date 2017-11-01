@@ -3,6 +3,7 @@ package controller;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,6 +18,7 @@ import board.PboardCommand;
 import dao.MemberDao;
 import dao.PageDao;
 import member.AuthInfo;
+import member.Member;
 import member.MemberCommand;
 import page.Page;
 import page.PageCommand;
@@ -53,6 +55,7 @@ public class PageController {
 			Model model, HttpServletRequest request) {
 		int pageHostId = host;
 		Page page = pageDao.getPage(pageHostId);
+		/*System.out.println(page.getPlatlng());*/
 		if(page == null) {
 			return "redirect:/home"; 
 		} else {	
@@ -67,13 +70,9 @@ public class PageController {
 			request.setAttribute("mbPage", mbPage);
 			model.addAttribute("mboardList", mboardList);
 			
-			
-			
 			AuthInfo authInfo = (AuthInfo) request.getSession().getAttribute("authInfo");
 			
-			
 			if (authInfo !=null) {
-				System.out.println("11");
 				int memId = authInfo.getMid();
 				List<PageLike> ckList = pageDao.plikeCheck(memId, pageHostId);
 				if (ckList.size() == 0) {
@@ -82,9 +81,7 @@ public class PageController {
 					int ck = ckList.get(0).getPlike();
 					model.addAttribute("ck", ck);
 				} 
-				System.out.println("22");
 			}
-			
 			return "page";
 		}
 	}
@@ -93,7 +90,7 @@ public class PageController {
 	public String pageMaker(@ModelAttribute("pagecmd") PageCommand pmc, HttpServletRequest request) {
 		AuthInfo authInfo = (AuthInfo) request.getSession().getAttribute("authInfo");
 		if(authInfo == null) {
-			return "redirect:/login";
+			return "redirect:/membermanager";
 		} else {
 			return "page/pageMaker";
 		}		
@@ -104,10 +101,10 @@ public class PageController {
 			HttpServletRequest request) {
 		AuthInfo authInfo = (AuthInfo) request.getSession().getAttribute("authInfo");
 		if(authInfo == null) {
-			return "redirect:/login";
+			return "redirect:/membermanager";
 		} else {
-			pageSvc.makePage(authInfo, pmc, request);
-			return "redirect:/home";
+			int host = pageSvc.makePage(authInfo, pmc, request);
+			return "redirect:/page?host=" + host;
 		}
 	}	
 	
@@ -128,14 +125,30 @@ public class PageController {
 	}
 	
 	@RequestMapping("/pointDonate")
-	public String pointDonate(HttpServletRequest request) {
+	public String pointDonate(HttpServletRequest request, AuthInfo authInfo, Page page) {
 		int mid = Integer.parseInt(request.getParameter("mid"));
 		int pid = Integer.parseInt(request.getParameter("pid"));
-		int point = Integer.parseInt(request.getParameter("ppoint"));
+		int ppoint = Integer.parseInt(request.getParameter("ppoint"));
+//		int ppoint = page.getPpoint();
+//		System.out.println(ppoint);
+		int mpoint = authInfo.getMpoint();
 		int dpoint = Integer.parseInt(request.getParameter("dmoney"));
 		
-		pageDao.regDonate(mid, pid, point, dpoint);
+		pageDao.regDonate(mid, pid, ppoint, dpoint);
+		memberDao.regDonate(mid, pid, mpoint, dpoint);
 		return "page";
+	}
+	
+	@RequestMapping("/pointCharge")
+	public void pointCharge(HttpServletRequest request, AuthInfo authInfo, HttpSession session) {
+		int mid = Integer.parseInt(request.getParameter("mid"));
+		int charge = Integer.parseInt(request.getParameter("charge"));
+		int mpoint = authInfo.getMpoint();
+		memberDao.regCharge(mid, charge, mpoint);
+		authInfo = (AuthInfo) session.getAttribute("authInfo");
+		Member member = memberDao.selectByEmail(authInfo.getMemail());
+		authInfo.setMpoint((member.getMpoint()));
+		session.setAttribute("authInfo", authInfo);
 	}
 
 //	@RequestMapping("/modify") 
@@ -143,6 +156,4 @@ public class PageController {
 //		
 //		return "page/pageModify";
 //	}
-
-
 }
