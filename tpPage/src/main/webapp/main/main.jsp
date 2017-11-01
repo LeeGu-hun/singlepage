@@ -9,7 +9,10 @@
 <%@ include file="./menubar.jsp" %>
 
 <c:if test="${searched != null }">
+<form id="frm">
 <input type="hidden" id="srch" value="0" />
+<input type="hidden" value="1" id="page" />
+</form>
 <%@ include file="./search.jsp" %>
 <br />
 </c:if>
@@ -27,9 +30,9 @@
 	</div>
 	</c:forEach>
 </div>
-<input type="hidden" value="1" id="page" />
-<button id="btn" onclick="loadMain()" class="btn btn-md btn-primary">더보기</button>
 
+<button id="btn" onclick="loadMain()" class="btn btn-md btn-primary">더보기</button>
+<a id="btnTop" class="btn btn-info btn-lg">맨 위로</a>
 <div class="inner-content"></div>
 <div class="inner-back"></div>
 <!-- 아이템 영역 끝 -->
