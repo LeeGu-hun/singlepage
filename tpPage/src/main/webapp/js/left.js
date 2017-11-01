@@ -119,20 +119,22 @@ function cin_charge(point) {
 function chargeCheck() {
 	var ccmoney = $('#ccmoney').val();
 	var mcheck = $('#mcheck').val();
-	console.log(ccmoney);
-	if(mcheck == "0" && ccmoney != "") {
+	if(mcheck == "0") {
+		$('#chTitle').html("본인 인증")
 		$('#ctxtModal').html('본인 인증하세요.');
 		$('#ctxtModal').append("<div id='mchkTxt'> <label>email:</label>" +
             		"<input type='text' id='email' name='email' /><br /> <label>password:</label>" + 
-            		"<input type='text' id='pw' name='pw' /><br /> <label>phone:</label>" +
+            		"<input type='password' id='pass' name='pass' /><br /> <label>phone:</label>" +
             		"<input type='text' id='phone' name='phone' /><br /></div>");
-		$('#cbtnModal').html("<a href='#' data-dismiss='modal' class='btn' onclick='memCheck()'>본인 인증</a>" +
+		$('#cbtnModal').html("<a href='#' class='btn' onclick='memCheck()'>본인 인증</a>" +
 				"<a href='#' data-dismiss='modal' class='btn'>취소</a>");
 	} else {
 		if(ccmoney == "" || Number(ccmoney)==0) {
+			$('#chTitle').html("실행 오류")
 			$('#ctxtModal').html('충전할 금액을 선택해주세요.');
 			$('#cbtnModal').html("<a href='#' data-dismiss='modal' class='btn'>확인</a>");
 		} else {
+			$('#chTitle').html("충전 확인")
 			$('#ctxtModal').html('충전하시겠습니까?');
 			$('#cbtnModal').html("<a href='#' data-dismiss='modal' class='btn'>취소</a>" +
 			"<a href='#' class='btn btn-primary' onclick='chargeClose()'>충전</a>");
@@ -140,16 +142,57 @@ function chargeCheck() {
 	}
 }
 
-function memCheck() {
-	var mid = $('#mid').val();
-	var pid = $('#pid').val();
-	var email = $('#memail').val(); 
-}
-
 function chargeClose() {
+	var charge = $('#ccmoney').val();
+	var mid = $('#mid').val();
+	$.ajax({
+		type : "POST",
+		url : "./pointCharge",
+		data : "charge=" + charge + "&mid=" + mid,
+	})
 	$('#myModal2').modal('hide');
 	$('#myModal4').modal('hide');
 }
+
+//본인인증
+function memCheck() {
+	var email = $('#memail').val(); 
+	$.ajax({
+		type : "POST",
+		url : "./memberCheck",
+		data : "email=" + email,
+		success : cmpPass
+	});
+}
+
+function cmpPass(pw) {
+	var memail = $('#memail').val(); 
+	var email = $('#email').val();
+	var pass = $('#pass').val();
+	var phone = $('#phone').val();
+	var pw = $.trim(pw)
+	if (memail == email && pw == pass) {
+		$.ajax({
+			type : "POST",
+			url : "./mchkUpdate",
+			data : "email=" + email + "&phone=" + phone,
+			success : changeMchk
+		});
+		function changeMchk() {
+			$('#mcheck').val(1);
+		}
+		$('#chTitle').html("본인 인증");
+		$('#ctxtModal').html("<label style='color:red'>인증성공</label>");
+		$('#cbtnModal').html("<a href='#' data-dismiss='modal' class='btn'>확인</a>");
+	} else {
+		$('#chTitle').html("본인 인증");
+		$('#ctxtModal').append("<label style='color:red'>인증실패</label>");
+		$('#cbtnModal').html("<a href='#' class='btn' onclick='memCheck()'>재인증</a>" +
+				"<a href='#' data-dismiss='modal' class='btn' onclick='memCheck()'>취소</a>");
+	}
+	
+}
+
 /////////////////////////////////////////////////////////////////////////////////////////////
 
 //좋아요

@@ -7,6 +7,7 @@ import java.util.List;
 import javax.sql.DataSource;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.transaction.annotation.Transactional;
 
 import member.AuthInfo;
 import member.Member;
@@ -73,6 +74,31 @@ public class MemberDao {
 	public void memModify(int mid, String memail, String mname, String mphone) {
 		jdbcTemplate.update("update member set memail = ?, mname = ?, mphone = ? where mid = ?",
 				memail, mname, mphone, mid);
+	}
+	
+	@Transactional
+	public void regDonate(int mid, int pid, int point, int dmoney) {
+		jdbcTemplate.update("insert into mem_point values(?, ?, 'donate', sysdate, ?))", 
+				mid, dmoney, pid);
+		
+		int mpoint = point - dmoney;
+		jdbcTemplate.update("update member set mpoint=? where mid=?", mpoint, mid);
+	}
+	
+	public String memPass(String email) {
+		String pass = jdbcTemplate.queryForObject("select mpw from member where memail = ?", String.class, email);
+		return pass;
+	}
+	
+	public void ckUpdate(String email, String phone) {
+		jdbcTemplate.update("update member set mcheck = 1, mphone=? where memail=?", phone, email);
+	}
+	
+	public void regCharge(int mid, int charge, int mpoint) {
+		jdbcTemplate.update("insert into mem_point values(?, ?, 'charge', sysdate, null))", 
+				mid, charge);
+		int point = charge + mpoint;
+		jdbcTemplate.update("update member set mpoint=? where mid=?", point, mid);
 	}
 
 //	public void memberModify(AuthInfo authInfo) {
