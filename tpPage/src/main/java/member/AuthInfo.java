@@ -23,6 +23,16 @@ public class AuthInfo {
 		this.pid = pid;
 	}
 
+	public AuthInfo(int mid, String mname, String memail, String mphone, int mcheck, int mpoint, Date mdate) {
+		this.mid = mid;
+		this.mname = mname;
+		this.memail = memail;
+		this.mphone = mphone;
+		this.mcheck = mcheck;
+		this.mpoint = mpoint;
+		this.mdate = mdate;
+	}
+
 	public int getMid() {
 		return mid;
 	}
@@ -53,38 +63,6 @@ public class AuthInfo {
 
 	public int getPid() {
 		return pid;
-	}
-
-	public void setMid(int mid) {
-		this.mid = mid;
-	}
-
-	public void setMname(String mname) {
-		this.mname = mname;
-	}
-
-	public void setMemail(String memail) {
-		this.memail = memail;
-	}
-
-	public void setMphone(String mphone) {
-		this.mphone = mphone;
-	}
-
-	public void setMcheck(int mcheck) {
-		this.mcheck = mcheck;
-	}
-
-	public void setMpoint(int mpoint) {
-		this.mpoint = mpoint;
-	}
-
-	public void setMdate(Date mdate) {
-		this.mdate = mdate;
-	}
-
-	public void setPid(int pid) {
-		this.pid = pid;
 	}
 	
 }
