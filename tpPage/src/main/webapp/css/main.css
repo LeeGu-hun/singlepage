@@ -80,8 +80,9 @@
 	height: 100%;
 }
 
-.gunguList {
-	display:none; 
+.itemList {
+	display:none;
+	margin-top : 10px;
 }
 
 .on {
@@ -97,11 +98,16 @@
 	max-width:330px; 
 }
 
-
+#btnTop {
+    position: fixed;
+    right: 2%;
+    bottom: 50px;
+    display: none;
+    z-index: 999;
+}
 
 
 /* ---searchtab 시작--- */
-
 
 .panel.with-nav-tabs .panel-heading{
     padding: 5px 5px 0 5px;

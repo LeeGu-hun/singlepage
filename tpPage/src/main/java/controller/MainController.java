@@ -84,7 +84,7 @@ public class MainController {
 			ArrayList<String> list = new ArrayList<String>();
 			while (e.hasMoreElements()) {
 				String name = e.nextElement();
-				if(name.equals("page")) continue;
+				if(name.equals("page") || name.equals("srch")) continue;
 				String srchOpt = name + "=";
 				String[] data = req.getParameterValues(name);
 				if(data[0].equals("more")) {

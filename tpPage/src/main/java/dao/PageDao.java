@@ -69,7 +69,7 @@ public class PageDao {
 	
 	@Transactional
 	public void regDonate(int mid, int pid, int point, int dmoney) {
-		jdbcTemplate.update("insert into page_point values(?, ?, 'donate', sysdate, ?))", 
+		jdbcTemplate.update("insert into page_point values(?, ?, 'donate', sysdate, ?)", 
 				pid, dmoney, mid);
 		
 		int ppoint=point + dmoney;

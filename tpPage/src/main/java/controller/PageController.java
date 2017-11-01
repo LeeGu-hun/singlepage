@@ -20,6 +20,7 @@ import dao.PageDao;
 import member.AuthInfo;
 import member.Member;
 import member.MemberCommand;
+import member.MemberService;
 import page.Page;
 import page.PageCommand;
 import page.PageLike;
@@ -32,6 +33,7 @@ public class PageController {
 	private PageService pageSvc;
 	private BoardService boardSvc;
 	private MemberDao memberDao;
+	private MemberService memberSvc;
 	
 	public void setPageDao(PageDao pageDao) {
 		this.pageDao = pageDao;
@@ -47,6 +49,10 @@ public class PageController {
 
 	public void setMemberDao(MemberDao memberDao) {
 		this.memberDao = memberDao;
+	}
+
+	public void setMemberSvc(MemberService memberSvc) {
+		this.memberSvc = memberSvc;
 	}
 
 	@RequestMapping("/page")
@@ -123,37 +129,43 @@ public class PageController {
 		model.addAttribute("ck", ckList.get(0).getPlike());
 		return "page/ck";
 	}
-	
+
 	@RequestMapping("/pointDonate")
-	public String pointDonate(HttpServletRequest request, AuthInfo authInfo, Page page) {
+	public String pointDonate(HttpServletRequest request, HttpSession session, Model model) {
+		AuthInfo authInfo = (AuthInfo) session.getAttribute("authInfo");
 		int mid = Integer.parseInt(request.getParameter("mid"));
 		int pid = Integer.parseInt(request.getParameter("pid"));
 		int ppoint = Integer.parseInt(request.getParameter("ppoint"));
-//		int ppoint = page.getPpoint();
-//		System.out.println(ppoint);
-		int mpoint = authInfo.getMpoint();
 		int dpoint = Integer.parseInt(request.getParameter("dmoney"));
+		int mpoint = authInfo.getMpoint();	
 		
 		pageDao.regDonate(mid, pid, ppoint, dpoint);
 		memberDao.regDonate(mid, pid, mpoint, dpoint);
-		return "page";
+		
+		Member member = memberSvc.getAuthInfo(mid);
+		AuthInfo authInfo2 = new AuthInfo(member.getMid(), member.getMname(), member.getMemail(), member.getMphone(),
+				member.getMcheck(), member.getMpoint(), member.getMdate());
+		session.setAttribute("authInfo", authInfo2);
+		model.addAttribute("ck" , authInfo2.getMpoint());
+		return "page/ck";
 	}
 	
 	@RequestMapping("/pointCharge")
-	public void pointCharge(HttpServletRequest request, AuthInfo authInfo, HttpSession session) {
+	public String pointCharge(HttpServletRequest request, HttpSession session, Model model) {
+		AuthInfo authInfo = (AuthInfo) session.getAttribute("authInfo");
 		int mid = Integer.parseInt(request.getParameter("mid"));
 		int charge = Integer.parseInt(request.getParameter("charge"));
 		int mpoint = authInfo.getMpoint();
-		memberDao.regCharge(mid, charge, mpoint);
-		authInfo = (AuthInfo) session.getAttribute("authInfo");
-		Member member = memberDao.selectByEmail(authInfo.getMemail());
-		authInfo.setMpoint((member.getMpoint()));
-		session.setAttribute("authInfo", authInfo);
-	}
 
-//	@RequestMapping("/modify") 
-//	public String pageModify() {
-//		
-//		return "page/pageModify";
-//	}
+		memberDao.regCharge(mid, charge, mpoint);
+		
+		Member member = memberSvc.getAuthInfo(mid);
+		AuthInfo authInfo2 = new AuthInfo(member.getMid(), member.getMname(), member.getMemail(), member.getMphone(),
+				member.getMcheck(), member.getMpoint(), member.getMdate());
+		session.setAttribute("authInfo", authInfo2);
+		model.addAttribute("ck" , authInfo2.getMpoint());
+		return "page/ck";
+	}
+	
+	
 }

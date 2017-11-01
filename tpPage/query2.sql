@@ -245,3 +245,4 @@ Insert into TP.LOCDB (SIDO,GUNGU) values ('경상남도','거창군');
 Insert into TP.LOCDB (SIDO,GUNGU) values ('경상남도','합천군');
 Insert into TP.LOCDB (SIDO,GUNGU) values ('제주도','제주시');
 Insert into TP.LOCDB (SIDO,GUNGU) values ('제주도','서귀포시');
+commit;
