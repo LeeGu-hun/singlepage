@@ -1,5 +1,21 @@
 
 $(document).ready(function(){
+	
+	$(function() {
+        $(window).scroll(function() {
+            if ($(this).scrollTop() > 500) {
+                $('#btnTop').fadeIn();
+            } else {
+                $('#btnTop').fadeOut();
+            }
+        });
+        $("#btnTop").click(function() {
+            $('html, body').animate({
+                scrollTop : 0
+            }, 400);
+            return false;
+        });
+    });
 
 	if($(document).height() > $(window).height())
 		$("#btn").css("display", "none");
@@ -45,31 +61,66 @@ $(document).ready(function(){
 		$('.inner-content').css('left', totalw/2-w/2-20);
 		$('.inner-content').css('top', $(window).scrollTop() + $(window).height()/2 - 350);
 	});
+	
 	$('.inner-back').on('click', function(){
 		$('.inner-content').removeClass('on');
 		$('.inner-back').removeClass('on');
 	});
+	
 	$('input:radio[name=sido]').on('click', function(){
-		$('.gunguList').hide();
+		$('.itemList').hide();
 		var sido = $('input:radio[name=sido]:checked').val();
 		$('#'+sido).show();
 	});
+	
+	$('input:checkbox').on('change', function(){
+		var itemId = $(this).attr('id');
+		var itemVal = $(this).val();
+		if($(this).is(':checked') == true) {
+			if($(this).is('[data-all]')) {
+				$('input:checkbox[name="'+ itemVal +'"]').not('input:checkbox[id="'+ itemVal +'"]').prop('checked', false);
+				$('input:checkbox[name="'+ itemVal +'"]').not('input:checkbox[id="'+ itemVal +'"]').attr('checked', false);					
+				$('.selected-item[id|="lb'+ itemVal +'"]').remove();
+				$('.selected').append('<label class="selected-item" id="lb' + itemId + '"><input type="hidden" value='+ itemVal + ' />' + itemVal +'</label>');
+				$('.selected-item').on('click', function(){
+					var id = $(this).attr('id');
+					id = id.substring(2, id.length);
+					$('#'+id).prop('checked', false);
+					$('#'+id).attr('checked', false);
+					$(this).remove();
+				});
+			} else {
+				$('#'+$(this).attr('name')).prop('checked', false);
+				$('#'+$(this).attr('name')).attr('checked', false);
+				$('#lb'+$(this).attr('name')).remove();
+				$('.selected').append('<label class="selected-item" id="lb' + itemId + '"><input type="hidden" value="'+ itemVal + '" />' + itemVal +'</label>');
+				$('.selected-item').on('click', function(){
+					var id = $(this).attr('id');
+					id = id.substring(2, id.length);
+					$('#'+id).prop('checked', false);
+					$('#'+id).attr('checked', false);
+					$(this).remove();
+				});
+			}
+		} else {
+			$('#lb'+itemId).remove();
+		}
+	});
 
+	
 });
 
 function loadMain() {
-	var page = $("#page").val();
-	$("#page").val(Number(page) + 1);
-	console.log($("#page").val());
 	var params = {
 			type : "POST",
 			url : "./loadMain",
 			success : appendList
-		};
-		if ($("#srch").length) {
-		    params.data = "srch=" + $("#srch").val() + "&page=" + page;
-		    console.log(params.data);
-		}
+	};
+	if ($("#srch").length) {
+		var page = $("#page").val();
+		$("#page").val(Number(page) + 1);
+		params.data = "srch=" + $("#srch").val() + "&page=" + page;
+	}
 	$.ajax(params);
 }
 
