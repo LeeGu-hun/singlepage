@@ -25,7 +25,7 @@ var mapContainer = document.getElementById('map'),
 	            marker.setMap(map);
 	            
 	            document.getElementById('ploc').value = detailAddr;
-	            document.getElementById('latlng').value = message;
+	            document.getElementById('platlng').value = message;
 	        }   
 	    });
 	});

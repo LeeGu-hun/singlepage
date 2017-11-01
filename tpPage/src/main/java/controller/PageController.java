@@ -55,6 +55,7 @@ public class PageController {
 			Model model, HttpServletRequest request) {
 		int pageHostId = host;
 		Page page = pageDao.getPage(pageHostId);
+		/*System.out.println(page.getPlatlng());*/
 		if(page == null) {
 			return "redirect:/home"; 
 		} else {	
@@ -69,13 +70,9 @@ public class PageController {
 			request.setAttribute("mbPage", mbPage);
 			model.addAttribute("mboardList", mboardList);
 			
-			
-			
 			AuthInfo authInfo = (AuthInfo) request.getSession().getAttribute("authInfo");
 			
-			
 			if (authInfo !=null) {
-				System.out.println("11");
 				int memId = authInfo.getMid();
 				List<PageLike> ckList = pageDao.plikeCheck(memId, pageHostId);
 				if (ckList.size() == 0) {
@@ -84,9 +81,7 @@ public class PageController {
 					int ck = ckList.get(0).getPlike();
 					model.addAttribute("ck", ck);
 				} 
-				System.out.println("22");
 			}
-			
 			return "page";
 		}
 	}
@@ -95,7 +90,7 @@ public class PageController {
 	public String pageMaker(@ModelAttribute("pagecmd") PageCommand pmc, HttpServletRequest request) {
 		AuthInfo authInfo = (AuthInfo) request.getSession().getAttribute("authInfo");
 		if(authInfo == null) {
-			return "redirect:/login";
+			return "redirect:/membermanager";
 		} else {
 			return "page/pageMaker";
 		}		
@@ -106,10 +101,10 @@ public class PageController {
 			HttpServletRequest request) {
 		AuthInfo authInfo = (AuthInfo) request.getSession().getAttribute("authInfo");
 		if(authInfo == null) {
-			return "redirect:/login";
+			return "redirect:/membermanager";
 		} else {
-			pageSvc.makePage(authInfo, pmc, request);
-			return "redirect:/home";
+			int host = pageSvc.makePage(authInfo, pmc, request);
+			return "redirect:/page?host=" + host;
 		}
 	}	
 	
@@ -161,6 +156,4 @@ public class PageController {
 //		
 //		return "page/pageModify";
 //	}
-
-
 }
