@@ -24,7 +24,7 @@ public class PageService {
 		if(!(pfile.equals(""))) {
 			String pnewfile = System.currentTimeMillis() + "_" + pfile;
 			Page page = new Page(pmaster, pmc.getPname(), pmc.getPnick(), pmc.getPintro(),
-					pmc.getPgenre(), pmc.getPloc(), pfile, pnewfile, null, null, pmc.getPlatlng());
+					pmc.getPgenre(), pmc.getPloc(), pfile, pnewfile, pmc.getPperiod(), pmc.getPshowtime(), pmc.getPlatlng());
 			int pid = pageDao.makePage(page);
 			String path = pmc.getPupdir() + pnewfile;
 			try {
@@ -39,7 +39,7 @@ public class PageService {
 			return pid;
 		} else {
 			Page page = new Page(pmaster, pmc.getPname(), pmc.getPnick(), pmc.getPintro(),
-					pmc.getPgenre(), pmc.getPloc(), null, null, null, null, pmc.getPlatlng());
+					pmc.getPgenre(), pmc.getPloc(), null, null, pmc.getPperiod(), pmc.getPshowtime(), pmc.getPlatlng());
 			int pid = pageDao.makePage(page);
 			authInfo = new AuthInfo(authInfo.getMid(), authInfo.getMname(), authInfo.getMemail(), authInfo.getMphone(),
 					authInfo.getMcheck(), authInfo.getMpoint(), authInfo.getMdate(), pid);
