@@ -70,15 +70,17 @@ public class MainDao {
 		for (int i=0; i <= opts.size()-1; i++) {
 			String code = opts.get(i).split("=")[0];
 			String[] val = opts.get(i).split("=")[1].split(",");
+			sql += " ( ";
 			for (int j=0; j <=val.length-1;j++) {
 				sql += code.trim() + " like ";
 				sql += "'%" + val[j].trim() + "%'";
-				if(j != val.length-1) sql += " and ";
+				if(j != val.length-1) sql += " or ";
 			}
+			sql += " ) ";
 			if (i != opts.size()-1) sql += " and ";
 		}
 		sql += " order by pbRE_REF desc, pbRE_SEQ asc)) where rnum >= ? and rnum<= ?";
-
+		System.out.println(sql);
 		List<Pboard> boardList = jdbcTemplate.query(sql, boRowMapper, page, limit);
 		return boardList;
 	}
