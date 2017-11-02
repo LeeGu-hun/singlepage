@@ -33,6 +33,12 @@ public class MemberService {
 		memberDao.memModify(authInfo.getMid(), modifycmd.getMemail(), modifycmd.getMname(), modifycmd.getMphone());
 		
 	}
+	
+	public Member getAuthInfo(int mid) {
+		Member memid = new Member(mid);
+		Member member = memberDao.getAuthInfo(mid);
+		return member;
+	}
 
 //	public void changeMpw(MemberCommand memberCmd, Errors errors) {
 //		Member chmem = memberDao.changeMpw(oldmpw, newmpw);

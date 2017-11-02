@@ -42,9 +42,9 @@ public class PageDao {
 
 	@Transactional
 	public int makePage(final Page page) {
-		jdbcTemplate.update("insert into page values(pid_seq.nextval, ?, ?, ?, ?, ?, sysdate, '00:00', 0, sysdate, ?, ?, ?, ?)",
-				page.getPname(), page.getPnick(), page.getPintro(), page.getPgenre(), page.getPloc(), page.getPmaster(),
-				page.getPfile(), page.getPnewfile(), page.getPlatlng());
+		jdbcTemplate.update("insert into page values(pid_seq.nextval, ?, ?, ?, ?, ?, ?, ?, 0, sysdate, ?, ?, ?, ?)",
+				page.getPname(), page.getPnick(), page.getPintro(), page.getPgenre(), page.getPloc(), page.getPperiod(), page.getPshowtime(),
+				page.getPmaster(), page.getPfile(), page.getPnewfile(), page.getPlatlng());
 		
 		Integer pid = jdbcTemplate.queryForObject("select pid from page where pmaster = ?", Integer.class, page.getPmaster());
 		return pid;
@@ -69,7 +69,7 @@ public class PageDao {
 	
 	@Transactional
 	public void regDonate(int mid, int pid, int point, int dmoney) {
-		jdbcTemplate.update("insert into page_point values(?, ?, 'donate', sysdate, ?))", 
+		jdbcTemplate.update("insert into page_point values(?, ?, 'donate', sysdate, ?)", 
 				pid, dmoney, mid);
 		
 		int ppoint=point + dmoney;

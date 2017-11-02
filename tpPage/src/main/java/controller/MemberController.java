@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import board.BoardService;
 import board.PboardCommand;
 import dao.MemberDao;
+import dao.PageDao;
 import member.AuthInfo;
 import member.Member;
 import member.MemberCommand;
@@ -180,15 +181,17 @@ public class MemberController {
 	
 	@RequestMapping("/mchkUpdate")
 	public String mchkUpdate(HttpServletRequest request, HttpSession session) {
+		int mid = Integer.parseInt(request.getParameter("mid"));
 		String email = request.getParameter("email");
 		String phone = request.getParameter("phone");
 		memberDao.ckUpdate(email, phone);
-		AuthInfo authInfo = (AuthInfo) session.getAttribute("authInfo");
-		Member member = memberDao.selectByEmail(authInfo.getMemail());
-		authInfo.setMcheck(member.getMcheck());
+		Member member = memberSvc.getAuthInfo(mid);
+		AuthInfo authInfo = new AuthInfo(member.getMid(), member.getMname(), member.getMemail(), member.getMphone(),
+				member.getMcheck(), member.getMpoint(), member.getMdate());
 		session.setAttribute("authInfo", authInfo);
 		return "page/ck";
 	}
+	
 	
 	// @RequestMapping("/memInfo")
 	// public String memInfo(@ModelAttribute("infocmd") MemberCommand infocmd,

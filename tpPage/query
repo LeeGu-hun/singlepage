@@ -37,6 +37,7 @@ constraint fk_page foreign key(pmaster) references member(mid)
 );
 
 alter table page add(pfile varchar2(100), pnewfile varchar2(100));
+alter table page add(platlng varchar2(100));
 
 alter table page modify ppoint not null;
 

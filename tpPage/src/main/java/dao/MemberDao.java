@@ -78,7 +78,7 @@ public class MemberDao {
 	
 	@Transactional
 	public void regDonate(int mid, int pid, int point, int dmoney) {
-		jdbcTemplate.update("insert into mem_point values(?, ?, 'donate', sysdate, ?))", 
+		jdbcTemplate.update("insert into mem_point values(?, ?, 'donate', sysdate, ?)", 
 				mid, dmoney, pid);
 		
 		int mpoint = point - dmoney;
@@ -95,10 +95,23 @@ public class MemberDao {
 	}
 	
 	public void regCharge(int mid, int charge, int mpoint) {
-		jdbcTemplate.update("insert into mem_point values(?, ?, 'charge', sysdate, null))", 
+		jdbcTemplate.update("insert into mem_point values(?, ?, 'charge', sysdate, null)", 
 				mid, charge);
 		int point = charge + mpoint;
 		jdbcTemplate.update("update member set mpoint=? where mid=?", point, mid);
+	}
+	
+	public Member getAuthInfo(int mid) {
+		List<Member> results = jdbcTemplate.query("select * from member where mid = ?", new RowMapper<Member>() {
+			@Override
+			public Member mapRow(ResultSet rs, int rowNum) throws SQLException {
+				Member member = new Member(rs.getInt("mid"), rs.getString("mname"), rs.getString("memail"),
+						rs.getString("mpw"), rs.getString("mphone"), rs.getInt("mcheck"), rs.getInt("mpoint"),
+						rs.getDate("mdate"));
+				return member;
+			}
+		}, mid);
+		return results.isEmpty() ? null : results.get(0);
 	}
 
 //	public void memberModify(AuthInfo authInfo) {
