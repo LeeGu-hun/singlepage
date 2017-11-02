@@ -164,9 +164,15 @@ public class BoardController {
 			return "redirect:/page?host=" + mbhostid;
 		}
 	}
+	
+	@RequestMapping("/loadpboard") 
+	public String loadpboard(HttpServletRequest request) {
+		int pbid =  Integer.parseInt(request.getParameter("pbid"));
+		Pboard pboard = boardDao.getpbDetail(pbid);
+		return "board/loadpboardR";
+	}
+	
 }
-
-
 
 
 

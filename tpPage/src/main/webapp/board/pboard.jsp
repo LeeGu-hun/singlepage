@@ -9,7 +9,6 @@
 <%
 	int nowPbPage = Integer.parseInt(request.getAttribute("pbPage").toString());
 %>
-
 <c:out value="${page.pid }" /> page board
 <c:if test="${page.pid == authInfo.pid }">
 <form:form commandName="pboardcmd" action="pbwrite" enctype="multipart/form-data">
@@ -50,7 +49,7 @@
 	<tbody>
 		<c:forEach var="pboard" items="${pboardList }">
 		<tr>
-			<td>${pboard.pbid }</td>
+			<td><a data-toggle="modal" onclick="loadpboard(${pboard.pbid });">${pboard.pbid }</a></td>
 			<td>${pboard.pbsubject }</td>
 			<td>${pboard.pbcontent }</td>
 			<td>${pboard.pbfile }</td>
