@@ -28,7 +28,7 @@
 				<div class="col-md-9">
 					<c:forEach var="sido" items="${sidoList }">
 					<div id="${sido.sido }" class="itemList">
-						<label><input type="checkbox" name="${sido.sido }" value="${sido.sido }" id="${sido.sido }" data-all class="btn btn-primary">전체</label>
+						<label><input type="checkbox" name="${sido.sido }" value="${sido.sido }" id="${sido.sido }" data-all">전체</label>
 						<c:forEach var="loc" items="${gunguList }">
 							<c:if test="${sido.sido == loc.sido && loc.gungu != null }">
 							<label><input type="checkbox" name="${sido.sido }" value="${sido.sido } ${loc.gungu }" id="${sido.sido }-${loc.gungu }">${loc.gungu }</label>

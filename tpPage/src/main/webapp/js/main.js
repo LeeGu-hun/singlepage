@@ -76,6 +76,12 @@ $(document).ready(function(){
 	$('input:checkbox').on('change', function(){
 		var itemId = $(this).attr('id');
 		var itemVal = $(this).val();
+		var apItem = '<label class="selected-item" id="lb' + itemId + '"><input type="hidden" value='+ itemVal + ' />' + itemVal +'</label>';
+		if ($(this).attr('data-cate') == 'loc') {
+			
+		} else if($(this).attr('data-cate') == 'genre') {
+			
+		} else if($(this).attr('data-cate') == 'genre')
 		if($(this).is(':checked') == true) {
 			if($(this).is('[data-all]')) {
 				$('input:checkbox[name="'+ itemVal +'"]').not('input:checkbox[id="'+ itemVal +'"]').prop('checked', false);
