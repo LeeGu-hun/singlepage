@@ -60,6 +60,7 @@ public class MainDao {
 				sql += " or ";
 			}
 		}
+
 		List<Pboard> board = jdbcTemplate.query(sql, row, boRowMapper);
 		return board; 
 	}
