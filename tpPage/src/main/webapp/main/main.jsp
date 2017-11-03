@@ -40,14 +40,18 @@
 <!-- 아이템 영역 끝 -->
 
 <script>
-jQuery(document).on('click', '.mega-dropdown', function(e) {
-	  e.stopPropagation()
-	})
+$(document).ready(function(){
+	jQuery(document).on('click', '.mega-dropdown', function(e) {
+		  e.stopPropagation()
+		})
+	
+});
 $('.grid').imagesLoaded(function (){
 	$('.grid').masonry({
 		  // options
+		  columnWidth: 1,
 		  itemSelector: '.grid-item',
-		  percentPosition: true,
+		  percentPosition: true
 	});
 });
 </script>

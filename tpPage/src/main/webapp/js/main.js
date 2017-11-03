@@ -1,6 +1,7 @@
 
+
 $(document).ready(function(){
-	
+
 	$(function() {
         $(window).scroll(function() {
             if ($(this).scrollTop() > 500) {
@@ -17,17 +18,19 @@ $(document).ready(function(){
         });
     });
 
-	if($(document).height() > $(window).height())
-		$("#btn").css("display", "none");
 	$(window).scroll(function(){
 		var scrollHeight = $(window).scrollTop() + $(window).height();
 		var documentHeight = $(document).height();
 		if($(document).height() > $(window).height())
 			$("#btn").css("display", "none");
 		if(scrollHeight == documentHeight){
-			loadMain();
+			if($("#srch").length) {
+				loadSrch();
+			} else {
+				loadMain();
+			}
 		}
-	});
+	});	
 	
 	$(window).resize(function(){
 		var totalw = $(window).width();
@@ -76,16 +79,16 @@ $(document).ready(function(){
 		var sido = $('input:radio[name=sido]:checked').val();
 		$('#'+sido).show();
 	});
-	
+
 	$('input:checkbox').on('change', function(){
 		if($(this).is('[name]')){
 			var itemId = $(this).attr('id');
 			var itemVal = $(this).val();
 			if($(this).is(':checked') == true) {
 				if($(this).is('[data-all]')) {
-					$('input:checkbox[name="'+ itemId +'"]').not('input:checkbox[id="'+ itemId +'"]').prop('checked', false);
-					$('input:checkbox[name="'+ itemId +'"]').not('input:checkbox[id="'+ itemId +'"]').attr('checked', false);					
-					$('.selected-item[id|="lb'+ itemId +'"]').remove();
+					$('input:checkbox[name="'+ itemId.split('-')[0] +'"]').not('input:checkbox[id="'+ itemId +'"]').prop('checked', false);
+					$('input:checkbox[name="'+ itemId.split('-')[0] +'"]').not('input:checkbox[id="'+ itemId +'"]').attr('checked', false);					
+					$('.selected-item[id|="lb'+ itemId.split('-')[0] +'"]').remove();
 					$('.selected').append('<label class="selected-item" id="lb' + itemId + '"><input type="hidden" value='+ itemVal + ' />' + itemId +'</label>');
 					$('.selected-item').on('click', function(){
 						var id = $(this).attr('id');
@@ -123,7 +126,7 @@ $(document).ready(function(){
 	});
 	
 	$('a[id="srchSubmit"]').on('click', function(){
-		loadSrch();
+		srchBtn();
 	});
 	
 	$(function() {
@@ -140,14 +143,20 @@ $(document).ready(function(){
 	});
 	
 	$('a[id="timeBtn"]').on('click', function(){
-		var time = $("#amount").val();
-		if($('label[id="lb' + time + '"]').length == 0) {
-			$('.selected').append('<label class="selected-item" id="lb' + time + '"><input type="hidden" value="'+ time + '" name="pshowtime" />공연시간 ' + time +'</label>');
+		var amount = $("#amount").val();
+		var time = $("#time").val();
+		if($('label[id="lb' + amount + '"]').length == 0) {
+			$('.selected').append('<label class="selected-item" id="lb' + amount + '"><input type="hidden" value="'+ time + '" name="pshowtime" />공연시간 ' + amount +'</label>');
 			$('.selected-item').on('click', function(){
 				$(this).remove();
 			});
 		}
 	});
+	
+	if($(document).height() > $(window).height()) {
+		$("#btn").css("display", "none");
+	}
+	
 });
 
 function sliderInit(min, max) {
@@ -159,6 +168,7 @@ function sliderInit(min, max) {
 	      slide: function(event, ui) {
 	    	  var str1 = ui.values[0];
 	    	  var str2 = ui.values[1];
+	    	  $("#time").val(str1 + "~" + str2);
 	    	  if(ui.values[0]>24){
 	    		  str1 = "익일 " + Number(ui.values[0]-24);
 	    	  }
@@ -166,10 +176,12 @@ function sliderInit(min, max) {
 	    		  str2 = "익일 " + Number(ui.values[1]-24);
 	    	  }
 	        $("#amount").val(str1 + "시 ~ " + str2 + "시");
+	        
 	      }
 	    });
 	  var str1 = $("#slider-range").slider("values", 0);
 	  var str2 = $("#slider-range").slider("values", 1);
+	  $("#time").val(str1 + "~" + str2);
 	  if($("#slider-range").slider("values", 0)>24){
 		  str1 = "익일 " +Number(ui.values[0]-24);
 	  }
@@ -177,18 +189,24 @@ function sliderInit(min, max) {
 		  str2 = "익일 " + Number(ui.values[1]-24);
 	  }
 	$("#amount").val(str1 + "시 ~ " + str2 + "시");
+	
+}
+
+function srchBtn() {
+	$("#page").val(0);
+	$(".grid-item").remove();
+	loadSrch();
 }
 
 function loadSrch() {
-	var data = $("#srchFrm").serialize();
-	console.log(data);
+	var frm = $("#srchFrm").serialize();
 	var page = $("#page").val();
 	$("#page").val(Number(page) + 1);
 	$.ajax({
 		type : "POST",
 		url : "./loadSrch",
-		data : data
-//		success : appendList
+		data : frm+"&page="+page,
+		success : appendList
 	});
 }
 
@@ -203,16 +221,17 @@ function loadMain() {
 
 function appendList(list) {
 	if($("#end").length) {
+		$(".grid").append($list).masonry('appended',$list);
+		$('.grid').masonry({
+			  // options
+			  itemSelector: '.grid-item',
+			  percentPosition: true
+		}).masonry();
 		return;
 	} else {
 		var $list = $(list);
 		$list.imagesLoaded(function (){
 			$(".grid").append($list).masonry('appended',$list);
-			$('.grid').masonry({
-				  // options
-				  itemSelector: '.grid-item',
-				  percentPosition: true,
-				});
 			$('.inner-item').on('click', function(){
 				$('body').css({overflow: 'hidden'});
 				var content = $(this).children().clone();
@@ -237,5 +256,11 @@ function appendList(list) {
 				$('.inner-content').css('top', 50);
 			});
 		});
+		var $grid = $('.grid').masonry({
+			  // options
+			  itemSelector: '.grid-item',
+			  percentPosition: true
+		});
+		$grid.masonry('layout');
 	}
 }

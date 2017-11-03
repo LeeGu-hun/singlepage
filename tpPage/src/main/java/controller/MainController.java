@@ -34,12 +34,7 @@ public class MainController {
 	
 	@RequestMapping("/srch")
 	public String srch(HttpServletRequest req, Model model, @ModelAttribute("logincmd") MemberCommand logincmd) {
-		int page = 1;
-		if(req.getParameter("page") != null) {
-			page = Integer.parseInt(req.getParameter("page"));
-		}
-		int startPage = page * 9 + 1;
-		int limit = startPage + 9;
+		int page = 1; int limit = 9;
 		Enumeration<String> e = req.getParameterNames();
 		ArrayList<String> list = new ArrayList<String>();
 		while (e.hasMoreElements()) {
@@ -76,12 +71,13 @@ public class MainController {
 		if(req.getParameter("page") != null) {
 			page = Integer.parseInt(req.getParameter("page"));
 		}
-		int startPage = page * 9 + 1;
-		int limit = startPage + 9;
+		page = page * 9 + 1;
+		int limit = page + 8;
 		Enumeration<String> e = req.getParameterNames();
 		ArrayList<String> list = new ArrayList<String>();
 		while (e.hasMoreElements()) {
 			String name = e.nextElement();
+			if(name.equals("page")) continue;
 			String srchOpt = name + "=";
 			String[] data = req.getParameterValues(name);
 			if(data!=null) {
@@ -106,8 +102,8 @@ public class MainController {
 		if(req.getParameter("page") != null) {
 			page = Integer.parseInt(req.getParameter("page"));
 		}
-		int startPage = page * 9 + 1;
-		int limit = startPage + 9;
+		page = page * 9 + 1;
+		int limit = page + 8;
 		List<Pboard> appendList = mainService.getRandom(page, limit);
 		model.addAttribute("appendList", appendList);
 		
