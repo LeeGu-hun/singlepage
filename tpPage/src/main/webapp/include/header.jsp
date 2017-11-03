@@ -11,10 +11,10 @@
 <div id="header">
 <c:if test="${empty authInfo }">
 
-<form:form commandName="logincmd" action="memberLogin">
+<form:form commandName="logincmd" action="login">
 <p>
 <a href="./home" class="btn btn-primary">home</a>
-<a href="./membermanager" class="btn btn-primary">회원가입+로그인</a>
+<a href="./join" class="btn btn-primary">회원가입</a>
 <form:input path="memail" placeholder="email"/>
 <form:password path="mpw" placeholder="password"/>
 <input type="submit" value="로그인" />
@@ -26,7 +26,7 @@
 <c:if test="${!empty authInfo }">
 <a href="./home" class="btn btn-primary">home</a>
 <a href="./logout" class="btn btn-primary">로그아웃</a>
-<a href="./membermanager" class="btn btn-primary">회원 정보</a>
+<a href="./meminfo" class="btn btn-primary">회원 정보</a>
 <%
 	if(authInfo.getPid() == 0) {
 %>

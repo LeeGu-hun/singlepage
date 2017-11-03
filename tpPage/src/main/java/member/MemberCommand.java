@@ -2,7 +2,8 @@ package member;
 
 public class MemberCommand {
 	private int mid, nowpid;
-	private String mname, memail, mpw, mpwconf, mphone, newmpw, newmpwconf;
+	private String mname, memail, mpw, mpwconf, mphone, newmpw, newmpwconf, mpwfmemail, mpwrmemail;
+	private boolean rememberMemail;
 	
 	public int getMid() {
 		return mid;
@@ -58,6 +59,12 @@ public class MemberCommand {
 	public void setNowpid(int nowpid) {
 		this.nowpid = nowpid;
 	}
+	public boolean isRememberMemail() {
+		return rememberMemail;
+	}
+	public void setRememberMemail(boolean rememberMemail) {
+		this.rememberMemail = rememberMemail;
+	}
 	public boolean isPasswordEqualToConfirmPassword() {
 		return mpw.equals(mpwconf);
 	}
@@ -66,5 +73,17 @@ public class MemberCommand {
 	}
 	public boolean isnewmpwEqualTonewmpwconf() {
 		return newmpw.equals(newmpwconf);
+	}
+	public String getMpwfmemail() {
+		return mpwfmemail;
+	}
+	public void setMpwfmemail(String mpwfmemail) {
+		this.mpwfmemail = mpwfmemail;
+	}
+	public String getMpwrmemail() {
+		return mpwrmemail;
+	}
+	public void setMpwrmemail(String mpwrmemail) {
+		this.mpwrmemail = mpwrmemail;
 	}
 }
