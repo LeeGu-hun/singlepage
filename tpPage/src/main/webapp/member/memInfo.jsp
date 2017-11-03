@@ -28,7 +28,7 @@
 		폰번호:<%=authInfo.getMphone() %>
 	</p>
 <a href="./memManager" class="btn btn-primary">회원정보수정</a>
-<a href="./changeMpw" class="btn btn-primary">비밀번호 변경</a><br><br>
+<a href="./mpwchanger" class="btn btn-primary">비밀번호 변경</a><br><br>
 <a href="./home" class="btn btn-primary">홈으로 가기</a>
 </form:form>
 </body>
