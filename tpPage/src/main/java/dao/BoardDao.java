@@ -5,6 +5,8 @@ import java.sql.SQLException;
 import java.util.List;
 
 import javax.sql.DataSource;
+
+import org.springframework.cglib.core.GeneratorStrategy;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.transaction.annotation.Transactional;
@@ -91,4 +93,29 @@ public class BoardDao {
 		
 		jdbcTemplate.update("update mboard set mbre_ref = ? where mbid = ?", currmbid, currmbid);	
 	}
+
+	public Pboard getpbDetail(int pbid) {
+		List<Pboard> results = jdbcTemplate.query("select pbid, pbsubject, pbcontent, pbfile, pbnewfile, pbreadcount, pbdate, pbhostid, pbwriterid, pname, mname "
+				+ "from (select * from member m, page p, pboard pb where m.mid = pb.pbwriterid and p.pid = pb.pbhostid and pbid = ?)",
+				new RowMapper<Pboard>() {
+					@Override
+					public Pboard mapRow(ResultSet rs, int rowNum) throws SQLException {
+						Pboard pboard = new Pboard(rs.getInt("pbid"), rs.getString("pbsubject"), rs.getString("pbcontent"),
+								rs.getString("pbfile"), rs.getString("pbnewfile"), rs.getInt("pbreadcount"), rs.getTimestamp("pbdate"),
+								rs.getInt("pbhostid"), rs.getInt("pbwriterid"), rs.getString("pname"), rs.getString("mname"));	
+						return pboard;
+					}	
+				}, pbid);		
+		return results.isEmpty() ? null : results.get(0);
+	}
+
+	public void pbrewrite(int pbid, String pbcontent, int pbhostid, int pbwriterid) {
+		
+		
+		
+		
+		
+		
+		
+	}	
 }

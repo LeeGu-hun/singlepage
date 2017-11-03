@@ -23,6 +23,7 @@ import board.PboardCommand;
 import dao.BoardDao;
 import dao.PageDao;
 import member.AuthInfo;
+import member.MemberCommand;
 import page.Page;
 import board.BoardService;
 import board.Mboard;
@@ -164,9 +165,24 @@ public class BoardController {
 			return "redirect:/page?host=" + mbhostid;
 		}
 	}
+	
+	@RequestMapping("/loadpboard") 
+	public String loadpboard(@ModelAttribute("pbrecmd") PboardCommand pbrecmd, HttpServletRequest request, Model model) {
+		int pbid =  Integer.parseInt(request.getParameter("pbid"));
+		Pboard pboard = boardDao.getpbDetail(pbid);
+		model.addAttribute("pboard", pboard);
+		return "board/loadpboardR";
+	}
+	
+	@RequestMapping("/pbrewrite") 
+	public String pbrewrite(@ModelAttribute("pbrecmd") PboardCommand pbrecmd, HttpServletRequest request, Model model) {
+		AuthInfo authInfo = (AuthInfo) request.getSession().getAttribute("authInfo");
+		
+		boardSvc.pbrewrite(pbrecmd, authInfo);
+		
+		return "board/pbrewriteR";
+	}
 }
-
-
 
 
 

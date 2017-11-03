@@ -1,6 +1,7 @@
 package controller;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Enumeration;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
@@ -33,9 +34,7 @@ public class MainController {
 	
 	@RequestMapping("/srch")
 	public String srch(HttpServletRequest req, Model model, @ModelAttribute("logincmd") MemberCommand logincmd) {
-		int page = Integer.parseInt(req.getParameter("page"));
-		int startPage = page * 9 + 1;
-		int limit = startPage + 9;
+		int page = 1; int limit = 9;
 		Enumeration<String> e = req.getParameterNames();
 		ArrayList<String> list = new ArrayList<String>();
 		while (e.hasMoreElements()) {
@@ -66,41 +65,46 @@ public class MainController {
 		return "home";
 	}
 	
+	@RequestMapping("/loadSrch")
+	public String loadSrch(HttpServletRequest req, Model model, @ModelAttribute("logincmd") MemberCommand logincmd) {
+		int page = 1;
+		if(req.getParameter("page") != null) {
+			page = Integer.parseInt(req.getParameter("page"));
+		}
+		page = page * 9 + 1;
+		int limit = page + 8;
+		Enumeration<String> e = req.getParameterNames();
+		ArrayList<String> list = new ArrayList<String>();
+		while (e.hasMoreElements()) {
+			String name = e.nextElement();
+			if(name.equals("page")) continue;
+			String srchOpt = name + "=";
+			String[] data = req.getParameterValues(name);
+			if(data!=null) {
+				for(int i = 0; i <= data.length-1; i++) {
+					srchOpt += data[i];
+					if (i != data.length-1) srchOpt += ",";
+				}
+				list.add(srchOpt);
+			}
+		}
+		System.out.println(Arrays.toString(list.toArray()));
+		List<Pboard> appendList = mainService.search(list, page, limit);
+		model.addAttribute("appendList", appendList);
+		
+		return "main/load";
+	}
+	
+	
 	@RequestMapping("/loadMain")
 	public String load(HttpServletRequest req, Model model, @ModelAttribute("logincmd") MemberCommand logincmd) {
 		int page = 1;
 		if(req.getParameter("page") != null) {
 			page = Integer.parseInt(req.getParameter("page"));
 		}
-		int startPage = page * 9 + 1;
-		int limit = startPage + 9;
-		String srch = req.getParameter("srch");
-		req.setAttribute("searched", srch);
-		List<Pboard> appendList = new ArrayList<Pboard>();
-		if(srch == null) {
-			appendList = mainService.getRandom(page, limit);
-		} else {
-			Enumeration<String> e = req.getParameterNames();
-			ArrayList<String> list = new ArrayList<String>();
-			while (e.hasMoreElements()) {
-				String name = e.nextElement();
-				if(name.equals("page") || name.equals("srch")) continue;
-				String srchOpt = name + "=";
-				String[] data = req.getParameterValues(name);
-				if(data[0].equals("more")) {
-					return onLoad(logincmd, model, req);
-				}
-				if(data[0].equals("all")) continue;
-				if(data!=null) {
-					for(int i = 0; i <= data.length-1; i++) {
-						srchOpt += data[i];
-						if (i != data.length-1) srchOpt += ",";
-					}
-					list.add(srchOpt);
-				}
-			}
-			appendList = mainService.search(list, page, limit);
-		}
+		page = page * 9 + 1;
+		int limit = page + 8;
+		List<Pboard> appendList = mainService.getRandom(page, limit);
 		model.addAttribute("appendList", appendList);
 		
 		return "main/load";

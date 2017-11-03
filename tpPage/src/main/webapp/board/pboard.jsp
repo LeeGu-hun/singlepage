@@ -50,7 +50,7 @@
 	<tbody>
 		<c:forEach var="pboard" items="${pboardList }">
 		<tr>
-			<td>${pboard.pbid }</td>
+			<td><a data-toggle="modal" onclick="loadpboard(${pboard.pbid });">${pboard.pbid }</a></td>
 			<td>${pboard.pbsubject }</td>
 			<td>${pboard.pbcontent }</td>
 			<td>${pboard.pbfile }</td>

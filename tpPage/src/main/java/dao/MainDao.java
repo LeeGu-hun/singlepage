@@ -60,25 +60,47 @@ public class MainDao {
 				sql += " or ";
 			}
 		}
+
 		List<Pboard> board = jdbcTemplate.query(sql, row, boRowMapper);
 		return board; 
 	}
 	
+	public String time(String str) {
+		if(str.length()<2) str = "0" + str;
+		str += ":00";
+		return str;
+	}
+	
 	public List<Pboard> getBoardListSome(int page, int limit, ArrayList<String> opts) {
 		String sql = "select * from (select rownum rnum, pbid, pbsubject, pbcontent, pbfile, pbnewfile, pbre_ref, pbre_lev, pbre_seq, pbreadcount, pbdate, pbhostid, pbwriterid from (select * from pboard pb, page p where pb.pbhostid = p.pid ";
-		if (!opts.isEmpty()) sql += " and ";
+		String sub = "";
 		for (int i=0; i <= opts.size()-1; i++) {
 			String code = opts.get(i).split("=")[0];
 			String[] val = opts.get(i).split("=")[1].split(",");
+			if(val.length>1) sub += " ( ";
 			for (int j=0; j <=val.length-1;j++) {
-				sql += code.trim() + " like ";
-				sql += "'%" + val[j].trim() + "%'";
-				if(j != val.length-1) sql += " and ";
+				if (val[j].equals("전체")) continue;
+				if(code.equals("pshowtime")) {
+					String start = val[j].split("~")[0];
+					String end = val[j].split("~")[1];
+					start = time(start);
+					end = time(end);
+					if(val.length>1) sub += " ( ";
+					sub += code.trim() + " between " + start + " and " + end;
+					if(val.length>1) sub += " ) ";
+				} else {
+					sub += code.trim() + " like ";
+					sub += "'%" + val[j].trim() + "%'";
+				}
+				if(j != val.length-1) sub += " or ";
 			}
-			if (i != opts.size()-1) sql += " and ";
+			if(val.length>1) sub += " ) ";
+			if (i != opts.size()-1) sub += " and ";
 		}
+		if (sub.length() > 0) sql += " and " + sub;
 		sql += " order by pbRE_REF desc, pbRE_SEQ asc)) where rnum >= ? and rnum<= ?";
-
+		
+		System.out.println(sql);
 		List<Pboard> boardList = jdbcTemplate.query(sql, boRowMapper, page, limit);
 		return boardList;
 	}
