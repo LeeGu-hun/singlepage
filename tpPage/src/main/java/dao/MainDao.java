@@ -33,13 +33,7 @@ public class MainDao {
 			return board;
 		}
 	};
-	private RowMapper<Loc> locRowMapper = new RowMapper<Loc>() {
-		@Override
-		public Loc mapRow(ResultSet rs, int rowNum) throws SQLException {
-			Loc loc = new Loc(rs.getString(1), rs.getString(2)); 
-			return loc;
-		}
-	};
+
 	
 
 	public MainDao(DataSource dataSource) {
@@ -66,6 +60,7 @@ public class MainDao {
 				sql += " or ";
 			}
 		}
+
 		List<Pboard> board = jdbcTemplate.query(sql, row, boRowMapper);
 		return board; 
 	}
@@ -76,22 +71,40 @@ public class MainDao {
 		for (int i=0; i <= opts.size()-1; i++) {
 			String code = opts.get(i).split("=")[0];
 			String[] val = opts.get(i).split("=")[1].split(",");
+			sql += " ( ";
 			for (int j=0; j <=val.length-1;j++) {
 				sql += code.trim() + " like ";
 				sql += "'%" + val[j].trim() + "%'";
-				if(j != val.length-1) sql += " and ";
+				if(j != val.length-1) sql += " or ";
 			}
+			sql += " ) ";
 			if (i != opts.size()-1) sql += " and ";
 		}
 		sql += " order by pbRE_REF desc, pbRE_SEQ asc)) where rnum >= ? and rnum<= ?";
 		System.out.println(sql);
-		
 		List<Pboard> boardList = jdbcTemplate.query(sql, boRowMapper, page, limit);
 		return boardList;
 	}
 	
-	public List<Loc> getLocList(String sido) {
-		List<Loc> locList = jdbcTemplate.query("select * from locdb where sido = ?", locRowMapper, sido);
+	public List<Loc> getSidoList() {
+		List<Loc> locList = jdbcTemplate.query("select distinct sido from locdb", new RowMapper<Loc>() {
+			@Override
+			public Loc mapRow(ResultSet rs, int rowNum) throws SQLException {
+				Loc loc = new Loc(rs.getString("sido"), null); 
+				return loc;
+			}
+		});
+		return locList;
+	}
+	
+	public List<Loc> getGunguList() {
+		List<Loc> locList = jdbcTemplate.query("select * from locdb", new RowMapper<Loc>() {
+			@Override
+			public Loc mapRow(ResultSet rs, int rowNum) throws SQLException {
+				Loc loc = new Loc(rs.getString("sido"), rs.getString("gungu")); 
+				return loc;
+			}
+		});
 		return locList;
 	}
 }

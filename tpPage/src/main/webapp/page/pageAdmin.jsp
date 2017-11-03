@@ -22,42 +22,47 @@
 
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=f637d5fa5f8a019e35446dc32b94a752&libraries=services"></script>
 
+
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>page maker</title>
 </head>
 <body>
-page maker
-<form:form commandName="pagecmd" name="mpfrm" action="makepage" enctype="multipart/form-data">
-	<p><img id="puploadImg" name="puploadImg" />
+page admin
+<form  name="mpfrm" action="makepage" enctype="multipart/form-data">
+	<p><c:choose>
+			<c:when test="${!empty page.pnewfile}">
+				<img id="puploadImg" name="puploadImg" src="./puploads/${page.pnewfile }"  alt="프로필사진" width="200px" height="150px"/>
+			</c:when>
+			<c:otherwise>
+				<img id="puploadImg" name="puploadImg" src="profile.png" alt="프로필" width="" height="" />
+			</c:otherwise>
+		</c:choose>
 	<p><label>사진:<input type="file" id="pfile" name="pfile" onchange="pagereadURL(this);" /></label>
 	<p><input type="hidden" id="pupdir" name="pupdir" 
 		value="<%=request.getRealPath("/puploads/")%>" />
-	<p><label>이름:<br><form:input path="pname" style="width:300px;" /></label></p>
-	<p><label>닉넴:<br><form:input path="pnick" style="width:300px;" /></label></p>
-	<p><label>소개:<br><form:textarea path="pintro" style="width:300px;" /></label></p>
+	<p><label>이름:<br><input id="pname" name="pname" style="width:300px;" value="${page.pname }"/></label></p>
+	<p><label>닉넴:<br><input id="pnick" name="pnick" style="width:300px;" value="${page.pnick }"/></label></p>
+	<p><label>소개:<br><textarea id="pintro" name="pintro" style="width:300px;">${page.pintro }</textarea></label></p>
 	<p>
-		<label>장르카테:<br>
-			<select id="pgcate" name="pgcate" style="width:300px;" onchange>
-				<option value="0">임의</option>
-				<option value="1">노래</option>
-				<option value="2">댄스</option>
-				<option value="3">연주</option>
-				<option value="4">연극</option>
-				<option value="5">기타</option>
+		<label>장르카테: ${genre } <br>
+			<select  id="pgcate" name="pgcate" style="width:300px;" >
+				<c:forEach var="g" items="${genres }">
+				<option value="${g}" ${genre == g ? 'selected' : ''}>${g}</option>
+				</c:forEach>
 			</select>
 		</label>
 	</p>
-	<p><label>장르세부:<br><input type="text" id="pgdetail" name="pgdetail" style="width:300px;" onkeyup; onkeypress; onkeydown; /></label></p>
-	<p><label>장르:<br><form:input path="pgenre" style="width:300px;" /></label></p>
-	<div id="map" style="width:500px;height:400px;"></div>
+	<p><label>장르세부: ${genreDetail } <br><input type="text" id="pgdetail" name="pgdetail" style="width:300px;" onkeyup; onkeypress; onkeydown; /></label></p>
+	<p><label>장르:<br><input id="pgenre" name="pgenre" style="width:300px;"/></label></p>
+	<div id="map" style="width:500px; height:400px;"></div>
 	<input type="text" id="keyword" style="width:300px;" /> 
 	<input type="button" value="검색" onclick="mapsearch(); return false;" />
-	<p><label>지역:<br><form:input path="ploc" style="width:300px;" /></label></p>
-	<p><label>좌표:<br><form:input path="platlng" style="width:300px;" /></label></p>
-	<p><label>기간:<br><form:input path="pperiod" value="" style="width:300px;" /></label></p>
+	<p><label>지역:<br><input id="ploc" name="ploc" style="width:300px;" /></label></p>
+	<p><label>좌표:<br><input id="platlng" name="platlng" style="width:300px;" /></label></p>
+	<p><label>기간:<br><input id="pperiod" name="pperiod" value="${page.pdate }" style="width:300px;" /></label></p>
 	<p>
 		<label>시작:<br>
-			<select id="pststart" name="pststart" style="width:300px;" onchange>
+			<select id="pststart" name="pststart" style="width:300px;" onchange="">
 				<option value="">미정</option>
 				<%
 					String start;
@@ -93,9 +98,9 @@ page maker
 			</select>
 		</label>
 	</p>
-	<p><label>시간:<br><form:input path="pshowtime" value="" style="width:300px;"/></label></p>
-	<p><input type="button" value="만들기" onclick="makepage(); " /></p>
-</form:form>
+	<p><label>시간:<br><input id="pshowtime" name="pshowtime" value="" style="width:300px;"/></label></p>
+	<p><input type="button" value="수정" onclick="makepage(); " /></p>
+</form>
 <script src="<%=request.getContextPath()%>/js/map.js?ver=1"></script>
 </body>
 </html>

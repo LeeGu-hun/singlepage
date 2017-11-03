@@ -70,21 +70,21 @@
 	
 				<div style="text-align:right">
 					<label for="current_money">보유 포인트</label>
-					<input type="text" id="cmoney" name="cmoney" value="${authInfo.mpoint }" readonly/>원<br/>
+					<input type="text" id="cmoney" name="cmoney" value="" readonly/>원<br/>
 					<label for="donate_money">- 후원 포인트</label>
 					<input type="text" id="dmoney" name="dmoney" value="" readonly/>원<br/>
 					<label for="after_money">= 예상 포인트</label>
 					<input type="text" id="amoney" name="amoney" value="" readonly/>원<br/>
 				</div>
-				<a data-toggle="modal" href="#myModal2" class="btn btn-primary">포인트 충전</a>
+				<a data-toggle="modal" href="#myModal2" class="btn btn-primary" onclick="chargeInit()">포인트 충전</a>
             </div>
             <div class="modal-footer">
-              <a href="#" data-dismiss="modal" class="btn">취소</a>
+              <a href="#" data-dismiss="modal" class="btn" onclick="donateInit()">취소</a>
               <a data-toggle="modal" href="#myModal3" class="btn btn-primary" onclick="donateCheck()">후원하기</a>
             </div>
-          </div>
-        </div>
-    </div>
+		</div>
+	</div>
+</div>
 	
 	<div class="modal" id="myModal2" aria-hidden="true" style="display: none; z-index: 1060;">
 		<div class="modal-dialog modal-lg">
@@ -112,7 +112,7 @@
 	
 				<div style="text-align:right">
 					<label for="ccurrent_money">보유 포인트</label>
-					<input type="text" id="hmoney" name="hmoney" value="${authInfo.mpoint }" readonly/>원<br/>
+					<input type="text" id="hmoney" name="hmoney" value="" readonly/>원<br/>
 					<label for="charge_money">+ 충전 포인트</label>
 					<input type="text" id="ccmoney" name="ccmoney" value="" readonly/>원<br/>
 					<label for="cafter_money">= 예상 포인트</label>
@@ -121,12 +121,12 @@
 				</div>
 		 	</div>
             <div class="modal-footer">
-              <a href="#" data-dismiss="modal" class="btn">취소</a>
+              <a href="#" data-dismiss="modal" class="btn" onclick="chargeInit()">취소</a>
               <a data-toggle="modal" href="#myModal4" class="btn btn-primary" onclick="chargeCheck()">충전하기</a>
             </div>
           </div>
         </div>
-    </div>
+    </div>	
 
 	<div class="modal" id="myModal3" aria-hidden="true" style="display: none; z-index: 1070;">
     	<div class="modal-dialog">
@@ -150,10 +150,10 @@
           <div class="modal-content">
             <div class="modal-header">
               <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-              <h4 class="modal-title">충전 확인</h4>
+              <h4 id="chTitle" class="modal-title"></h4>
             </div><div class="container"></div>
             <div id="ctxtModal" class="modal-body">
-              	<input type="hidden"/>
+              	
             </div>
             <div id="cbtnModal"class="modal-footer">
 	            
@@ -161,5 +161,27 @@
           </div>
         </div>
     </div>
+    
+<!-- 게시판 modal -->
+<div id="pbmodaldiv">
+	<div class="modal" id="pbmodal" aria-hidden="true" style="display: none; z-index: 1050;">
+    	<div class="modal-dialog modal-lg">
+       		<div class="modal-content">
+            	<div class="modal-header">
+              		<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+              		<h4 class="modal-title">초기값</h4>
+            	</div><div class="container"></div>
+            	<div class="modal-body">
+            		<p>초기값</p>
+              		<a data-toggle="modal" href="#" class="btn btn-primary">Launch modal</a>
+            	</div>
+            	<div class="modal-footer">
+              		<a href="#" data-dismiss="modal" class="btn">Close</a>
+            	</div>
+          	</div>
+        </div>
+    </div>
+</div>
+
 </body>
 </html>

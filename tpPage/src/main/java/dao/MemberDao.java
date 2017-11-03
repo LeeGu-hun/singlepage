@@ -7,6 +7,7 @@ import java.util.List;
 import javax.sql.DataSource;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.transaction.annotation.Transactional;
 
 import member.AuthInfo;
 import member.Member;
@@ -81,6 +82,44 @@ public class MemberDao {
 		System.out.println(newmpw + "///" + update);
 		if (update > 0) result = true;
 		return result;
+	}
+	
+	@Transactional
+	public void regDonate(int mid, int pid, int point, int dmoney) {
+		jdbcTemplate.update("insert into mem_point values(?, ?, 'donate', sysdate, ?)", 
+				mid, dmoney, pid);
+		
+		int mpoint = point - dmoney;
+		jdbcTemplate.update("update member set mpoint=? where mid=?", mpoint, mid);
+	}
+	
+	public String memPass(String email) {
+		String pass = jdbcTemplate.queryForObject("select mpw from member where memail = ?", String.class, email);
+		return pass;
+	}
+	
+	public void ckUpdate(String email, String phone) {
+		jdbcTemplate.update("update member set mcheck = 1, mphone=? where memail=?", phone, email);
+	}
+	
+	public void regCharge(int mid, int charge, int mpoint) {
+		jdbcTemplate.update("insert into mem_point values(?, ?, 'charge', sysdate, null)", 
+				mid, charge);
+		int point = charge + mpoint;
+		jdbcTemplate.update("update member set mpoint=? where mid=?", point, mid);
+	}
+	
+	public Member getAuthInfo(int mid) {
+		List<Member> results = jdbcTemplate.query("select * from member where mid = ?", new RowMapper<Member>() {
+			@Override
+			public Member mapRow(ResultSet rs, int rowNum) throws SQLException {
+				Member member = new Member(rs.getInt("mid"), rs.getString("mname"), rs.getString("memail"),
+						rs.getString("mpw"), rs.getString("mphone"), rs.getInt("mcheck"), rs.getInt("mpoint"),
+						rs.getDate("mdate"));
+				return member;
+			}
+		}, mid);
+		return results.isEmpty() ? null : results.get(0);
 	}
 
 //	public void memberModify(AuthInfo authInfo) {

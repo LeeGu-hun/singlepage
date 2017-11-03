@@ -44,13 +44,14 @@ public class MemberController {
 		this.memberDao = memberDao;
 	}
 
-	public void setAuthService(AuthService authService) {
-		this.authService = authService;
-	}
-
-	@RequestMapping("/join")
-	public String join(@ModelAttribute("logincmd") MemberCommand mlcmd, @ModelAttribute("joincmd") MemberCommand mjcmd,
-			HttpServletRequest request, Model model) {
+	@RequestMapping("/membermanager")
+	public String memberManager(@ModelAttribute("logincmd") MemberCommand mlcmd,
+			@ModelAttribute("joincmd") MemberCommand mjcmd, HttpServletRequest request, Model model) {
+		if(request.getParameter("pid") != null) {
+			int nowpid = Integer.parseInt(request.getParameter("pid"));
+			model.addAttribute("nowpid", nowpid);
+			return "member/memberManager"; 
+		}
 		return "member/memberManager";
 	}
 	
@@ -217,6 +218,26 @@ public class MemberController {
 			mlcmd.setRememberMemail(true);
 		}
 		return "member/memberManager";
+	}
+	@RequestMapping("/memberCheck")
+	public String memberCheck(HttpServletRequest request) {
+		String email = request.getParameter("email");
+		String pw = memberDao.memPass(email);
+		request.setAttribute("ck", pw);
+		return "page/ck";
+	}
+	
+	@RequestMapping("/mchkUpdate")
+	public String mchkUpdate(HttpServletRequest request, HttpSession session) {
+		int mid = Integer.parseInt(request.getParameter("mid"));
+		String email = request.getParameter("email");
+		String phone = request.getParameter("phone");
+		memberDao.ckUpdate(email, phone);
+		Member member = memberSvc.getAuthInfo(mid);
+		AuthInfo authInfo = new AuthInfo(member.getMid(), member.getMname(), member.getMemail(), member.getMphone(),
+				member.getMcheck(), member.getMpoint(), member.getMdate());
+		session.setAttribute("authInfo", authInfo);
+		return "page/ck";
 	}
 	
 	@RequestMapping("/mpwfinder")

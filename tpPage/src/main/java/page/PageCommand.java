@@ -1,11 +1,15 @@
 package page;
 
+import java.util.Date;
+
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.multipart.MultipartFile;
 
 public class PageCommand {
-	private String pname, pnick, pintro, pgenre, ploc, pupdir, pperiod, phowtime, latlng;
+	private String pname, pnick, pintro, pgenre, ploc, pupdir, pshowtime, platlng;
 	private MultipartFile pfile;
-	
+	@DateTimeFormat(pattern="yyyyMMddHHmmss")
+	private Date pperiod;
 	public String getPname() {
 		return pname;
 	}
@@ -42,17 +46,17 @@ public class PageCommand {
 	public void setPupdir(String pupdir) {
 		this.pupdir = pupdir;
 	}
-	public String getPperiod() {
-		return pperiod;
+	public String getPshowtime() {
+		return pshowtime;
 	}
-	public void setPperiod(String pperiod) {
-		this.pperiod = pperiod;
+	public void setPshowtime(String pshowtime) {
+		this.pshowtime = pshowtime;
 	}
-	public String getPhowtime() {
-		return phowtime;
+	public String getPlatlng() {
+		return platlng;
 	}
-	public void setPhowtime(String phowtime) {
-		this.phowtime = phowtime;
+	public void setPlatlng(String platlng) {
+		this.platlng = platlng;
 	}
 	public MultipartFile getPfile() {
 		return pfile;
@@ -60,11 +64,12 @@ public class PageCommand {
 	public void setPfile(MultipartFile pfile) {
 		this.pfile = pfile;
 	}
-	public String getLatlng() {
-		return latlng;
+	public Date getPperiod() {
+		return pperiod;
 	}
-	public void setLatlng(String latlng) {
-		this.latlng = latlng;
+	public void setPperiod(Date pperiod) {
+		this.pperiod = pperiod;
 	}
+
 	
 }

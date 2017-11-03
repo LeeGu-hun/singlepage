@@ -1,6 +1,7 @@
 package controller;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Enumeration;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
@@ -33,7 +34,10 @@ public class MainController {
 	
 	@RequestMapping("/srch")
 	public String srch(HttpServletRequest req, Model model, @ModelAttribute("logincmd") MemberCommand logincmd) {
-		int page = Integer.parseInt(req.getParameter("page"));
+		int page = 1;
+		if(req.getParameter("page") != null) {
+			page = Integer.parseInt(req.getParameter("page"));
+		}
 		int startPage = page * 9 + 1;
 		int limit = startPage + 9;
 		Enumeration<String> e = req.getParameterNames();
@@ -56,47 +60,55 @@ public class MainController {
 			}
 		}
 		List<Pboard> boardList = mainService.search(list, page, limit);
-		
-//		List<Loc> locList = mainService.getLoc(sido);
+		List<Loc> sidoList = mainService.getSidoList();
+		List<Loc> gunguList = mainService.getGunguList();
+
+		model.addAttribute("sidoList", sidoList);
+		model.addAttribute("gunguList", gunguList);
 		model.addAttribute("boardList", boardList);
-		req.setAttribute("searched", boardList);
-//		model.addAttribute("locList", locList);
+		req.setAttribute("searched", sidoList);
 		return "home";
 	}
 	
-	@RequestMapping("/loadMain")
-	public String load(HttpServletRequest req, Model model, @ModelAttribute("logincmd") MemberCommand logincmd) {
-		System.out.println(req.getParameter("page"));
-		int page = Integer.parseInt(req.getParameter("page"));
+	@RequestMapping("/loadSrch")
+	public String loadSrch(HttpServletRequest req, Model model, @ModelAttribute("logincmd") MemberCommand logincmd) {
+		int page = 1;
+		if(req.getParameter("page") != null) {
+			page = Integer.parseInt(req.getParameter("page"));
+		}
 		int startPage = page * 9 + 1;
 		int limit = startPage + 9;
-		String srch = req.getParameter("srch");
-		req.setAttribute("searched", srch);
-		List<Pboard> appendList = new ArrayList<Pboard>();
-		if(srch == null) {
-			appendList = mainService.getRandom(page, limit);
-		} else {
-			Enumeration<String> e = req.getParameterNames();
-			ArrayList<String> list = new ArrayList<String>();
-			while (e.hasMoreElements()) {
-				String name = e.nextElement();
-				if(name.equals("page")) continue;
-				String srchOpt = name + "=";
-				String[] data = req.getParameterValues(name);
-				if(data[0].equals("more")) {
-					return onLoad(logincmd, model, req);
+		Enumeration<String> e = req.getParameterNames();
+		ArrayList<String> list = new ArrayList<String>();
+		while (e.hasMoreElements()) {
+			String name = e.nextElement();
+			String srchOpt = name + "=";
+			String[] data = req.getParameterValues(name);
+			if(data!=null) {
+				for(int i = 0; i <= data.length-1; i++) {
+					srchOpt += data[i];
+					if (i != data.length-1) srchOpt += ",";
 				}
-				if(data[0].equals("all")) continue;
-				if(data!=null) {
-					for(int i = 0; i <= data.length-1; i++) {
-						srchOpt += data[i];
-						if (i != data.length-1) srchOpt += ",";
-					}
-					list.add(srchOpt);
-				}
+				list.add(srchOpt);
 			}
-			appendList = mainService.search(list, page, limit);
 		}
+		System.out.println(Arrays.toString(list.toArray()));
+		List<Pboard> appendList = mainService.search(list, page, limit);
+		model.addAttribute("appendList", appendList);
+		
+		return "main/load";
+	}
+	
+	
+	@RequestMapping("/loadMain")
+	public String load(HttpServletRequest req, Model model, @ModelAttribute("logincmd") MemberCommand logincmd) {
+		int page = 1;
+		if(req.getParameter("page") != null) {
+			page = Integer.parseInt(req.getParameter("page"));
+		}
+		int startPage = page * 9 + 1;
+		int limit = startPage + 9;
+		List<Pboard> appendList = mainService.getRandom(page, limit);
 		model.addAttribute("appendList", appendList);
 		
 		return "main/load";

@@ -42,6 +42,10 @@ public class Member {
 	public Member(String memail) {
 		this.memail = memail;                   	        //mpw 비교할때
 	}
+	
+	public Member(int mid) {
+		this.mid = mid;
+	}
 
 	/*public Member(int mid, String mname, String memail, String mpw) {
 		this.mid = mid;

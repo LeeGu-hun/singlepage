@@ -38,6 +38,12 @@ public class MemberService {
 		
 		return member;
 	}*/
+	
+	public Member getAuthInfo(int mid) {
+		Member memid = new Member(mid);
+		Member member = memberDao.getAuthInfo(mid);
+		return member;
+	}
 
 //	public void changeMpw(MemberCommand memberCmd, Errors errors) {
 //		String memail;

@@ -5,14 +5,21 @@
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/left.css?ver=1" />
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/reveal.css?" />
 
-<script type="text/javascript" src="<%=request.getContextPath()%>/js/left.js?ver=222"></script>
+<script type="text/javascript" src="<%=request.getContextPath()%>/js/left.js?ver=112"></script>
 
 <script type="text/javascript" src="http://code.jquery.com/jquery-1.6.min.js"></script>
 <script type="text/javascript" src="<%=request.getContextPath()%>/js/jquery.reveal.js?"></script>
 
 <div style="margin: 50px auto; width: 200px; text-align: center">
 	<div>
-		<img src="profile.png" alt="프로필" width="" height="" />
+		<c:choose>
+			<c:when test="${!empty page.pnewfile}">
+				<img src="./puploads/${page.pnewfile }" alt="프로필사진" width="200px" height="150px" />
+			</c:when>
+			<c:otherwise>
+				<img src="profile.png" alt="프로필" width="" height="" />
+			</c:otherwise>
+		</c:choose>
 	</div>
 	<div>
 		<br/>	
@@ -25,6 +32,7 @@
 		<input type="hidden" name="ppoint" id="ppoint" value=${page.ppoint } />
 		<input type="hidden" name="mid" id="mid" value=${authInfo.mid } />
 		<input type="hidden" name="memail" id="memail" value=${authInfo.memail } />
+		<input type="hidden" name="mpoint" id="mpoint" value=${authInfo.mpoint } />
 		<input type="hidden" name="ck" id="ck" value=${ck } />
 		<c:choose>
 			<c:when test="${ck == 0 || ck == null}">
@@ -41,7 +49,7 @@
 	<div>
 		<br/>
 		<c:if test="${authInfo.pid == page.pid }">
-			<a class="btn btn-info btn-sm" href="./modify">관리</a>&nbsp;&nbsp;
+			<a class="btn btn-info btn-sm" href="./admin">관리</a>&nbsp;&nbsp;
 		</c:if>
 	</div>
 </div>
