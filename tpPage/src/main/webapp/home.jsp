@@ -6,12 +6,14 @@
 <html lang="ko">
 <head>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/main.css?ver=32" />
 <script src="http://code.jquery.com/jquery-3.1.1.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 <script src="<%=request.getContextPath()%>/js/masonry.pkgd.js"></script>
 <script src="<%=request.getContextPath()%>/js/imagesloaded.pkgd.js"></script>
-<script src="<%=request.getContextPath()%>/js/main.js?ver=14"></script>
+<script src="<%=request.getContextPath()%>/js/main.js?ver=5"></script>
 
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>SinglePage</title>

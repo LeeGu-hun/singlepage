@@ -131,3 +131,15 @@ function mbMoreListScrollR(msg) {
 	$('#mbListTT').append(msg);
 }
 
+function loadpboard(pbid) {
+	$.ajax({
+		type : "POST",
+		url : "./loadpboard",
+		data : "pbid=" + pbid,
+		success : loadpboardR
+	});
+}
+function loadpboardR(msg) {
+	$('#pbmodaldiv').html(msg);
+	$("#pbmodal").modal('show');
+}

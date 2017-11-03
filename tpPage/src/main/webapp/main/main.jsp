@@ -25,10 +25,7 @@
 	<div class="grid-item">
 		<div class="inner-item">
 			<div class="title">제목 : <c:out value="${list.pbsubject}" /></div>
-			<div class="content">내용<br>
-			<c:if test="${!empty list.pbnewfile}">
-			<div style="text-align: center;"><img src="./buploads/pbuploads/${list.pbnewfile}"></div>
-			</c:if><c:out value="${list.pbcontent}" /></div>
+			<div class="content">내용<br><c:if test="${!empty list.pbnewfile}"><div style="text-align: center;"><img src="./buploads/pbuploads/${list.pbnewfile}"></div></c:if><% pageContext.setAttribute("rn", "\r\n"); %>${fn:replace(list.pbcontent, rn, "<br>")}<br><br><fmt:formatDate value="${list.pbdate}" pattern="yy.MM.dd HH:mm:ss"/></div>
 		</div>
 	</div>
 	</c:forEach>
@@ -36,21 +33,23 @@
 
 <button id="btn" onclick="loadMain()" class="btn btn-md btn-primary">더보기</button>
 <a id="btnTop" class="btn btn-info btn-lg">맨 위로</a>
+
+<div class="inner-back">
 <div class="inner-content"></div>
-<div class="inner-back"></div>
+</div>
 <!-- 아이템 영역 끝 -->
 
 <script>
 jQuery(document).on('click', '.mega-dropdown', function(e) {
 	  e.stopPropagation()
 	})
-$(window).ready(function(){
+$('.grid').imagesLoaded(function (){
 	$('.grid').masonry({
-	  // options
-	  itemSelector: '.grid-item',
-	  percentPosition: true,
+		  // options
+		  itemSelector: '.grid-item',
+		  percentPosition: true,
 	});
-})
+});
 </script>
 
 </div>
