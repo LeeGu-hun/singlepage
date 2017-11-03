@@ -20,6 +20,7 @@
 </c:choose>
 
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+
 <script>
 $(document).ready(function() {
 	var mbTab = $('#rMbTab').val();
@@ -30,20 +31,22 @@ $(document).ready(function() {
 </script>
 
 <c:out value="${page.pid }" /> member board
+<c:if test="${!empty authInfo }">
 <form:form commandName="mboardcmd" action="mbwrite" enctype="multipart/form-data">
 	<form:input path="mbsubject" />
 	<br>
-	<form:textarea path="mbcontent" />
+	<form:textarea path="mbcontent"></form:textarea>
 	<br>
 	<img id="mbuploadImg" name="mbuploadImg" />
 	<br>
-	<input type="file" id="mbfile" name="mbfile" onclick="mbreadURL(this);" />
+	<input type="file" id="mbfile" name="mbfile" onchange="mbreadURL(this);" />
 	<input type="hidden" id="mbupdir" name="mbupdir"
-		value="<%=request.getRealPath("/bupload/mbuploads/") %>" />
+		value="<%=request.getRealPath("/buploads/mbuploads/") %>" />
 	<input type="hidden" id="mbhostid" name="mbhostid" value="<c:out value='${page.pid }' />" />
 	<input type="hidden" id="mbTab" name="mbTab" value="active" />
 	<input type="submit" value="등록" />
 </form:form>
+</c:if>
 
 <br>
 <br>
