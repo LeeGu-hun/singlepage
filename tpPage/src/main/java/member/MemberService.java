@@ -29,10 +29,15 @@ public class MemberService {
 	}
 
 	public void memModify(MemberCommand modifycmd, AuthInfo authInfo) {
-		
 		memberDao.memModify(authInfo.getMid(), modifycmd.getMemail(), modifycmd.getMname(), modifycmd.getMphone());
-		
 	}
+	
+/*	public Member mpwfind(String memail, String newmpw) {
+		Member findmember = new Member(memail); 
+		Member member = memberDao.mpwFind(memail, newmpw);
+		
+		return member;
+	}*/
 	
 	public Member getAuthInfo(int mid) {
 		Member memid = new Member(mid);
@@ -41,7 +46,8 @@ public class MemberService {
 	}
 
 //	public void changeMpw(MemberCommand memberCmd, Errors errors) {
-//		Member chmem = memberDao.changeMpw(oldmpw, newmpw);
+//		String memail;
+//		Member chmem = memberDao.changeMpw(memail, newmpw);
 //		Member memeber = new Member();
 //		if(!Member.mpw.equals(oldmpw))
 //			throw new IdPasswordNotMatchingException();

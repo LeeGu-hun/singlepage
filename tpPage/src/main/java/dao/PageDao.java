@@ -60,7 +60,7 @@ public class PageDao {
 								rs.getString("pname"), rs.getString("pnick"),
 								rs.getString("pintro"), rs.getString("pgenre"),
 								rs.getString("ploc"), rs.getString("pfile"), rs.getString("pnewfile"),
-								rs.getString("pshowtime"), rs.getTimestamp("pdate"), rs.getTimestamp("pperiod"), rs.getString("platlng"));
+								rs.getString("pshowtime").trim(), rs.getTimestamp("pdate"), rs.getTimestamp("pperiod"), rs.getString("platlng"));
 						return page;
 					}
 		}, pageHostId);

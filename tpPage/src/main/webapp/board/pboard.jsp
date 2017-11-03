@@ -9,6 +9,7 @@
 <%
 	int nowPbPage = Integer.parseInt(request.getAttribute("pbPage").toString());
 %>
+
 <c:out value="${page.pid }" /> page board
 <c:if test="${page.pid == authInfo.pid }">
 <form:form commandName="pboardcmd" action="pbwrite" enctype="multipart/form-data">

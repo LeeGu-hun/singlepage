@@ -143,3 +143,11 @@ function loadpboardR(msg) {
 	$('#pbmodaldiv').html(msg);
 	$("#pbmodal").modal('show');
 }
+
+function pbrewrite() {
+	$('#pbrecmd').ajaxForm({
+		success:function(msg) {
+			$('#pbrebox').html(msg)
+		}
+	});
+}
