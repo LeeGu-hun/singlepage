@@ -173,16 +173,25 @@ public class PageController {
 		AuthInfo authInfo = (AuthInfo) request.getSession().getAttribute("authInfo");
 		int pid = authInfo.getPid();
 		Page page = pageDao.getPage(pid);
-		System.out.println(page.getPgenre());
 		String genre = page.getPgenre().split("-")[0].trim();
 		String genreDetail = page.getPgenre().split("-")[1].trim();
 		
+		String start = page.getPshowtime().split("-")[0].trim();
+		String end= page.getPshowtime().split("-")[1].trim();
+		
 		String[] genres = {"임의","노래","댄스","연주","연극","기타"};
+		
+		String lat = page.getPlatlng().split("//")[0].trim();
+		String lng= page.getPlatlng().split("//")[1].trim();
 		
 		model.addAttribute("genres", genres);
 		model.addAttribute("page", page);
 		model.addAttribute("genre", genre);
 		model.addAttribute("genreDetail", genreDetail);
+		model.addAttribute("start", start);
+		model.addAttribute("end", end);
+		model.addAttribute("lat", lat);
+		model.addAttribute("lng", lng);
 		return "page/pageAdmin";
 	}
 	
