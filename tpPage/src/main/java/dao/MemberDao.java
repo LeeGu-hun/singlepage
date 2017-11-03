@@ -38,14 +38,14 @@ public class MemberDao {
 		return results.isEmpty() ? null : results.get(0);
 	}
 
-	public Member selectByEmail(String email) {
+	public Member selectByEmail(String memail) {
 		List<Member> results = jdbcTemplate.query("select * from member where memail = ?", new RowMapper<Member>() {
 			@Override
 			public Member mapRow(ResultSet rs, int rowNum) throws SQLException {
 				Member member = new Member(rs.getString("memail"));
 				return member;
 			}
-		}, email);
+		}, memail);
 		return results.isEmpty() ? null : results.get(0);
 	}
 
@@ -60,12 +60,12 @@ public class MemberDao {
 		return results.isEmpty() ? null : results.get(0);
 	}
 	
-	public boolean changeMpw(String email, String newMpw) {
+	public boolean changeMpw(String memail, String newmpw) {
 		boolean result = false;
-		int update = jdbcTemplate.update("update member set mpw = ? where memail = ?", newMpw, email);
-		System.out.println(newMpw + "///" + update);
+		int update = jdbcTemplate.update("update member set mpw = ? where memail = ?", newmpw, memail);
+		System.out.println(newmpw + "///" + update);
 		if (update > 0) result = true;
-		return result;
+		return result;  //비번변경, 비번찾기 때 쓴다.ㄴ
 	
 	/*jdbcTemplate.update("update member set mpw = ? where memail = ?", authInfo.getMemail(), authInfo.getmp);*/
 }
@@ -73,6 +73,14 @@ public class MemberDao {
 	public void memModify(int mid, String memail, String mname, String mphone) {
 		jdbcTemplate.update("update member set memail = ?, mname = ?, mphone = ? where mid = ?",
 				memail, mname, mphone, mid);
+	}
+	
+	public boolean mpwFind(String newmpw, String mpwrmemail) {
+		boolean result = false;
+		int update = jdbcTemplate.update("update member set mpw = ? where memail = ?", newmpw, mpwrmemail);
+		System.out.println(newmpw + "///" + update);
+		if (update > 0) result = true;
+		return result;
 	}
 
 //	public void memberModify(AuthInfo authInfo) {

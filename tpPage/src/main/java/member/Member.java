@@ -114,7 +114,7 @@ public class Member {
 		this.mdate = mdate;
 	}
 
-//	public boolean matchPassword(String pwd) {
-//		return this.mpw.equals(pwd);
-//	}
+	public boolean matchPassword(String mpw) {
+		return this.mpw.equals(mpw);
+	}
 }

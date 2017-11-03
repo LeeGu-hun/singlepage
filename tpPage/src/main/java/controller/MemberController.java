@@ -2,21 +2,26 @@ package controller;
 
 import java.util.List;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
+import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import board.BoardService;
 import board.PboardCommand;
 import dao.MemberDao;
 import member.AuthInfo;
+import member.AuthService;
 import member.Member;
 import member.MemberCommand;
 import member.MemberService;
@@ -29,6 +34,7 @@ import vali_exception.JoinValidator;
 public class MemberController {
 	MemberDao memberDao;
 	MemberService memberSvc;
+	AuthService authService;
 
 	public void setMemberSvc(MemberService memberSvc) {
 		this.memberSvc = memberSvc;
@@ -38,30 +44,43 @@ public class MemberController {
 		this.memberDao = memberDao;
 	}
 
-	@RequestMapping("/membermanager")
-	public String memberManager(@ModelAttribute("logincmd") MemberCommand mlcmd,
-			@ModelAttribute("joincmd") MemberCommand mjcmd, HttpServletRequest request, Model model) {
-		if(request.getParameter("pid") != null) {
-			int nowpid = Integer.parseInt(request.getParameter("pid"));
-			model.addAttribute("nowpid", nowpid);
-			return "member/memberManager"; 
-		}
-		return "member/memberManager";
+	public void setAuthService(AuthService authService) {
+		this.authService = authService;
 	}
 
+	@RequestMapping("/join")
+	public String join(@ModelAttribute("logincmd") MemberCommand mlcmd, @ModelAttribute("joincmd") MemberCommand mjcmd,
+			HttpServletRequest request, Model model) {
+		return "member/memberManager";
+	}
+	
 	@RequestMapping("/memberJoin")
-	public String MemberJoin(@ModelAttribute("joincmd") MemberCommand membercmd, HttpSession session, Errors errors) {
+	public String MemberJoin(@ModelAttribute("joincmd") MemberCommand mjcmd, HttpSession session,
+			HttpServletResponse response, Errors errors) {
 		/* new JoinValidator().validate(membercmd, errors); */
 		// if (errors.hasErrors())
 		// return "member/join";
 		// try {
-		memberSvc.memberJoin(membercmd, errors);
-
-		Member member = memberSvc.memberLogin(membercmd.getMemail());
+		memberSvc.memberJoin(mjcmd, errors);
+		Member member = memberSvc.memberLogin(mjcmd.getMemail());
 
 		AuthInfo authInfo = new AuthInfo(member.getMid(), member.getMname(), member.getMemail(), member.getMphone(),
 				member.getMcheck(), member.getMpoint(), member.getMdate(), 0);
 		session.setAttribute("authInfo", authInfo);
+
+		/*Cookie cookie = new Cookie("remember", mjcmd.getMemail());
+		cookie.setPath("/");*/
+		/*
+		 * Cookie cookie2 = new Cookie("remember2", mjcmd.getMemail());
+		 * cookie2.setPath("./");
+		 */
+
+		/*if (mjcmd.isRememberMemail()) {
+			cookie.setMaxAge(60 * 60 * 24 * 1);
+		} else {
+			cookie.setMaxAge(0);
+		}
+		response.addCookie(cookie);*/
 		return "redirect:/home";
 		// } catch (AlreadyExistngMemberException e) {
 		// errors.rejectValue("memail", "이미 있다");
@@ -71,17 +90,19 @@ public class MemberController {
 		// return "redirect:/login";
 		// }
 	}
+	
+	@RequestMapping("/login")
+	public String MemberLogin(@ModelAttribute("logincmd") MemberCommand mlcmd, @ModelAttribute("mpwfindcmd") MemberCommand mpwfcmd,
+			@ModelAttribute("mpwresetcmd") MemberCommand mpwresetcmd, HttpSession session, HttpServletRequest request) {
+		
+		Member member = memberSvc.memberLogin(mlcmd.getMemail());
 
-	@RequestMapping("/memberLogin")
-	public String MemberLogin(@ModelAttribute("logincmd") MemberCommand membercmd, HttpSession session,
-			HttpServletRequest request) {
-		Member member = memberSvc.memberLogin(membercmd.getMemail());
 		if (member == null) {
-			return "redirect:/membermanager";
+			return "member/login";
 		} else {
-			if (membercmd.getMpw().equals(member.getMpw())) {
+			if (mlcmd.getMpw().equals(member.getMpw())) {
 				Page pid = memberDao.getMemberPid(member.getMid());
-				int npid = membercmd.getNowpid();
+				int npid = mlcmd.getNowpid();
 				if (npid == 0) {
 					if (pid == null) {
 						AuthInfo authInfo = new AuthInfo(member.getMid(), member.getMname(), member.getMemail(),
@@ -110,22 +131,27 @@ public class MemberController {
 					}
 				}
 			} else {
-				return "redirect:/membermanager";
+				return "member/login";
 			}
 		}
 	}
-
+	
 	@RequestMapping("/logout")
 	public String logout(HttpSession session) {
 		session.invalidate();
 		return "redirect:/home";
 	}
-
-	@RequestMapping("/memManager")
-	public String modify(@ModelAttribute("modifycmd") MemberCommand modifycmd, HttpServletRequest request) {
+	
+	@RequestMapping("/meminfo")
+	public String meminfo(@ModelAttribute("logincmd") MemberCommand mlcmd, @ModelAttribute("joincmd") MemberCommand mjcmd) {
+		return "member/memberManager";
+	}
+	
+	@RequestMapping("/memmodifier")
+	public String memmodifier(@ModelAttribute("modifycmd") MemberCommand modifycmd) {
 		return "member/memModify";
 	}
-
+	
 	@RequestMapping("/memModify")
 	public String memberModify(@ModelAttribute("modifycmd") MemberCommand modifycmd, HttpServletRequest request) {
 		AuthInfo authInfo = (AuthInfo) request.getSession().getAttribute("authInfo");
@@ -134,54 +160,128 @@ public class MemberController {
 		authInfo = new AuthInfo(authInfo.getMid(), modifycmd.getMname(), modifycmd.getMemail(), modifycmd.getMphone(),
 				authInfo.getMcheck(), authInfo.getMpoint(), authInfo.getMdate(), authInfo.getPid());
 		request.getSession().setAttribute("authInfo", authInfo);
-		return "redirect:/memManager";
+		return "redirect:meminfo";
 	}
-
-	@RequestMapping("/changeMpw")
-	public String change(@ModelAttribute("mpwcmd") MemberCommand mpwcmd, HttpServletRequest request) {
-		return "member/changeMpw";
+	
+	@RequestMapping("/mpwchanger")
+	public String change(@ModelAttribute("mpwcmd") MemberCommand mpwcmd) {
+		return "member/mpwChange";
 	}
-
+	
 	@RequestMapping("/mpwchange")
 	public String mpwchange(@ModelAttribute("mpwcmd") MemberCommand mpwcmd, HttpServletRequest request) {
 		AuthInfo authInfo = (AuthInfo) request.getSession().getAttribute("authInfo");
 		Member member = memberSvc.memberLogin(authInfo.getMemail());
-		System.out.println(member.getMpw());
 		if (member.getMpw().equals(mpwcmd.getMpw())) {
-			if (!member.getMpw().equals(mpwcmd.getNewmpw())) {
-				if (mpwcmd.isnewmpwEqualTonewmpwconf()) {
-					if (memberDao.changeMpw(authInfo.getMemail(), mpwcmd.getNewmpw())) {
-						return "redirect:/home";
+//			if (mpwcmd.ismpwEqualTonewmpw()) {
+				if (!member.getMpw().equals(mpwcmd.getNewmpw())) {
+					if (mpwcmd.isnewmpwEqualTonewmpwconf()) {
+						if (memberDao.changeMpw(authInfo.getMemail(), mpwcmd.getNewmpw())) {
+							return "redirect:/meminfo";
+						} else {
+							System.out.println("오류");
+							return "member/mpwChange";
+						}
 					} else {
-						System.out.println("오류");
-						return "member/memInfo";
+						System.out.println("새비번 새비번확인이 맞지않음");
+						return "member/mpwChange";
 					}
 				} else {
-					System.out.println("새비번 새비번확인이 맞지않음");
-					return "member/memInfo";
+					System.out.println("현재비번과 새로운비번이 같음");
+					return "member/mpwChange";
 				}
-			} else {
-				System.out.println("현재비번과 새로운비번이 같음");
-				return "member/changeMpw";
-			}
+//			} else {
+//				System.out.println("새비번 입력");
+//				return "redirect:/changeMpw";
+//			}
 		} else {
 			System.out.println("현재 비번이 틀렷네");
-			return "redirect:/memInfo";
+			return "member/mpwChange";
 		}
 	}
 
+	@RequestMapping("/membermanager")
+	public String memberManager(@ModelAttribute("logincmd") MemberCommand mlcmd,
+			@ModelAttribute("joincmd") MemberCommand mjcmd,
+			@CookieValue(value = "remember", required = false) Cookie cookie, HttpServletRequest request, Model model) {
+		int mmval;
+		if (request.getParameter("pid") != null) {
+			int nowpid = Integer.parseInt(request.getParameter("pid"));
+			model.addAttribute("nowpid", nowpid);
+			mmval = 2;
+			request.setAttribute("mmval", mmval);
+			return "member/memberManager";
+		}
+		if (cookie != null) {
+			mlcmd.setMemail(cookie.getValue());
+			mlcmd.setRememberMemail(true);
+		}
+		return "member/memberManager";
+	}
 	
+	@RequestMapping("/mpwfinder")
+	public String mpwfinder(@ModelAttribute("mpwfindcmd") MemberCommand mpwfcmd) {
+		return "member/mpwFinderR";
+	}
 	
-	// @RequestMapping("/memInfo")
-	// public String memInfo(@ModelAttribute("infocmd") MemberCommand infocmd,
-	// HttpServletRequest request) {
-	// // AuthInfo authInfo = (AuthInfo)
-	// request.getSession().getAttribute("authInfo");
-	// // Member member = memberSvc.memberLogin(authInfo.getMemail());
-	// // request.setAttribute("mpw", member.getMpw());
-	// return "member/memInfo";
-	// }
+	@RequestMapping("/mpwfmodal")
+	public String mpwfmodal(@ModelAttribute("mpwfindcmd") MemberCommand mpwfcmd, HttpServletRequest request) {
+		Member member = memberDao.selectByEmail(mpwfcmd.getMpwfmemail());
+		if(member != null) {
+			return "member/mpwFinderR";
+		}else {
+			return "member/login";
+		}
+		
+	}
 
+	@RequestMapping("/mpwreset")
+	public String mpwreset(@ModelAttribute("mpwresetcmd") MemberCommand mpwresetcmd, HttpServletRequest request) {
+		System.out.println(mpwresetcmd.getMpwrmemail());
+		System.out.println(mpwresetcmd.getNewmpw());
+		System.out.println(mpwresetcmd.getNewmpwconf());
+		
+		if(mpwresetcmd.getMpwrmemail() != null) {
+			if(mpwresetcmd.isnewmpwEqualTonewmpwconf())
+				if(memberDao.mpwFind(mpwresetcmd.getNewmpw(), mpwresetcmd.getMpwrmemail()))
+			return "redirect:login";
+		} else {
+			System.out.println("새비번 새비번확인이 맞지않음");
+			return "member/mpwFinderR";
+		}
+		System.out.println("제대로치라");
+		return "member/mpwFinderR";
+	}
+
+	/*@RequestMapping("/mpwFind")
+	public String mpwFind(@ModelAttribute("mpwfindcmd") MemberCommand mpwfindcmd, HttpServletRequest request) {
+		AuthInfo authInfo = (AuthInfo) request.getSession().getAttribute("authInfo");
+		Member find = memberSvc.mpwfind(mpwfindcmd.getMemail());
+		if(find.getMemail().equals(mpwfindcmd.getMemail())){
+			if(memberDao.changeMpw(authInfo.getMemail(), mpwfindcmd.getNewmpw())) {
+				return "redirect:/home";
+			} else {
+				System.out.println("오류");
+				return "member/mpwFinderR";
+			}
+		}else {
+			System.out.println("현재 아이디가 틀림");
+			return "redirect:/mpwfinder";
+		}
+	}*/
+	
+	
+	/*@RequestMapping("/memInfo")
+	public String memInfo(@ModelAttribute("infocmd") MemberCommand infocmd, HttpServletRequest request) {
+		// AuthInfo authInfo = (AuthInfo)
+		request.getSession().getAttribute("authInfo");
+		// Member member = memberSvc.memberLogin(authInfo.getMemail());
+		// request.setAttribute("mpw", member.getMpw());
+		return "member/memInfo";
+	}*/
+	
+	
+	
 	/*
 	 * @RequestMapping("/join") public String join(@ModelAttribute("joincmd")
 	 * MemberCommand membercmd) { return "member/join"; }
