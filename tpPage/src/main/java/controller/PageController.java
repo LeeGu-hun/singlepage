@@ -1,5 +1,6 @@
 package controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -167,5 +168,22 @@ public class PageController {
 		return "page/ck";
 	}
 	
+	@RequestMapping("/admin")
+	public String admin(HttpServletRequest request, Model model) {
+		AuthInfo authInfo = (AuthInfo) request.getSession().getAttribute("authInfo");
+		int pid = authInfo.getPid();
+		Page page = pageDao.getPage(pid);
+		System.out.println(page.getPgenre());
+		String genre = page.getPgenre().split("-")[0].trim();
+		String genreDetail = page.getPgenre().split("-")[1].trim();
+		
+		String[] genres = {"임의","노래","댄스","연주","연극","기타"};
+		
+		model.addAttribute("genres", genres);
+		model.addAttribute("page", page);
+		model.addAttribute("genre", genre);
+		model.addAttribute("genreDetail", genreDetail);
+		return "page/pageAdmin";
+	}
 	
 }

@@ -25,7 +25,10 @@
 	<div class="grid-item">
 		<div class="inner-item">
 			<div class="title">제목 : <c:out value="${list.pbsubject}" /></div>
-			<div class="content">내용<br><c:if test="${!empty list.pbnewfile}"><div style="text-align: center;"><img src="./buploads/pbuploads/${list.pbnewfile}"></div></c:if><c:out value="${list.pbcontent}" /></div>
+			<div class="content">내용<br>
+			<c:if test="${!empty list.pbnewfile}">
+			<div style="text-align: center;"><img src="./buploads/pbuploads/${list.pbnewfile}"></div>
+			</c:if><c:out value="${list.pbcontent}" /></div>
 		</div>
 	</div>
 	</c:forEach>
