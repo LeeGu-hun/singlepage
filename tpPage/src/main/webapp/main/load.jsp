@@ -5,10 +5,10 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <c:choose>
 <c:when test="${fn:length(appendList) < 1}">
-<br>
-더 이상 표시할 내용이 없습니다.
-<br><br>
-<input type="hidden" id="end" name="end">
+<div class="grid-item" style="width:100%; text-align: center; font-weight:bold;" >
+	더 이상 표시할 내용이 없습니다.
+	<input type="hidden" id="end" name="end">
+</div>
 </c:when>
 <c:otherwise>
 <c:forEach var="list" items="${appendList}">

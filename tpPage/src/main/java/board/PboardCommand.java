@@ -5,7 +5,7 @@ import org.springframework.web.multipart.MultipartFile;
 public class PboardCommand {
 	
 	private String pbsubject, pbcontent, pbupdir;
-	private int pbhostid, pbwriterid, pbpage;
+	private int pbhostid, pbwriterid, pbpage, pbid;
 	private MultipartFile pbfile;
 	
 	public String getPbsubject() {
@@ -50,4 +50,11 @@ public class PboardCommand {
 	public void setPbfile(MultipartFile pbfile) {
 		this.pbfile = pbfile;
 	}
+	public int getPbid() {
+		return pbid;
+	}
+	public void setPbid(int pbid) {
+		this.pbid = pbid;
+	}
+	
 }

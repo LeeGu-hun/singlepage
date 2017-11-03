@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.transaction.annotation.Transactional;
 
 import dao.BoardDao;
+import member.AuthInfo;
 
 public class BoardService {
 	
@@ -87,6 +88,10 @@ public class BoardService {
 		
 		Mboard mboard = new Mboard(mbhostid, mbwriterid, mbsubject, mbcontent, mbfile, mbnewfile);
 		boardDao.MboardWrite(mboard);
+	}
+
+	public void pbrewrite(PboardCommand pbrecmd, AuthInfo authInfo) {
+		boardDao.pbrewrite(pbrecmd.getPbid(), pbrecmd.getPbcontent() , pbrecmd.getPbhostid(), authInfo.getMid());
 	}
 }
 

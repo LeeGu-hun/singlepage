@@ -1,6 +1,5 @@
 package dao;
 
-
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
@@ -75,5 +74,6 @@ public class PageDao {
 		int ppoint=point + dmoney;
 		jdbcTemplate.update("update page set ppoint=? where pid=?", ppoint, pid);
 	}
+
 }
 

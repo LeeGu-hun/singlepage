@@ -13,24 +13,23 @@
 <title>비밀번호 변경</title>
 </head>
 <body>
-
 	<form:form commandName="mpwcmd" action="mpwchange">
-	<p>
-		<label>현재 비밀번호
-			<form:input path="mpw" />
-		</label>
-	</p>
-	<p>
-		<label>새 비밀번호
-			<form:input path="newmpw" />
-		</label>
-	</p>
-	<p>
-		<label>새 비밀번호 확인
-			<form:input path="newmpwconf" />
-		</label>
-	</p>
-	<input type="submit" value="변경하기">
+		<p>
+			<label>현재 비밀번호
+				<form:input path="mpw" />
+			</label>
+		</p>
+		<p>
+			<label>새 비밀번호
+				<form:input path="newmpw" />
+			</label>
+		</p>
+		<p>
+			<label>새 비밀번호 확인
+				<form:input path="newmpwconf" />
+			</label>
+		</p>
+		<input type="submit" value="변경하기">
 	</form:form>
 </body>
 </html>
