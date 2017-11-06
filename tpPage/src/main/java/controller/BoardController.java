@@ -167,20 +167,42 @@ public class BoardController {
 	}
 	
 	@RequestMapping("/loadpboard") 
-	public String loadpboard(@ModelAttribute("pbrecmd") PboardCommand pbrecmd, HttpServletRequest request, Model model) {
+	public String loadpboard(@ModelAttribute("pbrecmd") PboardCommand pbrecmd, @ModelAttribute("pbrerecmd") PboardCommand pbrerecmd,
+			HttpServletRequest request, Model model) {
 		int pbid =  Integer.parseInt(request.getParameter("pbid"));
 		Pboard pboard = boardDao.getpbDetail(pbid);
+		List<Pboard> pbrelist = boardDao.getpbreDetail(pbid);
 		model.addAttribute("pboard", pboard);
+		model.addAttribute("pbrelist", pbrelist);
 		return "board/loadpboardR";
 	}
 	
 	@RequestMapping("/pbrewrite") 
-	public String pbrewrite(@ModelAttribute("pbrecmd") PboardCommand pbrecmd, HttpServletRequest request, Model model) {
+	public String pbrewrite(@ModelAttribute("pbrecmd") PboardCommand pbrecmd, @ModelAttribute("pbrerecmd") PboardCommand pbrerecmd, 
+			HttpServletRequest request, Model model) {
 		AuthInfo authInfo = (AuthInfo) request.getSession().getAttribute("authInfo");
-		
-		boardSvc.pbrewrite(pbrecmd, authInfo);
-		
-		return "board/pbrewriteR";
+		if(authInfo == null) {
+			return "board/pbrewriteR";
+		} else {
+			boardSvc.pbrewrite(pbrecmd, authInfo);
+			List<Pboard> pbrelist = boardDao.getpbreDetail(pbrecmd.getPbid());
+			model.addAttribute("pbrelist", pbrelist);
+			return "board/pbrewriteR";
+		}
+	}
+	
+	@RequestMapping("/pbrerewrite") 
+	public String pbrerewrite(@ModelAttribute("pbrecmd") PboardCommand pbrecmd, @ModelAttribute("pbrerecmd") PboardCommand pbrerecmd, 
+			HttpServletRequest request, Model model) {
+		AuthInfo authInfo = (AuthInfo) request.getSession().getAttribute("authInfo");
+		if(authInfo == null) {
+			return "board/pbrewriteR";
+		} else {
+			boardSvc.pbrewrite(pbrecmd, authInfo);
+			List<Pboard> pbrelist = boardDao.getpbreDetail(pbrecmd.getPbid());
+			model.addAttribute("pbrelist", pbrelist);
+			return "board/pbrewriteR";
+		}
 	}
 }
 

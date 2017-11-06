@@ -59,7 +59,8 @@ public class PageController {
 	@RequestMapping("/page")
 	public String pageLoad(@RequestParam("host") int host, @ModelAttribute("pboardcmd") PboardCommand pbc,
 			@ModelAttribute("mboardcmd") MboardCommand mbc, @ModelAttribute("logincmd") MemberCommand logincmd,
-			@ModelAttribute("pbrecmd") PboardCommand pbrecmd, Model model, HttpServletRequest request) {
+			@ModelAttribute("pbrecmd") PboardCommand pbrecmd, @ModelAttribute("pbrecmd") PboardCommand pbrerecmd,
+			Model model, HttpServletRequest request) {
 		int pageHostId = host;
 		Page page = pageDao.getPage(pageHostId);
 		/*System.out.println(page.getPlatlng());*/
