@@ -181,8 +181,14 @@ public class PageController {
 		
 		String[] genres = {"임의","노래","댄스","연주","연극","기타"};
 		
-		String lat = page.getPlatlng().split("//")[0].trim();
-		String lng= page.getPlatlng().split("//")[1].trim();
+		String lat = page.getPlatlng();
+		if(lat != null) {			
+			lat = page.getPlatlng().split("//")[0].trim();
+		}
+		String lng= page.getPlatlng();
+		if(lng != null) {			
+			lng= page.getPlatlng().split("//")[1].trim();
+		}
 		
 		model.addAttribute("genres", genres);
 		model.addAttribute("page", page);
@@ -195,4 +201,11 @@ public class PageController {
 		return "page/pageAdmin";
 	}
 	
+	@RequestMapping("/adminpage")
+	public String adminPage(@ModelAttribute("pagecmd") PageCommand pmc, HttpServletRequest request) {
+		AuthInfo authInfo = (AuthInfo) request.getSession().getAttribute("authInfo");
+		int host = authInfo.getPid();
+		pageSvc.adminPage(host, pmc, request);
+		return "redirect:/page?host=" + host;
+	}	
 }
