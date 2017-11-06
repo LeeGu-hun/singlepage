@@ -27,16 +27,37 @@
             </div>
             <hr style="margin:0px;" />
             <div class="modal-body">
-            	댓글쓰기
             	<form:form commandName="pbrecmd" action="pbrewrite">
-            		<p><form:textarea path="pbcontent"></form:textarea></p>
+            		<p><form:textarea path="pbrecontent" class="pbrecontent"></form:textarea></p>
             		<form:hidden path="pbid" value="${pboard.pbid }" />
             		<form:hidden path="pbhostid" value="${pboard.pbhostid }" />
             		<p><input type="submit" value="댓글쓰기" onclick="pbrewrite(); "></p>
             	</form:form>
             	<div id="pbrebox">
-            	<hr style="margin:0px;" />
-            	댓글디브
+            		<div>
+            		<c:forEach var="pbrelist" items="${pbrelist }">
+            		<div>
+            			<hr style="margin:0px;" />
+				       	<c:out value="${pbrelist.pbid }" />
+  						//<c:out value="${pbrelist.pbcontent }" />
+ 						//<c:out value="${pbrelist.pbre_ref }" />
+						//<c:out value="${pbrelist.pbre_lev }" />
+						//<c:out value="${pbrelist.pbre_seq }" />
+						//<c:out value="${pbrelist.pbhostid }" />
+						//<c:out value="${pbrelist.pbwriterid }" />
+				        //<a class="rebtn">댓글쓰기</a>
+				        <div style="display:none">
+				        	<form:form commandName="pbrerecmd" action="pbrerewrite">
+            					<p><form:textarea path="pbrecontent" class="pbrecontent"></form:textarea></p>
+            					<form:hidden path="pbid" value="${pboard.pbid }" />
+            					<form:hidden path="pbreid" value="${pbrelist.pbid }" />
+            					<form:hidden path="pbhostid" value="${pboard.pbhostid }" />
+            					<p><input type="submit" value="댓글쓰기" onclick="pbrerewrite(); "></p>
+            				</form:form>
+				        </div>
+            		</div>
+            		</c:forEach>
+            		</div>
             	</div>
             </div>
             <div class="modal-footer">
