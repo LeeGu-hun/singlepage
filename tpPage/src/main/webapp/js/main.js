@@ -89,7 +89,7 @@ $(document).ready(function(){
 					$('input:checkbox[name="'+ itemId.split('-')[0] +'"]').not('input:checkbox[id="'+ itemId +'"]').prop('checked', false);
 					$('input:checkbox[name="'+ itemId.split('-')[0] +'"]').not('input:checkbox[id="'+ itemId +'"]').attr('checked', false);					
 					$('.selected-item[id|="lb'+ itemId.split('-')[0] +'"]').remove();
-					$('.selected').append('<label class="selected-item" id="lb' + itemId + '"><input type="hidden" value='+ itemVal + ' />' + itemId +'</label>');
+					$('.selected').append('<label class="selected-item" id="lb' + itemId + '"><input type="hidden" value='+ itemVal + ' />' + itemId + '  &#215;' + '</label>');
 					$('.selected-item').on('click', function(){
 						var id = $(this).attr('id');
 						id = id.substring(2, id.length);
@@ -98,10 +98,10 @@ $(document).ready(function(){
 						$(this).remove();
 					});
 				} else {
-					$('#'+$(this).attr('name')).prop('checked', false);
-					$('#'+$(this).attr('name')).attr('checked', false);
+					$('input:checkbox[name="'+$(this).attr('name')+'"][data-all]').prop('checked', false);
+					$('input:checkbox[name="'+$(this).attr('name')+'"][data-all]').attr('checked', false);
 					$('#lb'+$(this).attr('name')).remove();
-					$('.selected').append('<label class="selected-item" id="lb' + itemId + '"><input type="hidden" value="'+ itemVal + '" />' + itemId +'</label>');
+					$('.selected').append('<label class="selected-item" id="lb' + itemId + '"><input type="hidden" value="'+ itemVal + '" />' + itemId + '  &#215;' +'</label>');
 					$('.selected-item').on('click', function(){
 						var id = $(this).attr('id');
 						id = id.substring(2, id.length);
@@ -128,6 +128,14 @@ $(document).ready(function(){
 	$('a[id="srchSubmit"]').on('click', function(){
 		srchBtn();
 	});
+
+	$('a[id="reset"]').on('click', function(){
+		$('input:checkbox').prop('checked', false);
+		$('input:checkbox').attr('checked', false);
+		sliderInit(0, 24);
+		$('.selected-item').remove();
+	});
+	
 	
 	$(function() {
 		sliderInit(0, 24);
@@ -146,12 +154,14 @@ $(document).ready(function(){
 		var amount = $("#amount").val();
 		var time = $("#time").val();
 		if($('label[id="lb' + amount + '"]').length == 0) {
-			$('.selected').append('<label class="selected-item" id="lb' + amount + '"><input type="hidden" value="'+ time + '" name="pshowtime" />공연시간 ' + amount +'</label>');
+			$('.selected').append('<label class="selected-item" id="lb' + amount + '"><input type="hidden" value="'+ time + '" name="pshowtime" />공연시간 ' + amount + '  &#215;' + '</label>');
 			$('.selected-item').on('click', function(){
 				$(this).remove();
 			});
 		}
 	});
+	
+	
 	
 	if($(document).height() > $(window).height()) {
 		$("#btn").css("display", "none");

@@ -1,15 +1,31 @@
 var container = document.getElementById('map')
+
 var lat = $('#lat').val();
 var lng = $('#lng').val();
-var option = {
-	center: new daum.maps.LatLng(lat, lng),
-	level: 3
-	};
+if(lat == "/" && lng == "/") {
+	var lat = 36.8456144382645;
+	var lng = 127.6883583287049;
+	
+	var option = {
+			center: new daum.maps.LatLng(lat, lng),
+			level: 13
+			};
+} else {
+	var option = {
+		center: new daum.maps.LatLng(lat, lng),
+		level: 3
+		};
+}
 var map = new daum.maps.Map(container, option);
-var marker = new daum.maps.Marker();
+var markerPosition = new daum.maps.LatLng(lat, lng);
+var marker = new daum.maps.Marker({	position: markerPosition });
 var info = new daum.maps.InfoWindow();
 var geocoder = new daum.maps.services.Geocoder();
 var ps = new daum.maps.services.Places();
+
+if(lat != 36.8456144382645 && lng != 127.6883583287049) {	
+	marker.setMap(map);
+}
 
 function mapsearch() {
 	var keyword = document.getElementById('keyword').value;

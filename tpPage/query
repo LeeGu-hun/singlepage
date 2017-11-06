@@ -147,3 +147,54 @@ create table locdb(
 sido varchar2(100),
 gungu varchar2(100)
 );
+
+
+CREATE TABLE SHOWTIME 
+   (PID NUMBER, 
+	SHOWSTART NUMBER, 
+	SHOWEND NUMBER, 
+	 CONSTRAINT FK_SHOWTIME FOREIGN KEY ("PID")
+	  REFERENCES PAGE("PID")
+   );
+
+   
+create or replace trigger showtime after insert or update on page for each row 
+declare
+shows varchar(10);
+showe varchar(10);
+words varchar(20);
+ss number;
+se number;
+begin
+words := :new.pshowtime;
+shows := substr(words, 1, 2);
+if shows = '미정' then
+ss := 99;
+else
+ss := to_number(shows);
+end if;
+showe := substr(words, (instr(words, ' ', 1, 2)+1), 2);
+if showe = '미정' then
+se := -1;
+else
+se := to_number(showe);
+end if;
+if inserting then
+insert into showtime values(:new.pid, ss, se);
+end if;
+if updating then
+update showtime set showstart = ss, showend = se where pid = :new.pid;
+end if;
+end;
+
+
+update locdb set sido = '경기' where sido = '경기도';
+update locdb set sido = '경북' where sido = '경상북도';
+update locdb set sido = '경남' where sido = '경상남도';
+update locdb set sido = '강원' where sido = '강원도';
+update locdb set sido = '충북' where sido = '충청북도';
+update locdb set sido = '충남' where sido = '충청남도';
+update locdb set sido = '전북' where sido = '전라북도';
+update locdb set sido = '전남' where sido = '전라남도';
+update locdb set sido = '제주' where sido = '제주도';
+commit;

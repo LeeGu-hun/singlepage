@@ -49,7 +49,17 @@ function getDate() {
 	
 	var pshowtime = $('#pshowtime').val();
 	if(pshowtime == "") {
-		$('#pshowtime').val($('#pststart').val() + ":00 - " + $('#pstend').val() + ":00");
+		if($('#pststart').val() == "미정" && $('#pstend').val() == "미정") {
+			$('#pshowtime').val("미정 - 미정");
+		} else {
+			if($('#pststart').val() == "미정") {
+				$('#pshowtime').val($('#pststart').val() + $('#pstend').val() + ":00");
+			} else if($('#pstend').val() == "미정") {
+				$('#pshowtime').val($('#pststart').val() + ":00 - " + $('#pstend').val());
+			} else {
+				$('#pshowtime').val($('#pststart').val() + ":00 - " + $('#pstend').val() + ":00");
+			}
+		}
 	}
 
 	var pgenre = $('#pgenre').val();
@@ -94,9 +104,9 @@ function getDate() {
 	});
 }
 
-function makepage() {
+function adminpage() {
 	var pperiod = $('#pperiod').val();
 	pperiod = pperiod.replace(/-/g, "") + "000000";
 	$('#pperiod').val(pperiod);
-	document.mpfrm.submit();
+	document.apfrm.submit();
 }
