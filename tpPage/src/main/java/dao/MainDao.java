@@ -46,13 +46,13 @@ public class MainDao {
 	}
 	
 	public List<Pboard> getBoardListAll(int page, int limit) {
-		List<Pboard> boardList = jdbcTemplate.query("select * from (select rownum rnum, pbid, pbsubject, pbcontent, pbfile, pbnewfile, pbre_ref, pbre_lev, pbre_seq, pbreadcount, pbdate, pbhostid, pbwriterid from (select * from pboard order by pbRE_REF desc, pbRE_SEQ asc)) where rnum >= ? and rnum<= ?", boRowMapper, page, limit);
+		List<Pboard> boardList = jdbcTemplate.query("select * from (select rownum rnum, pbid, pbsubject, pbcontent, pbfile, pbnewfile, pbre_ref, pbre_lev, pbre_seq, pbreadcount, pbdate, pbhostid, pbwriterid from (select * from pboard order where pbre_lev = 0 by pbRE_REF desc, pbRE_SEQ asc)) where rnum >= ? and rnum<= ?", boRowMapper, page, limit);
 		return boardList; 
 	}
 	
 	public List<Pboard> getBoardListRandom(int number) {
 		Object row[] = new Object[number];
-		String sql = "select * from (select rownum rnum, pbid, pbsubject, pbcontent, pbfile, pbnewfile, pbre_ref, pbre_lev, pbre_seq, pbreadcount, pbdate, pbhostid, pbwriterid from (select * from pboard order by pbRE_REF desc, pbRE_SEQ asc)) where ";
+		String sql = "select * from (select rownum rnum, pbid, pbsubject, pbcontent, pbfile, pbnewfile, pbre_ref, pbre_lev, pbre_seq, pbreadcount, pbdate, pbhostid, pbwriterid from (select * from pboard where pbre_lev = 0 order by pbRE_REF desc, pbRE_SEQ asc)) where ";
 		for (int i = 0; i < number; i++) {
 			row[i] = (int)(Math.random() * count() + 1);
 			sql += " rnum = ? ";
@@ -72,7 +72,7 @@ public class MainDao {
 	}
 	
 	public List<Pboard> getBoardListSome(int page, int limit, ArrayList<String> opts) {
-		String sql = "select * from (select rownum rnum, pbid, pbsubject, pbcontent, pbfile, pbnewfile, pbre_ref, pbre_lev, pbre_seq, pbreadcount, pbdate, pbhostid, pbwriterid from (select * from pboard pb, page p where pb.pbhostid = p.pid ";
+		String sql = "select * from (select rownum rnum, pbid, pbsubject, pbcontent, pbfile, pbnewfile, pbre_ref, pbre_lev, pbre_seq, pbreadcount, pbdate, pbhostid, pbwriterid from (select * from pboard pb, page p, showtime st where pb.pbhostid = p.pid and p.pid = st.pid and pbre_lev = 0 ";
 		String sub = "";
 		for (int i=0; i <= opts.size()-1; i++) {
 			String code = opts.get(i).split("=")[0];
@@ -81,13 +81,19 @@ public class MainDao {
 			for (int j=0; j <=val.length-1;j++) {
 				if (val[j].equals("전체")) continue;
 				if(code.equals("pshowtime")) {
-					String start = val[j].split("~")[0];
-					String end = val[j].split("~")[1];
-					start = time(start);
-					end = time(end);
+					int start = Integer.parseInt(val[j].split("~")[0]);
+					int end = Integer.parseInt(val[j].split("~")[1]);
+					if (start > 24) start -= 24;
+					if (end > 24) end -= 24;
 					if(val.length>1) sub += " ( ";
-					sub += code.trim() + " between " + start + " and " + end;
+					sub += " showstart > " + start + " and showend < " + end;
 					if(val.length>1) sub += " ) ";
+				} else if (code.equals("pperiod")) {
+					if (Integer.parseInt(val[j]) == 5) {
+						sub += " trunc(to_number(sysdate - pperiod)) >= " + val[j];
+					} else {
+						sub += " trunc(to_number(sysdate - pperiod)) = " + val[j];
+					}
 				} else {
 					sub += code.trim() + " like ";
 					sub += "'%" + val[j].trim() + "%'";
@@ -99,8 +105,6 @@ public class MainDao {
 		}
 		if (sub.length() > 0) sql += " and " + sub;
 		sql += " order by pbRE_REF desc, pbRE_SEQ asc)) where rnum >= ? and rnum<= ?";
-		
-		System.out.println(sql);
 		List<Pboard> boardList = jdbcTemplate.query(sql, boRowMapper, page, limit);
 		return boardList;
 	}

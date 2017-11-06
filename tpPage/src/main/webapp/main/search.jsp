@@ -72,10 +72,12 @@
         </div>
     </div>
     <form id="srchFrm">
-	<div class="selected form-inline" style="padding: 20px">
-	<a class="btn btn-primary" id="srchSubmit">검색</a>
+	<div class="selected form-inline" style="padding: 0 20px 0 20px">
     </div>
-    
+    <div style="padding: 20px">
+    <a class="btn btn-primary" id="srchSubmit">검색</a>
+	<a class="btn btn-primary" id="reset">조건 초기화</a>
+    </div>
     </form>
 </div>
 
