@@ -40,7 +40,7 @@
             </div>
             <div class="tab-pane" id="tab2">
 				<div id="genre">
-					<label><input type="checkbox" name="장르" value="장르 전체" id="장르" data-all data-cate="genre">전체</label>
+					<label><input type="checkbox" name="장르" value="전체" id="장르-전체" data-all data-cate="genre">전체</label>
 					<label><input type="checkbox" name="장르" value="노래" id="장르-노래" data-cate="genre">노래</label>
 					<label><input type="checkbox" name="장르" value="댄스" id="장르-댄스" data-cate="genre">댄스</label>
 					<label><input type="checkbox" name="장르" value="연주" id="장르-연주" data-cate="genre">연주</label>
@@ -52,6 +52,7 @@
             	<div id="showtime">
             		<label for="amount">공연 시간 :</label>
   					<input type="text" id="amount" readonly style="border:0; color:#f6931f; font-weight:bold;">
+  					<input type="hidden" id="time">
   					<label><input type="checkbox" id="tomorrow">익일</label>
   					<div id="slider-range"></div>
   					<a class="btn btn-info btn-xs" id="timeBtn">추가</a>
@@ -59,12 +60,13 @@
             </div>
             <div class="tab-pane" id="tab4">
             	<div id="period">
-					<label><input type="checkbox" name="활동기간" value="활동기간 전체" id="활동기간" data-all data-cate="period">전체</label>
-					<label><input type="checkbox" name="활동기간" value="1년" id="활동기간-1년" data-cate="since">1년</label>
-					<label><input type="checkbox" name="활동기간" value="2년" id="활동기간-2년" data-cate="since">2년</label>
-					<label><input type="checkbox" name="활동기간" value="3년" id="활동기간-3년" data-cate="since">3년</label>
-					<label><input type="checkbox" name="활동기간" value="4년" id="활동기간-4년" data-cate="since">4년</label>
-					<label><input type="checkbox" name="활동기간" value="5년~" id="활동기간-5년" data-cate="since">5년~</label>
+					<label><input type="checkbox" name="활동기간" value="전체" id="활동기간-전체" data-all data-cate="period">전체</label>
+					<label><input type="checkbox" name="활동기간" value="0" id="활동기간-신규" data-cate="since">신규</label>
+					<label><input type="checkbox" name="활동기간" value="1" id="활동기간-1년" data-cate="since">1년</label>
+					<label><input type="checkbox" name="활동기간" value="2" id="활동기간-2년" data-cate="since">2년</label>
+					<label><input type="checkbox" name="활동기간" value="3" id="활동기간-3년" data-cate="since">3년</label>
+					<label><input type="checkbox" name="활동기간" value="4" id="활동기간-4년" data-cate="since">4년</label>
+					<label><input type="checkbox" name="활동기간" value="5" id="활동기간-5년" data-cate="since">5년~</label>
 				</div>
             </div>
         </div>

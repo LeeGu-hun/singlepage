@@ -163,6 +163,7 @@
     </div>
     
 <!-- 게시판 modal -->
+
 <div id="pbmodaldiv">
 	<div class="modal" id="pbmodal" aria-hidden="true" style="display: none; z-index: 1050;">
     	<div class="modal-dialog modal-lg">

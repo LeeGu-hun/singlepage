@@ -1,4 +1,4 @@
-<%@page import="member.AuthInfo"%>
+<%-- <%@page import="member.AuthInfo"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -24,15 +24,18 @@
 %>
 
 <c:out value="${page.pid }" /> member board
-<form id="mboardform" name="mboardform" action="mbwrite" method="Post" enctype="multipart/form-data">
-	<input type="text" id="mbsubject" name="mbsubject" />
-	<br><textarea id="mbcontent" name="mbcontent"></textarea>
+<c:if test="${!empty authInfo }">
+<form:form commandName="mboardcmd" action="mbwrite" enctype="multipart/form-data">
+	<form:input path="mbsubject" />
+	<br><form:textarea path="mbcontent"></form:textarea>
 	<br><img id="mbuploadImg" name="mbuploadImg" />
 	<br><input type="file" id="mbfile" name="mbfile" onchange="mbreadURL(this);" />
 	<input type="hidden" id="mbupdir" name="mbupdir" value="<%=request.getRealPath("/buploads/mbuploads/")%>" />
 	<input type="hidden" id="mbhostid" name="mbhostid" value="<c:out value='${page.pid }' />" />
-	<input type="submit" value="등록" onclick="mbwrite();" />
-</form>
+	<input type="hidden" id="mbTab" name="mbTab" value="active" />
+	<input type="submit" value="등록" />
+</form:form>
+</c:if>
 <br>
 <br>
 <br>
@@ -94,4 +97,4 @@
 	</tbody>
 </table>
 
-<% } %>
+<% } %> --%>
