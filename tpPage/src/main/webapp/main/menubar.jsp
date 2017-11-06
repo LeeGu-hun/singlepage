@@ -24,29 +24,29 @@
 					<li class="col-sm-3">
 						<ul>
 							<li class="dropdown-header">장르별</li>
-							<li><a href="#">노래</a></li>
-                            <li><a href="#">댄스</a></li>
-                            <li><a href="#">연주</a></li>
-							<li><a href="#">연극</a></li>
-							<li><a href="#">기타</a></li>
+							<li><a href="./srch?pgenre=노래">노래</a></li>
+                            <li><a href="./srch?pgenre=댄스">댄스</a></li>
+                            <li><a href="./srch?pgenre=연주">연주</a></li>
+							<li><a href="./srch?pgenre=연극">연극</a></li>
+							<li><a href="./srch?pgenre=기타">기타</a></li>
 						</ul>
 					</li>
 					<li class="col-sm-3">
 						<ul>
 							<li class="dropdown-header">공연시간별</li>
-							<li><a href="#">오전</a></li>
-							<li><a href="#">오후</a></li>
+							<li><a href="./srch?pshowtime=24~12">오전</a></li>
+							<li><a href="./srch?pshowtime=12~24">오후</a></li>
 						</ul>
 					</li>
 					<li class="col-sm-3">
 						<ul>
 							<li class="dropdown-header">활동기간별</li>
-                            <li><a href="#">신규</a></li>
-                            <li><a href="#">1년</a></li>
-                            <li><a href="#">2년</a></li>
-                            <li><a href="#">3년</a></li>
-                            <li><a href="#">4년</a></li>
-                            <li><a href="#">5년~</a></li>                         
+                            <li><a href="./srch?pperiod=0">신규</a></li>
+                            <li><a href="./srch?pperiod=1">1년</a></li>
+                            <li><a href="./srch?pperiod=2">2년</a></li>
+                            <li><a href="./srch?pperiod=3">3년</a></li>
+                            <li><a href="./srch?pperiod=4">4년</a></li>
+                            <li><a href="./srch?pperiod=5">5년~</a></li>                         
 						</ul>
 					</li>
 				</ul>				
