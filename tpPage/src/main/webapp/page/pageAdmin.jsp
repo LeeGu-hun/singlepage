@@ -14,7 +14,7 @@
 	integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
 	crossorigin="anonymous"></script>
 
-<script src="<%=request.getContextPath()%>/js/admin.js?ver=332"></script>
+<script src="<%=request.getContextPath()%>/js/admin.js?ver=3132"></script>
 
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
@@ -104,6 +104,6 @@ page admin
 	<p><label>시간:<br><input id="pshowtime" name="pshowtime" value="" style="width:300px;"/></label></p>
 	<p><input type="button" value="수정" onclick="makepage(); " /></p>
 </form>
-<script src="<%=request.getContextPath()%>/js/map.js?ver=12"></script>
+<script src="<%=request.getContextPath()%>/js/adminMap.js?ver=12"></script>
 </body>
 </html>

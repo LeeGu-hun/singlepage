@@ -44,7 +44,18 @@ public class MemberController {
 		this.memberDao = memberDao;
 	}
 
-	@RequestMapping("/membermanager")
+	/*@RequestMapping("/membermanager")
+	public String memberManager(@ModelAttribute("logincmd") MemberCommand mlcmd,
+			@ModelAttribute("joincmd") MemberCommand mjcmd, HttpServletRequest request, Model model) {
+		if(request.getParameter("pid") != null) {
+			int nowpid = Integer.parseInt(request.getParameter("pid"));
+			model.addAttribute("nowpid", nowpid);
+			return "member/memberManager"; 
+		}
+		return "member/memberManager";
+	}*/
+	
+	@RequestMapping("/join")
 	public String memberManager(@ModelAttribute("logincmd") MemberCommand mlcmd,
 			@ModelAttribute("joincmd") MemberCommand mjcmd, HttpServletRequest request, Model model) {
 		if(request.getParameter("pid") != null) {
@@ -205,20 +216,14 @@ public class MemberController {
 	public String memberManager(@ModelAttribute("logincmd") MemberCommand mlcmd,
 			@ModelAttribute("joincmd") MemberCommand mjcmd,
 			@CookieValue(value = "remember", required = false) Cookie cookie, HttpServletRequest request, Model model) {
-		int mmval;
 		if (request.getParameter("pid") != null) {
 			int nowpid = Integer.parseInt(request.getParameter("pid"));
 			model.addAttribute("nowpid", nowpid);
-			mmval = 2;
-			request.setAttribute("mmval", mmval);
 			return "member/memberManager";
-		}
-		if (cookie != null) {
-			mlcmd.setMemail(cookie.getValue());
-			mlcmd.setRememberMemail(true);
 		}
 		return "member/memberManager";
 	}
+	
 	@RequestMapping("/memberCheck")
 	public String memberCheck(HttpServletRequest request) {
 		String email = request.getParameter("email");
