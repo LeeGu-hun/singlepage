@@ -142,6 +142,17 @@ function loadpboard(pbid) {
 function loadpboardR(msg) {
 	$('#pbmodaldiv').html(msg);
 	$("#pbmodal").modal('show');
+	
+	$('.rew').on('click', function() {
+		console.log($(this));
+		
+		
+		
+		
+	
+	});
+	
+	
 	$('.rebtn').on('click', function() {
 		if($(this).next().css("display") == "none"){
 			$(this).next().show();
@@ -151,23 +162,24 @@ function loadpboardR(msg) {
 	});
 }
 
-function pbrewrite() {
+/*function pbrewrite() {
 	$('#pbrecmd').ajaxForm({
-		success:function(msg) {
-			$('#pbrebox').html(msg);
-			$('.pbrecontent').val('');
-			$('.rebtn').on('click', function() {
-				if($(this).next().css("display") == "none"){
-					$(this).next().show();
-				}else{
-					$(this).next().hide();
-				}
-			});
+		success: pbrewriteR
+	});
+}*/
+function pbrewriteR(msg) {
+	$('#pbrebox').html(msg);
+	$('.pbrecontent').val('');
+	$('.rebtn').on('click', function() {
+		if($(this).next().css("display") == "none"){
+			$(this).next().show();
+		}else{
+			$(this).next().hide();
 		}
 	});
 }
 
-function pbrerewrite() {
+/*function pbrerewrite() {
 	$('#pbrerecmd').ajaxForm({
 		success:function(msg) {
 			$('#pbrebox').html(msg);
@@ -181,4 +193,4 @@ function pbrerewrite() {
 			});
 		}
 	});
-}
+}*/

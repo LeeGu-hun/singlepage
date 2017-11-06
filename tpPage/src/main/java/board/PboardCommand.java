@@ -4,8 +4,8 @@ import org.springframework.web.multipart.MultipartFile;
 
 public class PboardCommand {
 	
-	private String pbsubject, pbcontent, pbupdir, pbrecontent, pbreid;
-	private int pbhostid, pbwriterid, pbpage, pbid;
+	private String pbsubject, pbcontent, pbupdir, pbrecontent;
+	private int pbhostid, pbwriterid, pbpage, pbid, pbreid;
 	private MultipartFile pbfile;
 	
 	public String getPbsubject() {
@@ -62,11 +62,12 @@ public class PboardCommand {
 	public void setPbrecontent(String pbrecontent) {
 		this.pbrecontent = pbrecontent;
 	}
-	public String getPbreid() {
+	public int getPbreid() {
 		return pbreid;
 	}
-	public void setPbreid(String pbreid) {
+	public void setPbreid(int pbreid) {
 		this.pbreid = pbreid;
 	}
+	
 	
 }

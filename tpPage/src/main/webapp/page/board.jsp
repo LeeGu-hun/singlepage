@@ -15,7 +15,7 @@ a {
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js" type="text/javascript"></script>
 <script src="http://malsup.github.com/jquery.form.js"></script>
 
-<script src="<%=request.getContextPath()%>/js/board.js?ver=142323"></script>
+<script src="<%=request.getContextPath()%>/js/board.js?ver=142333323"></script>
 
 <div>
 	<ul id="bTab" class="nav nav-tabs" role="tablist">
