@@ -209,4 +209,9 @@ public class PageController {
 		pageSvc.adminPage(host, pmc, request);
 		return "redirect:/page?host=" + host;
 	}	
+	
+	@RequestMapping("/topModify")
+	public String topModify() {
+		return "page/topModify";
+	}
 }

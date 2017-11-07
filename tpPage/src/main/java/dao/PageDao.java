@@ -59,10 +59,9 @@ public class PageDao {
 	
 	public void adminPage2(int host, final Page page) {
 		jdbcTemplate.update("update page set pname=?, pnick=?, pintro=?, pgenre=?, ploc=?, pperiod=?, "
-				+ "pshowtime=?, pfile=?, pnewfile=?, platlng=? where pid=?",
+				+ "pshowtime=?, platlng=? where pid=?",
 				page.getPname(), page.getPnick(), page.getPintro(), page.getPgenre(), page.getPloc(), 
-				page.getPperiod(), page.getPshowtime(),page.getPfile(), page.getPnewfile(), 
-				page.getPlatlng(), host);
+				page.getPperiod(), page.getPshowtime(),	page.getPlatlng(), host);
 	}
 
 	public Page getPage(int pageHostId) {
