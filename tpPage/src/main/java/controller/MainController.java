@@ -1,7 +1,6 @@
 package controller;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Enumeration;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
@@ -88,7 +87,6 @@ public class MainController {
 				list.add(srchOpt);
 			}
 		}
-		System.out.println(Arrays.toString(list.toArray()));
 		List<Pboard> appendList = mainService.search(list, page, limit);
 		model.addAttribute("appendList", appendList);
 		

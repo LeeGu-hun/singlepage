@@ -90,13 +90,19 @@ public class MainDao {
 					if(val.length>1) sub += " ) ";
 				} else if (code.equals("pperiod")) {
 					if (Integer.parseInt(val[j]) == 5) {
-						sub += " trunc(to_number(sysdate - pperiod)) >= " + val[j];
+						sub += " trunc((sysdate - pperiod)/365) >= " + val[j];
 					} else {
-						sub += " trunc(to_number(sysdate - pperiod)) = " + val[j];
+						sub += " trunc((sysdate - pperiod)/365) = " + val[j];
 					}
 				} else {
 					sub += code.trim() + " like ";
-					sub += "'%" + val[j].trim() + "%'";
+					if (val[j].trim().split(" ").length > 1) {
+						sub += "'%" + val[j].trim().split(" ")[0] + "%' and ";
+						sub += code.trim() + " like ";
+						sub += "'%" + val[j].trim().split(" ")[1] + "%'";
+					} else {
+						sub += "'%" + val[j].trim() + "%'";
+					}
 				}
 				if(j != val.length-1) sub += " or ";
 			}

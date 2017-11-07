@@ -65,7 +65,7 @@ public class PageController {
 		/*System.out.println(page.getPlatlng());*/
 		if(page == null) {
 			return "redirect:/home"; 
-		} else {	
+		} else {
 			
 			int pbPage = boardSvc.pboardpage(pageHostId);
 			List<Pboard> pboardList = boardSvc.getPboardList(pageHostId);
@@ -76,6 +76,10 @@ public class PageController {
 			model.addAttribute("pboardList", pboardList);
 			request.setAttribute("mbPage", mbPage);
 			model.addAttribute("mboardList", mboardList);
+			
+			//right 부분
+			List<Page> related = pageSvc.getRelatedPages(page.getPgenre(), page.getPid());
+			model.addAttribute("related", related);
 			
 			AuthInfo authInfo = (AuthInfo) request.getSession().getAttribute("authInfo");
 			
