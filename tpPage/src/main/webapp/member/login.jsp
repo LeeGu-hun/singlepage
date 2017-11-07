@@ -18,33 +18,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js" type="text/javascript"></script>
 <script src="http://malsup.github.com/jquery.form.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
-
-<script>
-	function mpwfinder() {
-		$.ajax({
-			type : "POST",
-			url : "./mpwfinder",
-			success : mpwfinderR
-		});
-	}
-	function mpwfinderR(msg) {
-		$('#mpwfinderR').html(msg)
-	}
-	
-	function mpwfmodal() {
-		var fmemail = $('#mpwfmemail').val()
-		$('#mpwrmemail').val(fmemail);
-		console.log('123');
-		
-		$('#mpwfindcmd').ajaxForm({
-			success:function() {
-				$('#mpwfmodal').modal('show');
-			}	
-		});
-	}
-</script>
-
-
+<script type="text/javascript" src="<%=request.getContextPath()%>/js/member.js?ver=99"></script>
 
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>로그인</title>
@@ -71,7 +45,7 @@
 	
 	<div id="mpwfinderR" name="mpwfinderR"></div>
 	
-	<div id="mpwfmodalR" name="mpwfmodalR"></div>
+	<!-- <div id="mpwfmodalR" name="mpwfmodalR"></div> -->
 	
 	<div class="modal" id="mpwfmodal" aria-hidden="true" style="display: none; z-index: 500;">
 		<div class="modal-dialog modal-lg">
