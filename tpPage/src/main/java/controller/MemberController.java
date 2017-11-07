@@ -258,8 +258,17 @@ public class MemberController {
 		}else {
 			return "member/login";
 		}
-		
 	}
+	
+//	@RequestMapping("/checkmodal")
+//	public String checkmodal(@ModelAttribute("infocmd") MemberCommand checkcmd, HttpServletRequest request) {
+//		Member member = memberDao.selectByEmail(checkcmd.getMphone());
+//		if(member != null) {
+//			return "member/mpwFinderR";
+//		}else {
+//			return "member/login";
+//		}
+//	}
 
 	@RequestMapping("/mpwreset")
 	public String mpwreset(@ModelAttribute("mpwresetcmd") MemberCommand mpwresetcmd, HttpServletRequest request) {

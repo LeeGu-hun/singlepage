@@ -142,12 +142,55 @@ function loadpboard(pbid) {
 function loadpboardR(msg) {
 	$('#pbmodaldiv').html(msg);
 	$("#pbmodal").modal('show');
-}
-
-function pbrewrite() {
-	$('#pbrecmd').ajaxForm({
-		success:function(msg) {
-			$('#pbrebox').html(msg)
+	
+	$('.rew').on('click', function() {
+		console.log($(this));
+		
+		
+		
+		
+	
+	});
+	
+	
+	$('.rebtn').on('click', function() {
+		if($(this).next().css("display") == "none"){
+			$(this).next().show();
+		}else{
+			$(this).next().hide();
 		}
 	});
 }
+
+/*function pbrewrite() {
+	$('#pbrecmd').ajaxForm({
+		success: pbrewriteR
+	});
+}*/
+function pbrewriteR(msg) {
+	$('#pbrebox').html(msg);
+	$('.pbrecontent').val('');
+	$('.rebtn').on('click', function() {
+		if($(this).next().css("display") == "none"){
+			$(this).next().show();
+		}else{
+			$(this).next().hide();
+		}
+	});
+}
+
+/*function pbrerewrite() {
+	$('#pbrerecmd').ajaxForm({
+		success:function(msg) {
+			$('#pbrebox').html(msg);
+			$('.pbrecontent').val('');
+			$('.rebtn').on('click', function() {
+				if($(this).next().css("display") == "none"){
+					$(this).next().show();
+				}else{
+					$(this).next().hide();
+				}
+			});
+		}
+	});
+}*/

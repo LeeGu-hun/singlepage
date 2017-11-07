@@ -48,6 +48,22 @@ public class PageDao {
 		Integer pid = jdbcTemplate.queryForObject("select pid from page where pmaster = ?", Integer.class, page.getPmaster());
 		return pid;
 	}
+	
+	public void adminPage1(int host, final Page page) {
+		jdbcTemplate.update("update page set pname=?, pnick=?, pintro=?, pgenre=?, ploc=?, pperiod=?, "
+				+ "pshowtime=?, pfile=?, pnewfile=?, platlng=? where pid=?",
+				page.getPname(), page.getPnick(), page.getPintro(), page.getPgenre(), page.getPloc(), 
+				page.getPperiod(), page.getPshowtime(),page.getPfile(), page.getPnewfile(), 
+				page.getPlatlng(), host);
+	}
+	
+	public void adminPage2(int host, final Page page) {
+		jdbcTemplate.update("update page set pname=?, pnick=?, pintro=?, pgenre=?, ploc=?, pperiod=?, "
+				+ "pshowtime=?, pfile=?, pnewfile=?, platlng=? where pid=?",
+				page.getPname(), page.getPnick(), page.getPintro(), page.getPgenre(), page.getPloc(), 
+				page.getPperiod(), page.getPshowtime(),page.getPfile(), page.getPnewfile(), 
+				page.getPlatlng(), host);
+	}
 
 	public Page getPage(int pageHostId) {
 		List<Page> results = jdbcTemplate.query("select * from page where pid = ?",

@@ -10,5 +10,4 @@
 		</label>
 	</p>
 	<p><input type="submit" value="이메일똑바로!" onclick="mpwfmodal(); " /></p>
-	<!-- <a data-toggle="modal" href="" class="btn btn-primary" >비번 재설정</a> -->
 </form:form>
