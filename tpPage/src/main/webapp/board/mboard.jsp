@@ -71,7 +71,7 @@ $(document).ready(function() {
 	<tbody>
 		<c:forEach var="mboard" items="${mboardList }">
 		<tr>
-			<td>${mboard.mbid }</td>
+			<td><a data-toggle="modal" onclick="loadmboard(${mboard.mbid });">${mboard.mbid }</a></td>
 			<td>${mboard.mbsubject }</td>
 			<td>${mboard.mbcontent }</td>
 			<td>${mboard.mbfile }</td>
