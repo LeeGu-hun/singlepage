@@ -121,6 +121,10 @@ public class MemberDao {
 		}, mid);
 		return results.isEmpty() ? null : results.get(0);
 	}
+	
+	public void memCheck() {
+		
+	}
 
 //	public void memberModify(AuthInfo authInfo) {
 //		jdbcTemplate.update("update member set memail = ?, mname = ?, mpw = ?, mphone=? where memail = ?", authInfo.getMemail(), authInfo.getMname(),

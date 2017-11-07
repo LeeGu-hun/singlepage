@@ -96,6 +96,6 @@ page maker
 	<p><label>시간:<br><form:input path="pshowtime" value="" style="width:300px;"/></label></p>
 	<p><input type="button" value="만들기" onclick="makepage(); " /></p>
 </form:form>
-<script src="<%=request.getContextPath()%>/js/adminMap.js?ver=1"></script>
+<script src="<%=request.getContextPath()%>/js/map.js?ver=1"></script>
 </body>
 </html>

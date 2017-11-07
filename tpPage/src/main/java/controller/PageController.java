@@ -145,7 +145,7 @@ public class PageController {
 		
 		Member member = memberSvc.getAuthInfo(mid);
 		AuthInfo authInfo2 = new AuthInfo(member.getMid(), member.getMname(), member.getMemail(), member.getMphone(),
-				member.getMcheck(), member.getMpoint(), member.getMdate());
+				member.getMcheck(), member.getMpoint(), member.getMdate(), authInfo.getPid());
 		session.setAttribute("authInfo", authInfo2);
 		model.addAttribute("ck" , authInfo2.getMpoint());
 		return "page/ck";
