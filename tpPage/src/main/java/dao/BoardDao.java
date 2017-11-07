@@ -125,17 +125,28 @@ public class BoardDao {
 	}	
 	
 	@Transactional
-	public void pbrewrite(int pbid, String pbcontent, int pbhostid, int pbwriterid) {
-		int pbre_lev = jdbcTemplate.queryForObject("select pbre_lev from pboard where pbid = ?", Integer.class, pbid);
-		int pbre_seq = jdbcTemplate.queryForObject("select pbre_seq from pboard where pbid = ?", Integer.class, pbid);
+	public void pbrewrite(int pbid, int pbreid, String pbcontent, int pbhostid, int pbwriterid) {
+		int pbre_lev = jdbcTemplate.queryForObject("select pbre_lev from pboard where pbid = ?", Integer.class, pbreid);
+		int pbre_seq = jdbcTemplate.queryForObject("select pbre_seq from pboard where pbid = ?", Integer.class, pbreid);
+		
 		jdbcTemplate.update("insert into pboard values(pbid_seq.nextval, 0, ?, null, null, ?, ?, ?, 0, sysdate, ?, ?)",
 				pbcontent, pbid, pbre_lev + 1, pbre_seq, pbhostid, pbwriterid);
+		
 		int row = jdbcTemplate.queryForObject("select count(*) from pboard where pbre_lev < ? and pbre_seq > ?", Integer.class,
 				pbre_lev + 1, pbre_seq);
+		
 		if(row == 0) {
+			System.out.println("00");
 			int repbid = jdbcTemplate.queryForObject("select pbid_seq.currval from dual", Integer.class);
 			int nowre_seq = jdbcTemplate.queryForObject("select * from (select pbre_seq from pboard order by pbre_seq desc) where rownum = 1", Integer.class);
 			jdbcTemplate.update("update pboard set pbre_seq = ? where pbid = ?", nowre_seq + 1, repbid);
+		} else {
+			System.out.println("11");
+			int repbid = jdbcTemplate.queryForObject("select pbid_seq.currval from dual", Integer.class);
+			int nowre_seq = jdbcTemplate.queryForObject("select * from (select pbre_seq from pboard where pbre_lev < ? and pbre_seq > ? order by pbre_seq) where rownum = 1",
+					Integer.class, pbre_lev + 1, pbre_seq);
+			jdbcTemplate.update("update pboard set pbre_seq = pbre_seq + 1 where pbre_seq >= ?", nowre_seq);
+			jdbcTemplate.update("update pboard set pbre_seq = ? where pbid = ?", nowre_seq, repbid);
 		}
 	}
 }

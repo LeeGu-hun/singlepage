@@ -187,11 +187,11 @@ public class BoardController {
 			boardSvc.pbrewrite(pbrecmd, authInfo);
 			List<Pboard> pbrelist = boardDao.getpbreDetail(pbrecmd.getPbid());
 			model.addAttribute("pbrelist", pbrelist);
-			return "board/pbrewriteR";
 		}
+		return "board/pbrewriteR";
 	}
 	
-	@RequestMapping("/pbrerewrite") 
+	/*@RequestMapping("/pbrerewrite") 
 	public String pbrerewrite(@ModelAttribute("pbrecmd") PboardCommand pbrecmd, @ModelAttribute("pbrerecmd") PboardCommand pbrerecmd, 
 			HttpServletRequest request, Model model) {
 		AuthInfo authInfo = (AuthInfo) request.getSession().getAttribute("authInfo");
@@ -203,7 +203,7 @@ public class BoardController {
 			model.addAttribute("pbrelist", pbrelist);
 			return "board/pbrewriteR";
 		}
-	}
+	}*/
 }
 
 

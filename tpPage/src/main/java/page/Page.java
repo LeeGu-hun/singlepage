@@ -26,6 +26,19 @@ public class Page {
 		this.platlng = platlng;
 	}
 	
+	public Page(int pmaster, String pname, String pnick, String pintro, String pgenre, String ploc, Date pperiod, 
+			String pshowtime, String platlng) {
+		this.pmaster = pmaster;
+		this.pname = pname;
+		this.pnick = pnick;
+		this.pintro = pintro;
+		this.pgenre = pgenre;
+		this.ploc = ploc;
+		this.pperiod = pperiod;
+		this.pshowtime = pshowtime;
+		this.platlng = platlng;
+	}
+	
 	public Page(int pid, int ppoint, int pmaster, String pname, String pnick, String pintro, String pgenre, String ploc,
 			String pfile, String pnewfile, String pshowtime, Date pdate, Date pperiod, String platlng) {
 		super();

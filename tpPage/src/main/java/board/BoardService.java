@@ -92,7 +92,7 @@ public class BoardService {
 
 	public void pbrewrite(PboardCommand pbrecmd, AuthInfo authInfo) {
 		
-		boardDao.pbrewrite(pbrecmd.getPbid(), pbrecmd.getPbrecontent() , pbrecmd.getPbhostid(), authInfo.getMid());
+		boardDao.pbrewrite(pbrecmd.getPbid(), pbrecmd.getPbreid(), pbrecmd.getPbcontent() , pbrecmd.getPbhostid(), authInfo.getMid());
 	}
 }
 
