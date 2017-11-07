@@ -35,8 +35,11 @@ $(document).ready(function(){
 	$(window).resize(function(){
 		var totalw = $(window).width();
 		var totalh = $(window).height();
-		$('.inner-back').css('width', totalw);
-		$('.inner-back').css('height', totalh);
+		$('.outer-back').css('top', $(window).scrollTop());
+		$('.outer-back').css('width', totalw);
+		$('.outer-back').css('height', totalh);
+		$('.outer-content').css('width', totalw);
+		$('.outer-content').css('height', totalh);
 		var w = $('.inner-content').width();
 		$('.inner-content').css('left', totalw/2-w/2);
 		$('.inner-content').css('top', 50);
@@ -48,30 +51,36 @@ $(document).ready(function(){
 		$('.inner-content').html(content);
 		$('.inner-content').append('<div class="close-btn">&#215;</div>');
 		$('.close-btn').on('click', function(){
-			$('.inner-back').scrollTop(0);
+			$('.outer-content').scrollTop(0);
 			$('body').css({overflow: ''});
 			$('.inner-content').removeClass('on');
-			$('.inner-back').removeClass('on');
+			$('.outer-content').removeClass('on');
+			$('.outer-back').removeClass('on');
 		});
 		$('.inner-content').addClass('on');
-		$('.inner-back').addClass('on');
+		$('.outer-content').addClass('on');
+		$('.outer-back').addClass('on');
 		var totalw = $(window).width();
 		var totalh = $(window).height();
 		var ow = $('.inner-item').width();
 		$('.inner-content').css('width', ow*2);
-		$('.inner-back').css('top', $(window).scrollTop());
-		$('.inner-back').css('width', totalw);
-		$('.inner-back').css('height', totalh);
+		$('.outer-back').css('top', $(window).scrollTop());
+		$('.outer-back').css('width', totalw);
+		$('.outer-back').css('height', totalh);
+		$('.outer-content').css('top', $(window).scrollTop());
+		$('.outer-content').css('width', totalw);
+		$('.outer-content').css('height', totalh);
 		var w = $('.inner-content').width();
 		$('.inner-content').css('left', totalw/2-w/2-20);
 		$('.inner-content').css('top', 50);
 	});
 	
 	$('.inner-back').on('click', function(){
-		$('.inner-back').scrollTop(0);
+		$('.outer-content').scrollTop(0);
 		$('body').css({overflow: ''});
 		$('.inner-content').removeClass('on');
-		$('.inner-back').removeClass('on');
+		$('.outer-content').removeClass('on');
+		$('.outer-back').removeClass('on');
 	});
 	
 	$('input:radio[name=sido]').on('click', function(){
@@ -89,7 +98,7 @@ $(document).ready(function(){
 					$('input:checkbox[name="'+ itemId.split('-')[0] +'"]').not('input:checkbox[id="'+ itemId +'"]').prop('checked', false);
 					$('input:checkbox[name="'+ itemId.split('-')[0] +'"]').not('input:checkbox[id="'+ itemId +'"]').attr('checked', false);					
 					$('.selected-item[id|="lb'+ itemId.split('-')[0] +'"]').remove();
-					$('.selected').append('<label class="selected-item" id="lb' + itemId + '"><input type="hidden" value='+ itemVal + ' />' + itemId + '  &#215;' + '</label>');
+					$('.selected').append('<label class="selected-item" id="lb' + itemId + '" name="'+ itemId.split('-')[0] +'" data-all><input type="hidden" value='+ itemVal + ' />' + itemId + '  &#215;' + '</label>');
 					$('.selected-item').on('click', function(){
 						var id = $(this).attr('id');
 						id = id.substring(2, id.length);
@@ -100,8 +109,8 @@ $(document).ready(function(){
 				} else {
 					$('input:checkbox[name="'+$(this).attr('name')+'"][data-all]').prop('checked', false);
 					$('input:checkbox[name="'+$(this).attr('name')+'"][data-all]').attr('checked', false);
-					$('#lb'+$(this).attr('name')).remove();
-					$('.selected').append('<label class="selected-item" id="lb' + itemId + '"><input type="hidden" value="'+ itemVal + '" />' + itemId + '  &#215;' +'</label>');
+					$('label[name="'+$(this).attr('name')+'"][data-all]').remove();
+					$('.selected').append('<label class="selected-item" id="lb' + itemId + '" name="'+ itemId.split('-')[0] +'"><input type="hidden" value="'+ itemVal + '" />' + itemId + '  &#215;' +'</label>');
 					$('.selected-item').on('click', function(){
 						var id = $(this).attr('id');
 						id = id.substring(2, id.length);
@@ -248,19 +257,24 @@ function appendList(list) {
 				$('.inner-content').html(content);
 				$('.inner-content').append('<div class="close-btn">&#215;</div>');
 				$('.close-btn').on('click', function(){
-					$('.inner-back').scrollTop(0);
+					$('.outer-content').scrollTop(0);
 					$('body').css({overflow: ''});
 					$('.inner-content').removeClass('on');
-					$('.inner-back').removeClass('on');
+					$('.outer-content').removeClass('on');
+					$('.outer-back').removeClass('on');
 				});
 				$('.inner-content').addClass('on');
-				$('.inner-back').addClass('on');
+				$('.outer-content').addClass('on');
+				$('.outer-back').addClass('on');
 				var totalw = $(window).width();
 				var ow = $('.inner-item').width();
 				$('.inner-content').css('width', ow*2);
-				$('.inner-back').css('top', $(window).scrollTop());
-				$('.inner-back').css('width', totalw);
-				$('.inner-back').css('height', $(window).height());
+				$('.outer-back').css('top', $(window).scrollTop());
+				$('.outer-back').css('width', totalw);
+				$('.outer-back').css('height', $(window).height());
+				$('.outer-content').css('top', $(window).scrollTop());
+				$('.outer-content').css('width', totalw);
+				$('.outer-content').css('height', $(window).height());
 				var w = $('.inner-content').width();
 				$('.inner-content').css('left', totalw/2-w/2-20);
 				$('.inner-content').css('top', 50);

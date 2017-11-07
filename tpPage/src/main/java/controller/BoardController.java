@@ -25,9 +25,11 @@ import dao.PageDao;
 import member.AuthInfo;
 import member.MemberCommand;
 import page.Page;
+import page.PageLike;
 import board.BoardService;
 import board.Mboard;
 import board.MboardCommand;
+import board.Pblike;
 import board.Pboard;
 
 @Controller
@@ -167,42 +169,99 @@ public class BoardController {
 	}
 	
 	@RequestMapping("/loadpboard") 
-	public String loadpboard(@ModelAttribute("pbrecmd") PboardCommand pbrecmd, @ModelAttribute("pbrerecmd") PboardCommand pbrerecmd,
-			HttpServletRequest request, Model model) {
+	public String loadpboard(@ModelAttribute("pbrecmd") PboardCommand pbrecmd, HttpServletRequest request, Model model) {
 		int pbid =  Integer.parseInt(request.getParameter("pbid"));
 		Pboard pboard = boardDao.getpbDetail(pbid);
 		List<Pboard> pbrelist = boardDao.getpbreDetail(pbid);
 		model.addAttribute("pboard", pboard);
 		model.addAttribute("pbrelist", pbrelist);
+		
+		AuthInfo authInfo = (AuthInfo) request.getSession().getAttribute("authInfo");
+		if (authInfo != null) {
+			Pblike pblike = boardDao.pblikeChk(authInfo.getMid(), pboard.getPbid());
+			if (pblike == null) {
+				model.addAttribute("pblikechk", 0);
+			} else {
+				model.addAttribute("pblikechk", pblike.getPblike());
+			} 
+		}
 		return "board/loadpboardR";
 	}
 	
 	@RequestMapping("/pbrewrite") 
-	public String pbrewrite(@ModelAttribute("pbrecmd") PboardCommand pbrecmd, @ModelAttribute("pbrerecmd") PboardCommand pbrerecmd, 
-			HttpServletRequest request, Model model) {
+	public String pbrewrite(@ModelAttribute("pbrecmd") PboardCommand pbrecmd, HttpServletRequest request, Model model) {
 		AuthInfo authInfo = (AuthInfo) request.getSession().getAttribute("authInfo");
 		if(authInfo == null) {
-			return "board/pbrewriteR";
+			return "board/ajaxlogin";
 		} else {
 			boardSvc.pbrewrite(pbrecmd, authInfo);
 			List<Pboard> pbrelist = boardDao.getpbreDetail(pbrecmd.getPbid());
 			model.addAttribute("pbrelist", pbrelist);
-			return "board/pbrewriteR";
 		}
+		
+		int pbid =  pbrecmd.getPbid();
+		Pboard pboard = boardDao.getpbDetail(pbid);
+		List<Pboard> pbrelist = boardDao.getpbreDetail(pbid);
+		model.addAttribute("pboard", pboard);
+		model.addAttribute("pbrelist", pbrelist);
+		
+		if (authInfo != null) {
+			Pblike pblike = boardDao.pblikeChk(authInfo.getMid(), pboard.getPbid());
+			if (pblike == null) {
+				model.addAttribute("pblikechk", 0);
+			} else {
+				model.addAttribute("pblikechk", pblike.getPblike());
+			} 
+		}
+		return "board/loadpboardR";
 	}
 	
-	@RequestMapping("/pbrerewrite") 
-	public String pbrerewrite(@ModelAttribute("pbrecmd") PboardCommand pbrecmd, @ModelAttribute("pbrerecmd") PboardCommand pbrerecmd, 
-			HttpServletRequest request, Model model) {
+	@RequestMapping("/pblike") 
+	public String pblike(HttpServletRequest request, Model model) {
+		
+		AuthInfo authInfo = (AuthInfo) request.getSession().getAttribute("authInfo");
+		int mid = authInfo.getMid();
+		int pbid = Integer.parseInt(request.getParameter("pbid"));
+		int pblikechk = Integer.parseInt(request.getParameter("pblikechk"));
+		
+		if(pblikechk == 0) {
+			boardDao.pblike(1, mid, pbid);
+		} else {
+			boardDao.pblike(0, mid, pbid);
+		}
+		
+		Pblike pblike = boardDao.pblikeChk(authInfo.getMid(), pbid);
+		model.addAttribute("pblikechk", pblike.getPblike());
+		return "board/pblike";
+	}
+	
+	@RequestMapping("/loadmboard") 
+	public String loadmboard(@ModelAttribute("mbrecmd") MboardCommand mbrecmd, HttpServletRequest request, Model model) {
+		int mbid =  Integer.parseInt(request.getParameter("mbid"));
+		Mboard mboard = boardDao.getmbDetail(mbid);
+		List<Mboard> mbrelist = boardDao.getmbreDetail(mbid);
+		model.addAttribute("mboard", mboard);
+		model.addAttribute("mbrelist", mbrelist);
+		return "board/loadmboardR";
+	}
+	
+	@RequestMapping("/mbrewrite") 
+	public String mbrewrite(@ModelAttribute("mbrecmd") MboardCommand mbrecmd, HttpServletRequest request, Model model) {
 		AuthInfo authInfo = (AuthInfo) request.getSession().getAttribute("authInfo");
 		if(authInfo == null) {
-			return "board/pbrewriteR";
+			return "board/ajaxlogin";
 		} else {
-			boardSvc.pbrewrite(pbrecmd, authInfo);
-			List<Pboard> pbrelist = boardDao.getpbreDetail(pbrecmd.getPbid());
-			model.addAttribute("pbrelist", pbrelist);
-			return "board/pbrewriteR";
+			boardSvc.mbrewrite(mbrecmd, authInfo);
+			List<Mboard> mbrelist = boardDao.getmbreDetail(mbrecmd.getMbid());
+			model.addAttribute("mbrelist", mbrelist);
 		}
+		
+		int mbid = mbrecmd.getMbid();
+		Mboard mboard = boardDao.getmbDetail(mbid);
+		List<Mboard> mbrelist = boardDao.getmbreDetail(mbid);
+		model.addAttribute("mboard", mboard);
+		model.addAttribute("mbrelist", mbrelist);
+		return "board/loadmboardR";
 	}
 }
 

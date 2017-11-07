@@ -10,57 +10,58 @@
 		<div class="modal-content">
       		<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-              	<h4 class="modal-title">수정</h4>
+              	<h4 class="modal-title">pb수정값</h4>
             </div>
             <div class="modal-body">
-            	<p><c:out value="${pboard.pbid }" /></p>
-            	<p><c:out value="${pboard.pbsubject }" /></p>
-            	<p><c:out value="${pboard.pbcontent }" /></p>
-            	<p><c:out value="${pboard.pbfile }" /></p>
-            	<p><c:out value="${pboard.pbnewfile }" /></p>
-            	<p><c:out value="${pboard.pbreadcount }" /></p>
-            	<p><c:out value="${pboard.pbdate }" /></p>
-            	<p><c:out value="${pboard.pbhostid }" /></p>
-            	<p><c:out value="${pboard.pbwriterid }" /></p>
-            	<p><c:out value="${pboard.pname }" /></p>
-            	<p><c:out value="${pboard.mname }" /></p>
-            </div>
-            <hr style="margin:0px;" />
-            <div class="modal-body">
-            	<form:form commandName="pbrecmd" action="pbrewrite">
-            		<p><form:textarea path="pbrecontent" class="pbrecontent"></form:textarea></p>
-            		<form:hidden path="pbid" value="${pboard.pbid }" />
-            		<form:hidden path="pbhostid" value="${pboard.pbhostid }" />
-            		<p><input type="submit" value="댓글쓰기" onclick="pbrewrite(); "></p>
-            	</form:form>
-            	<div id="pbrebox">
-            		<div>
-            		<c:forEach var="pbrelist" items="${pbrelist }">
-            		<div>
-            			<hr style="margin:0px;" />
-				       	<c:out value="${pbrelist.pbid }" />
-  						//<c:out value="${pbrelist.pbcontent }" />
- 						//<c:out value="${pbrelist.pbre_ref }" />
-						//<c:out value="${pbrelist.pbre_lev }" />
-						//<c:out value="${pbrelist.pbre_seq }" />
-						//<c:out value="${pbrelist.pbhostid }" />
-						//<c:out value="${pbrelist.pbwriterid }" />
-				        //<a class="rebtn">댓글쓰기</a>
-				        <div style="display:none">
-				        	<form:form commandName="pbrerecmd" action="pbrerewrite">
-            					<p><form:textarea path="pbrecontent" class="pbrecontent"></form:textarea></p>
-            					<form:hidden path="pbid" value="${pboard.pbid }" />
-            					<form:hidden path="pbreid" value="${pbrelist.pbid }" />
-            					<form:hidden path="pbhostid" value="${pboard.pbhostid }" />
-            					<p><input type="submit" value="댓글쓰기" onclick="pbrerewrite(); "></p>
-            				</form:form>
-				        </div>
-            		</div>
-            		</c:forEach>
-            		</div>
+            	<c:out value="${pboard.pbid }" />
+            	//<c:out value="${pboard.pbre_ref}" />
+            	//<c:out value="${pboard.pbre_lev}" />
+            	//<c:out value="${pboard.pbre_seq}" />
+            	//<c:out value="${pboard.pbcontent}" />
+            	<hr />
+	            <div id="pbrebox">
+		            <form:form commandName="pbrecmd" action="pbrewrite">
+	            		<form:textarea path="pbcontent" class="pbrecontent"></form:textarea>
+	            		<form:hidden path="pbid" value="${pboard.pbid }" />
+	            		<form:hidden path="pbreid" value="${pboard.pbid }" />
+	            		<form:hidden path="pbhostid" value="${pboard.pbhostid }" />
+	            		<p><input type="button" value="댓글쓰기" class="pbrew"></p>
+	            	</form:form>
+	           		<c:forEach var="pbrelist" items="${pbrelist }">
+	            		<div>
+	          				<hr style="margin:5px;" />
+	          				<c:out value="${pbrelist.pbid }" />
+	          				//<c:out value="${pbrelist.pbre_ref }" />
+	          				//<c:out value="${pbrelist.pbre_lev }" />
+	          				//<c:out value="${pbrelist.pbre_seq }" />
+	          				//<c:out value="${pbrelist.pbcontent }" />
+	          				<a class="pbrebtn">댓글쓰기</a>
+	          				<div style="display: none">
+								<form:form commandName="pbrecmd" action="pbrewrite" class="refrm">
+									<form:textarea path="pbcontent" class="pbrecontent"></form:textarea>
+									<form:hidden path="pbid" value="${pboard.pbid }" />
+									<form:hidden path="pbreid" value="${pbrelist.pbid }" />
+									<form:hidden path="pbhostid" value="${pboard.pbhostid }" />
+									<p><input type="button" value="댓글쓰기" class="pbrew"></p>
+								</form:form>
+							</div>
+	          			</div>
+	          		</c:forEach>
             	</div>
             </div>
             <div class="modal-footer">
+             	<c:if test="${!empty authInfo }">
+	             	<input type="hidden" id="nowpbid" name="nowpbid" value="${pboard.pbid }" />
+            		<input type="hidden" id="pblikechk" name="pblikechk" value="${pblikechk }" />
+	             	<c:choose>
+	             		<c:when test="${pblikechk == 0 || pblikechk == null }">
+	             			<a class="btn btn-primary" id="pblikebtn" onclick="pblike();">좋아요X</a>
+	             		</c:when>
+	             		<c:otherwise>
+	             			<a class="btn btn-primary" id="pblikebtn" onclick="pblike();">좋아요O</a>
+	             		</c:otherwise>
+	             	</c:choose>
+             	</c:if>
              	<a href="#" data-dismiss="modal" class="btn">Close</a>
             </div>
    		</div>

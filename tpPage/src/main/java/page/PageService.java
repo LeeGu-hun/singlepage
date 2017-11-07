@@ -1,6 +1,7 @@
 package page;
 
 import java.io.File;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -46,6 +47,11 @@ public class PageService {
 			request.getSession().setAttribute("authInfo", authInfo);
 			return pid;
 		}
+	}
+	
+	public List<Page> getRelatedPages(String genre, int hostId) {
+		List<Page> lists = pageDao.getRelatedPages(genre, hostId);
+		return lists;
 	}
 	
 	public void adminPage(int host, PageCommand pmc, HttpServletRequest request) {

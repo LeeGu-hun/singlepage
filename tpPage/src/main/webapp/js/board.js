@@ -141,8 +141,17 @@ function loadpboard(pbid) {
 }
 function loadpboardR(msg) {
 	$('#pbmodaldiv').html(msg);
+	$('.pbrecontent').val('');
 	$("#pbmodal").modal('show');
-	$('.rebtn').on('click', function() {
+	
+	$('.pbrew').on('click', function() {
+		var frm = $(this).parent().parent().parent().children('#pbrecmd');
+		frm.ajaxSubmit({
+			success: loadpboardR
+		});
+	});
+	
+	$('.pbrebtn').on('click', function() {
 		if($(this).next().css("display") == "none"){
 			$(this).next().show();
 		}else{
@@ -151,34 +160,61 @@ function loadpboardR(msg) {
 	});
 }
 
-function pbrewrite() {
-	$('#pbrecmd').ajaxForm({
-		success:function(msg) {
-			$('#pbrebox').html(msg);
-			$('.pbrecontent').val('');
-			$('.rebtn').on('click', function() {
-				if($(this).next().css("display") == "none"){
-					$(this).next().show();
-				}else{
-					$(this).next().hide();
-				}
-			});
+function pblike() {
+	var pbid = $('#nowpbid').val();
+	var pblikechk = $('#pblikechk').val();
+	
+	$.ajax({
+		type : "POST",
+		url : "./pblike",
+		data : "pbid=" + pbid + "&pblikechk=" + pblikechk,
+		success : changepblike
+	});
+	
+	function changepblike(pblikechk) {
+		pblikechk = $.trim(pblikechk);
+		$('#pblikechk').val(pblikechk);
+		if(pblikechk == 0) {
+			$('#pblikebtn').text('좋아요X');
+		} else {
+			$('#pblikebtn').text('좋아요O');
+		}
+	}
+}
+
+function loadmboard(mbid) {
+	$.ajax({
+		type : "POST",
+		url : "./loadmboard",
+		data : "mbid=" + mbid,
+		success : loadmboardR
+	});
+}
+function loadmboardR(msg) {
+	$('#mbmodaldiv').html(msg);
+	$('.mbrecontent').val('');
+	$("#mbmodal").modal('show');
+	
+	$('.mbrew').on('click', function() {
+		var frm = $(this).parent().parent().parent().children('#mbrecmd');
+		frm.ajaxSubmit({
+			success: loadmboardR
+		});
+	});
+	
+	$('.mbrebtn').on('click', function() {
+		if($(this).next().css("display") == "none"){
+			$(this).next().show();
+		}else{
+			$(this).next().hide();
 		}
 	});
 }
 
-function pbrerewrite() {
-	$('#pbrerecmd').ajaxForm({
-		success:function(msg) {
-			$('#pbrebox').html(msg);
-			$('.pbrecontent').val('');
-			$('.rebtn').on('click', function() {
-				if($(this).next().css("display") == "none"){
-					$(this).next().show();
-				}else{
-					$(this).next().hide();
-				}
-			});
-		}
-	});
-}
+
+
+
+
+
+
+
