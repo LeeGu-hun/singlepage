@@ -31,7 +31,13 @@
 	</c:forEach>
 </div>
 
+<c:if test="${searched == null }">
 <button id="btn" onclick="loadMain()" class="btn btn-md btn-primary">더보기</button>
+</c:if>
+<c:if test="${searched != null }">
+<button id="btn" onclick="loadSrch()" class="btn btn-md btn-primary">더보기</button>
+</c:if>
+
 <a id="btnTop" class="btn btn-info btn-lg">맨 위로</a>
 
 <div class="inner-back">

@@ -14,7 +14,7 @@
 	integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
 	crossorigin="anonymous"></script>
 
-<script src="<%=request.getContextPath()%>/js/admin.js?ver=3132"></script>
+<script src="<%=request.getContextPath()%>/js/admin.js?ver=2"></script>
 
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
@@ -28,7 +28,7 @@
 </head>
 <body>
 page admin
-<form name="mpfrm" action="makepage" enctype="multipart/form-data">
+<form:form commandName="pagecmd" name="apfrm" action="adminpage" enctype="multipart/form-data">
 	<p><c:choose>
 			<c:when test="${!empty page.pnewfile}">
 				<img id="puploadImg" name="puploadImg" src="./puploads/${page.pnewfile }"  alt="프로필사진" width="200px" height="150px"/>
@@ -48,7 +48,7 @@ page admin
 			<select  id="pgcate" name="pgcate" style="width:300px;" >
 				<c:forEach var="g" items="${genres }">
 				<option value="${g}" ${genre == g ? 'selected' : ''}>${g}</option>
-				</c:forEach>
+				</c:forEach>	
 			</select>
 		</label>
 	</p>
@@ -58,7 +58,7 @@ page admin
 	<input type="text" id="keyword" style="width:300px;"/> 
 	<input type="button" value="검색" onclick="mapsearch(); return false;"/>
 	<input type="hidden" id="loc" name="loc" />
-	<p><label>지역:<br><c:out value="${page.ploc }"/><br><input id="ploc" name="ploc" style="width:300px;"/></label></p>
+	<p><label>지역:<br><c:out value="${page.ploc }"/><br><input id="ploc" name="ploc" style="width:300px;" value="${page.ploc }"/></label></p>
 	<p><label>좌표:<br>
 		<input type="hidden" id="lat" name="lat" value=${lat } />
 		<input type="hidden" id="lng" name="lng" value=${lng } />
@@ -102,8 +102,8 @@ page admin
 		</label>
 	</p>
 	<p><label>시간:<br><input id="pshowtime" name="pshowtime" value="" style="width:300px;"/></label></p>
-	<p><input type="button" value="수정" onclick="makepage(); " /></p>
-</form>
-<script src="<%=request.getContextPath()%>/js/adminMap.js?ver=12"></script>
+	<p><input type="button" value="수정" onclick="adminpage(); " /></p>
+</form:form>
+<script src="<%=request.getContextPath()%>/js/adminMap.js?ver=11"></script>
 </body>
 </html>

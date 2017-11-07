@@ -47,4 +47,26 @@ public class PageService {
 			return pid;
 		}
 	}
+	
+	public void adminPage(int host, PageCommand pmc, HttpServletRequest request) {
+		MultipartFile multi = pmc.getPfile();
+		String pfile = multi.getOriginalFilename();
+		if(!(pfile.equals(""))) {
+			String pnewfile = System.currentTimeMillis() + "_" + pfile;
+			Page page = new Page(host, pmc.getPname(), pmc.getPnick(), pmc.getPintro(),
+					pmc.getPgenre(), pmc.getPloc(), pfile, pnewfile, pmc.getPperiod(), pmc.getPshowtime(), pmc.getPlatlng());
+			pageDao.adminPage1(host, page);
+			String path = pmc.getPupdir() + pnewfile;
+			try {
+				File file = new File(path);
+				multi.transferTo(file);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		} else {
+			Page page = new Page(host, pmc.getPname(), pmc.getPnick(), pmc.getPintro(),
+					pmc.getPgenre(), pmc.getPloc(), pmc.getPperiod(), pmc.getPshowtime(), pmc.getPlatlng());
+			pageDao.adminPage2(host, page);
+		}
+	}
 }
