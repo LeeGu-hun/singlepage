@@ -51,6 +51,16 @@
 .media-carousel img
 {
   width: 250px;
-  height: 100px
+  height: 100px;
 }
 /* End carousel */
+
+
+.topList 
+{
+	border: 1px solid; 
+	margin: 25px; 
+	padding: 20px; 
+	height: 250; 
+	width: 600;
+}

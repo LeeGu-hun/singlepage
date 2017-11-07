@@ -110,7 +110,7 @@ function charge(){
 		var hmoney = $('#hmoney').val();
 		var camoney = Number(hmoney) + Number(ccmoney);
 		$("#cin_money").val("");
-		$("#cin_money").attr("disabled",true)
+		$("#cin_money").attr("disabled",true);
 		if(Number(camoney) >= 0) {
 			  $('#camoney').val(camoney);  
 		  } else {
@@ -141,7 +141,7 @@ function chargeCheck() {
 				"<a href='#' data-dismiss='modal' class='btn'>취소</a>");
 	} else {
 		if(ccmoney == "" || Number(ccmoney)==0) {
-			$('#chTitle').html("실행 오류")
+			$('#chTitle').html("실행 오류");
 			$('#ctxtModal').html('충전할 금액을 선택해주세요.');
 			$('#cbtnModal').html("<a href='#' data-dismiss='modal' class='btn'>확인</a>");
 		} else {
