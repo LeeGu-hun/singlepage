@@ -23,23 +23,23 @@
 	</div>
 	<div>
 		<br/>	
-		<a href="#">${page.pnick }</a><br/><br/>
+		<a >${page.pnick }</a><br/><br/>
 		<textarea readonly>${page.pintro }</textarea>
 	</div>
 	<div>
 		<br/>
-		<input type="hidden" name="pid" id="pid" value=${page.pid } />
-		<input type="hidden" name="ppoint" id="ppoint" value=${page.ppoint } />
-		<input type="hidden" name="mid" id="mid" value=${authInfo.mid } />
-		<input type="hidden" name="memail" id="memail" value=${authInfo.memail } />
-		<input type="hidden" name="mpoint" id="mpoint" value=${authInfo.mpoint } />
-		<input type="hidden" name="ck" id="ck" value=${ck } />
+		<input type="hidden" name="pid" id="pid" value="${page.pid }" />
+		<input type="hidden" name="ppoint" id="ppoint" value="${page.ppoint }" />
+		<input type="hidden" name="mid" id="mid" value="${authInfo.mid }" />
+		<input type="hidden" name="memail" id="memail" value="${authInfo.memail }" />
+		<input type="hidden" name="mpoint" id="mpoint" value="${authInfo.mpoint }" />
+		<input type="hidden" name="ck" id="ck" value="${ck }" />
 		<c:choose>
 			<c:when test="${ck == 0 || ck == null}">
-			<a id="btnLike" class="btn btn-info btn-sm" href="#" onclick="like()">좋아요♡</a>&nbsp;&nbsp;
+			<a id="btnLike" class="btn btn-info btn-sm" onclick="like()">좋아요♡</a>&nbsp;&nbsp;
 			</c:when>
 			<c:otherwise>
-			<a id="btnLike" class="btn btn-info btn-sm" href="#" onclick="like()">좋아요♥</a>&nbsp;&nbsp;
+			<a id="btnLike" class="btn btn-info btn-sm" onclick="like()">좋아요♥</a>&nbsp;&nbsp;
 			</c:otherwise>
 		</c:choose>
 		<c:if test="${authInfo.mid != null}">

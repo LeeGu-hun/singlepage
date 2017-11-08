@@ -9,7 +9,6 @@ public class Mboard {
 	private Date mbdate;
 	
 	public Mboard(int mbhostid, int mbwriterid, String mbsubject, String mbcontent, String mbfile, String mbnewfile) {
-		super();
 		this.mbhostid = mbhostid;
 		this.mbwriterid = mbwriterid;
 		this.mbsubject = mbsubject;
@@ -18,6 +17,25 @@ public class Mboard {
 		this.mbnewfile = mbnewfile;
 	}
 	
+	public Mboard(int mbid, int mbre_ref, int mbre_lev, int mbre_seq, int mbreadcount, int mbhostid, int mbwriterid,
+			String mbsubject, String mbcontent, String mbfile, String mbnewfile, Date mbdate) {
+		super();
+		this.mbid = mbid;
+		this.mbre_ref = mbre_ref;
+		this.mbre_lev = mbre_lev;
+		this.mbre_seq = mbre_seq;
+		this.mbreadcount = mbreadcount;
+		this.mbhostid = mbhostid;
+		this.mbwriterid = mbwriterid;
+		this.mbsubject = mbsubject;
+		this.mbcontent = mbcontent;
+		this.mbfile = mbfile;
+		this.mbnewfile = mbnewfile;
+		this.mbdate = mbdate;
+	}
+
+
+
 	public Mboard(int mbid, String mbsubject, String mbcontent, String mbfile, String mbnewfile, int mbreadcount, Date mbdate,
 			int mbhostid, int mbwriterid, String pname, String mname) {
 		this.mbid = mbid;
@@ -33,6 +51,39 @@ public class Mboard {
 		this.mname = mname;
 	}
 	
+	public Mboard(int mbid, int mbre_ref, int mbre_lev, int mbre_seq, int mbreadcount, int mbhostid, int mbwriterid,
+			String mbsubject, String mbcontent, String mbfile, String mbnewfile, String pname, String mname,
+			Date mbdate) {
+		this.mbid = mbid;
+		this.mbre_ref = mbre_ref;
+		this.mbre_lev = mbre_lev;
+		this.mbre_seq = mbre_seq;
+		this.mbreadcount = mbreadcount;
+		this.mbhostid = mbhostid;
+		this.mbwriterid = mbwriterid;
+		this.mbsubject = mbsubject;
+		this.mbcontent = mbcontent;
+		this.mbfile = mbfile;
+		this.mbnewfile = mbnewfile;
+		this.pname = pname;
+		this.mname = mname;
+		this.mbdate = mbdate;
+	}
+	
+	public Mboard(int mbid, int mbre_ref, int mbre_lev, int mbre_seq, int mbhostid, int mbwriterid, String mbcontent,
+			String pname, String mname, Date mbdate) {
+		this.mbid = mbid;
+		this.mbre_ref = mbre_ref;
+		this.mbre_lev = mbre_lev;
+		this.mbre_seq = mbre_seq;
+		this.mbhostid = mbhostid;
+		this.mbwriterid = mbwriterid;
+		this.mbcontent = mbcontent;
+		this.pname = pname;
+		this.mname = mname;
+		this.mbdate = mbdate;
+	}
+
 	public int getMbid() {
 		return mbid;
 	}

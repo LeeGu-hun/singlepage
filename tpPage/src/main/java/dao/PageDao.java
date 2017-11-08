@@ -59,10 +59,9 @@ public class PageDao {
 	
 	public void adminPage2(int host, final Page page) {
 		jdbcTemplate.update("update page set pname=?, pnick=?, pintro=?, pgenre=?, ploc=?, pperiod=?, "
-				+ "pshowtime=?, pfile=?, pnewfile=?, platlng=? where pid=?",
+				+ "pshowtime=?, platlng=? where pid=?",
 				page.getPname(), page.getPnick(), page.getPintro(), page.getPgenre(), page.getPloc(), 
-				page.getPperiod(), page.getPshowtime(),page.getPfile(), page.getPnewfile(), 
-				page.getPlatlng(), host);
+				page.getPperiod(), page.getPshowtime(),	page.getPlatlng(), host);
 	}
 
 	public Page getPage(int pageHostId) {
@@ -89,6 +88,25 @@ public class PageDao {
 		
 		int ppoint=point + dmoney;
 		jdbcTemplate.update("update page set ppoint=? where pid=?", ppoint, pid);
+	}
+	
+	public List<Page> getRelatedPages(String genre, int hostId) {
+		List<Page> lists;
+		String sql = "select * from page where pgenre = ? and pid != ?";
+		lists = jdbcTemplate.query(sql, new RowMapper<Page>() {
+			@Override
+			public Page mapRow(ResultSet rs, int rowNom) throws SQLException {
+				Page page = new Page(rs.getInt("pid"),
+						rs.getInt("ppoint"), rs.getInt("pmaster"),
+						rs.getString("pname"), rs.getString("pnick"),
+						rs.getString("pintro"), rs.getString("pgenre"),
+						rs.getString("ploc"), rs.getString("pfile"), rs.getString("pnewfile"),
+						rs.getString("pshowtime"), rs.getTimestamp("pdate"), rs.getTimestamp("pperiod"), rs.getString("platlng"));
+				return page;
+			}
+		}, genre, hostId);
+		
+		return lists;
 	}
 
 }

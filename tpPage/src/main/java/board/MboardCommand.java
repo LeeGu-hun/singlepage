@@ -3,8 +3,8 @@ package board;
 import org.springframework.web.multipart.MultipartFile;
 
 public class MboardCommand {
-	private String mbsubject, mbcontent, mbupdir, mbTab;
-	private int mbhostid, mbwriterid, mbpage;
+	private String mbsubject, mbcontent, mbupdir, mbTab, mbrecontent;
+	private int mbhostid, mbwriterid, mbpage, mbid, mbreid;
 	private MultipartFile mbfile;
 	
 	public String getMbsubject() {
@@ -55,4 +55,23 @@ public class MboardCommand {
 	public void setMbfile(MultipartFile mbfile) {
 		this.mbfile = mbfile;
 	}
+	public String getMbrecontent() {
+		return mbrecontent;
+	}
+	public void setMbrecontent(String mbrecontent) {
+		this.mbrecontent = mbrecontent;
+	}
+	public int getMbid() {
+		return mbid;
+	}
+	public void setMbid(int mbid) {
+		this.mbid = mbid;
+	}
+	public int getMbreid() {
+		return mbreid;
+	}
+	public void setMbreid(int mbreid) {
+		this.mbreid = mbreid;
+	}
+	
 }
