@@ -219,4 +219,16 @@ public class BoardDao {
 			jdbcTemplate.update("update mboard set mbre_seq = ? where mbid = ?", nowre_seq, rembid);
 		}
 	}
+
+	public Pboard getPboard(int pbid) {
+		List<Pboard> results = jdbcTemplate.query("select pbid from pboard where pbid = ?",
+				new RowMapper<Pboard>() {
+					@Override
+					public Pboard mapRow(ResultSet rs, int rowNum) throws SQLException {
+						Pboard pboard = new Pboard(rs.getInt("pbid"));
+						return pboard;
+					}
+		}, pbid);
+		return results.isEmpty() ? null : results.get(0);
+	}
 }

@@ -16,6 +16,7 @@ import board.Mboard;
 import board.MboardCommand;
 import board.Pboard;
 import board.PboardCommand;
+import dao.BoardDao;
 import dao.MemberDao;
 import dao.PageDao;
 import member.AuthInfo;
@@ -33,6 +34,7 @@ public class PageController {
 
 	private PageDao pageDao;
 	private PageService pageSvc;
+	private BoardDao boardDao;
 	private BoardService boardSvc;
 	private MemberDao memberDao;
 	private MemberService memberSvc;
@@ -45,6 +47,10 @@ public class PageController {
 		this.pageSvc = pageSvc;
 	}
 	
+	public void setBoardDao(BoardDao boardDao) {
+		this.boardDao = boardDao;
+	}
+
 	public void setBoardSvc(BoardService boardSvc) {
 		this.boardSvc = boardSvc;
 	}
@@ -58,17 +64,23 @@ public class PageController {
 	}
 
 	@RequestMapping("/page")
-	public String pageLoad(@RequestParam("host") int host, @ModelAttribute("pboardcmd") PboardCommand pbc,
-			@ModelAttribute("mboardcmd") MboardCommand mbc, @ModelAttribute("logincmd") MemberCommand logincmd,
-			@ModelAttribute("pbrecmd") PboardCommand pbrecmd, @ModelAttribute("pbrecmd") PboardCommand pbrerecmd,
-			Model model, HttpServletRequest request) {
+	public String pageLoad(@RequestParam("host") int host, @ModelAttribute("logincmd") MemberCommand logincmd,
+			@ModelAttribute("pboardcmd") PboardCommand pbc, @ModelAttribute("mboardcmd") MboardCommand mbc,
+			@ModelAttribute("pbrecmd") PboardCommand pbrecmd, Model model, HttpServletRequest request) {
 		int pageHostId = host;
 		Page page = pageDao.getPage(pageHostId);
-		/*System.out.println(page.getPlatlng());*/
 		if(page == null) {
 			return "redirect:/home"; 
 		} else {
+			if(request.getParameter("pbid") != null) {
+				int pbid = Integer.parseInt(request.getParameter("pbid"));
+				Pboard pboard = boardDao.getPboard(pbid);
+				if(pboard != null) {
+					model.addAttribute("gopbid", pboard.getPbid());
+				}
+			}
 			
+			//board 부분
 			int pbPage = boardSvc.pboardpage(pageHostId);
 			List<Pboard> pboardList = boardSvc.getPboardList(pageHostId);
 			int mbPage = boardSvc.mboardpage(pageHostId);
@@ -83,8 +95,8 @@ public class PageController {
 			List<Page> related = pageSvc.getRelatedPages(page.getPgenre(), page.getPid());
 			model.addAttribute("related", related);
 			
+			//left 부분
 			AuthInfo authInfo = (AuthInfo) request.getSession().getAttribute("authInfo");
-			
 			if (authInfo !=null) {
 				int memId = authInfo.getMid();
 				List<PageLike> ckList = pageDao.plikeCheck(memId, pageHostId);
