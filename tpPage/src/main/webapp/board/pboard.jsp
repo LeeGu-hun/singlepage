@@ -10,6 +10,15 @@
 	int nowPbPage = Integer.parseInt(request.getAttribute("pbPage").toString());
 %>
 
+<c:if test="${gopbid != null }">
+<script>
+$(document).ready(function() {
+	loadpboard(${gopbid });
+});
+</script>
+</c:if>
+
+<c:out value="${gopbid }" />
 <c:out value="${page.pid }" /> page board
 <c:if test="${page.pid == authInfo.pid }">
 <form:form commandName="pboardcmd" action="pbwrite" enctype="multipart/form-data">

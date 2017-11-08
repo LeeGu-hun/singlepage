@@ -22,6 +22,7 @@
 	<bean class="controller.PageController">
 		<property name="pageDao" ref ="pageDao" />
 		<property name="pageSvc" ref="pageSvc" />
+		<property name="boardDao" ref="boardDao" />
 		<property name="boardSvc" ref="boardSvc" />
 		<property name="memberDao" ref="memberDao" />
 		<property name="memberSvc" ref="memberSvc" />
