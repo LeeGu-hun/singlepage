@@ -18,6 +18,7 @@
             	//<c:out value="${pboard.pbre_lev}" />
             	//<c:out value="${pboard.pbre_seq}" />
             	//<c:out value="${pboard.pbcontent}" />
+            	<br><c:out value="192.168.0.48:8080/tpPage/page?host=${pboard.pbhostid }&pbid=${pboard.pbid }" />
             	<hr />
 	            <div id="pbrebox">
 		            <form:form commandName="pbrecmd" action="pbrewrite">
