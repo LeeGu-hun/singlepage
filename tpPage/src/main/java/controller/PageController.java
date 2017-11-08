@@ -9,6 +9,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import board.BoardService;
@@ -62,8 +63,8 @@ public class PageController {
 		this.memberSvc = memberSvc;
 	}
 
-	@RequestMapping("/page")
-	public String pageLoad(@RequestParam("host") int host, @ModelAttribute("logincmd") MemberCommand logincmd,
+	@RequestMapping("/page/{host}")
+	public String pageLoad(@PathVariable("host") int host, @ModelAttribute("logincmd") MemberCommand logincmd,
 			@ModelAttribute("pboardcmd") PboardCommand pbc, @ModelAttribute("mboardcmd") MboardCommand mbc,
 			@ModelAttribute("pbrecmd") PboardCommand pbrecmd, Model model, HttpServletRequest request) {
 		int pageHostId = host;
@@ -128,7 +129,7 @@ public class PageController {
 			return "redirect:/membermanager";
 		} else {
 			int host = pageSvc.makePage(authInfo, pmc, request);
-			return "redirect:/page?host=" + host;
+			return "redirect:/page/" + host;
 		}
 	}	
 	
@@ -223,7 +224,7 @@ public class PageController {
 		AuthInfo authInfo = (AuthInfo) request.getSession().getAttribute("authInfo");
 		int host = authInfo.getPid();
 		pageSvc.adminPage(host, pmc, request);
-		return "redirect:/page?host=" + host;
+		return "redirect:/page/" + host;
 	}	
 	
 	@RequestMapping("/topModify")

@@ -75,7 +75,7 @@ function pbMoreList() {
 	var newPbPage = Number(pbPage) + 1;
 	$.ajax({
 		type : "POST",
-		url : "./pbmorelist",
+		url : "/tpPage/pbmorelist",
 		data : "pbPage=" + newPbPage + "&pbhostid=" + pbhostid,
 		success : pbMoreListR,
 	});
@@ -91,7 +91,7 @@ function pbMoreListScroll() {
 	$('#pbPage').val(newPbPage);
 	$.ajax({
 		type : "POST",
-		url : "./pbmorelistscroll",
+		url : "/tpPage/pbmorelistscroll",
 		data : "pbPage=" + newPbPage + "&pbhostid=" + pbhostid,
 		success : pbMoreListScrollR,
 	});
@@ -106,7 +106,7 @@ function mbMoreList() {
 	var newMbPage = Number(mbPage) + 1;
 	$.ajax({
 		type : "POST",
-		url : "./mbmorelist",
+		url : "/tpPage/mbmorelist",
 		data : "mbPage=" + newMbPage + "&mbhostid=" + mbhostid,
 		success : mbMoreListR,
 	});
@@ -122,7 +122,7 @@ function mbMoreListScroll() {
 	$('#mbPage').val(newMbPage);
 	$.ajax({
 		type : "POST",
-		url : "./mbmorelistscroll",
+		url : "/tpPage/mbmorelistscroll",
 		data : "mbPage=" + newMbPage + "&mbhostid=" + mbhostid,
 		success : mbMoreListScrollR,
 	});
@@ -134,7 +134,7 @@ function mbMoreListScrollR(msg) {
 function loadpboard(pbid) {
 	$.ajax({
 		type : "POST",
-		url : "./loadpboard",
+		url : "/tpPage/loadpboard",
 		data : "pbid=" + pbid,
 		success : loadpboardR
 	});
@@ -142,7 +142,10 @@ function loadpboard(pbid) {
 function loadpboardR(msg) {
 	$('#pbmodaldiv').html(msg);
 	$('.pbrecontent').val('');
-	$("#pbmodal").modal('show');
+	$('#pbmodal').modal('show');
+	$('#pbrmmodal').modal('hide');
+	var pbhostid = $('#pbhostid').val();
+	var gopbid = $('#gopbid').val();
 	
 	$('.pbrew').on('click', function() {
 		var frm = $(this).parent().parent().parent().children('#pbrecmd');
@@ -158,6 +161,62 @@ function loadpboardR(msg) {
 			$(this).next().hide();
 		}
 	});
+	
+	$('.pbrmbtn').on('click', function() {
+		var pbid = $('#pbid').val(); 
+		var rmpbid = $(this).next().val();
+		$.ajax({
+			type : "POST",
+			url : "/tpPage/pbreremove",
+			data : "pbid=" + pbid + "&rmpbid=" + rmpbid,
+			success : pbreremoveR
+		});
+		function pbreremoveR(msg) {
+			$('#pbrmmodaldiv').html(msg);
+			$('#pbrmmodal').modal('show');
+			$('.pbrermgo').on('click', function() {
+				var pbid = $(this).next().val();
+				var rmpbid = $(this).next().next().val();
+				$.ajax({
+					type : "POST",
+					url : "/tpPage/pbreremovego",
+					data : "pbid=" + pbid + "&rmpbid=" + rmpbid,
+					success : loadpboardR
+				});
+			});
+		}
+	});
+	
+	$('#pbmodal').on('hidden.bs.modal', function() {
+		if(gopbid != 0) {
+			location.href = '/tpPage/page/' + pbhostid;		
+		}
+	});	
+}
+
+function pbidrm(pbid) {
+	$.ajax({
+		type : "POST",
+		url : "/tpPage/pbidrm",
+		data : "pbid=" + pbid,
+		success : pbidrmR
+	});
+	function pbidrmR(msg) {
+		$('#pbrmmodaldiv').html(msg);
+		$('#pbrmmodal').modal('show');
+		$('.pbidrmgo').on('click', function() {
+			var pbid = $(this).next().val();
+			/*$.ajax({
+				type : "POST",
+				url : "/tpPage/pbidrmgo",
+				data : "pbid=" + pbid,
+				success : pbidrmRR
+			});
+			function pbidrmRR() {
+			}*/
+			$('#pbrmmodal').modal('hide');
+		});	
+	}
 }
 
 function pblike() {
@@ -166,7 +225,7 @@ function pblike() {
 	
 	$.ajax({
 		type : "POST",
-		url : "./pblike",
+		url : "/tpPage/pblike",
 		data : "pbid=" + pbid + "&pblikechk=" + pblikechk,
 		success : changepblike
 	});
@@ -185,7 +244,7 @@ function pblike() {
 function loadmboard(mbid) {
 	$.ajax({
 		type : "POST",
-		url : "./loadmboard",
+		url : "/tpPage/loadmboard",
 		data : "mbid=" + mbid,
 		success : loadmboardR
 	});

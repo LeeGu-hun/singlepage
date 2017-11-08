@@ -10,18 +10,24 @@
 	int nowPbPage = Integer.parseInt(request.getAttribute("pbPage").toString());
 %>
 
-<c:if test="${gopbid != null }">
-<script>
-$(document).ready(function() {
-	loadpboard(${gopbid });
-});
-</script>
-</c:if>
+<c:choose>
+	<c:when test="${gopbid != null }">
+		<script>
+			$(document).ready(function() {
+				loadpboard(${gopbid });
+			});
+		</script>
+		<input type="hidden" id="gopbid" value="${gopbid }" />
+	</c:when>
+	<c:otherwise>
+		<input type="hidden" id="gopbid" value="0" />
+	</c:otherwise>
+</c:choose>
 
 <c:out value="${gopbid }" />
 <c:out value="${page.pid }" /> page board
 <c:if test="${page.pid == authInfo.pid }">
-<form:form commandName="pboardcmd" action="pbwrite" enctype="multipart/form-data">
+<form:form commandName="pboardcmd" action="/tpPage/pbwrite" enctype="multipart/form-data">
 	<form:input path="pbsubject" />
 	<br>
 	<form:textarea path="pbcontent"></form:textarea>
@@ -65,7 +71,7 @@ $(document).ready(function() {
 			<td>${pboard.pbfile }</td>
 			<td>
 			<c:if test="${!empty pboard.pbnewfile }">
-			<img src="./buploads/pbuploads/${pboard.pbnewfile }" width="100px" />
+			<img src="/tpPage/buploads/pbuploads/${pboard.pbnewfile }" width="100px" />
 			</c:if>
 			<td>${pboard.pbreadcount }</td>
 			<td><fmt:formatDate value="${pboard.pbdate }" pattern="yyyy-mm-dd HH:mm:ss" /></td>
@@ -73,23 +79,25 @@ $(document).ready(function() {
 			<td>${pboard.pbwriterid }</td>
 			<td>${pboard.pname }</td>
 			<td>${pboard.mname }</td>
+			<td><a onclick="pbidrm(${pboard.pbid })">삭제</a><td>
+			<input type="hidden" class="pbidrow" value="${pboard.pbid }" />
 		</tr>
 		</c:forEach>
 <% if(nowPbPage == -1) { %>
 		<tr>
-			<td colspan="11">
+			<td colspan="12">
 				등록된 글이 없습니다.
 			</td>
 		<tr>
 <% } else if(nowPbPage == 0) { %>		
 		<tr>
-			<td colspan="11">
+			<td colspan="12">
 				마지막 항목입니다.
 			</td>
 		</tr>
 <% } else { %>
 		<tr name="pbBtnRow" id="pbBtnRow">
-			<td>
+			<td colspan="12">
 				<input type="button" value="더 보기" onclick="pbMoreList();" />                    
 			</td>
 		</tr>

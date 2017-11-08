@@ -17,7 +17,7 @@
 			<td>${pboard.pbfile }</td>
 			<td>
 			<c:if test="${!empty pboard.pbnewfile }">
-			<img src="./buploads/pbuploads/${pboard.pbnewfile }" width="100px" />
+			<img src="/tpPage/buploads/pbuploads/${pboard.pbnewfile }" width="100px" />
 			</c:if>
 			<td>${pboard.pbreadcount }</td>
 			<td><fmt:formatDate value="${pboard.pbdate }" pattern="yyyy-mm-dd HH:mm:ss" /></td>

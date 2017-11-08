@@ -32,7 +32,7 @@ $(document).ready(function() {
 
 <c:out value="${page.pid }" /> member board
 <c:if test="${!empty authInfo }">
-<form:form commandName="mboardcmd" action="mbwrite" enctype="multipart/form-data">
+<form:form commandName="mboardcmd" action="/tpPage/mbwrite" enctype="multipart/form-data">
 	<form:input path="mbsubject" />
 	<br>
 	<form:textarea path="mbcontent"></form:textarea>
@@ -77,7 +77,7 @@ $(document).ready(function() {
 			<td>${mboard.mbfile }</td>
 			<td>
 			<c:if test="${!empty mboard.mbnewfile }">
-			<img src="./buploads/mbuploads/${mboard.mbnewfile }" width="100px" />
+			<img src="/tpPage/buploads/mbuploads/${mboard.mbnewfile }" width="100px" />
 			</c:if>
 			<td>${mboard.mbreadcount }</td>
 			<td><fmt:formatDate value="${mboard.mbdate }" pattern="yyyy-mm-dd HH:mm:ss" /></td>
