@@ -57,12 +57,12 @@
         </div>
         <a data-slide="prev" href="#media" class="left carousel-control">‹</a>
         <a data-slide="next" href="#media" class="right carousel-control">›</a>
+		  <div style="text-align: right">
+			<c:if test="${authInfo.pid == page.pid }">
+				<a class="btn btn-info btn-sm" href="./topModify">수정</a>&nbsp;&nbsp;
+			</c:if>
+		  </div>
       </div>                          
     </div>
 </div>
   
-<div style="text-align: right">
-	<c:if test="${authInfo.pid == page.pid }">
-		<a class="btn btn-info btn-sm" href="./topModify">수정</a>&nbsp;&nbsp;
-	</c:if>
-</div>
