@@ -26,6 +26,7 @@ import page.Page;
 import page.PageCommand;
 import page.PageLike;
 import page.PageService;
+import page.PageTop;
 
 @Controller
 public class PageController {
@@ -215,7 +216,27 @@ public class PageController {
 	}	
 	
 	@RequestMapping("/topModify")
-	public String topModify() {
+	public String topModify(HttpServletRequest request, Model model) {
+		AuthInfo authInfo = (AuthInfo) request.getSession().getAttribute("authInfo");
+		int pid = authInfo.getPid();
+		List<PageTop> ptop = pageDao.selectTop(pid);
+		
+		model.addAttribute("ptop", ptop);
 		return "page/topModify";
+	}
+	
+	@RequestMapping("/sendTop")
+	public String modifyTop(HttpServletRequest request) {
+		AuthInfo authInfo = (AuthInfo) request.getSession().getAttribute("authInfo");
+		int pid = authInfo.getPid();
+		int count = Integer.parseInt(request.getParameter("count"));
+		String[] turn = request.getParameterValues("turn");
+		String[] link = request.getParameterValues("link");
+		String[] thum = request.getParameterValues("thum");
+		String[] checked = request.getParameterValues("checked");
+		
+		pageSvc.sendTop(count, pid, turn, link, thum, checked);
+		
+		return "redirect:/page?host=" + pid;
 	}
 }

@@ -13,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 import board.Pboard;
 import page.Page;
 import page.PageLike;
+import page.PageTop;
 
 public class PageDao {
 	private JdbcTemplate jdbcTemplate;
@@ -108,6 +109,25 @@ public class PageDao {
 		
 		return lists;
 	}
-
+	
+	public void addToplist(int pid, String turn, String link, String thum, String checked) {
+		jdbcTemplate.update("insert into toplist values(?, tid_seq.nextval, ?, ?, ?, ?)", 
+				pid, link, thum, checked, turn);
+	}
+	
+	public List<PageTop> selectTop(int pid) {
+		List<PageTop> tlist = jdbcTemplate.query("select * from toplist where pid=?", 
+				new RowMapper<PageTop>() {
+					@Override
+					public PageTop mapRow(ResultSet rs, int rowNum) throws SQLException {
+							PageTop ptop = new PageTop(rs.getInt("pid"), rs.getInt("tid"), rs.getInt("tcheck"), rs.getInt("turn"),
+									rs.getString("url"), rs.getString("thum"));
+						return ptop;
+					}				
+				},
+		pid);
+		
+		return tlist.isEmpty()?null:tlist;
+	}
 }
 
