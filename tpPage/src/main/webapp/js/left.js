@@ -228,8 +228,8 @@ function like() {
 	var pid = $('#pid').val();
 	var mid = $('#mid').val();
 	var ck = $('#ck').val();
-	if(mid == "/"){
-		location.href = './membermanager?pid='+pid;
+	if(mid == ""){
+		location.href = './login?pid='+pid;
 	} else {
 		$.ajax({
 			type : "POST",
