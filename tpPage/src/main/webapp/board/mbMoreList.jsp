@@ -41,11 +41,12 @@
 			<td>${mboard.mbwriterid }</td>
 			<td>${mboard.pname }</td>
 			<td>${mboard.mname }</td>
+			<td><a class="mbidrm">삭제</a><input type="hidden" value="${mboard.mbid }" /></td>
 		</tr>
 		</c:forEach>
 <% if(nowMbPage == 0) { %>		
 		<tr>
-			<td colspan="11">
+			<td colspan="12">
 				마지막 항목입니다.
 			</td>
 		</tr>

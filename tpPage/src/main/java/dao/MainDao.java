@@ -12,6 +12,8 @@ import org.springframework.jdbc.core.RowMapper;
 
 import board.Pboard;
 import main.Loc;
+import page.Page;
+import page.PageLike;
 
 public class MainDao {
 	private JdbcTemplate jdbcTemplate;
@@ -135,5 +137,29 @@ public class MainDao {
 			}
 		});
 		return locList;
+	}
+
+	public List<Pboard> getBoardListFavo(int page, int limit, int mid) {
+		List<PageLike> favoPid = jdbcTemplate.query("select distinct pid from page_like where mid = ? and plike = 1", new RowMapper<PageLike>() {
+			@Override
+			public PageLike mapRow(ResultSet rs, int rowNum) throws SQLException {
+				PageLike pid = new PageLike();
+				pid.setPid(rs.getInt(1));
+				return pid;
+			}
+		}, mid);
+		
+		String sql = "select * from (select rownum rnum, pbid, pbsubject, pbcontent, pbfile, pbnewfile, pbre_ref, pbre_lev, pbre_seq, pbreadcount, pbdate, pbhostid, pbwriterid from (select * from pboard where pbre_lev = 0 ";
+		if (favoPid.size()>0) {
+			sql += " and (";
+			for(int i = 0; i <favoPid.size(); i++) {
+				sql += " pbhostid = " + favoPid.get(i).getPid();
+				if(i != favoPid.size()-1) sql += " or ";
+			}
+			sql += " ) ";
+		}
+		sql += " order by pbdate desc)) where rnum >= ? and rnum<= ?";
+		List<Pboard> favoList = jdbcTemplate.query(sql, boRowMapper, page, limit);
+		return favoList;
 	}
 }

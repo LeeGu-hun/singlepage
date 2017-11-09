@@ -6,7 +6,6 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 <div class="container">
-<%@ include file="./menubar.jsp" %>
 
 <c:if test="${searched != null }">
 <form id="frm">
@@ -16,6 +15,10 @@
 <%@ include file="./search.jsp" %>
 <br />
 </c:if>
+<c:if test="${favo != null }">
+<input type="hidden" id="favo" value="0" />
+<input type="hidden" value="1" id="page" />
+</c:if>
 </div>
 
 
@@ -24,18 +27,21 @@
 	<c:forEach var="list" items="${boardList }">
 	<div class="grid-item">
 		<div class="inner-item">
-			<div class="title"><a href="./page?host=${list.pbhostid }">제목 : <c:out value="${list.pbsubject}" /></a></div>
-			<div class="content">내용<br><c:if test="${!empty list.pbnewfile}"><div style="text-align: center;"><img src="./buploads/pbuploads/${list.pbnewfile}"></div></c:if><% pageContext.setAttribute("rn", "\r\n"); %>${fn:replace(list.pbcontent, rn, "<br>")}<br><br><fmt:formatDate value="${list.pbdate}" pattern="yy.MM.dd HH:mm:ss"/></div>
+			<div class="title"><a href="/tpPage/page/${list.pbhostid }">제목 : <c:out value="${list.pbsubject}" /></a></div>
+			<div class="content">내용<br><c:if test="${!empty list.pbnewfile}"><div style="text-align: center;"><img src="/tpPage/buploads/pbuploads/${list.pbnewfile}"></div></c:if><% pageContext.setAttribute("rn", "\r\n"); %>${fn:replace(list.pbcontent, rn, "<br>")}<br><br><fmt:formatDate value="${list.pbdate}" pattern="yy.MM.dd HH:mm:ss"/></div>
 		</div>
 	</div>
 	</c:forEach>
 </div>
 
-<c:if test="${searched == null }">
+<c:if test="${searched == null && favo == null}">
 <button id="btn" onclick="loadMain()" class="btn btn-md btn-primary">더보기</button>
 </c:if>
 <c:if test="${searched != null }">
 <button id="btn" onclick="loadSrch()" class="btn btn-md btn-primary">더보기</button>
+</c:if>
+<c:if test="${favo != null }">
+<button id="btn" onclick="loadFavo()" class="btn btn-md btn-primary">더보기</button>
 </c:if>
 
 <a id="btnTop" class="btn btn-info btn-lg">맨 위로</a>

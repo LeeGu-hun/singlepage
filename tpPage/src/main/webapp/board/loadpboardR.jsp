@@ -25,7 +25,7 @@
             	//<c:out value="${pboard.pbre_seq}" />
             	//<c:out value="${pboard.pbcontent}" />
             	<br><c:out value="192.168.0.48:8080/tpPage/page/${pboard.pbhostid }?pbid=${pboard.pbid }" />
-            	<br><a href="javascript:ts('test', 'http://192.168.0.48:8080/tpPage/page/${pboard.pbhostid }?pbid=${pboard.pbid }');">트위터</a>
+            	<br><a href="javascript:ts('test', '{http://192.168.0.48:8080/tpPage/page?host=1&pbid=${pboard.pbid }}');">트위터</a>
 	            <div id="pbrebox">
 	            	<c:if test="${!empty authInfo }">
             		<hr />

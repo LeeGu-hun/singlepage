@@ -13,6 +13,7 @@ import board.Pboard;
 import dao.MainDao;
 import main.Loc;
 import main.MainService;
+import member.AuthInfo;
 import member.MemberCommand;
 
 @Controller
@@ -104,6 +105,33 @@ public class MainController {
 		int limit = page + 8;
 		List<Pboard> appendList = mainService.getRandom(page, limit);
 		model.addAttribute("appendList", appendList);
+		
+		return "main/load";
+	}
+	
+	
+	@RequestMapping("/favo")
+	public String favo(HttpServletRequest req, Model model, @ModelAttribute("logincmd") MemberCommand logincmd) {
+		int page = 1; int limit = 9;
+		AuthInfo authInfo = (AuthInfo)req.getSession().getAttribute("authInfo");
+		List<Pboard> boardList = mainService.getFavo(page, limit, authInfo.getMid());
+		model.addAttribute("boardList", boardList);
+		req.setAttribute("favo", 0);
+		
+		return "home";
+	}
+	
+	@RequestMapping("/loadFavo")
+	public String loadFavo(HttpServletRequest req, Model model, @ModelAttribute("logincmd") MemberCommand logincmd) {
+		int page = 1;
+		if(req.getParameter("page") != null) {
+			page = Integer.parseInt(req.getParameter("page"));
+		}
+		page = page * 9 + 1;
+		int limit = page + 8;
+		AuthInfo authInfo = (AuthInfo)req.getSession().getAttribute("authInfo");
+		List<Pboard> favoList = mainService.getFavo(page, limit, authInfo.getMid());
+		model.addAttribute("appendList", favoList);
 		
 		return "main/load";
 	}

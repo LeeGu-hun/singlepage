@@ -140,10 +140,11 @@ function loadpboard(pbid) {
 	});
 }
 function loadpboardR(msg) {
+	$('#rmchkmodal').modal('hide');
 	$('#pbmodaldiv').html(msg);
 	$('.pbrecontent').val('');
 	$('#pbmodal').modal('show');
-	$('#pbrmmodal').modal('hide');
+	$('body').css({'overflow': 'hidden', 'padding': '0px'});
 	var pbhostid = $('#pbhostid').val();
 	var gopbid = $('#gopbid').val();
 	
@@ -172,8 +173,9 @@ function loadpboardR(msg) {
 			success : pbreremoveR
 		});
 		function pbreremoveR(msg) {
-			$('#pbrmmodaldiv').html(msg);
-			$('#pbrmmodal').modal('show');
+			$('#rmchkmodaldiv').html(msg);
+			$('#rmchkmodal').modal('show');
+			$('body').css({'overflow': 'hidden', 'padding': '0px'});
 			$('.pbrermgo').on('click', function() {
 				var pbid = $(this).next().val();
 				var rmpbid = $(this).next().next().val();
@@ -188,36 +190,49 @@ function loadpboardR(msg) {
 	});
 	
 	$('#pbmodal').on('hidden.bs.modal', function() {
+		$('body').css('overflow', '');
 		if(gopbid != 0) {
 			location.href = '/tpPage/page/' + pbhostid;		
 		}
 	});	
 }
 
-function pbidrm(pbid) {
-	$.ajax({
-		type : "POST",
-		url : "/tpPage/pbidrm",
-		data : "pbid=" + pbid,
-		success : pbidrmR
-	});
-	function pbidrmR(msg) {
-		$('#pbrmmodaldiv').html(msg);
-		$('#pbrmmodal').modal('show');
-		$('.pbidrmgo').on('click', function() {
-			var pbid = $(this).next().val();
-			/*$.ajax({
-				type : "POST",
-				url : "/tpPage/pbidrmgo",
-				data : "pbid=" + pbid,
-				success : pbidrmRR
+$(document).ready(function() {
+	$('.pbidrm').on('click', function() {
+		var pbid = $(this).next().val();
+		$(this).parent().parent().attr('id', 'pbidrmrow');
+		$.ajax({
+			type : "POST",
+			url : "/tpPage/pbidrm",
+			data : "pbid=" + pbid,
+			success : pbidrmR
+		});
+		function pbidrmR(msg) {
+			$('#rmchkmodaldiv').html(msg);
+			$('#rmchkmodal').modal('show');
+			$('body').css({'overflow': 'hidden', 'padding': '0px'});
+			$('.pbidrmgo').on('click', function() {
+				var pbid = $(this).next().val();
+				$.ajax({
+					type : "POST",
+					url : "/tpPage/pbidrmgo",
+					data : "pbid=" + pbid,
+					success : pbidrmRR
+				});
+				function pbidrmRR() {
+					$('#rmchkmodal').modal('hide');
+					$('body').css('overflow', '');
+					$('#pbidrmrow').remove();
+				}
+			});	
+			
+			$('#rmchkmodal').on('hidden.bs.modal', function() {
+				$('body').css('overflow', '');
 			});
-			function pbidrmRR() {
-			}*/
-			$('#pbrmmodal').modal('hide');
-		});	
-	}
-}
+		}
+		
+	});
+});
 
 function pblike() {
 	var pbid = $('#nowpbid').val();
@@ -250,10 +265,11 @@ function loadmboard(mbid) {
 	});
 }
 function loadmboardR(msg) {
+	$('#rmchkmodal').modal('hide');
 	$('#mbmodaldiv').html(msg);
 	$('.mbrecontent').val('');
 	$("#mbmodal").modal('show');
-	
+	$('body').css({'overflow': 'hidden', 'padding': '0px'});
 	$('.mbrew').on('click', function() {
 		var frm = $(this).parent().parent().parent().children('#mbrecmd');
 		frm.ajaxSubmit({
@@ -268,7 +284,73 @@ function loadmboardR(msg) {
 			$(this).next().hide();
 		}
 	});
+	
+	$('.mbrmbtn').on('click', function() {
+		var mbid = $('#mbid').val();
+		var rmmbid = $(this).next().val();
+		$.ajax({
+			type : "POST",
+			url : "/tpPage/mbreremove",
+			data : "mbid=" + mbid + "&rmmbid=" + rmmbid,
+			success : mbreremoveR
+		});
+		function mbreremoveR(msg) {
+			$('#rmchkmodaldiv').html(msg);
+			$('#rmchkmodal').modal('show');
+			$('body').css({'overflow': 'hidden', 'padding': '0px'});
+			$('.mbrermgo').on('click', function() {
+				var mbid = $(this).next().val();
+				var rmmbid = $(this).next().next().val();
+				$.ajax({
+					type : "POST",
+					url : "/tpPage/mbreremovego",
+					data : "mbid=" + mbid + "&rmmbid=" + rmmbid,
+					success : loadmboardR
+				})
+			});
+		}
+	});
+	
+	$('#mbmodal').on('hidden.bs.modal', function() {
+		$('body').css('overflow', '');
+	});
 }
+
+$(document).ready(function() {
+	$('.mbidrm').on('click', function() {
+		var mbid = $(this).next().val();
+		$(this).parent().parent().attr('id', 'mbidrmrow');
+		$.ajax({
+			type : "POST",
+			url : "/tpPage/mbidrm",
+			data : "mbid=" + mbid,
+			success : mbidrmR
+		});
+		function mbidrmR(msg) {
+			$('#rmchkmodaldiv').html(msg);
+			$('#rmchkmodal').modal('show');
+			$('body').css({'overflow': 'hidden', 'padding': '0px'});
+			$('.mbidrmgo').on('click', function() {
+				var mbid = $(this).next().val();
+				$.ajax({
+					type : "POST",
+					url : "/tpPage/mbidrmgo",
+					data : "mbid=" + mbid,
+					success : mbidrmRR
+				});
+				function mbidrmRR() {
+					$('#rmchkmodal').modal('hide');
+					$('body').css('overflow', '');
+					$('#mbidrmrow').remove();
+				}
+			});
+			
+			$('#rmchkmodal').on('hidden.bs.modal', function() {
+				$('body').css('overflow', '');
+			});
+		}
+	});
+});
 
 
 

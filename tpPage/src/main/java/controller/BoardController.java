@@ -314,8 +314,65 @@ public class BoardController {
 		if(authInfo == null) {
 			return "board/ajaxlogin";
 		} else {
-			
-			return "board/null";
+			int pbid = Integer.parseInt(request.getParameter("pbid"));
+			boardDao.pbidrm(pbid);
+			return "board/boardNull";
+		}
+	}
+	
+	@RequestMapping("/mbreremove")
+	public String mbreremove(HttpServletRequest request, Model model) {
+		AuthInfo authInfo = (AuthInfo) request.getSession().getAttribute("authInfo");
+		if(authInfo == null) {
+			return "board/ajaxlogin";
+		} else {
+			int mbid = Integer.parseInt(request.getParameter("mbid"));
+			int rmmbid = Integer.parseInt(request.getParameter("rmmbid"));
+			model.addAttribute("mbid", mbid);
+			model.addAttribute("rmmbid", rmmbid);
+			return "board/mbreremoveR";
+		}
+	}
+	
+	@RequestMapping("/mbreremovego")
+	public String mbreremovego(@ModelAttribute("mbrecmd") MboardCommand mbrecmd, HttpServletRequest request, Model model) {
+		AuthInfo authInfo = (AuthInfo) request.getSession().getAttribute("authInfo");
+		if(authInfo == null) {
+			return "board/ajaxlogin";
+		} else {
+			int rmmbid = Integer.parseInt(request.getParameter("rmmbid"));
+			boardDao.mbrerm(rmmbid);
+		}
+		
+		int mbid = Integer.parseInt(request.getParameter("mbid"));
+		Mboard mboard = boardDao.getmbDetail(mbid);
+		List<Mboard> mbrelist = boardDao.getmbreDetail(mbid);
+		model.addAttribute("mboard", mboard);
+		model.addAttribute("mbrelist", mbrelist);
+		return "board/loadmboardR";
+	}
+	
+	@RequestMapping("/mbidrm")
+	public String mbidrm(HttpServletRequest request, Model model) {
+		AuthInfo authInfo = (AuthInfo) request.getSession().getAttribute("authInfo");
+		if(authInfo == null) {
+			return "board/ajaxlogin";
+		} else {
+			int mbid = Integer.parseInt(request.getParameter("mbid"));
+			model.addAttribute("mbid", mbid);
+			return "board/mbidrmR";
+		}
+	}
+	
+	@RequestMapping("/mbidrmgo")
+	public String mbidrmgo(HttpServletRequest request, Model model) {
+		AuthInfo authInfo = (AuthInfo) request.getSession().getAttribute("authInfo");
+		if(authInfo == null) {
+			return "board/ajaxlogin";
+		} else {
+			int mbid = Integer.parseInt(request.getParameter("mbid"));
+			boardDao.mbidrm(mbid);
+			return "board/boardNull";
 		}
 	}
 }

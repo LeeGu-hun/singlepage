@@ -50,6 +50,7 @@ public class PageService {
 	}
 	
 	public List<Page> getRelatedPages(String genre, int hostId) {
+		genre = genre.split(" - ")[0];
 		List<Page> lists = pageDao.getRelatedPages(genre, hostId);
 		return lists;
 	}

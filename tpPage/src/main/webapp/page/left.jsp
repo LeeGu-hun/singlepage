@@ -14,10 +14,14 @@
 	<div>
 		<c:choose>
 			<c:when test="${!empty page.pnewfile}">
+<<<<<<< HEAD
 				<img src="../puploads/${page.pnewfile }" alt="프로필사진" width="200px" height="150px" />
+=======
+				<img src="/tpPage/puploads/${page.pnewfile }" alt="프로필사진" width="200px" height="150px" />
+>>>>>>> branch 'temp' of https://github.com/LeeGu-hun/singlepage.git
 			</c:when>
 			<c:otherwise>
-				<img src="profile.png" alt="프로필" width="" height="" />
+				<img src="/tpPage/profile.png" alt="프로필" width="" height="" />
 			</c:otherwise>
 		</c:choose>
 	</div>

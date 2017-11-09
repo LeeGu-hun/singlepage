@@ -14,8 +14,8 @@
 <c:forEach var="list" items="${appendList}">
 	<div class="grid-item">
 		<div class="inner-item">
-			<div class="title"><a href="./page?host=${list.pbhostid }">제목 : <c:out value="${list.pbsubject}" /></a></div>
-			<div class="content">내용<br><c:if test="${!empty list.pbnewfile}"><div style="text-align: center;"><img src="./buploads/pbuploads/${list.pbnewfile}"></div></c:if><% pageContext.setAttribute("rn", "\r\n"); %>${fn:replace(list.pbcontent, rn, "<br>")}<br><br><fmt:formatDate value="${list.pbdate}" pattern="yy.MM.dd HH:mm:ss"/></div>
+			<div class="title"><a href="/tpPage/page/${list.pbhostid }">제목 : <c:out value="${list.pbsubject}" /></a></div>
+			<div class="content">내용<br><c:if test="${!empty list.pbnewfile}"><div style="text-align: center;"><img src="/tpPage/buploads/pbuploads/${list.pbnewfile}"></div></c:if><% pageContext.setAttribute("rn", "\r\n"); %>${fn:replace(list.pbcontent, rn, "<br>")}<br><br><fmt:formatDate value="${list.pbdate}" pattern="yy.MM.dd HH:mm:ss"/></div>
 		</div>
 	</div>
 </c:forEach>
