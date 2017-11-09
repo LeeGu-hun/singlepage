@@ -80,6 +80,7 @@ public class PageController {
 					model.addAttribute("gopbid", pboard.getPbid());
 				}
 			}
+			model.addAttribute("nowpid", page.getPid());
 			
 			//board 부분
 			int pbPage = boardSvc.pboardpage(pageHostId);
