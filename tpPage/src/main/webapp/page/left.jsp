@@ -14,7 +14,7 @@
 	<div>
 		<c:choose>
 			<c:when test="${!empty page.pnewfile}">
-				<img src="./puploads/${page.pnewfile }" alt="프로필사진" width="200px" height="150px" />
+				<img src="../puploads/${page.pnewfile }" alt="프로필사진" width="200px" height="150px" />
 			</c:when>
 			<c:otherwise>
 				<img src="profile.png" alt="프로필" width="" height="" />
@@ -49,7 +49,7 @@
 	<div>
 		<br/>
 		<c:if test="${authInfo.pid == page.pid }">
-			<a class="btn btn-info btn-sm" href="./admin">관리</a>&nbsp;&nbsp;
+			<a class="btn btn-info btn-sm" href="/tpPage/admin">관리</a>&nbsp;&nbsp;
 		</c:if>
 	</div>
 </div>

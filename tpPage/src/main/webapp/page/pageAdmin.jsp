@@ -31,7 +31,7 @@ page admin
 <form:form commandName="pagecmd" name="apfrm" action="adminpage" enctype="multipart/form-data">
 	<p><c:choose>
 			<c:when test="${!empty page.pnewfile}">
-				<img id="puploadImg" name="puploadImg" src="./puploads/${page.pnewfile }"  alt="프로필사진" width="200px" height="150px"/>
+				<img id="puploadImg" name="puploadImg" src="/tpPage/puploads/${page.pnewfile }"  alt="프로필사진" width="200px" height="150px"/>
 			</c:when>
 			<c:otherwise>
 				<img id="puploadImg" name="puploadImg" src="profile.png" alt="프로필" width="" height="" />

@@ -54,7 +54,7 @@ public class PageService {
 		return lists;
 	}
 	
-	public void adminPage(int host, PageCommand pmc, HttpServletRequest request) {
+	public void adminPage(int host, PageCommand pmc) {
 		MultipartFile multi = pmc.getPfile();
 		String pfile = multi.getOriginalFilename();
 		if(!(pfile.equals(""))) {
@@ -76,9 +76,18 @@ public class PageService {
 		}
 	}
 	
-	public void sendTop(int count, int pid, String[] turn, String[] link, String[] thum, String[] checked) {	
+	public void sendTop(int count, int pid, String[] turn, String[] link, MultipartFile[] thum, String[] checked, String[] tupdir) {	 
 		for (int i = 0; i <count; i++) {
-			pageDao.addToplist(pid, turn[i], link[i], thum[i], checked[i]);
+			String tfile = thum[i].getOriginalFilename();
+			String newtfile = System.currentTimeMillis() + "_" + tfile;
+			pageDao.addToplist(pid, turn[i], link[i], tfile, newtfile, checked[i]);
+			String path = tupdir[i] + newtfile;
+			try {
+				File file = new File(path);
+				thum[i].transferTo(file);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		}
 	}
 }

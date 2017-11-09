@@ -110,18 +110,18 @@ public class PageDao {
 		return lists;
 	}
 	
-	public void addToplist(int pid, String turn, String link, String thum, String checked) {
-		jdbcTemplate.update("insert into toplist values(?, tid_seq.nextval, ?, ?, ?, ?)", 
-				pid, link, thum, checked, turn);
+	public void addToplist(int pid, String turn, String link, String thum, String newthum, String checked) {
+		jdbcTemplate.update("insert into toplist values(?, tid_seq.nextval, ?, ?, ?, ?, ?)", 
+				pid, turn, link, thum, newthum, checked);
 	}
 	
 	public List<PageTop> selectTop(int pid) {
-		List<PageTop> tlist = jdbcTemplate.query("select * from toplist where pid=?", 
+		List<PageTop> tlist = jdbcTemplate.query("select * from toplist where pid=? order by turn", 
 				new RowMapper<PageTop>() {
 					@Override
 					public PageTop mapRow(ResultSet rs, int rowNum) throws SQLException {
 							PageTop ptop = new PageTop(rs.getInt("pid"), rs.getInt("tid"), rs.getInt("tcheck"), rs.getInt("turn"),
-									rs.getString("url"), rs.getString("thum"));
+									rs.getString("url"), rs.getString("thum"), rs.getString("newthum"));
 						return ptop;
 					}				
 				},
