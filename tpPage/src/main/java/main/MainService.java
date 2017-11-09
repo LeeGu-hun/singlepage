@@ -17,8 +17,9 @@ public class MainService {
 		
 	}
 	
-	public void getFavo() {
+	public List<Pboard> getFavo(int page, int limit, int mid) {
 		
+		return mainDao.getBoardListFavo(page, limit, mid);
 	}
 	
 	public void getHot() {

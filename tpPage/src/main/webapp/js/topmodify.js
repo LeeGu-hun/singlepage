@@ -20,9 +20,9 @@ function addlist() {
 				+"<input type='hidden' id='turn" + count + "' name='turn' value='" + count + "' />" 
 				+"<input type='checkbox' value='"+ count +"'/>보이기 <hr>" 
 				+"<div class='col-md-6'>" 
-				+"<label>링크: </label><input type='text' id='link"+ count +"' name='link'/><br/><br/> " 
-				+"<label>이미지: <input type='file' id='thum"+ count +"' name='thum' onchange='imgreadURL(this)'/>"
-				+"<input type='hidden' id='tupdir" + count + "' name='tupdir' value='<%=request.getRealPath('/tuploads/')%>' /></label>" 
+				+"<label>링크: </label><input type='text' id='link"+ count +"' name='link' required /><br/><br/> " 
+				+"<label>이미지: <input type='file' id='thum"+ count +"' name='thum' onchange='imgreadURL(this)' />"
+				+"<input type='hidden' id='tupdir" + count + "' name='tupdir' value='"+$('#realPath').val()+"' /></label>" 
 				+"</div><div class='col-md-6'><img id='tuploadImg"+ count +"' name='tuploadImg'/>" 
 				+"</div></div><br/>");
 		$('input:checkbox').on('change', function(){

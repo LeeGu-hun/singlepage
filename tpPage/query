@@ -220,8 +220,10 @@ commit;
 create table toplist(
     pid number not null,
     tid number not null,
+    turn number default 0 not null,
     url varchar2(100) not null,
-    thum varchar2(100) not null,
+    thum varchar2(100),
+    newthum varchar2(100),
     tcheck number default 0 not null,
     constraint pk_top primary key(tid),
     constraint fk_top foreign key(pid) references page(pid)
@@ -230,3 +232,5 @@ create table toplist(
 create sequence tid_seq increment by 1 start with 1 maxvalue 50000;
 
 alter table toplist add (turn number default 0 not null);
+
+

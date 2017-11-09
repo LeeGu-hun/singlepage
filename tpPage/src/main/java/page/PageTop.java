@@ -2,9 +2,9 @@ package page;
 
 public class PageTop {
 	private int pid, tid, tcheck, turn;
-	private String url, thum;
+	private String url, thum, newthum;
 	
-	public PageTop(int pid, int tid, int tcheck, int turn, String url, String thum) {
+	public PageTop(int pid, int tid, int tcheck, int turn, String url, String thum, String newthum) {
 		super();
 		this.pid = pid;
 		this.tid = tid;
@@ -12,6 +12,7 @@ public class PageTop {
 		this.turn = turn;
 		this.url = url;
 		this.thum = thum;
+		this.newthum = newthum;
 	}
 	
 	public int getPid() {
@@ -59,5 +60,13 @@ public class PageTop {
 
 	public void setTurn(int turn) {
 		this.turn = turn;
+	}
+
+	public String getNewthum() {
+		return newthum;
+	}
+
+	public void setNewthum(String newthum) {
+		this.newthum = newthum;
 	}
 }

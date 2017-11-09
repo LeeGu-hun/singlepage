@@ -26,6 +26,8 @@ $(document).ready(function(){
 		if(scrollHeight == documentHeight){
 			if($("#srch").length) {
 				loadSrch();
+			} else if($("#favo").length) {
+				loadFavo();
 			} else {
 				loadMain();
 			}
@@ -225,6 +227,17 @@ function loadSrch() {
 		type : "POST",
 		url : "./loadSrch",
 		data : frm+"&page="+page,
+		success : appendList
+	});
+}
+
+function loadFavo() {
+	var page = $("#page").val();
+	$("#page").val(Number(page) + 1);
+	$.ajax({
+		type : "POST",
+		url : "./loadFavo",
+		data : "page="+page,
 		success : appendList
 	});
 }
