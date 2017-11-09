@@ -184,8 +184,8 @@
     </div>
 </div>
 
-<div id="pbrmmodaldiv">
-	<div class="modal" id="pbrmmodal" aria-hidden="true" style="display: none; z-index: 1050;">
+<div id="mbmodaldiv">
+	<div class="modal" id="mbmodal" aria-hidden="true" style="display: none; z-index: 1050;">
     	<div class="modal-dialog modal-lg">
        		<div class="modal-content">
             	<div class="modal-header">
@@ -204,8 +204,8 @@
     </div>
 </div>
 
-<div id="mbmodaldiv">
-	<div class="modal" id="mbmodal" aria-hidden="true" style="display: none; z-index: 1050;">
+<div id="rmchkmodaldiv">
+	<div class="modal" id="rmchkmodal" aria-hidden="true" style="display: none; z-index: 1050;">
     	<div class="modal-dialog modal-lg">
        		<div class="modal-content">
             	<div class="modal-header">

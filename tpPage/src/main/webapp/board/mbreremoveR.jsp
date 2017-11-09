@@ -13,11 +13,11 @@
              		<h4 class="modal-title">삭제하시겠습니까?</h4>
            	</div><div class="container"></div>
            	<div class="modal-body">
-           		<c:out value="${pbid }" />
-           		//<c:out value="${rmpbid }" />
-           		<br><a class="pbrermgo">삭제</a>
-           		<input type="hidden" value="${pbid }" />
-           		<input type="hidden" value="${rmpbid }" />
+           		<c:out value="${mbid }" />
+           		//<c:out value="${rmmbid }" />
+           		<br><a class="mbrermgo">삭제</a>
+           		<input type="hidden" value="${mbid }" />
+           		<input type="hidden" value="${rmmbid }" />
            		<a href="#" data-dismiss="modal" class="btn">취소</a>
            	</div>
     	</div>

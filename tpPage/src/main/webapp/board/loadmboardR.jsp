@@ -38,7 +38,10 @@
 	          				//<c:out value="${mbrelist.mbre_seq }" />
 	          				//<c:out value="${mbrelist.mbcontent }" />
 	          				<c:if test="${authInfo.mid == mbrelist.mbwriterid }">
-	          				<a>삭제</a>	
+	          					<c:if test="${mbrelist.mbid > 0 }">
+	          						<a class="mbrmbtn">삭제</a>
+	          						<input type="hidden" value="${mbrelist.mbid }" />	
+	          					</c:if>
 	          				</c:if>
 	          				<c:if test="${!empty authInfo }">
 	          				<a class="mbrebtn">댓글쓰기</a>

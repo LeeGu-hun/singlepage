@@ -25,11 +25,12 @@
 			<td>${pboard.pbwriterid }</td>
 			<td>${pboard.pname }</td>
 			<td>${pboard.mname }</td>
+			<td><a class="pbidrm">삭제</a><input type="hidden" value="${pboard.pbid }" /></td>
 		</tr>
 		</c:forEach>
 <% if(nowPbPage == -1) { %>		
 		<tr>
-			<td colspan="11">
+			<td colspan="12">
 				마지막 항목입니다.
 			</td>
 		</tr>

@@ -134,7 +134,7 @@ public class BoardDao {
 		jdbcTemplate.update("insert into pboard values(pbid_seq.nextval, 0, ?, null, null, ?, ?, ?, 0, sysdate, ?, ?)",
 				pbcontent, pbid, pbre_lev + 1, pbre_seq, pbhostid, pbwriterid);
 		
-		int row = jdbcTemplate.queryForObject("select count(*) from pboard where pbre_ref = ? and pbre_lev < ? and pbre_seq > ?", Integer.class,
+		int row = jdbcTemplate.queryForObject("select count(*) from pboard where pbre_ref = ? and pbre_lev > -1 and pbre_lev < ? and pbre_seq > ?", Integer.class,
 				pbid, pbre_lev + 1, pbre_seq);
 		
 		if(row == 0) {
@@ -204,7 +204,7 @@ public class BoardDao {
 		jdbcTemplate.update("insert into mboard values(mbid_seq.nextval, 0, ?, null, null, ?, ?, ?, 0, sysdate, ?, ?)",
 				mbcontent, mbid, mbre_lev + 1, mbre_seq, mbhostid, mbwriterid);
 		
-		int row = jdbcTemplate.queryForObject("select count(*) from mboard where mbre_ref = ? and mbre_lev < ? and mbre_seq > ?", Integer.class,
+		int row = jdbcTemplate.queryForObject("select count(*) from mboard where mbre_ref = ? and mbre_lev > -1 and mbre_lev < ? and mbre_seq > ?", Integer.class,
 				mbid, mbre_lev + 1, mbre_seq);
 		
 		if(row == 0) {
@@ -234,9 +234,21 @@ public class BoardDao {
 
 	public void pbrerm(int rmpbid) {
 		String remove = "삭제된 댓글입니다.";
-		
 		int pbid = 0 - rmpbid;
-		
 		jdbcTemplate.update("update pboard set pbcontent = ?, pbid = ? where pbid = ?", remove, pbid, rmpbid);
+	}
+
+	public void pbidrm(int pbid) {
+		jdbcTemplate.update("update pboard set pbre_lev = -1 where pbid = ?", pbid);
+	}
+
+	public void mbrerm(int rmmbid) {
+		String remove = "삭제된 댓글입니다.";
+		int mbid = 0 - rmmbid;
+		jdbcTemplate.update("update mboard set mbcontent = ?, mbid = ? where mbid = ?", remove, mbid, rmmbid);
+	}
+
+	public void mbidrm(int mbid) {
+		jdbcTemplate.update("update mboard set mbre_lev = -1 where mbid = ?", mbid);	
 	}
 }
