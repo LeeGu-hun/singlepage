@@ -5,6 +5,12 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
+<script>
+ function ts(text, url) {
+	 window.open("https://twitter.com/intent/tweet?text=" + text + "&url=" + url);
+ }
+</script>
+
 <div class="modal" id="pbmodal" aria-hidden="true" style="display: none; z-index: 1050;">
 	<div class="modal-dialog modal-lg">
 		<div class="modal-content">
@@ -18,16 +24,19 @@
             	//<c:out value="${pboard.pbre_lev}" />
             	//<c:out value="${pboard.pbre_seq}" />
             	//<c:out value="${pboard.pbcontent}" />
-            	<br><c:out value="192.168.0.48:8080/tpPage/page?host=${pboard.pbhostid }&pbid=${pboard.pbid }" />
-            	<hr />
+            	<br><c:out value="192.168.0.48:8080/tpPage/page/${pboard.pbhostid }?pbid=${pboard.pbid }" />
+            	<br><a href="javascript:ts('test', 'http://192.168.0.48:8080/tpPage/page/${pboard.pbhostid }?pbid=${pboard.pbid }');">트위터</a>
 	            <div id="pbrebox">
-		            <form:form commandName="pbrecmd" action="pbrewrite">
+	            	<c:if test="${!empty authInfo }">
+            		<hr />
+		            <form:form commandName="pbrecmd" action="/tpPage/pbrewrite">
 	            		<form:textarea path="pbcontent" class="pbrecontent"></form:textarea>
 	            		<form:hidden path="pbid" value="${pboard.pbid }" />
 	            		<form:hidden path="pbreid" value="${pboard.pbid }" />
 	            		<form:hidden path="pbhostid" value="${pboard.pbhostid }" />
 	            		<p><input type="button" value="댓글쓰기" class="pbrew"></p>
 	            	</form:form>
+	           		</c:if>
 	           		<c:forEach var="pbrelist" items="${pbrelist }">
 	            		<div>
 	          				<hr style="margin:5px;" />
@@ -36,9 +45,16 @@
 	          				//<c:out value="${pbrelist.pbre_lev }" />
 	          				//<c:out value="${pbrelist.pbre_seq }" />
 	          				//<c:out value="${pbrelist.pbcontent }" />
+	          				<c:if test="${authInfo.mid == pbrelist.pbwriterid }">
+	          					<c:if test="${pbrelist.pbid > 0 }">
+	          						<a class="pbrmbtn">삭제</a>
+	          						<input type="hidden" value="${pbrelist.pbid }" />
+	          					</c:if>
+	          				</c:if>
+	          				<c:if test="${!empty authInfo }">
 	          				<a class="pbrebtn">댓글쓰기</a>
 	          				<div style="display: none">
-								<form:form commandName="pbrecmd" action="pbrewrite" class="refrm">
+								<form:form commandName="pbrecmd" action="/tpPage/pbrewrite" class="refrm">
 									<form:textarea path="pbcontent" class="pbrecontent"></form:textarea>
 									<form:hidden path="pbid" value="${pboard.pbid }" />
 									<form:hidden path="pbreid" value="${pbrelist.pbid }" />
@@ -46,6 +62,7 @@
 									<p><input type="button" value="댓글쓰기" class="pbrew"></p>
 								</form:form>
 							</div>
+	          				</c:if>
 	          			</div>
 	          		</c:forEach>
             	</div>

@@ -184,6 +184,26 @@
     </div>
 </div>
 
+<div id="pbrmmodaldiv">
+	<div class="modal" id="pbrmmodal" aria-hidden="true" style="display: none; z-index: 1050;">
+    	<div class="modal-dialog modal-lg">
+       		<div class="modal-content">
+            	<div class="modal-header">
+              		<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+              		<h4 class="modal-title">초기값</h4>
+            	</div><div class="container"></div>
+            	<div class="modal-body">
+            		<p>초기값</p>
+              		<a data-toggle="modal" href="#" class="btn btn-primary">Launch modal</a>
+            	</div>
+            	<div class="modal-footer">
+              		<a href="#" data-dismiss="modal" class="btn">Close</a>
+            	</div>
+          	</div>
+        </div>
+    </div>
+</div>
+
 <div id="mbmodaldiv">
 	<div class="modal" id="mbmodal" aria-hidden="true" style="display: none; z-index: 1050;">
     	<div class="modal-dialog modal-lg">

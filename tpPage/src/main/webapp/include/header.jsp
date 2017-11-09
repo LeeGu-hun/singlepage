@@ -11,10 +11,10 @@
 <div id="header">
 <c:if test="${empty authInfo }">
 
-<form:form commandName="logincmd" action="login">
+<form:form commandName="logincmd" action="/tpPage/login">
 <p>
-<a href="./home" class="btn btn-primary">home</a>
-<a href="./join" class="btn btn-primary">회원가입</a>
+<a href="/tpPage/home" class="btn btn-primary">home</a>
+<a href="/tpPage/join" class="btn btn-primary">회원가입</a>
 <form:input path="memail" placeholder="email"/>
 <form:password path="mpw" placeholder="password"/>
 <c:if test="${nowpid != null }">
@@ -27,21 +27,21 @@
 </c:if>
 
 <c:if test="${!empty authInfo }">
-<form:form commandName="logincmd" action="logout">
-<a href="./home" class="btn btn-primary">home</a>
+<form:form commandName="logincmd" action="/tpPage/logout">
+<a href="/tpPage/home" class="btn btn-primary">home</a>
 <c:if test="${nowpid != null }">
 <form:hidden path="nowpid" value="${nowpid }"/>
 </c:if>
 <input type="submit" class="btn btn-primary" value="로그아웃">
-<a href="./meminfo" class="btn btn-primary">회원 정보</a>
+<a href="/tpPage/meminfo" class="btn btn-primary">회원 정보</a>
 <%
 	if(authInfo.getPid() == 0) {
 %>
-<a href="./pagemaker" class="btn btn-primary">page 만들기</a>
+<a href="/tpPage/pagemaker" class="btn btn-primary">page 만들기</a>
 <%
 	} else {
 %>		
-<a href="./page?host=${authInfo.pid }" class="btn btn-primary">내 page 이동</a>		
+<a href="/tpPage/page/${authInfo.pid }" class="btn btn-primary">내 page 이동</a>		
 <%
 	}
 %>

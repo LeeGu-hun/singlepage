@@ -27,13 +27,13 @@
 	<tbody id="mbListTT" name="mbListTT">
 		<c:forEach var="mboard" items="${mboardList }">
 		<tr>
-			<td>${mboard.mbid }</td>
+			<td><a data-toggle="modal" onclick="loadmboard(${mboard.mbid });">${mboard.mbid }</a></td>
 			<td>${mboard.mbsubject }</td>
 			<td>${mboard.mbcontent }</td>
 			<td>${mboard.mbfile }</td>
 			<td>
 			<c:if test="${!empty mboard.mbnewfile }">
-			<img src="./buploads/mbuploads/${mboard.mbnewfile }" width="100px" />
+			<img src="/tpPage/buploads/mbuploads/${mboard.mbnewfile }" width="100px" />
 			</c:if>
 			<td>${mboard.mbreadcount }</td>
 			<td><fmt:formatDate value="${mboard.mbdate }" pattern="yyyy-mm-dd HH:mm:ss" /></td>

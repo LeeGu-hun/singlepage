@@ -101,7 +101,7 @@ public class BoardController {
 			} else {
 				boardSvc.pboardWrite(pbhostid, pbwriterid, pbc.getPbsubject(), pbc.getPbcontent(), null, null);
 			}
-			return "redirect:/page?host=" + pbhostid;
+			return "redirect:/page/" + pbhostid;
 		}
 	}
 	
@@ -164,7 +164,7 @@ public class BoardController {
 				boardSvc.mboardWrite(mbhostid, mbwriterid, mbc.getMbsubject(), mbc.getMbcontent(), null, null);
 			}
 			ra.addFlashAttribute("reMbTab", reMbTab);
-			return "redirect:/page?host=" + mbhostid;
+			return "redirect:/page/" + mbhostid;
 		}
 	}
 	
@@ -262,6 +262,61 @@ public class BoardController {
 		model.addAttribute("mboard", mboard);
 		model.addAttribute("mbrelist", mbrelist);
 		return "board/loadmboardR";
+	}
+	
+	@RequestMapping("/pbreremove")
+	public String pbreremove(HttpServletRequest request, Model model) {
+		AuthInfo authInfo = (AuthInfo) request.getSession().getAttribute("authInfo");
+		if(authInfo == null) {
+			return "board/ajaxlogin";
+		} else {
+			int pbid = Integer.parseInt(request.getParameter("pbid"));
+			int rmpbid = Integer.parseInt(request.getParameter("rmpbid"));
+			model.addAttribute("pbid", pbid);
+			model.addAttribute("rmpbid", rmpbid);
+			return "board/pbreremoveR";
+		}
+	}
+	
+	@RequestMapping("/pbreremovego")
+	public String pbreremovego(@ModelAttribute("pbrecmd") PboardCommand pbrecmd, HttpServletRequest request, Model model) {
+		AuthInfo authInfo = (AuthInfo) request.getSession().getAttribute("authInfo");
+		if(authInfo == null) {
+			return "board/ajaxlogin";
+		} else {
+			int rmpbid = Integer.parseInt(request.getParameter("rmpbid"));
+			boardDao.pbrerm(rmpbid);
+		}
+		
+		int pbid = Integer.parseInt(request.getParameter("pbid"));
+		Pboard pboard = boardDao.getpbDetail(pbid);
+		List<Pboard> pbrelist = boardDao.getpbreDetail(pbid);
+		model.addAttribute("pboard", pboard);
+		model.addAttribute("pbrelist", pbrelist);
+		return "board/loadpboardR";
+	}
+	
+	@RequestMapping("/pbidrm")
+	public String pbidrm(HttpServletRequest request, Model model) {
+		AuthInfo authInfo = (AuthInfo) request.getSession().getAttribute("authInfo");
+		if(authInfo == null) {
+			return "board/ajaxlogin";
+		} else {
+			int pbid = Integer.parseInt(request.getParameter("pbid"));
+			model.addAttribute("pbid", pbid);
+			return "board/pbidrmR";
+		}
+	}
+	
+	@RequestMapping("/pbidrmgo")
+	public String pbidrmgo(HttpServletRequest request, Model model) {
+		AuthInfo authInfo = (AuthInfo) request.getSession().getAttribute("authInfo");
+		if(authInfo == null) {
+			return "board/ajaxlogin";
+		} else {
+			
+			return "board/null";
+		}
 	}
 }
 

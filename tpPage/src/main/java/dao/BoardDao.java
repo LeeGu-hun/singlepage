@@ -60,7 +60,7 @@ public class BoardDao {
 				+ "from (select rownum rnum, mbid, mbsubject, mbcontent, mbfile, mbnewfile, "
 				+ "mbre_ref, mbre_lev, mbre_seq, mbreadcount, mbdate, mbhostid, mbwriterid, pname, mname "
 				+ "from (select * from member m, page p, mboard mb where m.mid = mb.mbwriterid and p.pid = mb.mbhostid "
-				+ "and mb.mbhostid = ? order by mbre_ref desc, mbre_seq asc)) where rnum >= ? and rnum <= ?",
+				+ "and mb.mbhostid = ? and mbre_lev = 0 order by mbre_ref desc, mbre_seq asc)) where rnum >= ? and rnum <= ?",
 				new RowMapper<Mboard>() {
 					@Override
 					public Mboard mapRow(ResultSet rs, int rowNom) throws SQLException {
@@ -230,5 +230,13 @@ public class BoardDao {
 					}
 		}, pbid);
 		return results.isEmpty() ? null : results.get(0);
+	}
+
+	public void pbrerm(int rmpbid) {
+		String remove = "삭제된 댓글입니다.";
+		
+		int pbid = 0 - rmpbid;
+		
+		jdbcTemplate.update("update pboard set pbcontent = ?, pbid = ? where pbid = ?", remove, pbid, rmpbid);
 	}
 }

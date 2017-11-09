@@ -12,7 +12,7 @@
 %>
 
 <script type="text/javascript">
-	location.href="./login";
+	location.href="/tpPage/login";
 </script>
 
 <%

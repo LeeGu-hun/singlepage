@@ -75,4 +75,10 @@ public class PageService {
 			pageDao.adminPage2(host, page);
 		}
 	}
+	
+	public void sendTop(int count, int pid, String[] turn, String[] link, String[] thum, String[] checked) {	
+		for (int i = 0; i <count; i++) {
+			pageDao.addToplist(pid, turn[i], link[i], thum[i], checked[i]);
+		}
+	}
 }
