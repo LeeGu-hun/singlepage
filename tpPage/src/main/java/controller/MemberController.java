@@ -122,32 +122,21 @@ public class MemberController {
 			if (mlcmd.getMpw().equals(member.getMpw())) {
 				Page pid = memberDao.getMemberPid(member.getMid());
 				int npid = mlcmd.getNowpid();
+				int newPid;
 				if (npid == 0) {
-					if (pid == null) {
-						AuthInfo authInfo = new AuthInfo(member.getMid(), member.getMname(), member.getMemail(),
-								member.getMphone(), member.getMcheck(), member.getMpoint(), member.getMdate(), 0);
-						session.setAttribute("authInfo", authInfo);
-						return "redirect:/home";
-					} else {
-						AuthInfo authInfo = new AuthInfo(member.getMid(), member.getMname(), member.getMemail(),
-								member.getMphone(), member.getMcheck(), member.getMpoint(), member.getMdate(),
-								pid.getPid());
-						session.setAttribute("authInfo", authInfo);
-						return "redirect:/home";
-					}
+					if (pid == null) newPid = 0;
+					else newPid = pid.getPid();
+					AuthInfo authInfo = new AuthInfo(member.getMid(), member.getMname(), member.getMemail(),
+							member.getMphone(), member.getMcheck(), member.getMpoint(), member.getMdate(), newPid);
+					session.setAttribute("authInfo", authInfo);
+					return "redirect:/home";
 				} else {
-					if (pid == null) {
-						AuthInfo authInfo = new AuthInfo(member.getMid(), member.getMname(), member.getMemail(),
-								member.getMphone(), member.getMcheck(), member.getMpoint(), member.getMdate(), 0);
-						session.setAttribute("authInfo", authInfo);
-						return "redirect:/page?host=" + npid;
-					} else {
-						AuthInfo authInfo = new AuthInfo(member.getMid(), member.getMname(), member.getMemail(),
-								member.getMphone(), member.getMcheck(), member.getMpoint(), member.getMdate(),
-								pid.getPid());
-						session.setAttribute("authInfo", authInfo);
-						return "redirect:/page?host=" + npid;
-					}
+					if (pid == null) newPid = 0;
+					else newPid = pid.getPid();
+					AuthInfo authInfo = new AuthInfo(member.getMid(), member.getMname(), member.getMemail(),
+							member.getMphone(), member.getMcheck(), member.getMpoint(), member.getMdate(), newPid);
+					session.setAttribute("authInfo", authInfo);
+					return "redirect:/page?host=" + npid;
 				}
 			} else {
 				return "member/login";
@@ -156,8 +145,11 @@ public class MemberController {
 	}
 	
 	@RequestMapping("/logout")
-	public String logout(HttpSession session) {
+	public String logout(HttpSession session, @ModelAttribute("logincmd") MemberCommand mlcmd) {
 		session.invalidate();
+		if(mlcmd.getNowpid() != 0) {
+			return "redirect:/page?host=" + mlcmd.getNowpid();
+		}
 		return "redirect:/home";
 	}
 	
