@@ -85,23 +85,24 @@ $(document).ready(function() {
 			<td>${mboard.mbwriterid }</td>
 			<td>${mboard.pname }</td>
 			<td>${mboard.mname }</td>
+			<td><a class="mbidrm">삭제</a><input type="hidden" value="${mboard.mbid }" /></td>
 		</tr>
 		</c:forEach>
 <% if(nowMbPage == -1) { %>
 		<tr>
-			<td colspan="11">
+			<td colspan="12">
 				등록된 글이 없습니다.
 			</td>
 		<tr>
 <% } else if(nowMbPage == 0) { %>		
 		<tr>
-			<td colspan="11">
+			<td colspan="12">
 				마지막 항목입니다.
 			</td>
 		</tr>
 <% } else { %>
 		<tr>
-			<td>
+			<td colspan="12">
 				<input type="button" value="더 보기" onclick="mbMoreList();" />                    
 			</td>
 		</tr>

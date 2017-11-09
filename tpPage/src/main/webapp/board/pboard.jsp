@@ -79,8 +79,7 @@
 			<td>${pboard.pbwriterid }</td>
 			<td>${pboard.pname }</td>
 			<td>${pboard.mname }</td>
-			<td><a onclick="pbidrm(${pboard.pbid })">삭제</a><td>
-			<input type="hidden" class="pbidrow" value="${pboard.pbid }" />
+			<td><a class="pbidrm">삭제</a><input type="hidden" value="${pboard.pbid }" /></td>
 		</tr>
 		</c:forEach>
 <% if(nowPbPage == -1) { %>

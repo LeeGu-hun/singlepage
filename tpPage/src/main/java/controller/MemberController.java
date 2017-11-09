@@ -136,7 +136,7 @@ public class MemberController {
 					AuthInfo authInfo = new AuthInfo(member.getMid(), member.getMname(), member.getMemail(),
 							member.getMphone(), member.getMcheck(), member.getMpoint(), member.getMdate(), newPid);
 					session.setAttribute("authInfo", authInfo);
-					return "redirect:/page?host=" + npid;
+					return "redirect:/page/" + npid;
 				}
 			} else {
 				return "member/login";
@@ -148,7 +148,7 @@ public class MemberController {
 	public String logout(HttpSession session, @ModelAttribute("logincmd") MemberCommand mlcmd) {
 		session.invalidate();
 		if(mlcmd.getNowpid() != 0) {
-			return "redirect:/page?host=" + mlcmd.getNowpid();
+			return "redirect:/page/" + mlcmd.getNowpid();
 		}
 		return "redirect:/home";
 	}
