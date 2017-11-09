@@ -6,7 +6,6 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 <div class="container">
-<%@ include file="./menubar.jsp" %>
 
 <c:if test="${searched != null }">
 <form id="frm">
@@ -15,6 +14,10 @@
 </form>
 <%@ include file="./search.jsp" %>
 <br />
+</c:if>
+<c:if test="${favo != null }">
+<input type="hidden" id="favo" value="0" />
+<input type="hidden" value="1" id="page" />
 </c:if>
 </div>
 
@@ -31,11 +34,14 @@
 	</c:forEach>
 </div>
 
-<c:if test="${searched == null }">
+<c:if test="${searched == null && favo == null}">
 <button id="btn" onclick="loadMain()" class="btn btn-md btn-primary">더보기</button>
 </c:if>
 <c:if test="${searched != null }">
 <button id="btn" onclick="loadSrch()" class="btn btn-md btn-primary">더보기</button>
+</c:if>
+<c:if test="${favo != null }">
+<button id="btn" onclick="loadFavo()" class="btn btn-md btn-primary">더보기</button>
 </c:if>
 
 <a id="btnTop" class="btn btn-info btn-lg">맨 위로</a>

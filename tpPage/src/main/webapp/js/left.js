@@ -233,7 +233,7 @@ function like() {
 	} else {
 		$.ajax({
 			type : "POST",
-			url : "./chklike",
+			url : "/tpPage/chklike",
 			data : "pid=" + pid + "&mid=" + mid + "&ck=" + $.trim(ck),
 			success : changeHeart
 		});

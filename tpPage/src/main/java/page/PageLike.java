@@ -6,6 +6,8 @@ public class PageLike {
 	private int mid, plike, pid;
 	private Date plike_date;
 	
+	public PageLike() {}
+	
 	public PageLike(int mid, int plike, int pid, Date plike_date) {
 		super();
 		this.mid = mid;
