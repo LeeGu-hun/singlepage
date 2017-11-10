@@ -375,6 +375,30 @@ public class BoardController {
 			return "board/boardNull";
 		}
 	}
+	
+	@RequestMapping("/pballdrop")
+	public String pballdrop(HttpServletRequest request, Model model) {
+		AuthInfo authInfo = (AuthInfo) request.getSession().getAttribute("authInfo");
+		if(authInfo == null) {
+			return "board/ajaxlogin";
+		} else {
+			int pbhostid = Integer.parseInt(request.getParameter("pbhostid"));
+			model.addAttribute("pbhostid", pbhostid);
+			return "board/pballdropR";
+		}
+	}
+	
+	@RequestMapping("/pballdropgo")
+	public String pballdropgo(HttpServletRequest request, Model model) {
+		AuthInfo authInfo = (AuthInfo) request.getSession().getAttribute("authInfo");
+		if(authInfo == null) {
+			return "board/ajaxlogin";
+		} else {
+			int pbhostid = Integer.parseInt(request.getParameter("pbhostid"));
+			boardDao.pballdrop(pbhostid);
+			return "board/boardNull";
+		}
+	}
 }
 
 

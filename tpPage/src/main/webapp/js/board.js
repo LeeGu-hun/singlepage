@@ -484,7 +484,37 @@ $(document).ready(function() {
 	});
 });
 
-
+function pballdrop(pbhostid) {
+	$.ajax({
+		type : "POST",
+		url : "/tpPage/pballdrop",
+		data : "pbhostid=" + pbhostid,
+		success : pballdropR
+	});
+	function pballdropR(msg) {
+		$('#rmchkmodaldiv').html(msg);
+		$('#rmchkmodal').modal('show');
+		$('body').css({'overflow': 'hidden', 'padding': '0px'});
+		$('#pballdropgo').on('click', function() {
+			var pbhostid = $(this).next().val();
+			$.ajax({
+				type : "POST",
+				url : "/tpPage/pballdropgo",
+				data : "pbhostid=" + pbhostid,
+				success : pballdropgoR
+			})
+			function pballdropgoR() {
+				$('#rmchkmodal').modal('hide');
+				$('body').css('overflow', '');
+				$('#pbListT').html('등록된 글이 없습니다.');
+			}
+		});
+		
+		$('#rmchkmodal').on('hidden.bs.modal', function() {
+			$('body').css('overflow', '');
+		});
+	}
+}
 
 
 
