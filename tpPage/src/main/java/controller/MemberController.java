@@ -136,7 +136,7 @@ public class MemberController {
 					AuthInfo authInfo = new AuthInfo(member.getMid(), member.getMname(), member.getMemail(),
 							member.getMphone(), member.getMcheck(), member.getMpoint(), member.getMdate(), newPid);
 					session.setAttribute("authInfo", authInfo);
-					return "redirect:/page?host=" + npid;
+					return "redirect:/page/" + npid;
 				}
 			} else {
 				return "member/login";
@@ -148,14 +148,20 @@ public class MemberController {
 	public String logout(HttpSession session, @ModelAttribute("logincmd") MemberCommand mlcmd) {
 		session.invalidate();
 		if(mlcmd.getNowpid() != 0) {
-			return "redirect:/page?host=" + mlcmd.getNowpid();
+			return "redirect:/page/" + mlcmd.getNowpid();
 		}
 		return "redirect:/home";
 	}
 	
 	@RequestMapping("/meminfo")
-	public String meminfo(@ModelAttribute("logincmd") MemberCommand mlcmd, @ModelAttribute("joincmd") MemberCommand mjcmd) {
-		return "member/memberManager";
+	public String meminfo(@ModelAttribute("logincmd") MemberCommand mlcmd, @ModelAttribute("joincmd") MemberCommand mjcmd,
+			@ModelAttribute("memberdropcmd") MemberCommand dropcmd, HttpServletRequest request) {
+		AuthInfo authInfo = (AuthInfo) request.getSession().getAttribute("authInfo");
+		if(authInfo == null) {
+			return "redirect:/login";
+		} else {
+			return "member/memberManager";
+		}
 	}
 	
 	@RequestMapping("/memmodifier")
@@ -247,6 +253,32 @@ public class MemberController {
 		}
 	}
 	
+	@RequestMapping("/memberdrop")
+	public String memberdrop(@ModelAttribute("memberdropcmd") MemberCommand dropcmd, HttpServletRequest request, HttpSession session) {
+		AuthInfo authInfo = (AuthInfo) request.getSession().getAttribute("authInfo");
+		Member member = memberSvc.memberLogin(dropcmd.getMemail());
+		if(authInfo == null) {
+			return "redirect:/login";
+		} else if(member.getMpw().equals(dropcmd.getMpw())){
+			memberDao.memDrop(member.getMid(), member.getMemail());
+			session.invalidate();
+			return "redirect:/home";
+		}else {
+			return "redirect:/meminfo";
+		}
+	}
+
+//	@RequestMapping("/dropfinish")
+//	public String dropfinish(@ModelAttribute("memberdropcmd") MemberCommand dropcmd, HttpServletResponse response, HttpSession session) {
+//		memberDao.memDrop(dropcmd.getMemail(), dropcmd.getMpw());
+//		if() {
+//			session.invalidate();
+//		}else {
+//		
+//		return "redirect:/home";
+//		}
+//	}
+	
 //	@RequestMapping("/checkmodal")
 //	public String checkmodal(@ModelAttribute("infocmd") MemberCommand checkcmd, HttpServletRequest request) {
 //		Member member = memberDao.selectByEmail(checkcmd.getMphone());
@@ -274,6 +306,14 @@ public class MemberController {
 		System.out.println("제대로치라");
 		return "member/mpwFinderR";
 	}
+	
+//	@RequestMapping("/memberCheck")
+//	public String memberCheck(HttpServletRequest request) {
+//		String email = request.getParameter("email");
+//		String pw = memberDao.memPass(email);
+//		request.setAttribute("ck", pw);
+//		return "page/ck";
+//	}
 
 	/*@RequestMapping("/mpwFind")
 	public String mpwFind(@ModelAttribute("mpwfindcmd") MemberCommand mpwfindcmd, HttpServletRequest request) {
