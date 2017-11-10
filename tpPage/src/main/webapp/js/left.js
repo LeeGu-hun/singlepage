@@ -63,7 +63,7 @@ function donateClose() {
 	console.log(ppoint);
 	$.ajax({
 		type : "POST",
-		url : "./pointDonate",
+		url : "/tpPage/pointDonate",
 		data : "pid=" + pid + "&mid=" + mid + "&ppoint=" + ppoint+ "&dmoney=" + dmoney,
 		success : function(ck) {
 			ck = $.trim(ck);
@@ -158,7 +158,7 @@ function chargeClose() {
 	var mid = $('#mid').val();
 	$.ajax({
 		type : "POST",
-		url : "./pointCharge",
+		url : "/tpPage/pointCharge",
 		data : "charge=" + charge + "&mid=" + mid,
 		success : function(ck) {
 			ck = $.trim(ck);
@@ -186,7 +186,7 @@ function memCheck() {
 	var email = $('#memail').val(); 
 	$.ajax({
 		type : "POST",
-		url : "./memberCheck",
+		url : "/tpPage/memberCheck",
 		data : "email=" + email,
 		success : cmpPass
 	});
@@ -202,7 +202,7 @@ function cmpPass(pw) {
 	if (memail == email && pw == pass) {
 		$.ajax({
 			type : "POST",
-			url : "./mchkUpdate",
+			url : "/tpPage/mchkUpdate",
 			data : "email=" + email + "&phone=" + phone + "&mid=" + mid,
 			success : changeMchk
 		});
