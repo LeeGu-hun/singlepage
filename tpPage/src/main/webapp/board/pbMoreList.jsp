@@ -22,53 +22,12 @@
 			<th>pbwriterid</th>
 			<th>pname</th>
 			<th>mname</th>
+			<c:if test="${page.pid == authInfo.pid }">
+			<td><a class="pbidrm">삭제</a><input type="hidden" value="${pboard.pbid }" /></td>
+			</c:if>
 		</tr>
 	</thead>
 	<input type="hidden" id="pbPage" name="pbPage" value="<%= nowPbPage %>" />
-	<tbody>
-		<tr>
-			<td>
-				<script>
-				$(document).ready(function() {
-					$('.pbidrm').on('click', function() {
-						var pbid = $(this).next().val();
-						$(this).parent().parent().attr('id', 'pbidrmrow');
-						$.ajax({
-							type : "POST",
-							url : "/tpPage/pbidrm",
-							data : "pbid=" + pbid,
-							success : pbidrmR
-						});
-						function pbidrmR(msg) {
-							$('#rmchkmodaldiv').html(msg);
-							$('#rmchkmodal').modal('show');
-							$('body').css({'overflow': 'hidden', 'padding': '0px'});
-							$('.pbidrmgo').on('click', function() {
-								var pbid = $(this).next().val();
-								$.ajax({
-									type : "POST",
-									url : "/tpPage/pbidrmgo",
-									data : "pbid=" + pbid,
-									success : pbidrmRR
-								});
-								function pbidrmRR() {
-									$('#rmchkmodal').modal('hide');
-									$('body').css('overflow', '');
-									$('#pbidrmrow').remove();
-								}
-							});	
-							
-							$('#rmchkmodal').on('hidden.bs.modal', function() {
-								$('body').css('overflow', '');
-							});
-						}
-						
-					});
-				});
-				</script>
-			</td>
-		</tr>
-	</tbody>
 	<tbody id="pbListTT" name="pbListTT">
 		<c:forEach var="pboard" items="${pboardList }">
 		<tr>
