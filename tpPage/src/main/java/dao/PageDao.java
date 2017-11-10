@@ -110,9 +110,28 @@ public class PageDao {
 		return lists;
 	}
 	
-	public void addToplist(int pid, String turn, String link, String thum, String newthum, String checked) {
+	public void addToplist1(int pid, String turn, String link, String thum, String newthum, String checked) {
 		jdbcTemplate.update("insert into toplist values(?, tid_seq.nextval, ?, ?, ?, ?, ?)", 
 				pid, turn, link, thum, newthum, checked);
+	}
+	
+	public void addToplist2(int pid, String turn, String link, String checked) {
+		jdbcTemplate.update("insert into toplist values(?, tid_seq.nextval, ?, ?, ?)", 
+				pid, turn, link, checked);
+	}
+	
+	public void updateToplist1(String tid, String turn, String link, String thum, String newthum, String checked) {
+		jdbcTemplate.update("update toplist set turn=?, url=?, thum=?, newthum=?, tcheck=? where tid=? )", 
+				turn, link, thum, newthum, checked, tid);
+	}
+	
+	public void updateToplist2(String tid, String turn, String link, String checked) {
+		jdbcTemplate.update("update toplist set turn=?, url=?, tcheck=? where tid=? )", 
+				turn, link, checked, tid);
+	}
+	
+	public void deleteToplist(String turn) {
+		jdbcTemplate.update("delete from toplist where turn=?)", turn);
 	}
 	
 	public List<PageTop> selectTop(int pid) {

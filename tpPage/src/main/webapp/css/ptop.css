@@ -64,3 +64,10 @@
 	height: 250; 
 	width: 600;
 }
+
+.delspan
+{
+	display:inline-block; 
+	width: 490px; 
+	text-align: right;
+}
