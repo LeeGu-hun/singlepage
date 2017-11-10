@@ -15,17 +15,21 @@
     <div class='col-md-12'>
       <div class="carousel slide media-carousel" id="media">
         <div class="carousel-inner">
-          <div class="item  active">
+          <div class="item active">
             <div class="row">
-              <div class="col-md-4">
-                <a class="thumbnail" href="#"><img alt="" src="http://placehold.it/150x150"></a>
-              </div>          
-              <div class="col-md-4">
-                <a class="thumbnail" href="#"><img alt="" src="http://placehold.it/150x150"></a>
-              </div>
-              <div class="col-md-4">
-                <a class="thumbnail" href="#"><img alt="" src="http://placehold.it/150x150"></a>
-              </div>        
+              <c:forEach var="list" varStatus="i" begin="0" end="2">
+              <c:set var="list" value="${ptop[i.current] }" />
+	              <c:if test="${i.count == list.turn }">
+	              	<div class="col-md-4">
+		              <a class="thumbnail" href="${list.url }"><img alt="" src="../tuploads/${list.newthum }"></a>
+		            </div> 
+	              </c:if>
+	              <c:if test="${i.count != list.turn }">
+	              	<div class="col-md-4">
+                	  <a class="thumbnail" href="#"><img alt="" src="http://placehold.it/150x150"></a>
+              		</div>  
+	              </c:if>
+              </c:forEach> 
             </div>
           </div>
           <div class="item">
@@ -39,19 +43,6 @@
               <div class="col-md-4">
                 <a class="thumbnail" href="#"><img alt="" src="http://placehold.it/150x150"></a>
               </div>        
-            </div>
-          </div>
-          <div class="item">
-            <div class="row">
-              <div class="col-md-4">
-                <a class="thumbnail" href="#"><img alt="" src="http://placehold.it/150x150"></a>
-              </div>          
-              <div class="col-md-4">
-                <a class="thumbnail" href="#"><img alt="" src="http://placehold.it/150x150"></a>
-              </div>
-              <div class="col-md-4">
-                <a class="thumbnail" href="#"><img alt="" src="http://placehold.it/150x150"></a>
-              </div>      
             </div>
           </div>
         </div>
@@ -59,7 +50,7 @@
         <a data-slide="next" href="#media" class="right carousel-control">›</a>
 		  <div style="text-align: right">
 			<c:if test="${authInfo.pid == page.pid }">
-				<a class="btn btn-info btn-sm" href="./topModify">수정</a>&nbsp;&nbsp;
+				<a class="btn btn-info btn-sm" href="/tpPage/topModify">수정</a>&nbsp;&nbsp;
 			</c:if>
 		  </div>
       </div>                          

@@ -1,10 +1,12 @@
 package controller;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import javax.tools.ToolProvider;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,6 +14,9 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
+
 import board.BoardService;
 import board.Mboard;
 import board.MboardCommand;
@@ -29,6 +34,7 @@ import page.PageCommand;
 import page.PageLike;
 import page.PageService;
 import page.PageTop;
+import page.TopCommand;
 
 @Controller
 public class PageController {
@@ -109,6 +115,11 @@ public class PageController {
 					model.addAttribute("ck", ck);
 				} 
 			}
+			
+			//carousel
+			List<PageTop> ptop = pageDao.selectTop(host);
+			model.addAttribute("ptop", ptop);
+			
 			return "page";
 		}
 	}
@@ -225,7 +236,7 @@ public class PageController {
 	public String adminPage(@ModelAttribute("pagecmd") PageCommand pmc, HttpServletRequest request) {
 		AuthInfo authInfo = (AuthInfo) request.getSession().getAttribute("authInfo");
 		int host = authInfo.getPid();
-		pageSvc.adminPage(host, pmc, request);
+		pageSvc.adminPage(host, pmc);
 		return "redirect:/page/" + host;
 	}	
 	
@@ -240,17 +251,21 @@ public class PageController {
 	}
 	
 	@RequestMapping("/sendTop")
-	public String modifyTop(HttpServletRequest request) {
+	public String modifyTop(@RequestParam("thum") MultipartFile[] thum, HttpServletRequest request, Model model) {
 		AuthInfo authInfo = (AuthInfo) request.getSession().getAttribute("authInfo");
 		int pid = authInfo.getPid();
 		int count = Integer.parseInt(request.getParameter("count"));
+		
 		String[] turn = request.getParameterValues("turn");
 		String[] link = request.getParameterValues("link");
-		String[] thum = request.getParameterValues("thum");
 		String[] checked = request.getParameterValues("checked");
+		String[] tupdir = request.getParameterValues("tupdir");
 		
-		pageSvc.sendTop(count, pid, turn, link, thum, checked);
+		pageSvc.sendTop(count, pid, turn, link, thum, checked, tupdir);
 		
-		return "redirect:/page?host=" + pid;
+		List<PageTop> ptop = pageDao.selectTop(pid);
+		model.addAttribute("ptop", ptop);
+		
+		return "redirect:/page/" + pid;
 	}
 }
