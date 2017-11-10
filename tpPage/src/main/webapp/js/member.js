@@ -21,6 +21,19 @@
 			}	
 		});
 	}
+	
+//회원탈퇴
+function memberdrop() {
+	$('#memberdrop').modal('show');
+	$('#memdpbtn').on('click', function() {
+		$('#memberdropchk').modal('show');
+		$('#memdpgobtn').on('click', function() {
+			$('#memberdropcmd').submit();
+		});
+	});
+}
+
+
 
 //본인 인증하기
 function mcheckgo() {

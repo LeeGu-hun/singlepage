@@ -82,6 +82,39 @@ function pbMoreList() {
 }
 function pbMoreListR(msg) {
 	$('#pbListT').html(msg)
+	$('.pbidrm').on('click', function() {
+		var pbid = $(this).next().val();
+		$(this).parent().parent().attr('id', 'pbidrmrow');
+		$.ajax({
+			type : "POST",
+			url : "/tpPage/pbidrm",
+			data : "pbid=" + pbid,
+			success : pbidrmR
+		});
+		function pbidrmR(msg) {
+			$('#rmchkmodaldiv').html(msg);
+			$('#rmchkmodal').modal('show');
+			$('body').css({'overflow': 'hidden', 'padding': '0px'});
+			$('.pbidrmgo').on('click', function() {
+				var pbid = $(this).next().val();
+				$.ajax({
+					type : "POST",
+					url : "/tpPage/pbidrmgo",
+					data : "pbid=" + pbid,
+					success : pbidrmRR
+				});
+				function pbidrmRR() {
+					$('#rmchkmodal').modal('hide');
+					$('body').css('overflow', '');
+					$('#pbidrmrow').remove();
+				}
+			});	
+			
+			$('#rmchkmodal').on('hidden.bs.modal', function() {
+				$('body').css('overflow', '');
+			});
+		}		
+	});
 }
 
 function pbMoreListScroll() {
@@ -98,6 +131,39 @@ function pbMoreListScroll() {
 }
 function pbMoreListScrollR(msg) {
 	$('#pbListTT').append(msg)
+	$('.pbidrm').on('click', function() {
+		var pbid = $(this).next().val();
+		$(this).parent().parent().attr('id', 'pbidrmrow');
+		$.ajax({
+			type : "POST",
+			url : "/tpPage/pbidrm",
+			data : "pbid=" + pbid,
+			success : pbidrmR
+		});
+		function pbidrmR(msg) {
+			$('#rmchkmodaldiv').html(msg);
+			$('#rmchkmodal').modal('show');
+			$('body').css({'overflow': 'hidden', 'padding': '0px'});
+			$('.pbidrmgo').on('click', function() {
+				var pbid = $(this).next().val();
+				$.ajax({
+					type : "POST",
+					url : "/tpPage/pbidrmgo",
+					data : "pbid=" + pbid,
+					success : pbidrmRR
+				});
+				function pbidrmRR() {
+					$('#rmchkmodal').modal('hide');
+					$('body').css('overflow', '');
+					$('#pbidrmrow').remove();
+				}
+			});	
+			
+			$('#rmchkmodal').on('hidden.bs.modal', function() {
+				$('body').css('overflow', '');
+			});
+		}
+	});
 }
 
 function mbMoreList() {
@@ -113,6 +179,39 @@ function mbMoreList() {
 }
 function mbMoreListR(msg) {
 	$('#mbListT').html(msg)
+	$('.mbidrm').on('click', function() {
+		var mbid = $(this).next().val();
+		$(this).parent().parent().attr('id', 'mbidrmrow');
+		$.ajax({
+			type : "POST",
+			url : "/tpPage/mbidrm",
+			data : "mbid=" + mbid,
+			success : mbidrmR
+		});
+		function mbidrmR(msg) {
+			$('#rmchkmodaldiv').html(msg);
+			$('#rmchkmodal').modal('show');
+			$('body').css({'overflow': 'hidden', 'padding': '0px'});
+			$('.mbidrmgo').on('click', function() {
+				var mbid = $(this).next().val();
+				$.ajax({
+					type : "POST",
+					url : "/tpPage/mbidrmgo",
+					data : "mbid=" + mbid,
+					success : mbidrmRR
+				});
+				function mbidrmRR() {
+					$('#rmchkmodal').modal('hide');
+					$('body').css('overflow', '');
+					$('#mbidrmrow').remove();
+				}
+			});
+			
+			$('#rmchkmodal').on('hidden.bs.modal', function() {
+				$('body').css('overflow', '');
+			});
+		}
+	});
 }
 
 function mbMoreListScroll() {
@@ -129,6 +228,39 @@ function mbMoreListScroll() {
 }
 function mbMoreListScrollR(msg) {
 	$('#mbListTT').append(msg);
+	$('.mbidrm').on('click', function() {
+		var mbid = $(this).next().val();
+		$(this).parent().parent().attr('id', 'mbidrmrow');
+		$.ajax({
+			type : "POST",
+			url : "/tpPage/mbidrm",
+			data : "mbid=" + mbid,
+			success : mbidrmR
+		});
+		function mbidrmR(msg) {
+			$('#rmchkmodaldiv').html(msg);
+			$('#rmchkmodal').modal('show');
+			$('body').css({'overflow': 'hidden', 'padding': '0px'});
+			$('.mbidrmgo').on('click', function() {
+				var mbid = $(this).next().val();
+				$.ajax({
+					type : "POST",
+					url : "/tpPage/mbidrmgo",
+					data : "mbid=" + mbid,
+					success : mbidrmRR
+				});
+				function mbidrmRR() {
+					$('#rmchkmodal').modal('hide');
+					$('body').css('overflow', '');
+					$('#mbidrmrow').remove();
+				}
+			});
+			
+			$('#rmchkmodal').on('hidden.bs.modal', function() {
+				$('body').css('overflow', '');
+			});
+		}
+	});
 }
 
 function loadpboard(pbid) {
@@ -352,7 +484,37 @@ $(document).ready(function() {
 	});
 });
 
-
+function pballdrop(pbhostid) {
+	$.ajax({
+		type : "POST",
+		url : "/tpPage/pballdrop",
+		data : "pbhostid=" + pbhostid,
+		success : pballdropR
+	});
+	function pballdropR(msg) {
+		$('#rmchkmodaldiv').html(msg);
+		$('#rmchkmodal').modal('show');
+		$('body').css({'overflow': 'hidden', 'padding': '0px'});
+		$('#pballdropgo').on('click', function() {
+			var pbhostid = $(this).next().val();
+			$.ajax({
+				type : "POST",
+				url : "/tpPage/pballdropgo",
+				data : "pbhostid=" + pbhostid,
+				success : pballdropgoR
+			})
+			function pballdropgoR() {
+				$('#rmchkmodal').modal('hide');
+				$('body').css('overflow', '');
+				$('#pbListT').html('등록된 글이 없습니다.');
+			}
+		});
+		
+		$('#rmchkmodal').on('hidden.bs.modal', function() {
+			$('body').css('overflow', '');
+		});
+	}
+}
 
 
 

@@ -7,15 +7,26 @@
 <%
 	AuthInfo authInfo = (AuthInfo) request.getSession().getAttribute("authInfo");
 %>
+<%-- <%
+	int success = (int)request.getSession().getAttribute("success");
+%> --%>
 <!DOCTYPE html>
 <html>
 <head>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+
+<style>
+a {
+ cursor:pointer;
+}
+</style>
+
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"
 	integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
 	crossorigin="anonymous"></script>
 <script type="text/javascript" src="<%=request.getContextPath()%>/js/member.js?ver=118"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js" type="text/javascript"></script>
+<script src="http://malsup.github.com/jquery.form.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>	
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
@@ -85,7 +96,7 @@
 <!-- 로그인 전후 -->
 
 <c:if test="${! empty authInfo }">	
-	<form:form commandName="infocmd" action="memInfo">
+
 		<p>
 			* 이메일:<%=authInfo.getMemail() %>
 		</p>
@@ -196,9 +207,52 @@
 		<a href="./memmodifier" class="btn btn-primary">회원정보수정</a>
 		<a href="./mpwchange" class="btn btn-primary">비밀번호 변경</a><br><br>
 		<a href="./home" class="btn btn-primary">홈으로 가기</a>
-	</form:form>
-</c:if>
+		<a data-toggle="modal" class="btn btn-success" href="" onclick="memberdrop()">회원탈퇴</a>
 
+		
+		<div class="modal" id="memberdrop" aria-hidden="true" style="display: none; z-index: 1050;">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+						<h4 class="modal-title">회원탈퇴</h4>
+					</div><div class="container"></div>
+					<div class="modal-body">
+					<form:form commandName="memberdropcmd" action="/tpPage/memberdrop">
+						<p>
+							<label> 
+								<form:hidden path="memail" value="${authInfo.memail }" />
+								<form:password path="mpw" placeholder="비밀번호 입력하시오" />
+							</label>
+						</p>
+					</form:form>
+					</div>
+					<div class="modal-footer">
+						<a href="#" id="memdpbtn" class="btn btn-primary">회원탈퇴!</a>
+						<a href="#" data-dismiss="modal" class="btn">닫기</a>
+					</div>
+				</div>
+			</div>
+		</div>
 
+		<div class="modal" id="memberdropchk" aria-hidden="true" style="display: none; z-index: 1060;">
+			<div class="modal-dialog modal-sm">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+						<h4 class="modal-title">탈퇴하시겠습니까?</h4>
+					</div><div class="container"></div>
+					<div class="modal-body">
+						<a id="memdpgobtn">탈퇴</a>
+						<a href="#" data-dismiss="modal" class="btn">아니오</a>
+					</div>
+					<div class="modal-footer">
+						<a href="#" data-dismiss="modal" class="btn">Close</a>
+					</div>
+				</div>
+			</div>
+		</div>
+			
+	</c:if>
 </body>
 </html>

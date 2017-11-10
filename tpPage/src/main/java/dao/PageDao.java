@@ -93,7 +93,8 @@ public class PageDao {
 	
 	public List<Page> getRelatedPages(String genre, int hostId) {
 		List<Page> lists;
-		String sql = "select * from page where pgenre = ? and pid != ?";
+		String sql = "select * from page where pgenre like '%" + genre + "%' ";
+		sql += "and pid != ?";
 		lists = jdbcTemplate.query(sql, new RowMapper<Page>() {
 			@Override
 			public Page mapRow(ResultSet rs, int rowNom) throws SQLException {
@@ -105,8 +106,13 @@ public class PageDao {
 						rs.getString("pshowtime"), rs.getTimestamp("pdate"), rs.getTimestamp("pperiod"), rs.getString("platlng"));
 				return page;
 			}
-		}, genre, hostId);
-		
+		}, hostId);
+		if(lists.size()>5) {
+			while(lists.size()>5) {
+				int i = (int) (Math.random()*lists.size()+1);
+				lists.remove(i);
+			}
+		}
 		return lists;
 	}
 	
