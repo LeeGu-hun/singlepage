@@ -79,9 +79,9 @@ public class PageService {
 
 	public void sendTop(int originCnt, int count, int pid, String[] tid, String[] turn, String[] link, MultipartFile[] thum,
 			String[] checked, String[] tupdir) {
-		System.out.println("service");
-		if (originCnt == 0) {
-			for (int i = 0; i < count; i++) {
+		int originTurn = 0;
+		for (int i = 0; i<count; i++) {
+			if(tid[i].equals("")) {
 				String tfile = thum[i].getOriginalFilename();
 				if (!(tfile.equals(""))) {					
 					String newtfile = System.currentTimeMillis() + "_" + tfile;
@@ -96,33 +96,13 @@ public class PageService {
 				} else {
 					pageDao.addToplist2(pid, turn[i], link[i], checked[i]);
 				}
-			}
-		} else {
-			if (originCnt >= count) {
-				for (int i = 0; i < count; i++) {
-					String tfile = thum[i].getOriginalFilename();
-					if (!(tfile.equals(""))) {					
-						String newtfile = System.currentTimeMillis() + "_" + tfile;
-						pageDao.updateToplist1(tid[i], turn[i], link[i], tfile, newtfile, checked[i]);
-						String path = tupdir[i] + newtfile;
-						try {
-							File file = new File(path);
-							thum[i].transferTo(file);
-						} catch (Exception e) {
-							e.printStackTrace();
-						}
-					} else {
-						pageDao.updateToplist2(tid[i], turn[i], link[i], checked[i]);
-					}
-				}
-				for (int i = count; i < originCnt; i++) {
-					pageDao.deleteToplist(turn[i]);
-				}
 			} else {
-				for (int i = 0; i < originCnt; i++) {
+				originTurn = pageDao.selectTurn(tid[i]);
+				if (originTurn > Integer.parseInt(turn[i])) {
 					String tfile = thum[i].getOriginalFilename();
 					if (!(tfile.equals(""))) {					
 						String newtfile = System.currentTimeMillis() + "_" + tfile;
+						pageDao.deleteTurn(pid, turn[i]);
 						pageDao.updateToplist1(tid[i], turn[i], link[i], tfile, newtfile, checked[i]);
 						String path = tupdir[i] + newtfile;
 						try {
@@ -132,27 +112,11 @@ public class PageService {
 							e.printStackTrace();
 						}
 					} else {
+						pageDao.deleteTurn(pid, turn[i]);
 						pageDao.updateToplist2(tid[i], turn[i], link[i], checked[i]);
-					}
-				}
-				for (int i = originCnt; i < count; i++) {
-					String tfile = thum[i].getOriginalFilename();
-					if (!(tfile.equals(""))) {					
-						String newtfile = System.currentTimeMillis() + "_" + tfile;
-						pageDao.addToplist1(pid, turn[i], link[i], tfile, newtfile, checked[i]);
-						String path = tupdir[i] + newtfile;
-						try {
-							File file = new File(path);
-							thum[i].transferTo(file);
-						} catch (Exception e) {
-							e.printStackTrace();
-						}
-					} else {
-						pageDao.addToplist2(pid, turn[i], link[i], checked[i]);
 					}
 				}
 			}
 		}
-
 	}
 }

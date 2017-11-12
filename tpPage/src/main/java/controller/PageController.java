@@ -118,7 +118,7 @@ public class PageController {
 			}
 			
 			//carousel
-			List<PageTop> ptop = pageDao.selectTop(host);
+			List<PageTop> ptop = pageDao.selectCarousel(host);
 			model.addAttribute("ptop", ptop);
 			
 			return "page";
@@ -256,7 +256,6 @@ public class PageController {
 		System.out.println("asfdasdfasfdf");
 		AuthInfo authInfo = (AuthInfo) request.getSession().getAttribute("authInfo");
 		int pid = authInfo.getPid();
-		System.out.println(pid);
 		int count = Integer.parseInt(request.getParameter("count"));
 		int originCnt = Integer.parseInt(request.getParameter("originCnt"));
 		String[] tid = request.getParameterValues("tid");
@@ -264,9 +263,9 @@ public class PageController {
 		String[] link = request.getParameterValues("link");
 		String[] checked = request.getParameterValues("checked");
 		String[] tupdir = request.getParameterValues("tupdir");
-		System.out.println("22222222222222");
+		
 		pageSvc.sendTop(originCnt, count, pid, tid, turn, link, thum, checked, tupdir);
-		System.out.println("111111111111");
+
 		return "redirect:/page/" + pid;
 	}
 }

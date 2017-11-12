@@ -21,13 +21,15 @@
 	<c:if test="${ptop == null}">
 		<input type="hidden" id="originCnt" name="originCnt" value="0"/>
 		<input type="hidden" id="count" name="count" value="1"/>
-		<div class="topList">
+		<div class="topList" id="order1">
+			<input type="hidden" id="tid1" name="tid" value="" />
 			<input type="hidden" id = "turn1" name="turn" value="1" />
 			<input type="hidden" id="checked1" name="checked" value="0" />
-			<input type="checkbox" id="ck1" value="1" />보이기 <hr>
+			<input type="checkbox" id="ck1" value="1" />보이기 
 			<span class="delspan">
-				<input type="button" class="btn btn-info btn-sm" id="del1" value="삭제" onclick="deleteList(1)" />
+				<input type="button" class="btn btn-info btn-sm" style="display: none;" id="del1" value="삭제" onclick="deleteList(1)" />
 			</span>
+			<hr>
 			<div class="col-md-6">
 				<label>링크: </label><input type="text" id="link1" name="link" required /><br/><br/>
 				<label>이미지: <input type="file" id="thum1" name="thum" onchange="imgreadURL(this);" />
@@ -43,7 +45,7 @@
 		<input type="hidden" id="originCnt" name="originCnt" value="${fn:length(ptop)}"/>
 		<input type="hidden" id="count" name="count" value="${fn:length(ptop)}"/>
 		<c:forEach var="list" items="${ptop }">
-		<div class="topList">
+		<div class="topList" id="order${list.turn }">
 			<input type="hidden" id="tid${list.turn }" name="tid" value="${list.tid }" />
 			<input type="hidden"  id="turn${list.turn }" name="turn" value="${list.turn }" />
 			<input type="hidden" id="checked${list.turn }" name="checked" value="${list.tcheck }" />

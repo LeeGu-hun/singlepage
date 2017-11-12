@@ -25,7 +25,8 @@ function addlist() {
 	if(count <= 5) {
 		count ++;
 		$('#count').val(count);
-		$('#list').append("<div class='topList'>" 
+		$('#list').append("<div class='topList' id='order"+count+"'>"
+				+"<input type='hidden' id='tid" + count + "' name='tid' value='' />"
 				+"<input type='hidden'  id='turn" + count + "' name='turn' value='" + count + "' />" 
 				+"<input type='hidden' id='checked" + count + "' name='checked'  value='0' />" 
 				+"<input type='checkbox' id='ck" + count + "' value='"+ count +"'/>보이기 " 
@@ -56,8 +57,10 @@ function deleteList(num) {
 	var turn = $("#turn"+num).value;
 	
 	if(count > 1) {
-		$("#turn"+num).remove();
+		$("#order"+num).remove();
 		for(var i=(num+1); i<=(count+1); i++) {
+			$("#order"+i).attr("id", "order"+(i-1));
+			$("#tid"+i).attr("id", "tid"+(i-1));
 			$("#turn"+i).val(i-1);
 			$("#turn"+i).attr("id", "turn"+(i-1));
 			$("#checked"+i).attr("id", "checked"+(i-1));
@@ -73,14 +76,16 @@ function deleteList(num) {
 		$('#count').val(count);
 		
 	} else {
-		$("#turn"+num).remove();	
+		$("#order"+num).remove();	
 		for(var i=(num+1); i<=(count+1); i++) {
+			$("#order"+i).attr("id", "order"+(i-1));
+			$("#tid"+i).attr("id", "tid"+(i-1));
 			$("#turn"+i).val(i-1);
 			$("#turn"+i).attr("id", "turn"+(i-1));
 			$("#checked"+i).attr("id", "checked"+(i-1));
 			$("#ck"+i).val((i-1));
 			$("#ck"+i).attr("id", "ck"+(i-1));
-			$("#del"+i).attr("onclick", "deleteList("+(i-1)+"0");
+			$("#del"+i).attr("onclick", "deleteList("+(i-1)+")");
 			$("#del"+i).attr("id", "del"+(i-1));
 			$("#link"+i).attr("id", "link"+(i-1));
 			$("#thum"+i).attr("id", "thum"+(i-1));
