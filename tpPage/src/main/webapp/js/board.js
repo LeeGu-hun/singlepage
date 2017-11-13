@@ -504,10 +504,10 @@ function pballdrop(pbhostid) {
 				data : "pbhostid=" + pbhostid,
 				success : pballdropgoR
 			})
-			function pballdropgoR() {
+			function pballdropgoR(msg) {
 				$('#rmchkmodal').modal('hide');
 				$('body').css('overflow', '');
-				$('#pbListT').html('등록된 글이 없습니다.');
+				$('#pbListT').html(msg);			
 			}
 		});
 		
