@@ -8,10 +8,6 @@
 	}
 }*/
 
-
-
-
-
 function autolayout() {
 	windowH = $(window).height() - ($('#header').height() + $('#footer').height());
 	pagecontentboxH = $('#pagecontentbox').height();
@@ -20,13 +16,63 @@ function autolayout() {
 	} else {
 		$('#pagemainbox').css('height', pagecontentboxH);
 	}
+	
 	windowW = $(window).width();
-	pagecenterboxW = $(window).width() - ($('#pageleftbox').width() + $('#pageleftbox').width());
-	$('#pagecenterbox').css('width', pagecenterboxW);
+	console.log(windowW);
+	if($(document).height() > $(window).height()) {
+		if(windowW >= 1300) {
+			$('#pageleftbox').css('display', '');
+			$('#pagerightbox').css('display', '');
+			pagecenterboxW = $(window).width() - ($('#pageleftbox').width() + $('#pagerightbox').width());
+			$('#pagecenterbox').css('width', pagecenterboxW);
+		} else if(windowW < 1300) {
+			$('#pageleftbox').css('display', '');
+			$('#pagerightbox').css('display', 'none');
+			pagecenterboxW = $(window).width() - ($('#pageleftbox').width());
+			$('#pagecenterbox').css('width', pagecenterboxW);
+		} else if(windowW < 1000) {
+			$('#pageleftbox').css('display', 'none');
+			$('#pagerightbox').css('display', 'none');
+			$('#pagecenterbox').css({'width' : 'auto'}, {'min-width' : '900'});
+		}
+	} else {
+		if(windowW >= 1300) {
+			$('#pageleftbox').css('display', '');
+			$('#pagerightbox').css('display', '');
+			pagecenterboxW = $(window).width() - ($('#pageleftbox').width() + $('#pagerightbox').width());
+			$('#pagecenterbox').css('width', pagecenterboxW);
+		} else if(windowW < 1300) {
+			$('#pageleftbox').css('display', '');
+			$('#pagerightbox').css('display', 'none');
+			pagecenterboxW = $(window).width() - ($('#pageleftbox').width());
+			$('#pagecenterbox').css('width', pagecenterboxW);
+		} else if(windowW < 1000) {
+			$('#pageleftbox').css('display', 'none');
+			$('#pagerightbox').css('display', 'none');
+			$('#pagecenterbox').css({'width' : 'auto'}, {'min-width' : '900'});
+		}
+	}
 	/*if(windowW < 900) {
 		$('#pagerightbox').remove();
 		$('#pagecenterbox').css('width', 'auto');
 	}*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }
 
 $(document).ready(function() {
