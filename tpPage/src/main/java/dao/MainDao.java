@@ -32,6 +32,8 @@ public class MainDao {
 					rs.getString("pbfile"),
 					rs.getString("pbnewfile"),
 					rs.getTimestamp("pbdate"));
+			board.setPname(rs.getString("pname"));
+			board.setMname(rs.getString("mname"));
 			return board;
 		}
 	};
@@ -47,14 +49,9 @@ public class MainDao {
 		return count;
 	}
 	
-	public List<Pboard> getBoardListAll(int page, int limit) {
-		List<Pboard> boardList = jdbcTemplate.query("select * from (select rownum rnum, pbid, pbsubject, pbcontent, pbfile, pbnewfile, pbre_ref, pbre_lev, pbre_seq, pbreadcount, pbdate, pbhostid, pbwriterid from (select * from pboard order where pbre_lev = 0 by pbRE_REF desc, pbRE_SEQ asc)) where rnum >= ? and rnum<= ?", boRowMapper, page, limit);
-		return boardList; 
-	}
-	
 	public List<Pboard> getBoardListRandom(int number) {
 		Object row[] = new Object[number];
-		String sql = "select * from (select rownum rnum, pbid, pbsubject, pbcontent, pbfile, pbnewfile, pbre_ref, pbre_lev, pbre_seq, pbreadcount, pbdate, pbhostid, pbwriterid from (select * from pboard where pbre_lev = 0 order by pbRE_REF desc, pbRE_SEQ asc)) where ";
+		String sql = "select * from (select rownum rnum, pbid, pbsubject, pbcontent, pbfile, pbnewfile, pbre_ref, pbre_lev, pbre_seq, pbreadcount, pbdate, pbhostid, pbwriterid, pname, mname from (select * from pboard pb, page p, member m where pb.pbhostid = p.pid and p.pmaster = m.mid and pbre_lev = 0 order by pbRE_REF desc, pbRE_SEQ asc)) where ";
 		for (int i = 0; i < number; i++) {
 			row[i] = (int)(Math.random() * count() + 1);
 			sql += " rnum = ? ";
@@ -74,7 +71,7 @@ public class MainDao {
 	}
 	
 	public List<Pboard> getBoardListSome(int page, int limit, ArrayList<String> opts) {
-		String sql = "select * from (select rownum rnum, pbid, pbsubject, pbcontent, pbfile, pbnewfile, pbre_ref, pbre_lev, pbre_seq, pbreadcount, pbdate, pbhostid, pbwriterid from (select * from pboard pb, page p, showtime st where pb.pbhostid = p.pid and p.pid = st.pid and pbre_lev = 0 ";
+		String sql = "select * from (select rownum rnum, pbid, pbsubject, pbcontent, pbfile, pbnewfile, pbre_ref, pbre_lev, pbre_seq, pbreadcount, pbdate, pbhostid, pbwriterid, pname, mname from (select * from pboard pb, page p, showtime st, member m where pb.pbhostid = p.pid and p.pid = st.pid and p.pmaster = m.mid and pbre_lev = 0 ";
 		String sub = "";
 		for (int i=0; i <= opts.size()-1; i++) {
 			String code = opts.get(i).split("=")[0];
@@ -149,7 +146,7 @@ public class MainDao {
 			}
 		}, mid);
 		
-		String sql = "select * from (select rownum rnum, pbid, pbsubject, pbcontent, pbfile, pbnewfile, pbre_ref, pbre_lev, pbre_seq, pbreadcount, pbdate, pbhostid, pbwriterid from (select * from pboard where pbre_lev = 0 ";
+		String sql = "select * from (select rownum rnum, pbid, pbsubject, pbcontent, pbfile, pbnewfile, pbre_ref, pbre_lev, pbre_seq, pbreadcount, pbdate, pbhostid, pbwriterid, pname, mname from (select * from pboard pb, page p, member m where pb.pbhostid = p.pid and p.pmaster = m.mid and pbre_lev = 0 ";
 		if (favoPid.size()>0) {
 			sql += " and (";
 			for(int i = 0; i <favoPid.size(); i++) {

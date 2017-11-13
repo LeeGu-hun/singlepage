@@ -15,8 +15,8 @@
 
 <form:form commandName="logincmd" action="/tpPage/login">
 <p>
-<a href="/tpPage/home" class="btn btn-primary">home</a>
-<a href="/tpPage/join" class="btn btn-primary">회원가입</a>
+<a href="/tpPage/home" class="btn btn-custom">home</a>
+<a href="/tpPage/join" class="btn btn-custom">회원가입</a>
 <form:input path="memail" placeholder="email"/>
 <form:password path="mpw" placeholder="password"/>
 <c:if test="${nowpid != null }">
@@ -30,20 +30,20 @@
 
 <c:if test="${!empty authInfo }">
 <form:form commandName="logincmd" action="/tpPage/logout">
-<a href="/tpPage/home" class="btn btn-primary">home</a>
+<a href="/tpPage/home" class="btn btn-custom">home</a>
 <c:if test="${nowpid != null }">
 <form:hidden path="nowpid" value="${nowpid }"/>
 </c:if>
-<input type="submit" class="btn btn-primary" value="로그아웃">
-<a href="/tpPage/meminfo" class="btn btn-primary">회원 정보</a>
+<input type="submit" class="btn btn-custom" value="로그아웃">
+<a href="/tpPage/meminfo" class="btn btn-custom">회원 정보</a>
 <%
 	if(authInfo.getPid() == 0) {
 %>
-<a href="/tpPage/pagemaker" class="btn btn-primary">page 만들기</a>
+<a href="/tpPage/pagemaker" class="btn btn-custom">page 만들기</a>
 <%
 	} else {
 %>		
-<a href="/tpPage/page/${authInfo.pid }" class="btn btn-primary">내 page 이동</a>		
+<a href="/tpPage/page/${authInfo.pid }" class="btn btn-custom">내 page 이동</a>		
 <%
 	}
 %>
