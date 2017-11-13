@@ -52,7 +52,6 @@ function addlist() {
 }
 
 function deleteList(num) {
-	console.log(num);
 	var count = $('#count').val()-1;
 	var turn = $("#turn"+num).value;
 	
@@ -66,7 +65,7 @@ function deleteList(num) {
 			$("#checked"+i).attr("id", "checked"+(i-1));
 			$("#ck"+i).val((i-1));
 			$("#ck"+i).attr("id", "ck"+(i-1));
-			$("#del"+i).attr("onclick", "deleteList("+(i-1)+"0");
+			$("#del"+i).attr("onclick", "deleteList("+(i-1)+")");
 			$("#del"+i).attr("id", "del"+(i-1));
 			$("#link"+i).attr("id", "link"+(i-1));
 			$("#thum"+i).attr("id", "thum"+(i-1));

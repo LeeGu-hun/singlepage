@@ -19,9 +19,9 @@
           <div class="item active">         
             <div class="row">
               <c:if test="${fn:length(ptop) != 0}">
-              <c:forEach var="list" varStatus="i" begin="0" end="2">
-              <c:set var="list" value="${ptop[i.current] }" />
-	              <c:if test="${i.count == list.turn }">
+              <c:forEach var="cnt" varStatus="i" begin="0" end="2">
+              <c:set var="list" value="${ptop[i.index] }" />
+	              <c:if test="${list != null }">
 	              	<div class="col-md-4">
 		              <a class="thumbnail" href="${list.url }"><img alt="" src="../tuploads/${list.newthum }"></a>
 		            </div> 
@@ -44,9 +44,9 @@
           <div class="item">
             <div class="row">
             <c:if test="${fn:length(ptop) > 3}">
-              <c:forEach var="list" varStatus="i" begin="3" end="5">
-              <c:set var="list" value="${ptop[i.current] }" />
-	              <c:if test="${i.count == list.turn }">
+              <c:forEach var="cnt" varStatus="i" begin="3" end="5">
+              <c:set var="list" value="${ptop[i.index] }" />
+	              <c:if test="${list != null }">
 	              	<div class="col-md-4">
 		              <a class="thumbnail" href="${list.url }"><img alt="" src="../tuploads/${list.newthum }"></a>
 		            </div> 
