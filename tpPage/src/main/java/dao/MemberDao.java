@@ -121,7 +121,12 @@ public class MemberDao {
 		}, mid);
 		return results.isEmpty() ? null : results.get(0);
 	}
-
+	
+	public void memDrop(int mid, String memail) {
+		memail = "drop" + System.currentTimeMillis() + "_" + memail;
+		jdbcTemplate.update("update member set memail = ?, mpw = 9999 where mid=?", memail, mid);
+	}
+	
 //	public void memberModify(AuthInfo authInfo) {
 //		jdbcTemplate.update("update member set memail = ?, mname = ?, mpw = ?, mphone=? where memail = ?", authInfo.getMemail(), authInfo.getMname(),
 //				authInfo.get(), authInfo.getMphone());

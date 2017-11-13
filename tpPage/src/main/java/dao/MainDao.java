@@ -12,6 +12,8 @@ import org.springframework.jdbc.core.RowMapper;
 
 import board.Pboard;
 import main.Loc;
+import page.Page;
+import page.PageLike;
 
 public class MainDao {
 	private JdbcTemplate jdbcTemplate;
@@ -30,6 +32,8 @@ public class MainDao {
 					rs.getString("pbfile"),
 					rs.getString("pbnewfile"),
 					rs.getTimestamp("pbdate"));
+			board.setPname(rs.getString("pname"));
+			board.setMname(rs.getString("mname"));
 			return board;
 		}
 	};
@@ -45,14 +49,9 @@ public class MainDao {
 		return count;
 	}
 	
-	public List<Pboard> getBoardListAll(int page, int limit) {
-		List<Pboard> boardList = jdbcTemplate.query("select * from (select rownum rnum, pbid, pbsubject, pbcontent, pbfile, pbnewfile, pbre_ref, pbre_lev, pbre_seq, pbreadcount, pbdate, pbhostid, pbwriterid from (select * from pboard order where pbre_lev = 0 by pbRE_REF desc, pbRE_SEQ asc)) where rnum >= ? and rnum<= ?", boRowMapper, page, limit);
-		return boardList; 
-	}
-	
 	public List<Pboard> getBoardListRandom(int number) {
 		Object row[] = new Object[number];
-		String sql = "select * from (select rownum rnum, pbid, pbsubject, pbcontent, pbfile, pbnewfile, pbre_ref, pbre_lev, pbre_seq, pbreadcount, pbdate, pbhostid, pbwriterid from (select * from pboard where pbre_lev = 0 order by pbRE_REF desc, pbRE_SEQ asc)) where ";
+		String sql = "select * from (select rownum rnum, pbid, pbsubject, pbcontent, pbfile, pbnewfile, pbre_ref, pbre_lev, pbre_seq, pbreadcount, pbdate, pbhostid, pbwriterid, pname, mname from (select * from pboard pb, page p, member m where pb.pbhostid = p.pid and p.pmaster = m.mid and pbre_lev = 0 order by pbRE_REF desc, pbRE_SEQ asc)) where ";
 		for (int i = 0; i < number; i++) {
 			row[i] = (int)(Math.random() * count() + 1);
 			sql += " rnum = ? ";
@@ -72,7 +71,7 @@ public class MainDao {
 	}
 	
 	public List<Pboard> getBoardListSome(int page, int limit, ArrayList<String> opts) {
-		String sql = "select * from (select rownum rnum, pbid, pbsubject, pbcontent, pbfile, pbnewfile, pbre_ref, pbre_lev, pbre_seq, pbreadcount, pbdate, pbhostid, pbwriterid from (select * from pboard pb, page p, showtime st where pb.pbhostid = p.pid and p.pid = st.pid and pbre_lev = 0 ";
+		String sql = "select * from (select rownum rnum, pbid, pbsubject, pbcontent, pbfile, pbnewfile, pbre_ref, pbre_lev, pbre_seq, pbreadcount, pbdate, pbhostid, pbwriterid, pname, mname from (select * from pboard pb, page p, showtime st, member m where pb.pbhostid = p.pid and p.pid = st.pid and p.pmaster = m.mid and pbre_lev = 0 ";
 		String sub = "";
 		for (int i=0; i <= opts.size()-1; i++) {
 			String code = opts.get(i).split("=")[0];
@@ -90,13 +89,19 @@ public class MainDao {
 					if(val.length>1) sub += " ) ";
 				} else if (code.equals("pperiod")) {
 					if (Integer.parseInt(val[j]) == 5) {
-						sub += " trunc(to_number(sysdate - pperiod)) >= " + val[j];
+						sub += " trunc((sysdate - pperiod)/365) >= " + val[j];
 					} else {
-						sub += " trunc(to_number(sysdate - pperiod)) = " + val[j];
+						sub += " trunc((sysdate - pperiod)/365) = " + val[j];
 					}
 				} else {
 					sub += code.trim() + " like ";
-					sub += "'%" + val[j].trim() + "%'";
+					if (val[j].trim().split(" ").length > 1) {
+						sub += "'%" + val[j].trim().split(" ")[0] + "%' and ";
+						sub += code.trim() + " like ";
+						sub += "'%" + val[j].trim().split(" ")[1] + "%'";
+					} else {
+						sub += "'%" + val[j].trim() + "%'";
+					}
 				}
 				if(j != val.length-1) sub += " or ";
 			}
@@ -129,5 +134,29 @@ public class MainDao {
 			}
 		});
 		return locList;
+	}
+
+	public List<Pboard> getBoardListFavo(int page, int limit, int mid) {
+		List<PageLike> favoPid = jdbcTemplate.query("select distinct pid from page_like where mid = ? and plike = 1", new RowMapper<PageLike>() {
+			@Override
+			public PageLike mapRow(ResultSet rs, int rowNum) throws SQLException {
+				PageLike pid = new PageLike();
+				pid.setPid(rs.getInt(1));
+				return pid;
+			}
+		}, mid);
+		
+		String sql = "select * from (select rownum rnum, pbid, pbsubject, pbcontent, pbfile, pbnewfile, pbre_ref, pbre_lev, pbre_seq, pbreadcount, pbdate, pbhostid, pbwriterid, pname, mname from (select * from pboard pb, page p, member m where pb.pbhostid = p.pid and p.pmaster = m.mid and pbre_lev = 0 ";
+		if (favoPid.size()>0) {
+			sql += " and (";
+			for(int i = 0; i <favoPid.size(); i++) {
+				sql += " pbhostid = " + favoPid.get(i).getPid();
+				if(i != favoPid.size()-1) sql += " or ";
+			}
+			sql += " ) ";
+		}
+		sql += " order by pbdate desc)) where rnum >= ? and rnum<= ?";
+		List<Pboard> favoList = jdbcTemplate.query(sql, boRowMapper, page, limit);
+		return favoList;
 	}
 }

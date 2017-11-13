@@ -143,6 +143,24 @@ constraint fk_blike_mbid foreign key(mbid) references mboard(mbid),
 constraint fk_blike_pbid foreign key(pbid) references pboard(pbid),
 constraint blike_status check(blike in('0', '1')));
 
+create table pboard_like (
+mid number not null,
+pblike char(1) not null,
+pbid number,
+pblike_date date not null,
+constraint fk_pblike_mid foreign key(mid) references member(mid),
+constraint fk_pblike_pbid foreign key(pbid) references pboard(pbid),
+constraint pblike_status check(pblike in('0', '1')));
+
+create table mboard_like (
+mid number not null,
+mblike char(1) not null,
+mbid number,
+mblike_date date not null,
+constraint fk_mblike_mid foreign key(mid) references member(mid),
+constraint fk_mblike_pbid foreign key(mbid) references mboard(mbid),
+constraint mblike_status check(mblike in('0', '1')));
+
 create table locdb(
 sido varchar2(100),
 gungu varchar2(100)
@@ -198,3 +216,19 @@ update locdb set sido = '전북' where sido = '전라북도';
 update locdb set sido = '전남' where sido = '전라남도';
 update locdb set sido = '제주' where sido = '제주도';
 commit;
+
+create table toplist(
+    pid number not null,
+    tid number not null,
+    turn number default 0 not null,
+    url varchar2(100) not null,
+    thum varchar2(100),
+    newthum varchar2(100),
+    tcheck number default 0 not null,
+    constraint pk_top primary key(tid),
+    constraint fk_top foreign key(pid) references page(pid)
+);
+
+create sequence tid_seq increment by 1 start with 1 maxvalue 50000;
+
+

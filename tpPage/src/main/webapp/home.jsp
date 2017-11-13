@@ -8,6 +8,7 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/main.css?ver=32" />
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/btnColor.css" />
 <script src="http://code.jquery.com/jquery-3.1.1.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
@@ -21,10 +22,7 @@
 <body>
 <%@ include file="./include/header.jsp" %>
 
-
 <%@ include file="./main/main.jsp" %>
 
-
-<%@ include file="./include/footer.jsp" %>
 </body>
 </html>

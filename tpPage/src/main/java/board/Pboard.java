@@ -84,6 +84,10 @@ public class Pboard {
 		this.mname = mname;
 		this.pbdate = pbdate;
 	}
+	
+	public Pboard(int pbid) {
+		this.pbid = pbid;
+	}
 
 	public int getPbid() {
 		return pbid;

@@ -2,6 +2,7 @@ function pbreadURL(input) {
 	if(input.files && input.files[0]) {
 		var reader = new FileReader();
 		reader.onload = function(e) {
+			$('#pbuploadImg').show();
 			$('#pbuploadImg').attr('src', e.target.result);
 			$('#pbuploadImg').attr('width', 300);
 		}
@@ -75,13 +76,46 @@ function pbMoreList() {
 	var newPbPage = Number(pbPage) + 1;
 	$.ajax({
 		type : "POST",
-		url : "./pbmorelist",
+		url : "/tpPage/pbmorelist",
 		data : "pbPage=" + newPbPage + "&pbhostid=" + pbhostid,
 		success : pbMoreListR,
 	});
 }
 function pbMoreListR(msg) {
 	$('#pbListT').html(msg)
+	$('.pbidrm').on('click', function() {
+		var pbid = $(this).next().val();
+		$(this).parent().parent().attr('id', 'pbidrmrow');
+		$.ajax({
+			type : "POST",
+			url : "/tpPage/pbidrm",
+			data : "pbid=" + pbid,
+			success : pbidrmR
+		});
+		function pbidrmR(msg) {
+			$('#rmchkmodaldiv').html(msg);
+			$('#rmchkmodal').modal('show');
+			$('body').css({'overflow': 'hidden', 'padding': '0px'});
+			$('.pbidrmgo').on('click', function() {
+				var pbid = $(this).next().val();
+				$.ajax({
+					type : "POST",
+					url : "/tpPage/pbidrmgo",
+					data : "pbid=" + pbid,
+					success : pbidrmRR
+				});
+				function pbidrmRR() {
+					$('#rmchkmodal').modal('hide');
+					$('body').css('overflow', '');
+					$('#pbidrmrow').remove();
+				}
+			});	
+			
+			$('#rmchkmodal').on('hidden.bs.modal', function() {
+				$('body').css('overflow', '');
+			});
+		}		
+	});
 }
 
 function pbMoreListScroll() {
@@ -91,13 +125,46 @@ function pbMoreListScroll() {
 	$('#pbPage').val(newPbPage);
 	$.ajax({
 		type : "POST",
-		url : "./pbmorelistscroll",
+		url : "/tpPage/pbmorelistscroll",
 		data : "pbPage=" + newPbPage + "&pbhostid=" + pbhostid,
 		success : pbMoreListScrollR,
 	});
 }
 function pbMoreListScrollR(msg) {
 	$('#pbListTT').append(msg)
+	$('.pbidrm').on('click', function() {
+		var pbid = $(this).next().val();
+		$(this).parent().parent().attr('id', 'pbidrmrow');
+		$.ajax({
+			type : "POST",
+			url : "/tpPage/pbidrm",
+			data : "pbid=" + pbid,
+			success : pbidrmR
+		});
+		function pbidrmR(msg) {
+			$('#rmchkmodaldiv').html(msg);
+			$('#rmchkmodal').modal('show');
+			$('body').css({'overflow': 'hidden', 'padding': '0px'});
+			$('.pbidrmgo').on('click', function() {
+				var pbid = $(this).next().val();
+				$.ajax({
+					type : "POST",
+					url : "/tpPage/pbidrmgo",
+					data : "pbid=" + pbid,
+					success : pbidrmRR
+				});
+				function pbidrmRR() {
+					$('#rmchkmodal').modal('hide');
+					$('body').css('overflow', '');
+					$('#pbidrmrow').remove();
+				}
+			});	
+			
+			$('#rmchkmodal').on('hidden.bs.modal', function() {
+				$('body').css('overflow', '');
+			});
+		}
+	});
 }
 
 function mbMoreList() {
@@ -106,13 +173,46 @@ function mbMoreList() {
 	var newMbPage = Number(mbPage) + 1;
 	$.ajax({
 		type : "POST",
-		url : "./mbmorelist",
+		url : "/tpPage/mbmorelist",
 		data : "mbPage=" + newMbPage + "&mbhostid=" + mbhostid,
 		success : mbMoreListR,
 	});
 }
 function mbMoreListR(msg) {
 	$('#mbListT').html(msg)
+	$('.mbidrm').on('click', function() {
+		var mbid = $(this).next().val();
+		$(this).parent().parent().attr('id', 'mbidrmrow');
+		$.ajax({
+			type : "POST",
+			url : "/tpPage/mbidrm",
+			data : "mbid=" + mbid,
+			success : mbidrmR
+		});
+		function mbidrmR(msg) {
+			$('#rmchkmodaldiv').html(msg);
+			$('#rmchkmodal').modal('show');
+			$('body').css({'overflow': 'hidden', 'padding': '0px'});
+			$('.mbidrmgo').on('click', function() {
+				var mbid = $(this).next().val();
+				$.ajax({
+					type : "POST",
+					url : "/tpPage/mbidrmgo",
+					data : "mbid=" + mbid,
+					success : mbidrmRR
+				});
+				function mbidrmRR() {
+					$('#rmchkmodal').modal('hide');
+					$('body').css('overflow', '');
+					$('#mbidrmrow').remove();
+				}
+			});
+			
+			$('#rmchkmodal').on('hidden.bs.modal', function() {
+				$('body').css('overflow', '');
+			});
+		}
+	});
 }
 
 function mbMoreListScroll() {
@@ -122,75 +222,307 @@ function mbMoreListScroll() {
 	$('#mbPage').val(newMbPage);
 	$.ajax({
 		type : "POST",
-		url : "./mbmorelistscroll",
+		url : "/tpPage/mbmorelistscroll",
 		data : "mbPage=" + newMbPage + "&mbhostid=" + mbhostid,
 		success : mbMoreListScrollR,
 	});
 }
 function mbMoreListScrollR(msg) {
 	$('#mbListTT').append(msg);
+	$('.mbidrm').on('click', function() {
+		var mbid = $(this).next().val();
+		$(this).parent().parent().attr('id', 'mbidrmrow');
+		$.ajax({
+			type : "POST",
+			url : "/tpPage/mbidrm",
+			data : "mbid=" + mbid,
+			success : mbidrmR
+		});
+		function mbidrmR(msg) {
+			$('#rmchkmodaldiv').html(msg);
+			$('#rmchkmodal').modal('show');
+			$('body').css({'overflow': 'hidden', 'padding': '0px'});
+			$('.mbidrmgo').on('click', function() {
+				var mbid = $(this).next().val();
+				$.ajax({
+					type : "POST",
+					url : "/tpPage/mbidrmgo",
+					data : "mbid=" + mbid,
+					success : mbidrmRR
+				});
+				function mbidrmRR() {
+					$('#rmchkmodal').modal('hide');
+					$('body').css('overflow', '');
+					$('#mbidrmrow').remove();
+				}
+			});
+			
+			$('#rmchkmodal').on('hidden.bs.modal', function() {
+				$('body').css('overflow', '');
+			});
+		}
+	});
 }
 
 function loadpboard(pbid) {
 	$.ajax({
 		type : "POST",
-		url : "./loadpboard",
+		url : "/tpPage/loadpboard",
 		data : "pbid=" + pbid,
 		success : loadpboardR
 	});
 }
 function loadpboardR(msg) {
+	$('#rmchkmodal').modal('hide');
 	$('#pbmodaldiv').html(msg);
-	$("#pbmodal").modal('show');
-	
-	$('.rew').on('click', function() {
-		console.log($(this));
-		
-		
-		
-		
-	
-	});
-	
-	
-	$('.rebtn').on('click', function() {
-		if($(this).next().css("display") == "none"){
-			$(this).next().show();
-		}else{
-			$(this).next().hide();
-		}
-	});
-}
-
-/*function pbrewrite() {
-	$('#pbrecmd').ajaxForm({
-		success: pbrewriteR
-	});
-}*/
-function pbrewriteR(msg) {
-	$('#pbrebox').html(msg);
 	$('.pbrecontent').val('');
-	$('.rebtn').on('click', function() {
+	$('#pbmodal').modal('show');
+	$('body').css({'overflow': 'hidden', 'padding': '0px'});
+	var pbhostid = $('#pbhostid').val();
+	var gopbid = $('#gopbid').val();
+	
+	$('.pbrew').on('click', function() {
+		var frm = $(this).parent().parent().parent().children('#pbrecmd');
+		frm.ajaxSubmit({
+			success: loadpboardR
+		});
+	});
+	
+	$('.pbrebtn').on('click', function() {
 		if($(this).next().css("display") == "none"){
 			$(this).next().show();
 		}else{
 			$(this).next().hide();
 		}
 	});
-}
-
-/*function pbrerewrite() {
-	$('#pbrerecmd').ajaxForm({
-		success:function(msg) {
-			$('#pbrebox').html(msg);
-			$('.pbrecontent').val('');
-			$('.rebtn').on('click', function() {
-				if($(this).next().css("display") == "none"){
-					$(this).next().show();
-				}else{
-					$(this).next().hide();
-				}
+	
+	$('.pbrmbtn').on('click', function() {
+		var pbid = $('#pbid').val(); 
+		var rmpbid = $(this).next().val();
+		$.ajax({
+			type : "POST",
+			url : "/tpPage/pbreremove",
+			data : "pbid=" + pbid + "&rmpbid=" + rmpbid,
+			success : pbreremoveR
+		});
+		function pbreremoveR(msg) {
+			$('#rmchkmodaldiv').html(msg);
+			$('#rmchkmodal').modal('show');
+			$('body').css({'overflow': 'hidden', 'padding': '0px'});
+			$('.pbrermgo').on('click', function() {
+				var pbid = $(this).next().val();
+				var rmpbid = $(this).next().next().val();
+				$.ajax({
+					type : "POST",
+					url : "/tpPage/pbreremovego",
+					data : "pbid=" + pbid + "&rmpbid=" + rmpbid,
+					success : loadpboardR
+				});
 			});
 		}
 	});
-}*/
+	
+	$('#pbmodal').on('hidden.bs.modal', function() {
+		$('body').css('overflow', '');
+		if(gopbid != 0) {
+			location.href = '/tpPage/page/' + pbhostid;		
+		}
+	});	
+}
+
+$(document).ready(function() {
+	$('.pbidrm').on('click', function() {
+		var pbid = $(this).next().val();
+		$(this).parent().parent().attr('id', 'pbidrmrow');
+		$.ajax({
+			type : "POST",
+			url : "/tpPage/pbidrm",
+			data : "pbid=" + pbid,
+			success : pbidrmR
+		});
+		function pbidrmR(msg) {
+			$('#rmchkmodaldiv').html(msg);
+			$('#rmchkmodal').modal('show');
+			$('body').css({'overflow': 'hidden', 'padding': '0px'});
+			$('.pbidrmgo').on('click', function() {
+				var pbid = $(this).next().val();
+				$.ajax({
+					type : "POST",
+					url : "/tpPage/pbidrmgo",
+					data : "pbid=" + pbid,
+					success : pbidrmRR
+				});
+				function pbidrmRR() {
+					$('#rmchkmodal').modal('hide');
+					$('body').css('overflow', '');
+					$('#pbidrmrow').remove();
+				}
+			});	
+			
+			$('#rmchkmodal').on('hidden.bs.modal', function() {
+				$('body').css('overflow', '');
+			});
+		}
+		
+	});
+});
+
+function pblike() {
+	var pbid = $('#nowpbid').val();
+	var pblikechk = $('#pblikechk').val();
+	
+	$.ajax({
+		type : "POST",
+		url : "/tpPage/pblike",
+		data : "pbid=" + pbid + "&pblikechk=" + pblikechk,
+		success : changepblike
+	});
+	
+	function changepblike(pblikechk) {
+		pblikechk = $.trim(pblikechk);
+		$('#pblikechk').val(pblikechk);
+		if(pblikechk == 0) {
+			$('#pblikebtn').text('좋아요X');
+		} else {
+			$('#pblikebtn').text('좋아요O');
+		}
+	}
+}
+
+function loadmboard(mbid) {
+	$.ajax({
+		type : "POST",
+		url : "/tpPage/loadmboard",
+		data : "mbid=" + mbid,
+		success : loadmboardR
+	});
+}
+function loadmboardR(msg) {
+	$('#rmchkmodal').modal('hide');
+	$('#mbmodaldiv').html(msg);
+	$('.mbrecontent').val('');
+	$("#mbmodal").modal('show');
+	$('body').css({'overflow': 'hidden', 'padding': '0px'});
+	$('.mbrew').on('click', function() {
+		var frm = $(this).parent().parent().parent().children('#mbrecmd');
+		frm.ajaxSubmit({
+			success: loadmboardR
+		});
+	});
+	
+	$('.mbrebtn').on('click', function() {
+		if($(this).next().css("display") == "none"){
+			$(this).next().show();
+		}else{
+			$(this).next().hide();
+		}
+	});
+	
+	$('.mbrmbtn').on('click', function() {
+		var mbid = $('#mbid').val();
+		var rmmbid = $(this).next().val();
+		$.ajax({
+			type : "POST",
+			url : "/tpPage/mbreremove",
+			data : "mbid=" + mbid + "&rmmbid=" + rmmbid,
+			success : mbreremoveR
+		});
+		function mbreremoveR(msg) {
+			$('#rmchkmodaldiv').html(msg);
+			$('#rmchkmodal').modal('show');
+			$('body').css({'overflow': 'hidden', 'padding': '0px'});
+			$('.mbrermgo').on('click', function() {
+				var mbid = $(this).next().val();
+				var rmmbid = $(this).next().next().val();
+				$.ajax({
+					type : "POST",
+					url : "/tpPage/mbreremovego",
+					data : "mbid=" + mbid + "&rmmbid=" + rmmbid,
+					success : loadmboardR
+				})
+			});
+		}
+	});
+	
+	$('#mbmodal').on('hidden.bs.modal', function() {
+		$('body').css('overflow', '');
+	});
+}
+
+$(document).ready(function() {
+	$('.mbidrm').on('click', function() {
+		var mbid = $(this).next().val();
+		$(this).parent().parent().attr('id', 'mbidrmrow');
+		$.ajax({
+			type : "POST",
+			url : "/tpPage/mbidrm",
+			data : "mbid=" + mbid,
+			success : mbidrmR
+		});
+		function mbidrmR(msg) {
+			$('#rmchkmodaldiv').html(msg);
+			$('#rmchkmodal').modal('show');
+			$('body').css({'overflow': 'hidden', 'padding': '0px'});
+			$('.mbidrmgo').on('click', function() {
+				var mbid = $(this).next().val();
+				$.ajax({
+					type : "POST",
+					url : "/tpPage/mbidrmgo",
+					data : "mbid=" + mbid,
+					success : mbidrmRR
+				});
+				function mbidrmRR() {
+					$('#rmchkmodal').modal('hide');
+					$('body').css('overflow', '');
+					$('#mbidrmrow').remove();
+				}
+			});
+			
+			$('#rmchkmodal').on('hidden.bs.modal', function() {
+				$('body').css('overflow', '');
+			});
+		}
+	});
+});
+
+function pballdrop(pbhostid) {
+	$.ajax({
+		type : "POST",
+		url : "/tpPage/pballdrop",
+		data : "pbhostid=" + pbhostid,
+		success : pballdropR
+	});
+	function pballdropR(msg) {
+		$('#rmchkmodaldiv').html(msg);
+		$('#rmchkmodal').modal('show');
+		$('body').css({'overflow': 'hidden', 'padding': '0px'});
+		$('#pballdropgo').on('click', function() {
+			var pbhostid = $(this).next().val();
+			$.ajax({
+				type : "POST",
+				url : "/tpPage/pballdropgo",
+				data : "pbhostid=" + pbhostid,
+				success : pballdropgoR
+			})
+			function pballdropgoR(msg) {
+				$('#rmchkmodal').modal('hide');
+				$('body').css('overflow', '');
+				$('#pbListT').html(msg);			
+			}
+		});
+		
+		$('#rmchkmodal').on('hidden.bs.modal', function() {
+			$('body').css('overflow', '');
+		});
+	}
+}
+
+
+
+
+
+
+
+
+
+

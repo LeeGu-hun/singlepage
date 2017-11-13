@@ -5,8 +5,9 @@
 <head>
 
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
-<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/page_style.css?ver=3" />
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/page_style.css?ver=4" />
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/ptop.css?ver=33" />
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/btnColor.css" />
 
 <script 
 	src="https://code.jquery.com/jquery-3.2.1.min.js"
@@ -39,9 +40,6 @@
 		</div>
 	</div>
 </div>
-
-<%@ include file="./include/footer.jsp" %>
-
 
 <!-- 후원 modal -->
 <div class="modal" id="myModal" aria-hidden="true" style="display: none; z-index: 1050;">
@@ -76,11 +74,11 @@
 					<label for="after_money">= 예상 포인트</label>
 					<input type="text" id="amoney" name="amoney" value="" readonly/>원<br/>
 				</div>
-				<a data-toggle="modal" href="#myModal2" class="btn btn-primary" onclick="chargeInit()">포인트 충전</a>
+				<a data-toggle="modal" href="#myModal2" class="btn btn-custom" onclick="chargeInit()">포인트 충전</a>
             </div>
             <div class="modal-footer">
               <a href="#" data-dismiss="modal" class="btn" onclick="donateInit()">취소</a>
-              <a data-toggle="modal" href="#myModal3" class="btn btn-primary" onclick="donateCheck()">후원하기</a>
+              <a data-toggle="modal" href="#myModal3" class="btn btn-custom" onclick="donateCheck()">후원하기</a>
             </div>
 		</div>
 	</div>
@@ -122,7 +120,7 @@
 		 	</div>
             <div class="modal-footer">
               <a href="#" data-dismiss="modal" class="btn" onclick="chargeInit()">취소</a>
-              <a data-toggle="modal" href="#myModal4" class="btn btn-primary" onclick="chargeCheck()">충전하기</a>
+              <a data-toggle="modal" href="#myModal4" class="btn btn-custom" onclick="chargeCheck()">충전하기</a>
             </div>
           </div>
         </div>
@@ -166,6 +164,46 @@
 
 <div id="pbmodaldiv">
 	<div class="modal" id="pbmodal" aria-hidden="true" style="display: none; z-index: 1050;">
+    	<div class="modal-dialog modal-lg">
+       		<div class="modal-content">
+            	<div class="modal-header">
+              		<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+              		<h4 class="modal-title">초기값</h4>
+            	</div><div class="container"></div>
+            	<div class="modal-body">
+            		<p>초기값</p>
+              		<a data-toggle="modal" href="#" class="btn btn-primary">Launch modal</a>
+            	</div>
+            	<div class="modal-footer">
+              		<a href="#" data-dismiss="modal" class="btn">Close</a>
+            	</div>
+          	</div>
+        </div>
+    </div>
+</div>
+
+<div id="mbmodaldiv">
+	<div class="modal" id="mbmodal" aria-hidden="true" style="display: none; z-index: 1050;">
+    	<div class="modal-dialog modal-lg">
+       		<div class="modal-content">
+            	<div class="modal-header">
+              		<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+              		<h4 class="modal-title">초기값</h4>
+            	</div><div class="container"></div>
+            	<div class="modal-body">
+            		<p>초기값</p>
+              		<a data-toggle="modal" href="#" class="btn btn-primary">Launch modal</a>
+            	</div>
+            	<div class="modal-footer">
+              		<a href="#" data-dismiss="modal" class="btn">Close</a>
+            	</div>
+          	</div>
+        </div>
+    </div>
+</div>
+
+<div id="rmchkmodaldiv">
+	<div class="modal" id="rmchkmodal" aria-hidden="true" style="display: none; z-index: 1050;">
     	<div class="modal-dialog modal-lg">
        		<div class="modal-content">
             	<div class="modal-header">

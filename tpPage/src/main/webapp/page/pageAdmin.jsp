@@ -31,7 +31,7 @@ page admin
 <form:form commandName="pagecmd" name="apfrm" action="adminpage" enctype="multipart/form-data">
 	<p><c:choose>
 			<c:when test="${!empty page.pnewfile}">
-				<img id="puploadImg" name="puploadImg" src="./puploads/${page.pnewfile }"  alt="프로필사진" width="200px" height="150px"/>
+				<img id="puploadImg" name="puploadImg" src="/tpPage/puploads/${page.pnewfile }"  alt="프로필사진" width="200px" height="150px"/>
 			</c:when>
 			<c:otherwise>
 				<img id="puploadImg" name="puploadImg" src="profile.png" alt="프로필" width="" height="" />
@@ -52,7 +52,7 @@ page admin
 			</select>
 		</label>
 	</p>
-	<p><label>장르세부: ${genreDetail } <br><input type="text" id="pgdetail" name="pgdetail" style="width:300px;" value=${genreDetail } onkeyup; onkeypress; onkeydown; /></label></p>
+	<p><label>장르세부: ${genreDetail } <br><input type="text" id="pgdetail" name="pgdetail" style="width:300px;" value="${genreDetail }" onkeyup; onkeypress; onkeydown; /></label></p>
 	<p><label>장르: ${page.pgenre } <br><input id="pgenre" name="pgenre" style="width:300px;"/></label></p>
 	<div id="map" style="width:500px; height:400px;"></div>
 	<input type="text" id="keyword" style="width:300px;"/> 
@@ -60,9 +60,9 @@ page admin
 	<input type="hidden" id="loc" name="loc" />
 	<p><label>지역:<br><c:out value="${page.ploc }"/><br><input id="ploc" name="ploc" style="width:300px;" value="${page.ploc }"/></label></p>
 	<p><label>좌표:<br>
-		<input type="hidden" id="lat" name="lat" value=${lat } />
-		<input type="hidden" id="lng" name="lng" value=${lng } />
-		<input id="platlng" name="platlng" style="width:300px;" value=${page.platlng }/>
+		<input type="hidden" id="lat" name="lat" value="${lat }" />
+		<input type="hidden" id="lng" name="lng" value="${lng }" />
+		<input id="platlng" name="platlng" style="width:300px;" value="${page.platlng }"/>
 	</label></p>
 	<p><label>기간:<br><input id="pperiod" name="pperiod" value="${page.pdate }" style="width:300px;" /></label></p>
 	<p>
@@ -102,7 +102,7 @@ page admin
 		</label>
 	</p>
 	<p><label>시간:<br><input id="pshowtime" name="pshowtime" value="" style="width:300px;"/></label></p>
-	<p><input type="button" value="수정" onclick="adminpage(); " /></p>
+	<p><input type="button" value="수정" onclick="adminpage() " /></p>
 </form:form>
 <script src="<%=request.getContextPath()%>/js/adminMap.js?ver=11"></script>
 </body>
