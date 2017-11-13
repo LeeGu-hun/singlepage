@@ -14,6 +14,7 @@ function mbreadURL(input) {
 	if(input.files && input.files[0]) {
 		var reader = new FileReader();
 		reader.onload = function(e) {
+			$('#mbuploadImg').show();
 			$('#mbuploadImg').attr('src', e.target.result);
 			$('#mbuploadImg').attr('width', 300);
 		}

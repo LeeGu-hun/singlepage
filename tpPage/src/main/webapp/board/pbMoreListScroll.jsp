@@ -26,11 +26,11 @@
 			<td style="padding:5px; width:15%" align="center">
 				<fmt:formatDate value="${pboard.pbdate }" pattern="MM-dd HH:mm" />
 			</td>
-			<c:if test="${pageHostId == authInfo.pid }">
 			<td style="padding:5px; width:10%" align="center">
+			<c:if test="${pageHostId == authInfo.pid }">
 				<a class="pbidrm" style="color:red">삭제</a><input type="hidden" value="${pboard.pbid }" />
-			</td>
 			</c:if>
+			</td>
 		</tr>
 		</c:forEach>
 <% if(nowPbPage == -1) { %>		

@@ -32,7 +32,7 @@
 	<input type="file" id="pbfile" name="pbfile" style="margin-top:5px" onchange="pbreadURL(this);" />
 	<input type="hidden" id="pbupdir" name="pbupdir" value="<%=request.getRealPath("/buploads/pbuploads/")%>" />
 	<input type="hidden" id="pbhostid" name="pbhostid" value="<c:out value='${page.pid }' />" />
-	<div align="center">
+	<div align="center" style="margin-top:5px">
 	<input type="submit" class="btn btn-custom" value="등록" />
 	</div>
 </form:form>
@@ -46,13 +46,22 @@
 			<th colspan="2" style="padding:5px; width:65%" class="text-center">제목</th>
 			<th style="width:10%" class="text-center">작성자</th>
 			<th style="width:15%" class="text-center">작성일</th>
-			<c:if test="${page.pid == authInfo.pid }">
 			<th style="width:10%" class="text-center">
+			<c:if test="${page.pid == authInfo.pid }">
 				<a onclick="pballdrop(${authInfo.pid });" style="color:red">전체삭제</a>
-			</th>
 			</c:if>
+			</th>
 		</tr>
 	</thead>
+	<tbody>
+		<tr>
+			<td style="width: 20%"></td>
+			<td style="width: 45%"></td>
+			<td style="width: 10%"></td>
+			<td style="width: 15%"></td>
+			<td style="width: 10%"></td>
+		</tr>
+	</tbody>
 	<input type="hidden" id="pbPage" name="pbPage" value="1" />
 	<tbody>
 		<c:forEach var="pboard" items="${pboardList }">
@@ -62,7 +71,7 @@
 					<c:when test="${!empty pboard.pbnewfile }">
 						<img data-toggle="modal" onclick="loadpboard(${pboard.pbid });" src="/tpPage/buploads/pbuploads/${pboard.pbnewfile }" height="75px" />
 					</c:when>
-				<c:otherwise>
+					<c:otherwise>
 						<img data-toggle="modal" onclick="loadpboard(${pboard.pbid });" src="/tpPage/default_image.png" height="75px" />
 					</c:otherwise>
 				</c:choose>
@@ -72,11 +81,11 @@
 			<td style="padding:5px; width:15%" align="center">
 				<fmt:formatDate value="${pboard.pbdate }" pattern="MM-dd HH:mm" />
 			</td>
-			<c:if test="${page.pid == authInfo.pid }">
 			<td style="padding:5px; width:10%" align="center">
+			<c:if test="${page.pid == authInfo.pid }">
 				<a class="pbidrm" style="color:red">삭제</a><input type="hidden" value="${pboard.pbid }" />
-			</td>
 			</c:if>
+			</td>
 		</tr>
 		</c:forEach>
 <% if(nowPbPage == -1) { %>
