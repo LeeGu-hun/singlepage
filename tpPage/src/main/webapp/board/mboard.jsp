@@ -65,6 +65,7 @@ $(document).ready(function() {
 			<th>mbwriterid</th>
 			<th>pname</th>
 			<th>mname</th>
+			<th></th>
 		</tr>
 	</thead>
 	<input type="hidden" id="mbPage" name="mbPage" value="1" />
@@ -85,7 +86,9 @@ $(document).ready(function() {
 			<td>${mboard.mbwriterid }</td>
 			<td>${mboard.pname }</td>
 			<td>${mboard.mname }</td>
+			<c:if test="${mboard.mbwriterid == authInfo.mid }">
 			<td><a class="mbidrm">삭제</a><input type="hidden" value="${mboard.mbid }" /></td>
+			</c:if>
 		</tr>
 		</c:forEach>
 <% if(nowMbPage == -1) { %>
