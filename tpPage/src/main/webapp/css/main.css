@@ -33,7 +33,7 @@
 
 .inner-item {
 	padding:5px;
-	border: 2px solid #cccccc;
+	border: 2px solid #000000;
 	border-radius: 10px;
 	max-height: 500px;
 	overflow: auto;
@@ -108,13 +108,17 @@
 	display:block;
 }
 
-.title {
-	color: red;
-}
-
 .inner-item img {
 	border-radius: 10px;
 	max-width:330px; 
+}
+
+.content a {
+	color: black; 
+}
+
+.content a:hover {
+	color: red; 
 }
 
 #btnTop {
@@ -123,7 +127,15 @@
     bottom: 50px;
     display: none;
     z-index: 999;
+    color: white;
+    background-color: black;
+    border-color: black;
 }
+
+#btnTop:hover {
+    color: red;
+}
+
 
 .selected-item {
 	border: 2px solid #03709e;
