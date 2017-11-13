@@ -61,6 +61,13 @@
 	border: 1px solid; 
 	margin: 25px; 
 	padding: 20px; 
-	height: 250; 
+	height: 300; 
 	width: 600;
+}
+
+.delspan
+{
+	display:inline-block; 
+	width: 490px; 
+	text-align: right;
 }

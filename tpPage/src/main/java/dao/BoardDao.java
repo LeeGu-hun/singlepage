@@ -251,4 +251,8 @@ public class BoardDao {
 	public void mbidrm(int mbid) {
 		jdbcTemplate.update("update mboard set mbre_lev = -1 where mbid = ?", mbid);	
 	}
+
+	public void pballdrop(int pbhostid) {
+		jdbcTemplate.update("update pboard set pbre_lev = -1 where pbhostid = ? and pbre_lev = 0", pbhostid);
+	}
 }

@@ -13,7 +13,7 @@
 
 
 function autolayout() {
-	windowH = $(window).height() - (/*$('#header').height() + */$('#footer').height());
+	windowH = $(window).height() - ($('#header').height() + $('#footer').height());
 	pagecontentboxH = $('#pagecontentbox').height();
 	if(windowH > pagecontentboxH) {
 		$('#pagemainbox').css('height', windowH);
