@@ -31,7 +31,7 @@ function addlist() {
 				+"<input type='hidden' id='checked" + count + "' name='checked'  value='0' />" 
 				+"<input type='checkbox' id='ck" + count + "' value='"+ count +"'/>보이기 " 
 				+"<span class='delspan'>" 
-				+"<input type='button' class='btn btn-info btn-sm' id='del${list.turn }' value='삭제' onclick='deleteList(" + count + ")'/></span><hr>" 
+				+"<input type='button' class='btn btn-custom' id='del${list.turn }' value='삭제' onclick='deleteList(" + count + ")'/></span><hr>" 
 				+"<div class='col-md-6'>" 
 				+"<label>링크: </label><input type='text' id='link"+ count +"' name='link' value='' required /><br/><br/> " 
 				+"<label>이미지: <input type='file' id='thum"+ count +"' name='thum' onchange='imgreadURL(this)' />"
@@ -52,7 +52,6 @@ function addlist() {
 }
 
 function deleteList(num) {
-	console.log(num);
 	var count = $('#count').val()-1;
 	var turn = $("#turn"+num).value;
 	
@@ -66,7 +65,7 @@ function deleteList(num) {
 			$("#checked"+i).attr("id", "checked"+(i-1));
 			$("#ck"+i).val((i-1));
 			$("#ck"+i).attr("id", "ck"+(i-1));
-			$("#del"+i).attr("onclick", "deleteList("+(i-1)+"0");
+			$("#del"+i).attr("onclick", "deleteList("+(i-1)+")");
 			$("#del"+i).attr("id", "del"+(i-1));
 			$("#link"+i).attr("id", "link"+(i-1));
 			$("#thum"+i).attr("id", "thum"+(i-1));

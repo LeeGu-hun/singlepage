@@ -6,6 +6,7 @@ import java.util.List;
 
 import javax.sql.DataSource;
 
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.transaction.annotation.Transactional;
@@ -116,6 +117,21 @@ public class PageDao {
 		return lists;
 	}
 	
+	public List<PageTop> selectTop(int pid) {
+		List<PageTop> tlist = jdbcTemplate.query("select * from toplist where pid=? order by turn", 
+				new RowMapper<PageTop>() {
+					@Override
+					public PageTop mapRow(ResultSet rs, int rowNum) throws SQLException {
+							PageTop ptop = new PageTop(rs.getInt("pid"), rs.getInt("tid"), rs.getInt("tcheck"), rs.getInt("turn"),
+									rs.getString("url"), rs.getString("thum"), rs.getString("newthum"));
+						return ptop;
+					}				
+				},
+		pid);
+		
+		return tlist.isEmpty()?null:tlist;
+	}
+	
 	public void addToplist1(int pid, String turn, String link, String thum, String newthum, String checked) {
 		jdbcTemplate.update("insert into toplist values(?, tid_seq.nextval, ?, ?, ?, ?, ?)", 
 				pid, turn, link, thum, newthum, checked);
@@ -132,32 +148,8 @@ public class PageDao {
 	}
 	
 	public void updateToplist2(String tid, String turn, String link, String checked) {
-		System.out.println(tid);
-		System.out.println(turn);
-		System.out.println(link);
-		System.out.println(checked);
 		jdbcTemplate.update("update toplist set turn=?, url=?, tcheck=? where tid=? ", 
 				turn, link, checked, tid);
-		System.out.println("update");
-	}
-	
-	public void deleteToplist(int rest) {
-		jdbcTemplate.update("delete from toplist where turn=?", rest);
-	}
-	
-	public List<PageTop> selectTop(int pid) {
-		List<PageTop> tlist = jdbcTemplate.query("select * from toplist where pid=? order by turn", 
-				new RowMapper<PageTop>() {
-					@Override
-					public PageTop mapRow(ResultSet rs, int rowNum) throws SQLException {
-							PageTop ptop = new PageTop(rs.getInt("pid"), rs.getInt("tid"), rs.getInt("tcheck"), rs.getInt("turn"),
-									rs.getString("url"), rs.getString("thum"), rs.getString("newthum"));
-						return ptop;
-					}				
-				},
-		pid);
-		
-		return tlist.isEmpty()?null:tlist;
 	}
 	
 	public List<PageTop> selectCarousel(int pid) {
@@ -175,15 +167,17 @@ public class PageDao {
 		return tlist.isEmpty()?null:tlist;
 	}
 	
-	public int selectTurn(String tid) {
-		int turn = jdbcTemplate.queryForObject("select turn from toplist where tid=?", Integer.class, tid);
-		return turn;
+	public void deleteTurn(int pid, String turn) {
+		jdbcTemplate.update("delete from toplist where pid=? and turn=?", pid, turn);
 	}
 	
-	public void deleteTurn(int pid, String turn) {
-		System.out.println("pid: "+ pid);
-		System.out.println("turn: "+ turn);
-		jdbcTemplate.update("delete from toplist where pid=? and turn=?", pid, turn);
+	public String selectExistTurn(String turn) {
+		try {
+			String tid = jdbcTemplate.queryForObject("select tid from toplist where turn=?", String.class, turn);
+			return tid;
+		} catch (EmptyResultDataAccessException e) {
+			return "";
+		}
 	}
 }
 

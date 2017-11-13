@@ -1,2 +1,6 @@
 @charset "UTF-8";
 
+.introText {
+	height:200px;
+	resize:none;
+}
