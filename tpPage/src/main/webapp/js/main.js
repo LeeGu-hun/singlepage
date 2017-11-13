@@ -214,6 +214,9 @@ function sliderInit(min, max) {
 }
 
 function srchBtn() {
+	if($(document).height() > $(window).height())
+		$("#btn").css("display", "none");
+	else $("#btn").css("display", "inline-block");
 	$("#page").val(0);
 	$(".grid-item").remove();
 	loadSrch();
