@@ -22,9 +22,7 @@
 			<th>pbwriterid</th>
 			<th>pname</th>
 			<th>mname</th>
-			<c:if test="${page.pid == authInfo.pid }">
 			<td><a class="pbidrm">삭제</a><input type="hidden" value="${pboard.pbid }" /></td>
-			</c:if>
 		</tr>
 	</thead>
 	<input type="hidden" id="pbPage" name="pbPage" value="<%= nowPbPage %>" />

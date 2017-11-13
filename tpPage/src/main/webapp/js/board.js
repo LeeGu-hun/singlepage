@@ -2,6 +2,7 @@ function pbreadURL(input) {
 	if(input.files && input.files[0]) {
 		var reader = new FileReader();
 		reader.onload = function(e) {
+			$('#pbuploadImg').show();
 			$('#pbuploadImg').attr('src', e.target.result);
 			$('#pbuploadImg').attr('width', 300);
 		}
@@ -515,6 +516,10 @@ function pballdrop(pbhostid) {
 		});
 	}
 }
+
+
+
+
 
 
 

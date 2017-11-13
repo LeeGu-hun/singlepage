@@ -41,9 +41,6 @@
 	</div>
 </div>
 
-<%@ include file="./include/footer.jsp" %>
-
-
 <!-- 후원 modal -->
 <div class="modal" id="myModal" aria-hidden="true" style="display: none; z-index: 1050;">
 	<div class="modal-dialog modal-lg">

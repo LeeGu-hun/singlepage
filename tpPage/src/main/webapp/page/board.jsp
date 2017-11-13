@@ -7,7 +7,11 @@
 
 <style>
 a {
- cursor:pointer;
+	cursor:pointer;
+}
+
+img {
+	cursor:pointer;
 }
 </style>
 
