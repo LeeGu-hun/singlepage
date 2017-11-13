@@ -31,7 +31,7 @@ function addlist() {
 				+"<input type='hidden' id='checked" + count + "' name='checked'  value='0' />" 
 				+"<input type='checkbox' id='ck" + count + "' value='"+ count +"'/>보이기 " 
 				+"<span class='delspan'>" 
-				+"<input type='button' class='btn btn-info btn-sm' id='del${list.turn }' value='삭제' onclick='deleteList(" + count + ")'/></span><hr>" 
+				+"<input type='button' class='btn btn-custom' id='del${list.turn }' value='삭제' onclick='deleteList(" + count + ")'/></span><hr>" 
 				+"<div class='col-md-6'>" 
 				+"<label>링크: </label><input type='text' id='link"+ count +"' name='link' value='' required /><br/><br/> " 
 				+"<label>이미지: <input type='file' id='thum"+ count +"' name='thum' onchange='imgreadURL(this)' />"

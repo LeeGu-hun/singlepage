@@ -99,7 +99,6 @@ public class PageService {
 		} else if (originCnt <= count) {			
 			for (int i = 0; i < count; i++) {			
 				String stid = pageDao.selectExistTurn(turn[i]);
-				System.out.println("stid:" + stid);
 				if (stid.equals("")) {
 					String tfile = thum[i].getOriginalFilename();
 					if (!(tfile.equals(""))) {					
@@ -168,7 +167,6 @@ public class PageService {
 		} else {
 			for (int i = 0; i < count; i++) {				
 				String stid = pageDao.selectExistTurn(turn[i]);
-				System.out.println("stid:" + stid);
 				if (stid.equals("")) {
 					String tfile = thum[i].getOriginalFilename();
 					if (!(tfile.equals(""))) {					

@@ -3,13 +3,13 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
-<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/ptop.css?ver=33" />
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/ptop.css?ver=3311" />
 
 <script 
 	src="https://code.jquery.com/jquery-3.2.1.min.js"
 	integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
 	crossorigin="anonymous"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js?ver=1111"></script>
 <script src="<%=request.getContextPath()%>/js/top.js?ver=1"></script>
 
 <div class='row' style="width:auto; margin:0px 0px 0px 0px">
@@ -62,7 +62,7 @@
         </c:if>    
 		  <div style="text-align: right">
 			<c:if test="${authInfo.pid == page.pid }">
-				<a class="btn btn-info btn-sm" href="/tpPage/topModify">수정</a>&nbsp;&nbsp;
+				<a class="btn btn-custom" href="/tpPage/topModify">수정</a>&nbsp;&nbsp;
 			</c:if>
 		  </div>
       </div>                          

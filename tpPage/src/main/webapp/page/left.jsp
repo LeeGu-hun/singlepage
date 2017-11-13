@@ -24,7 +24,7 @@
 	<div>
 		<br/>	
 		<a >${page.pnick }</a><br/><br/>
-		<textarea readonly>${page.pintro }</textarea>
+		<textarea class="introText" readonly>${page.pintro }</textarea>
 	</div>
 	<div>
 		<br/>
@@ -36,20 +36,20 @@
 		<input type="hidden" name="ck" id="ck" value="${ck }" />
 		<c:choose>
 			<c:when test="${ck == 0 || ck == null}">
-			<a id="btnLike" class="btn btn-info btn-sm" onclick="like()">좋아요♡</a>&nbsp;&nbsp;
+			<a id="btnLike" class="btn btn-custom" onclick="like()">좋아요♡</a>&nbsp;&nbsp;
 			</c:when>
 			<c:otherwise>
-			<a id="btnLike" class="btn btn-info btn-sm" onclick="like()">좋아요♥</a>&nbsp;&nbsp;
+			<a id="btnLike" class="btn btn-custom" onclick="like()">좋아요♥</a>&nbsp;&nbsp;
 			</c:otherwise>
 		</c:choose>
 		<c:if test="${authInfo.mid != null}">
-			<a data-toggle="modal" class="btn btn-info btn-sm" href="#myModal" onclick="donate()">후원</a>
+			<a data-toggle="modal" class="btn btn-custom" href="#myModal" onclick="donate()">후원</a>
 		</c:if>
 	</div>
 	<div>
 		<br/>
 		<c:if test="${authInfo.pid == page.pid }">
-			<a class="btn btn-info btn-sm" href="/tpPage/admin">관리</a>&nbsp;&nbsp;
+			<a class="btn btn-custom" href="/tpPage/admin">관리</a>&nbsp;&nbsp;
 		</c:if>
 	</div>
 </div>

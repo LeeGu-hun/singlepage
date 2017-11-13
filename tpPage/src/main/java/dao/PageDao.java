@@ -148,13 +148,8 @@ public class PageDao {
 	}
 	
 	public void updateToplist2(String tid, String turn, String link, String checked) {
-		System.out.println(tid);
-		System.out.println(turn);
-		System.out.println(link);
-		System.out.println(checked);
 		jdbcTemplate.update("update toplist set turn=?, url=?, tcheck=? where tid=? ", 
 				turn, link, checked, tid);
-		System.out.println("update");
 	}
 	
 	public List<PageTop> selectCarousel(int pid) {
@@ -173,14 +168,10 @@ public class PageDao {
 	}
 	
 	public void deleteTurn(int pid, String turn) {
-		System.out.println("pid: "+ pid);
-		System.out.println("turn: "+ turn);
 		jdbcTemplate.update("delete from toplist where pid=? and turn=?", pid, turn);
 	}
 	
 	public String selectExistTurn(String turn) {
-		System.out.println("selectExistTurn");
-		System.out.println("turn:" + turn);
 		try {
 			String tid = jdbcTemplate.queryForObject("select tid from toplist where turn=?", String.class, turn);
 			return tid;
