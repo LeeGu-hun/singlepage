@@ -74,11 +74,11 @@
 					<label for="after_money">= 예상 포인트</label>
 					<input type="text" id="amoney" name="amoney" value="" readonly/>원<br/>
 				</div>
-				<a data-toggle="modal" href="#myModal2" class="btn btn-primary" onclick="chargeInit()">포인트 충전</a>
+				<a data-toggle="modal" href="#myModal2" class="btn btn-custom" onclick="chargeInit()">포인트 충전</a>
             </div>
             <div class="modal-footer">
               <a href="#" data-dismiss="modal" class="btn" onclick="donateInit()">취소</a>
-              <a data-toggle="modal" href="#myModal3" class="btn btn-primary" onclick="donateCheck()">후원하기</a>
+              <a data-toggle="modal" href="#myModal3" class="btn btn-custom" onclick="donateCheck()">후원하기</a>
             </div>
 		</div>
 	</div>
@@ -120,7 +120,7 @@
 		 	</div>
             <div class="modal-footer">
               <a href="#" data-dismiss="modal" class="btn" onclick="chargeInit()">취소</a>
-              <a data-toggle="modal" href="#myModal4" class="btn btn-primary" onclick="chargeCheck()">충전하기</a>
+              <a data-toggle="modal" href="#myModal4" class="btn btn-custom" onclick="chargeCheck()">충전하기</a>
             </div>
           </div>
         </div>

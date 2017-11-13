@@ -6,6 +6,7 @@
 
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/ptop.css?ver=313" />
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/btnColor.css" />
 
 <script 
 	src="https://code.jquery.com/jquery-3.2.1.min.js"
@@ -27,7 +28,7 @@
 			<input type="hidden" id="checked1" name="checked" value="0" />
 			<input type="checkbox" id="ck1" value="1" />보이기 
 			<span class="delspan">
-				<input type="button" class="btn btn-info btn-sm" style="display: none;" id="del1" value="삭제" onclick="deleteList(1)" />
+				<input type="button" class="btn btn-custom" style="display: none;" id="del1" value="삭제" onclick="deleteList(1)" />
 			</span>
 			<hr>
 			<div class="col-md-6">
@@ -51,7 +52,7 @@
 			<input type="hidden" id="checked${list.turn }" name="checked" value="${list.tcheck }" />
 			<input type="checkbox" id="ck${list.turn }" value="${list.turn }" ${list.tcheck==0?'':'checked'} />보이기
 			<span class="delspan">
-				<input type="button" class="btn btn-info btn-sm" id="del${list.turn }" value="삭제" onclick="deleteList(${list.turn})" />
+				<input type="button" class="btn btn-custom" id="del${list.turn }" value="삭제" onclick="deleteList(${list.turn})" />
 			</span>
 			<hr>
 			<div class="col-md-6">
@@ -71,6 +72,6 @@
 	<br/>
 	
 	<div>
-		<input type="submit" class="btn btn-info btn-sm" value="수정" />
+		<input type="submit" class="btn btn-custom" value="수정" />
 	</div>
 </form:form>

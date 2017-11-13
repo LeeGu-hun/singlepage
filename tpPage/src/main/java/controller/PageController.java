@@ -253,7 +253,6 @@ public class PageController {
 	
 	@RequestMapping("/sendTop")
 	public String modifyTop(@RequestParam("thum") MultipartFile[] thum, HttpServletRequest request, Model model) {
-		System.out.println("asfdasdfasfdf");
 		AuthInfo authInfo = (AuthInfo) request.getSession().getAttribute("authInfo");
 		int pid = authInfo.getPid();
 		int count = Integer.parseInt(request.getParameter("count"));

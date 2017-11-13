@@ -2,8 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
   <nav class="navbar navbar-inverse">
-	
-	<div class="collapse navbar-collapse js-navbar-collapse">
+	<div style="padding: 0 15px 0 15px;">
 		<ul class="nav navbar-nav">
 			<li class="dropdown mega-dropdown">
 				<a href="#" class="dropdown-toggle" data-toggle="dropdown">카테고리 <span class="caret"></span></a>				
