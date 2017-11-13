@@ -118,7 +118,7 @@ public class PageController {
 			}
 			
 			//carousel
-			List<PageTop> ptop = pageDao.selectTop(host);
+			List<PageTop> ptop = pageDao.selectCarousel(host);
 			model.addAttribute("ptop", ptop);
 			
 			return "page";
@@ -194,7 +194,7 @@ public class PageController {
 		
 		Member member = memberSvc.getAuthInfo(mid);
 		AuthInfo authInfo2 = new AuthInfo(member.getMid(), member.getMname(), member.getMemail(), member.getMphone(),
-				member.getMcheck(), member.getMpoint(), member.getMdate());
+				member.getMcheck(), member.getMpoint(), member.getMdate(), authInfo.getPid());
 		session.setAttribute("authInfo", authInfo2);
 		model.addAttribute("ck" , authInfo2.getMpoint());
 		return "page/ck";
@@ -253,20 +253,19 @@ public class PageController {
 	
 	@RequestMapping("/sendTop")
 	public String modifyTop(@RequestParam("thum") MultipartFile[] thum, HttpServletRequest request, Model model) {
+		System.out.println("asfdasdfasfdf");
 		AuthInfo authInfo = (AuthInfo) request.getSession().getAttribute("authInfo");
 		int pid = authInfo.getPid();
 		int count = Integer.parseInt(request.getParameter("count"));
-		
+		int originCnt = Integer.parseInt(request.getParameter("originCnt"));
+		String[] tid = request.getParameterValues("tid");
 		String[] turn = request.getParameterValues("turn");
 		String[] link = request.getParameterValues("link");
 		String[] checked = request.getParameterValues("checked");
 		String[] tupdir = request.getParameterValues("tupdir");
 		
-		pageSvc.sendTop(count, pid, turn, link, thum, checked, tupdir);
-		
-		List<PageTop> ptop = pageDao.selectTop(pid);
-		model.addAttribute("ptop", ptop);
-		
+		pageSvc.sendTop(originCnt, count, pid, tid, turn, link, thum, checked, tupdir);
+
 		return "redirect:/page/" + pid;
 	}
 }
