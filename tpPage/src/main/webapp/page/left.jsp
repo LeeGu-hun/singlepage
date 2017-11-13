@@ -14,42 +14,42 @@
 	<div>
 		<c:choose>
 			<c:when test="${!empty page.pnewfile}">
-				<img src="./puploads/${page.pnewfile }" alt="프로필사진" width="200px" height="150px" />
+				<img src="/tpPage/puploads/${page.pnewfile }" alt="프로필사진" width="200px" height="150px" />
 			</c:when>
 			<c:otherwise>
-				<img src="profile.png" alt="프로필" width="" height="" />
+				<img src="/tpPage/profile.png" alt="프로필" width="" height="" />
 			</c:otherwise>
 		</c:choose>
 	</div>
 	<div>
 		<br/>	
-		<a href="#">${page.pnick }</a><br/><br/>
-		<textarea readonly>${page.pintro }</textarea>
+		<a >${page.pnick }</a><br/><br/>
+		<textarea class="introText" readonly>${page.pintro }</textarea>
 	</div>
 	<div>
 		<br/>
-		<input type="hidden" name="pid" id="pid" value=${page.pid } />
-		<input type="hidden" name="ppoint" id="ppoint" value=${page.ppoint } />
-		<input type="hidden" name="mid" id="mid" value=${authInfo.mid } />
-		<input type="hidden" name="memail" id="memail" value=${authInfo.memail } />
-		<input type="hidden" name="mpoint" id="mpoint" value=${authInfo.mpoint } />
-		<input type="hidden" name="ck" id="ck" value=${ck } />
+		<input type="hidden" name="pid" id="pid" value="${page.pid }" />
+		<input type="hidden" name="ppoint" id="ppoint" value="${page.ppoint }" />
+		<input type="hidden" name="mid" id="mid" value="${authInfo.mid }" />
+		<input type="hidden" name="memail" id="memail" value="${authInfo.memail }" />
+		<input type="hidden" name="mpoint" id="mpoint" value="${authInfo.mpoint }" />
+		<input type="hidden" name="ck" id="ck" value="${ck }" />
 		<c:choose>
 			<c:when test="${ck == 0 || ck == null}">
-			<a id="btnLike" class="btn btn-info btn-sm" href="#" onclick="like()">좋아요♡</a>&nbsp;&nbsp;
+			<a id="btnLike" class="btn btn-custom" onclick="like()">좋아요♡</a>&nbsp;&nbsp;
 			</c:when>
 			<c:otherwise>
-			<a id="btnLike" class="btn btn-info btn-sm" href="#" onclick="like()">좋아요♥</a>&nbsp;&nbsp;
+			<a id="btnLike" class="btn btn-custom" onclick="like()">좋아요♥</a>&nbsp;&nbsp;
 			</c:otherwise>
 		</c:choose>
 		<c:if test="${authInfo.mid != null}">
-			<a data-toggle="modal" class="btn btn-info btn-sm" href="#myModal" onclick="donate()">후원</a>
+			<a data-toggle="modal" class="btn btn-custom" href="#myModal" onclick="donate()">후원</a>
 		</c:if>
 	</div>
 	<div>
 		<br/>
 		<c:if test="${authInfo.pid == page.pid }">
-			<a class="btn btn-info btn-sm" href="./admin">관리</a>&nbsp;&nbsp;
+			<a class="btn btn-custom" href="/tpPage/admin">관리</a>&nbsp;&nbsp;
 		</c:if>
 	</div>
 </div>

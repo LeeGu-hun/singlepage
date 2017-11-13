@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
 <div class="panel with-nav-tabs panel-info">
     <div class="panel-heading">
             <ul class="nav nav-tabs">
@@ -14,18 +13,16 @@
     <div class="panel-body">
         <div class="tab-content">
             <div class="tab-pane in active" id="tab1">
-            	<div class="col-md-3">
+            	<div class="col-xs-2">
 					<div style = "overflow:auto; height: 200px" >
 						<div class="radio">
 							<c:forEach var="loc" items="${sidoList }">
-								<div class="cateList">
 								<label><input type="radio" name="sido" value="${loc.sido }">${loc.sido }</label>
-								</div>
 							</c:forEach>
 						</div>
 					</div>
 				</div>
-				<div class="col-md-9">
+				<div class="col-xs-10">
 					<c:forEach var="sido" items="${sidoList }">
 					<div id="${sido.sido }" class="itemList">
 						<label><input type="checkbox" name="${sido.sido }" value="${sido.sido }" id="${sido.sido }" data-all data-cate="loc">전체</label>
@@ -50,12 +47,14 @@
             </div>
             <div class="tab-pane" id="tab3">
             	<div id="showtime">
-            		<label for="amount">공연 시간 :</label>
+            		<label for="amount" class="ex">공연 시간 :</label>
   					<input type="text" id="amount" readonly style="border:0; color:#f6931f; font-weight:bold;">
   					<input type="hidden" id="time">
-  					<label><input type="checkbox" id="tomorrow">익일</label>
+  					<label class="ex"><input type="checkbox" id="tomorrow">익일</label>
   					<div id="slider-range"></div>
-  					<a class="btn btn-info btn-xs" id="timeBtn">추가</a>
+  					<div class="timeBtn">
+  					<a class="btn btn-custom btn-md" id="timeBtn">추가</a>
+  					</div>
 				</div>
             </div>
             <div class="tab-pane" id="tab4">
@@ -72,10 +71,12 @@
         </div>
     </div>
     <form id="srchFrm">
-	<div class="selected form-inline" style="padding: 20px">
-	<a class="btn btn-primary" id="srchSubmit">검색</a>
+	<div class="selected form-inline" style="padding: 0 20px 0 20px">
     </div>
-    
+    <div style="padding: 20px">
+    <a class="btn btn-custom" id="srchSubmit">검색</a>
+	<a class="btn btn-custom" id="reset">조건 초기화</a>
+    </div>
     </form>
 </div>
 

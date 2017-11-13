@@ -1,0 +1,13 @@
+@charset "UTF-8";
+
+.btn-custom {
+    color: #fff;
+    background-color: #000000;
+    border-color: #000000;
+}
+
+.btn-custom:hover {
+    color: red;
+    background-color: #000000;
+    border-color: #000000;
+}

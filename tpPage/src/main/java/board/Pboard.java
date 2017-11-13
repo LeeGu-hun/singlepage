@@ -69,6 +69,26 @@ public class Pboard {
 		this.pbdate = pbdate;
 	}
 
+	
+
+	public Pboard(int pbid, int pbre_ref, int pbre_lev, int pbre_seq, int pbhostid, int pbwriterid, String pbcontent,
+			String pname, String mname, Date pbdate) {
+		this.pbid = pbid;
+		this.pbre_ref = pbre_ref;
+		this.pbre_lev = pbre_lev;
+		this.pbre_seq = pbre_seq;
+		this.pbhostid = pbhostid;
+		this.pbwriterid = pbwriterid;
+		this.pbcontent = pbcontent;
+		this.pname = pname;
+		this.mname = mname;
+		this.pbdate = pbdate;
+	}
+	
+	public Pboard(int pbid) {
+		this.pbid = pbid;
+	}
+
 	public int getPbid() {
 		return pbid;
 	}

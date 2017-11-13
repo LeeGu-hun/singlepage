@@ -7,14 +7,38 @@
 <%
 	AuthInfo authInfo = (AuthInfo) request.getSession().getAttribute("authInfo");
 %>
+<%-- <%
+	int success = (int)request.getSession().getAttribute("success");
+%> --%>
 <!DOCTYPE html>
 <html>
 <head>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+
+<style>
+a {
+ cursor:pointer;
+}
+</style>
+
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"
+	integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+	crossorigin="anonymous"></script>
+<script type="text/javascript" src="<%=request.getContextPath()%>/js/member.js?ver=118"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js" type="text/javascript"></script>
+<script src="http://malsup.github.com/jquery.form.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>	
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 </head>
 <body>
+<input type="hidden" id="memail" value="${authInfo.memail }"/>
+<input type="hidden" id="ck" value="${ck }"/>
+<input type="hidden" id="mid" value="${authInfo.mid }"/>
+<input type="hidden" id="mpoint" value="${authInfo.mpoint }"/>
+<input type="hidden" id="ppoint" value=${page.ppoint } />
+<input type="hidden" id="pid" value=${page.pid } />
+
 <c:if test="${empty authInfo }">
 	<form:form commandName="logincmd" action="login">
 		<p>
@@ -72,7 +96,7 @@
 <!-- 로그인 전후 -->
 
 <c:if test="${! empty authInfo }">	
-	<form:form commandName="infocmd" action="memInfo">
+
 		<p>
 			* 이메일:<%=authInfo.getMemail() %>
 		</p>
@@ -83,12 +107,36 @@
 			* 폰번호:<%=authInfo.getMphone() %>
 		</p>
 	<c:if test="${ authInfo.getMcheck() == 0 }">
+				<p>
+					* 포인트:<%=authInfo.getMpoint() %>
+					<a data-toggle= "modal" class = "btn btn-info btn-sm" href="#mcheckcmd" >본인 인증</a>
+				</p>
+				<div class="modal" id="mcheckcmd" aria-hidden="true" style="display: none; z-index: 1080;">
+					<div class="modal-dialog">
+						<div class="modal-content">
+							<div class="modal-header">
+								<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+								<h4 id="chTitle" class="modal-title">본인인증</h4>
+							</div>
+							<div class="container"></div>
+							<div id="ctxtModal" class="modal-body">
+								<div id='mchkTxt'> 
+									<label>email:</label>
+				            		<input type='text' id='email' name='email' /><br /> 
+				            		<label>password:</label>
+				            		<input type='password' id='pass' name='pass' /><br /> 
+				            		<label>phone:</label>
+									<input type='text' id='phone' name='phone' /><br /></div>
+								</div>
+								<div id="cbtnModal" class="modal-footer">
+								<a href='#' class='btn' onclick='mcheckgo()'>본인 인증</a> 
+								<a href='#' data-dismiss='modal' class='btn'>취소</a>
+							</div>
+						</div>
+					</div>
+				</div>
 		<p>
-			* 포인트:<%=authInfo.getMpoint() %>
-			<a href="#" class="btn btn-primary">본인인증하기</a>
-		</p>
-		<p>
-			* 본인인증:<%=authInfo.getMcheck() %>
+			* 본인인증:<%=authInfo.getMcheck()%>
 		</p>
 	</c:if>		
 	<c:if test="${ authInfo.getMcheck() == 1 }">
@@ -97,13 +145,114 @@
 		</p>
 		<p>
 			* 본인인증:<%=authInfo.getMcheck() %>
-			<a href="#" class="btn btn-primary">포인트 충전</a>
+			<a data-toggle="modal" class="btn btn-info btn-sm" href="#pointchargecmd" onclick="chargeInit()">포인트 충전</a>
 		</p>
-	</c:if>		
+				<div class="modal" id="pointchargecmd" aria-hidden="true" style="display: none; z-index: 1060;">
+					<div class="modal-dialog modal-lg">
+						<div class="modal-content">
+							<div class="modal-header">
+								<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+								<h4 class="modal-title">포인트 충전</h4>
+							</div>
+							<div class="container"></div>
+							<div class="modal-body">
+								<label>충전금액</label><br />
+								<div onchange="charge()">
+									<input id="coneth" type="radio" name="chmoney" value="1000" />
+									<label for="coneth">1000원</label>
+									<input id="cthrth" type="radio" name="chmoney" value="3000" />
+									<label for="cthrth">3000원</label>
+									<input id="cfivth" type="radio" name="chmoney" value="5000" />
+									<label for="cfivth">5000원</label><br />
+									<input id="ctenth" type="radio" name="chmoney" value="10000" />
+									<label for="ctenth">10000원</label>
+									<input id="cin" type="radio"name="chmoney" value="cin" />
+									<label for="cin">직접입력</label>
+									<input onkeydown="cin_charge(this)" id="cin_money" type="text" name="cin_money" disabled />
+									<label>원</label>
+								</div>
+
+								<div style="text-align: right">
+									<label for="ccurrent_money">보유 포인트</label>
+									<input type="text" id="hmoney" name="hmoney" value="" readonly />원<br />
+									<label for="charge_money">+ 충전 포인트</label>
+									<input type="text" id="ccmoney" name="ccmoney" value="" readonly />원<br />
+									<label for="cafter_money">= 예상 포인트</label>
+									<input type="text" id="camoney" name="camoney" value="" readonly />원<br />
+									<input type="hidden" id="mcheck" name="mcheck" value="${authInfo.mcheck }" />
+								</div>
+							</div>
+							<div class="modal-footer">
+								<a href="#" data-dismiss="modal" class="btn" onclick="chargeInit()">취소</a>
+								<a data-toggle="modal" href="#finishcmd" class="btn btn-primary" onclick="chargeCheck()">충전하기</a>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="modal" id="finishcmd" data-backdrop="static" aria-hidden="true" style="display: none; z-index: 1080;">
+					<div class="modal-dialog">
+						<div class="modal-content">
+							<div class="modal-header">
+								<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+								<h4 id="chTitle" class="modal-title"></h4>
+							</div>
+							<div class="container"></div>
+							<div id="ctxtModal" class="modal-body"></div>
+							<div id="cbtnModal" class="modal-footer"></div>
+						</div>
+					</div>
+				</div>
+			</c:if>		
 		<a href="./memmodifier" class="btn btn-primary">회원정보수정</a>
 		<a href="./mpwchange" class="btn btn-primary">비밀번호 변경</a><br><br>
 		<a href="./home" class="btn btn-primary">홈으로 가기</a>
-	</form:form>
-</c:if>
+		<a data-toggle="modal" class="btn btn-success" href="" onclick="memberdrop()">회원탈퇴</a>
+
+		
+		<div class="modal" id="memberdrop" aria-hidden="true" style="display: none; z-index: 1050;">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+						<h4 class="modal-title">회원탈퇴</h4>
+					</div><div class="container"></div>
+					<div class="modal-body">
+					<form:form commandName="memberdropcmd" action="/tpPage/memberdrop">
+						<p>
+							<label> 
+								<form:hidden path="memail" value="${authInfo.memail }" />
+								<form:password path="mpw" placeholder="비밀번호 입력하시오" />
+							</label>
+						</p>
+					</form:form>
+					</div>
+					<div class="modal-footer">
+						<a href="#" id="memdpbtn" class="btn btn-primary">회원탈퇴!</a>
+						<a href="#" data-dismiss="modal" class="btn">닫기</a>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="modal" id="memberdropchk" aria-hidden="true" style="display: none; z-index: 1060;">
+			<div class="modal-dialog modal-sm">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+						<h4 class="modal-title">탈퇴하시겠습니까?</h4>
+					</div><div class="container"></div>
+					<div class="modal-body">
+						<a id="memdpgobtn">탈퇴</a>
+						<a href="#" data-dismiss="modal" class="btn">아니오</a>
+					</div>
+					<div class="modal-footer">
+						<a href="#" data-dismiss="modal" class="btn">Close</a>
+					</div>
+				</div>
+			</div>
+		</div>
+			
+	</c:if>
 </body>
 </html>

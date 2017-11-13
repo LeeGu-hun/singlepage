@@ -63,7 +63,7 @@ function donateClose() {
 	console.log(ppoint);
 	$.ajax({
 		type : "POST",
-		url : "./pointDonate",
+		url : "/tpPage/pointDonate",
 		data : "pid=" + pid + "&mid=" + mid + "&ppoint=" + ppoint+ "&dmoney=" + dmoney,
 		success : function(ck) {
 			ck = $.trim(ck);
@@ -110,7 +110,7 @@ function charge(){
 		var hmoney = $('#hmoney').val();
 		var camoney = Number(hmoney) + Number(ccmoney);
 		$("#cin_money").val("");
-		$("#cin_money").attr("disabled",true)
+		$("#cin_money").attr("disabled",true);
 		if(Number(camoney) >= 0) {
 			  $('#camoney').val(camoney);  
 		  } else {
@@ -141,7 +141,7 @@ function chargeCheck() {
 				"<a href='#' data-dismiss='modal' class='btn'>취소</a>");
 	} else {
 		if(ccmoney == "" || Number(ccmoney)==0) {
-			$('#chTitle').html("실행 오류")
+			$('#chTitle').html("실행 오류");
 			$('#ctxtModal').html('충전할 금액을 선택해주세요.');
 			$('#cbtnModal').html("<a href='#' data-dismiss='modal' class='btn'>확인</a>");
 		} else {
@@ -158,7 +158,7 @@ function chargeClose() {
 	var mid = $('#mid').val();
 	$.ajax({
 		type : "POST",
-		url : "./pointCharge",
+		url : "/tpPage/pointCharge",
 		data : "charge=" + charge + "&mid=" + mid,
 		success : function(ck) {
 			ck = $.trim(ck);
@@ -186,7 +186,7 @@ function memCheck() {
 	var email = $('#memail').val(); 
 	$.ajax({
 		type : "POST",
-		url : "./memberCheck",
+		url : "/tpPage/memberCheck",
 		data : "email=" + email,
 		success : cmpPass
 	});
@@ -202,7 +202,7 @@ function cmpPass(pw) {
 	if (memail == email && pw == pass) {
 		$.ajax({
 			type : "POST",
-			url : "./mchkUpdate",
+			url : "/tpPage/mchkUpdate",
 			data : "email=" + email + "&phone=" + phone + "&mid=" + mid,
 			success : changeMchk
 		});
@@ -228,12 +228,12 @@ function like() {
 	var pid = $('#pid').val();
 	var mid = $('#mid').val();
 	var ck = $('#ck').val();
-	if(mid == "/"){
-		location.href = './membermanager?pid='+pid;
+	if(mid == ""){
+		location.href = './login?pid='+pid;
 	} else {
 		$.ajax({
 			type : "POST",
-			url : "./chklike",
+			url : "/tpPage/chklike",
 			data : "pid=" + pid + "&mid=" + mid + "&ck=" + $.trim(ck),
 			success : changeHeart
 		});

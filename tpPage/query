@@ -143,7 +143,92 @@ constraint fk_blike_mbid foreign key(mbid) references mboard(mbid),
 constraint fk_blike_pbid foreign key(pbid) references pboard(pbid),
 constraint blike_status check(blike in('0', '1')));
 
+create table pboard_like (
+mid number not null,
+pblike char(1) not null,
+pbid number,
+pblike_date date not null,
+constraint fk_pblike_mid foreign key(mid) references member(mid),
+constraint fk_pblike_pbid foreign key(pbid) references pboard(pbid),
+constraint pblike_status check(pblike in('0', '1')));
+
+create table mboard_like (
+mid number not null,
+mblike char(1) not null,
+mbid number,
+mblike_date date not null,
+constraint fk_mblike_mid foreign key(mid) references member(mid),
+constraint fk_mblike_pbid foreign key(mbid) references mboard(mbid),
+constraint mblike_status check(mblike in('0', '1')));
+
 create table locdb(
 sido varchar2(100),
 gungu varchar2(100)
 );
+
+
+CREATE TABLE SHOWTIME 
+   (PID NUMBER, 
+	SHOWSTART NUMBER, 
+	SHOWEND NUMBER, 
+	 CONSTRAINT FK_SHOWTIME FOREIGN KEY ("PID")
+	  REFERENCES PAGE("PID")
+   );
+
+   
+create or replace trigger showtime after insert or update on page for each row 
+declare
+shows varchar(10);
+showe varchar(10);
+words varchar(20);
+ss number;
+se number;
+begin
+words := :new.pshowtime;
+shows := substr(words, 1, 2);
+if shows = '미정' then
+ss := 99;
+else
+ss := to_number(shows);
+end if;
+showe := substr(words, (instr(words, ' ', 1, 2)+1), 2);
+if showe = '미정' then
+se := -1;
+else
+se := to_number(showe);
+end if;
+if inserting then
+insert into showtime values(:new.pid, ss, se);
+end if;
+if updating then
+update showtime set showstart = ss, showend = se where pid = :new.pid;
+end if;
+end;
+
+
+update locdb set sido = '경기' where sido = '경기도';
+update locdb set sido = '경북' where sido = '경상북도';
+update locdb set sido = '경남' where sido = '경상남도';
+update locdb set sido = '강원' where sido = '강원도';
+update locdb set sido = '충북' where sido = '충청북도';
+update locdb set sido = '충남' where sido = '충청남도';
+update locdb set sido = '전북' where sido = '전라북도';
+update locdb set sido = '전남' where sido = '전라남도';
+update locdb set sido = '제주' where sido = '제주도';
+commit;
+
+create table toplist(
+    pid number not null,
+    tid number not null,
+    turn number default 0 not null,
+    url varchar2(100) not null,
+    thum varchar2(100),
+    newthum varchar2(100),
+    tcheck number default 0 not null,
+    constraint pk_top primary key(tid),
+    constraint fk_top foreign key(pid) references page(pid)
+);
+
+create sequence tid_seq increment by 1 start with 1 maxvalue 50000;
+
+
