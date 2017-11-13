@@ -5,8 +5,13 @@
 .navbar {
 	font-family: 'Open Sans', 'sans-serif';
 	background: #000000;
+	margin-bottom: 0px;
+	border-radius: 0px;
 }
 
+.nav {
+	border-radius: 0px;
+}
 .navbar-inverse .navbar-nav>li>a {
     color: white;
 }

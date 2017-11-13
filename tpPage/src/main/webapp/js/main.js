@@ -51,14 +51,6 @@ $(document).ready(function(){
 		$('body').css({overflow: 'hidden'});
 		var content = $(this).children().clone();
 		$('.inner-content').html(content);
-		$('.inner-content').append('<div class="close-btn">&#215;</div>');
-		$('.close-btn').on('click', function(){
-			$('.outer-content').scrollTop(0);
-			$('body').css({overflow: ''});
-			$('.inner-content').removeClass('on');
-			$('.outer-content').removeClass('on');
-			$('.outer-back').removeClass('on');
-		});
 		$('.inner-content').addClass('on');
 		$('.outer-content').addClass('on');
 		$('.outer-back').addClass('on');
@@ -89,6 +81,9 @@ $(document).ready(function(){
 		$('.itemList').hide();
 		var sido = $('input:radio[name=sido]:checked').val();
 		$('#'+sido).show();
+		console.log($(this));
+		$(':radio:checked').parent().addClass('sel');
+		$('input:radio').not(':radio:checked').parent().removeClass('sel');
 	});
 
 	$('input:checkbox').on('change', function(){
@@ -98,7 +93,9 @@ $(document).ready(function(){
 			if($(this).is(':checked') == true) {
 				if($(this).is('[data-all]')) {
 					$('input:checkbox[name="'+ itemId.split('-')[0] +'"]').not('input:checkbox[id="'+ itemId +'"]').prop('checked', false);
-					$('input:checkbox[name="'+ itemId.split('-')[0] +'"]').not('input:checkbox[id="'+ itemId +'"]').attr('checked', false);					
+					$('input:checkbox[name="'+ itemId.split('-')[0] +'"]').not('input:checkbox[id="'+ itemId +'"]').attr('checked', false);
+					$('input:checkbox[name="'+ itemId.split('-')[0] +'"]').not('input:checkbox[id="'+ itemId +'"]').parent().removeClass('sel');
+					$(this).parent().addClass('sel');
 					$('.selected-item[id|="lb'+ itemId.split('-')[0] +'"]').remove();
 					$('.selected').append('<label class="selected-item" id="lb' + itemId + '" name="'+ itemId.split('-')[0] +'" data-all><input type="hidden" value='+ itemVal + ' />' + itemId + '  &#215;' + '</label>');
 					$('.selected-item').on('click', function(){
@@ -111,6 +108,8 @@ $(document).ready(function(){
 				} else {
 					$('input:checkbox[name="'+$(this).attr('name')+'"][data-all]').prop('checked', false);
 					$('input:checkbox[name="'+$(this).attr('name')+'"][data-all]').attr('checked', false);
+					$('input:checkbox[name="'+$(this).attr('name')+'"][data-all]').parent().removeClass('sel');
+					$(this).parent().addClass('sel');
 					$('label[name="'+$(this).attr('name')+'"][data-all]').remove();
 					$('.selected').append('<label class="selected-item" id="lb' + itemId + '" name="'+ itemId.split('-')[0] +'"><input type="hidden" value="'+ itemVal + '" />' + itemId + '  &#215;' +'</label>');
 					$('.selected-item').on('click', function(){
@@ -132,6 +131,7 @@ $(document).ready(function(){
 				}
 			} else {
 				$('#lb'+itemId).remove();
+				$(this).parent().removeClass('sel');
 			}
 		}
 	});
@@ -271,14 +271,6 @@ function appendList(list) {
 				$('body').css({overflow: 'hidden'});
 				var content = $(this).children().clone();
 				$('.inner-content').html(content);
-				$('.inner-content').append('<div class="close-btn">&#215;</div>');
-				$('.close-btn').on('click', function(){
-					$('.outer-content').scrollTop(0);
-					$('body').css({overflow: ''});
-					$('.inner-content').removeClass('on');
-					$('.outer-content').removeClass('on');
-					$('.outer-back').removeClass('on');
-				});
 				$('.inner-content').addClass('on');
 				$('.outer-content').addClass('on');
 				$('.outer-back').addClass('on');

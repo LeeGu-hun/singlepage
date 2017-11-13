@@ -5,6 +5,8 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
+<div style="height: 20px"></div>
+
 <div class="container">
 
 <c:if test="${searched != null }">
@@ -47,7 +49,8 @@
 
 <div class="outer-content">
 <div class="inner-content"></div>
-<div class="inner-back"></div>
+<div class="inner-back">
+<img class="btn-close" src="close-button.png"></div>
 </div>
 <div class="outer-back">
 </div>
