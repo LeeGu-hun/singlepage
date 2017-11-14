@@ -404,6 +404,31 @@ public class BoardController {
 			return "board/pballdropgoR";
 		}
 	}
+	
+	@RequestMapping("/mballdrop")
+	public String mballdrop(HttpServletRequest request, Model model) {
+		AuthInfo authInfo = (AuthInfo) request.getSession().getAttribute("authInfo");
+		if(authInfo == null) {
+			return "board/ajaxlogin";
+		} else {
+			int mbhostid = Integer.parseInt(request.getParameter("mbhostid"));
+			model.addAttribute("mbhostid", mbhostid);
+			return "board/mballdropR";
+		}
+	}
+	
+	@RequestMapping("/mballdropgo")
+	public String mballdropgo(HttpServletRequest request, Model model) {
+		AuthInfo authInfo = (AuthInfo) request.getSession().getAttribute("authInfo");
+		if(authInfo == null) {
+			return "board/ajaxlogin";
+		} else {
+			int mbhostid = Integer.parseInt(request.getParameter("mbhostid"));
+			boardDao.mballdrop(mbhostid);
+			model.addAttribute("mbhostid", mbhostid);
+			return "board/mballdropgoR";
+		}
+	}
 }
 
 

@@ -12,12 +12,11 @@
              		<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
              		<h4 class="modal-title">삭제하시겠습니까?</h4>
            	</div><div class="container"></div>
-           	<div class="modal-body">
-           		<c:out value="${mbid }" />
-           		//<c:out value="${rmmbid }" />
-           		<br><a class="mbrermgo">삭제</a>
+           	<div class="modal-body" align="center">
+           		<a style="color:red" class="mbrermgo">삭제</a>
            		<input type="hidden" value="${mbid }" />
            		<input type="hidden" value="${rmmbid }" />
+           		&nbsp;&nbsp;&nbsp;
            		<a href="#" data-dismiss="modal" class="btn">취소</a>
            	</div>
     	</div>

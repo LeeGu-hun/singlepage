@@ -13,8 +13,8 @@
          		<h4 class="modal-title">전체 삭제하시겠습니까?</h4>
        		</div><div class="container"></div>
        		<div class="modal-body" align="center">
-       			<a style="color:red" id="pballdropgo">삭제</a>
-       			<input type="hidden" value="${pbhostid }" />
+       			<a style="color:red" id="mballdropgo">삭제</a>
+       			<input type="hidden" value="${mbhostid }" />
         		&nbsp;&nbsp;&nbsp;
         		<a href="#" data-dismiss="modal" class="btn">취소</a>
         	</div>

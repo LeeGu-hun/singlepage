@@ -23,12 +23,22 @@
               <c:set var="list" value="${ptop[i.index] }" />
 	              <c:if test="${list != null }">
 	              	<div class="col-md-4">
-		              <a class="thumbnail" href="${list.url }"><img alt="" src="../tuploads/${list.newthum }"></a>
+	              		<c:set value="${list.url}" var="url" />
+	              		<c:choose>
+	              		<c:when test="${fn:contains(url, 'youtu.be') || fn:contains(url, 'youtube.com')}">
+	              		<c:if test="${fn:contains(url, 'youtube.com')}">
+	              		<c:set var="key" value="${fn:substringAfter(url, 'v=') }" /></c:if>
+	              		<c:if test="${fn:contains(url, 'youtu.be')}">
+	              		<c:set var="key" value="${fn:substringAfter(url, '/') }" /></c:if>
+	              		<iframe width="300" height="160" src="http://www.youtube.com/embed/${key }?fs=0&rel=0" frameborder="0" allowfullscreen></iframe>
+	              		</c:when>
+		              <c:otherwise><a class="thumbnail" href="${list.url }"><img alt="" src="../tuploads/${list.newthum }"></a></c:otherwise>
+		              </c:choose>
 		            </div> 
 	              </c:if>
               </c:forEach> 
               </c:if>
-              <c:if test="${fn:length(ptop) == 0}">
+              <c:if test="${fn:length(ptop) == 0 && authInfo.pid == page.pid}">
                  <div class="col-md-4">
                		<a class="thumbnail" href="#"><img alt="" src="http://placehold.it/150x150"></a>
               	 </div>          

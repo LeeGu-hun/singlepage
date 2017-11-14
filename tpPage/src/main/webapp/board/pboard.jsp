@@ -26,8 +26,8 @@
 
 <c:if test="${page.pid == authInfo.pid }">
 <form:form commandName="pboardcmd" action="/tpPage/pbwrite" enctype="multipart/form-data">
-	<form:input path="pbsubject" style="width:100%; margin-top:5px" placeholder="제목을 입력해주세요" />
-	<br><form:textarea path="pbcontent" rows="7" cols="auto" style="width:100%; margin-top:5px; resize:none" placeholder="내용을 입력해주세요"></form:textarea>
+	<form:input path="pbsubject" required="required" style="width:100%; margin-top:5px" placeholder="제목을 입력해주세요"  />
+	<br><form:textarea path="pbcontent" required="required" rows="7" cols="auto" style="width:100%; margin-top:5px; resize:none" placeholder="내용을 입력해주세요"></form:textarea>
 	<br><img id="pbuploadImg" name="pbuploadImg" style="display:none" />
 	<input type="file" id="pbfile" name="pbfile" style="margin-top:5px" onchange="pbreadURL(this);" />
 	<input type="hidden" id="pbupdir" name="pbupdir" value="<%=request.getRealPath("/buploads/pbuploads/")%>" />

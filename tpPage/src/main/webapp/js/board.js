@@ -518,7 +518,37 @@ function pballdrop(pbhostid) {
 	}
 }
 
-
+function mballdrop(mbhostid) {
+	$.ajax({
+		type : "POST",
+		url : "/tpPage/mballdrop",
+		data : "mbhostid=" + mbhostid,
+		success : mballdropR
+	});
+	function mballdropR(msg) {
+		$('#rmchkmodaldiv').html(msg);
+		$('#rmchkmodal').modal('show');
+		$('body').css({'overflow': 'hidden', 'padding': '0px'});
+		$('#mballdropgo').on('click', function() {
+			var mbhostid = $(this).next().val();
+			$.ajax({
+				type : "POST",
+				url : "/tpPage/mballdropgo",
+				data : "mbhostid=" + mbhostid,
+				success : mballdropgoR
+			});
+			function mballdropgoR(msg) {
+				$('#rmchkmodal').modal('hide');
+				$('body').css('overflow', '');
+				$('#mbListT').html(msg);
+			}
+		});
+		
+		$('#rmchkmodal').on('hidden.bs.modal', function() {
+			$('body').css('overflow', '');
+		});
+	}
+}
 
 
 
