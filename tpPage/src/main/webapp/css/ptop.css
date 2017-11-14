@@ -60,7 +60,8 @@
 	border: 2px solid; 
 	margin: 25px; 
 	padding: 20px; 
-	height: 300; 
+	height: auto; 
+	overflow: hidden;
 	width: 600;
 	border-radius: 10px;
 }
@@ -83,3 +84,8 @@
 .plus {
 	text-align: center;
 }
+
+#tuploadImg1, #tuploadImg2, #tuploadImg3, #tuploadImg4, #tuploadImg5, #tuploadImg6 {
+	width: 200px;
+	height: auto;
+} 

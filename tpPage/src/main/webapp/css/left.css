@@ -1,7 +1,11 @@
 @charset "UTF-8";
 
 .introText {
+	text-align: justify;
+	width: 200px;
 	height:200px;
+	word-break: break-word;
+	overflow: auto;
 	resize:none;
 }
 
@@ -21,11 +25,18 @@
 	border: 2px solid;
 	border-radius: 10px;
 	width: 700px;
-	padding: 40px;
+	padding: 20px 100px;
 	position:absolute; 
 	top:150px; 
 	margin-bottom:50px;
 	left:34%; 
 	margin-top:-50px; 
 	margin-left:-50px;
+}
+
+#pintro {
+	width: 300px;
+	height: 200px;
+	overflow: auto;
+	resize: none;
 }

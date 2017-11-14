@@ -29,53 +29,51 @@
 <title>page maker</title>
 </head>
 <body>
-
 <%@ include file="../include/header.jsp" %>
 
 <form:form commandName="pagecmd" name="apfrm" action="adminpage" enctype="multipart/form-data">
 <div class="alldiv">
+<h2 align="center"><b>Page Admin</b></h2><hr>
 	<p><c:choose>
 			<c:when test="${!empty page.pnewfile}">
-				<img id="puploadImg" name="puploadImg" src="/tpPage/puploads/${page.pnewfile }"  alt="프로필사진" width="200px" height="150px"/>
+				<img id="puploadImg" name="puploadImg" src="/tpPage/puploads/${page.pnewfile }"  alt="프로필사진" width="200px" height="auto"/>
 			</c:when>
 			<c:otherwise>
 				<img id="puploadImg" name="puploadImg" src="profile.png" alt="프로필" width="" height="" />
 			</c:otherwise>
 		</c:choose>
-	<p><label>사진:<input type="file" id="pfile" name="pfile" onchange="pagereadURL(this);" /></label>
-	<p><input type="hidden" id="pupdir" name="pupdir" 
-		value="<%=request.getRealPath("/puploads/")%>" />
-	<p><label>이름:<br><input id="pname" name="pname" style="width:300px;" value="${page.pname }"/></label></p>
-	<p><label>닉넴:<br><input id="pnick" name="pnick" style="width:300px;" value="${page.pnick }"/></label></p>
-	<p><label>소개:<br><textarea id="pintro" name="pintro" style="width:300px;">${page.pintro }</textarea></label></p>
+	<p><label>●사진:</label><input type="file" id="pfile" name="pfile" onchange="pagereadURL(this);" /><br></p>
+	<input type="hidden" id="pupdir" name="pupdir" value="<%=request.getRealPath("/puploads/")%>" />
+	<p><label>●이름:</label>&nbsp; &nbsp;<input id="pname" name="pname" style="width:300px;" value="${page.pname }"/><br></p>
+	<p><label>●닉넴:</label>&nbsp; &nbsp;<input id="pnick" name="pnick" style="width:300px;" value="${page.pnick }"/><br></p>
+	<p><label>●소개:</label>
+		<textarea id="pintro" name="pintro">${page.pintro }</textarea><br></p>
 	<p>
-		<label>장르카테: ${genre } <br>
+		<label>●구분</label><br>
+		<label>&nbsp; -카테고리:&nbsp; &nbsp;</label>
 			<select  id="pgcate" name="pgcate" style="width:300px;" >
 				<c:forEach var="g" items="${genres }">
 				<option value="${g}" ${genre == g ? 'selected' : ''}>${g}</option>
 				</c:forEach>	
-			</select>
-		</label>
-	</p>
-	<p><label>장르세부: ${genreDetail } <br><input type="text" id="pgdetail" name="pgdetail" style="width:300px;" value="${genreDetail }" onkeyup; onkeypress; onkeydown; /></label></p>
-	<p><label>장르: ${page.pgenre } <br><input id="pgenre" name="pgenre" style="width:300px;"/></label></p>
+			</select>	
+	<br></p>
+	<p><label>&nbsp; -세부장르:&nbsp; &nbsp;<input type="text" id="pgdetail" name="pgdetail" style="width:300px;" value="${genreDetail }" onkeyup; onkeypress; onkeydown; /></label></p>
+	<input type="hidden" id="pgenre" name="pgenre" style="width:300px;"/>
 	<br>
 	<p>
-		<label>지역:<br>
-		<input type="text" id="keyword" style="width:300px;"/> 
-		<input type="button" value="검색" onclick="mapsearch(); return false;"/>
-		<input type="hidden" id="loc" name="loc" />
-		<input id="ploc" name="ploc" style="width:300px;" value="${page.ploc }"/></label>
-	</p>
+		<label>●지역: &nbsp;<input type="text" id="keyword" style="width:300px;"/> 
+		<input type="button" class="btn btn-custom" value="검색" onclick="mapsearch(); return false;"/><br/>
+		<input type="hidden" id="loc" name="loc" /> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
+		<input id="ploc" name="ploc" style="width:300px;" value="${page.ploc }" readonly /></label>
+	 &nbsp; &nbsp;
 	<div id="map" style="width:500px; height:400px;"></div>
-	<p><label>좌표:<br>
-		<input type="hidden" id="lat" name="lat" value="${lat }" />
-		<input type="hidden" id="lng" name="lng" value="${lng }" />
-		<input id="platlng" name="platlng" style="width:300px;" value="${page.platlng }"/>
+	<input type="hidden" id="lat" name="lat" value="${lat }" />
+	<input type="hidden" id="lng" name="lng" value="${lng }" />
+	<input type="hidden" id="platlng" name="platlng" style="width:300px;" value="${page.platlng }"/>
 	</label></p>
-	<p><label>기간:<br><input id="pperiod" name="pperiod" value="${page.pdate }" style="width:300px;" /></label></p>
+	<p><br/><label>●기간: &nbsp; &nbsp;<input id="pperiod" name="pperiod" value="${page.pdate }" style="width:300px;" /></label><br></p>
 	<p>
-		<label>시작:<br>
+		<label>●시작:&nbsp; &nbsp;
 			<select id="pststart" name="pststart" style="width:300px;" onchange="">
 				<option value="미정" ${"미정" == start ? 'selected' : "" }>미정</option>
 				<c:forEach begin="0" end="23" var="s">
@@ -92,7 +90,7 @@
 				</c:forEach>
 			</select>
 		</label><br>
-		<label>종료:<br>
+		<label>●종료:&nbsp; &nbsp;
 			<select id="pstend" name="pstend" style="width:300px;" onchange>
 				<option value="미정" ${'미정' == end ? 'selected' : "" }>미정</option>
 				<c:forEach begin="0" end="23" var="e">
@@ -110,8 +108,11 @@
 			</select>
 		</label>
 	</p>
-	<p><label>시간:<br><input id="pshowtime" name="pshowtime" value="" style="width:300px;"/></label></p>
-	<p><input class="btn btn-custom" type="button" value="수정" onclick="adminpage() " /></p>
+	<input type="hidden" id="pshowtime" name="pshowtime" value="" style="width:300px;"/>
+	<div style="text-align: center">
+	<br/><br/>
+		<input class="btn btn-custom" type="button" value="수정" onclick="adminpage() " />
+	</div>
 </div>
 </form:form>
 <script src="<%=request.getContextPath()%>/js/adminMap.js?ver=11"></script>

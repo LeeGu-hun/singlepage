@@ -65,7 +65,10 @@
 				</div>
 				<div class="col-md-6">
 					<c:if test="${list.newthum != null }">
-						<img id="tuploadImg${list.turn }" name="tuploadImg" src="/tpPage/tuploads/${list.newthum }" style="width:200px; height: auto;"/>
+						<img id="tuploadImg${list.turn }" name="tuploadImg" src="/tpPage/tuploads/${list.newthum }"/>
+					</c:if>
+					<c:if test="${list.newthum == null }">
+						<img id="tuploadImg${list.turn }" name="tuploadImg"/>
 					</c:if>
 				</div>
 			</div>
