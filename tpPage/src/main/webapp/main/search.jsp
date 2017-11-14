@@ -53,7 +53,7 @@
   					<label class="ex"><input type="checkbox" id="tomorrow">익일</label>
   					<div id="slider-range"></div>
   					<div class="timeBtn">
-  					<a class="btn btn-custom btn-md" id="timeBtn">추가</a>
+  					<a class="btn btn-custom btn-sm" id="timeBtn">추가</a>
   					</div>
 				</div>
             </div>
