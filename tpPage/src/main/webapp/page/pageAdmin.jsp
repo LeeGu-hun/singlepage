@@ -16,19 +16,24 @@
 
 <script src="<%=request.getContextPath()%>/js/admin.js?ver=2"></script>
 
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/left.css" />
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=f637d5fa5f8a019e35446dc32b94a752&libraries=services"></script>
-
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>page maker</title>
 </head>
 <body>
-page admin
+
+<%@ include file="../include/header.jsp" %>
+
 <form:form commandName="pagecmd" name="apfrm" action="adminpage" enctype="multipart/form-data">
+<div class="alldiv">
 	<p><c:choose>
 			<c:when test="${!empty page.pnewfile}">
 				<img id="puploadImg" name="puploadImg" src="/tpPage/puploads/${page.pnewfile }"  alt="프로필사진" width="200px" height="150px"/>
@@ -54,11 +59,15 @@ page admin
 	</p>
 	<p><label>장르세부: ${genreDetail } <br><input type="text" id="pgdetail" name="pgdetail" style="width:300px;" value="${genreDetail }" onkeyup; onkeypress; onkeydown; /></label></p>
 	<p><label>장르: ${page.pgenre } <br><input id="pgenre" name="pgenre" style="width:300px;"/></label></p>
+	<br>
+	<p>
+		<label>지역:<br>
+		<input type="text" id="keyword" style="width:300px;"/> 
+		<input type="button" value="검색" onclick="mapsearch(); return false;"/>
+		<input type="hidden" id="loc" name="loc" />
+		<input id="ploc" name="ploc" style="width:300px;" value="${page.ploc }"/></label>
+	</p>
 	<div id="map" style="width:500px; height:400px;"></div>
-	<input type="text" id="keyword" style="width:300px;"/> 
-	<input type="button" value="검색" onclick="mapsearch(); return false;"/>
-	<input type="hidden" id="loc" name="loc" />
-	<p><label>지역:<br><c:out value="${page.ploc }"/><br><input id="ploc" name="ploc" style="width:300px;" value="${page.ploc }"/></label></p>
 	<p><label>좌표:<br>
 		<input type="hidden" id="lat" name="lat" value="${lat }" />
 		<input type="hidden" id="lng" name="lng" value="${lng }" />
@@ -73,7 +82,7 @@ page admin
 					<c:choose>
 						<c:when test="${s <= 9}">
 						<c:set value="0${s }:00" var="valKey1"/>
-							<option value="${s }" ${valKey1 == start ? 'selected' : ''}>0${s }:00</option>
+							<option value="0${s }" ${valKey1 == start ? 'selected' : ''}>0${s }:00</option>
 						</c:when>
 						<c:otherwise>
 						<c:set value="${s }:00" var="valKey2"/>
@@ -102,7 +111,8 @@ page admin
 		</label>
 	</p>
 	<p><label>시간:<br><input id="pshowtime" name="pshowtime" value="" style="width:300px;"/></label></p>
-	<p><input type="button" value="수정" onclick="adminpage() " /></p>
+	<p><input class="btn btn-custom" type="button" value="수정" onclick="adminpage() " /></p>
+</div>
 </form:form>
 <script src="<%=request.getContextPath()%>/js/adminMap.js?ver=11"></script>
 </body>
