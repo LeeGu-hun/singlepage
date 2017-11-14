@@ -143,6 +143,7 @@ $(document).ready(function(){
 	$('a[id="reset"]').on('click', function(){
 		$('input:checkbox').prop('checked', false);
 		$('input:checkbox').attr('checked', false);
+		$('.sel').removeClass('sel');
 		sliderInit(0, 24);
 		$('.selected-item').remove();
 	});

@@ -137,7 +137,7 @@ public class MainDao {
 	}
 
 	public List<Pboard> getBoardListFavo(int page, int limit, int mid) {
-		List<PageLike> favoPid = jdbcTemplate.query("select distinct pid from page_like where mid = ? and plike = 1", new RowMapper<PageLike>() {
+		List<PageLike> select = jdbcTemplate.query("select distinct pid from page_like where mid = ?", new RowMapper<PageLike>() {
 			@Override
 			public PageLike mapRow(ResultSet rs, int rowNum) throws SQLException {
 				PageLike pid = new PageLike();
@@ -145,18 +145,35 @@ public class MainDao {
 				return pid;
 			}
 		}, mid);
-		
-		String sql = "select * from (select rownum rnum, pbid, pbsubject, pbcontent, pbfile, pbnewfile, pbre_ref, pbre_lev, pbre_seq, pbreadcount, pbdate, pbhostid, pbwriterid, pname, mname from (select * from pboard pb, page p, member m where pb.pbhostid = p.pid and p.pmaster = m.mid and pbre_lev = 0 ";
-		if (favoPid.size()>0) {
+		List<PageLike> favoPid = new ArrayList<PageLike>();
+		if(!select.isEmpty()) {
+			String sql = "select mid, plike, pid, plike_date from (select mid, plike, pid, plike_date from page_like where pid = ? order by plike_date desc) where rownum = 1";
+			for(int i=0;i<select.size();i++) {
+				PageLike plike = jdbcTemplate.queryForObject(sql, new RowMapper<PageLike>() {
+				@Override
+				public PageLike mapRow(ResultSet rs, int rowNum) throws SQLException {
+					PageLike pageLike = new PageLike();
+					pageLike.setPid(rs.getInt("pid"));
+					pageLike.setPlike(rs.getInt("plike"));
+					return pageLike;
+				}
+				}, select.get(i).getPid());
+			if(plike.getPlike() != 0) favoPid.add(plike);
+			}
+		}
+		if(favoPid.size()>0) {
+			String sql = "select * from (select rownum rnum, pbid, pbsubject, pbcontent, pbfile, pbnewfile, pbre_ref, pbre_lev, pbre_seq, pbreadcount, pbdate, pbhostid, pbwriterid, pname, mname from (select * from pboard pb, page p, member m where pb.pbhostid = p.pid and p.pmaster = m.mid and pbre_lev = 0 ";
 			sql += " and (";
 			for(int i = 0; i <favoPid.size(); i++) {
 				sql += " pbhostid = " + favoPid.get(i).getPid();
 				if(i != favoPid.size()-1) sql += " or ";
 			}
 			sql += " ) ";
+			sql += " order by pbdate desc)) where rnum >= ? and rnum<= ?";
+			List<Pboard> favoList = jdbcTemplate.query(sql, boRowMapper, page, limit);
+			return favoList;
+		} else {
+			return null;
 		}
-		sql += " order by pbdate desc)) where rnum >= ? and rnum<= ?";
-		List<Pboard> favoList = jdbcTemplate.query(sql, boRowMapper, page, limit);
-		return favoList;
 	}
 }

@@ -10,28 +10,36 @@
 %>
 
 	<c:forEach var="mboard" items="${mboardList }">
-		<tr>
-			<td><a data-toggle="modal" onclick="loadmboard(${mboard.mbid });">${mboard.mbid }</a></td>
-			<td>${mboard.mbsubject }</td>
-			<td>${mboard.mbcontent }</td>
-			<td>${mboard.mbfile }</td>
-			<td>
-			<c:if test="${!empty mboard.mbnewfile }">
-			<img src="/tpPage/buploads/mbuploads/${mboard.mbnewfile }" width="100px" />
+		<tr style="border-top: 1px solid black;">
+			<td style="padding:5px; width:20%" align="center">
+				<c:choose>
+					<c:when test="${!empty mboard.mbnewfile }">
+						<img data-toggle="modal" onclick="loadmboard(${mboard.mbid });" src="/tpPage/buploads/mbuploads/${mboard.mbnewfile }" height="75px" />
+					</c:when>
+					<c:otherwise>
+						<img data-toggle="modal" onclick="loadmboard(${mboard.mbid });" src="/tpPage/default_image.png" height="75px" />
+					</c:otherwise>
+				</c:choose>
+			</td>
+			<td style="padding:5px; width:45%"><a data-toggle="modal" onclick="loadmboard(${mboard.mbid });">${mboard.mbsubject }</a></td>
+			<td style="padding:5px; width:10%">${mboard.mname }</td>
+			<td style="padding:5px; width:15%" align="center">
+				<fmt:formatDate value="${mboard.mbdate }" pattern="MM-dd HH:mm" />
+			</td>
+			<td style="padding:5px; width:10%" align="center">
+			<c:if test="${mboard.mbwriterid == authInfo.mid || pageHostId == authInfo.pid }">
+				<a class="mbidrm" style="color:red">삭제</a><input type="hidden" value="${mboard.mbid }" />
 			</c:if>
-			<td>${mboard.mbreadcount }</td>
-			<td><fmt:formatDate value="${mboard.mbdate }" pattern="yyyy-mm-dd HH:mm:ss" /></td>
-			<td>${mboard.mbhostid }</td>
-			<td>${mboard.mbwriterid }</td>
-			<td>${mboard.pname }</td>
-			<td>${mboard.mname }</td>
-			<td><a class="mbidrm">삭제</a><input type="hidden" value="${mboard.mbid }" /></td>
+			</td>
 		</tr>
 		</c:forEach>
 <% if(nowMbPage == -1) { %>		
-		<tr>
-			<td colspan="12">
+		<tr style="border-top: 1px solid black;">
+			<td colspan="5" style="padding:5px" align="center">
+				<br>
 				마지막 항목입니다.
+				<br>
+				<br>
 			</td>
 		</tr>
 	<input type="hidden" name="mbMpage" id="mbMpage" value="<%=nowMbPage %>" />

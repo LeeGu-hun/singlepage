@@ -14,13 +14,22 @@
 			<th colspan="2" style="padding:5px; width:65%" class="text-center">제목</th>
 			<th style="width:10%" class="text-center">작성자</th>
 			<th style="width:15%" class="text-center">작성일</th>
-			<c:if test="${pageHostId == authInfo.pid }">
 			<th style="width:10%" class="text-center">
+			<c:if test="${pageHostId == authInfo.pid }">
 				<a onclick="pballdrop(${authInfo.pid });" style="color:red">전체삭제</a>
-			</th>
 			</c:if>
+			</th>
 		</tr>
 	</thead>
+	<tbody>
+		<tr>
+			<td style="width: 20%"></td>
+			<td style="width: 45%"></td>
+			<td style="width: 10%"></td>
+			<td style="width: 15%"></td>
+			<td style="width: 10%"></td>
+		</tr>
+	</tbody>
 	<input type="hidden" id="pbPage" name="pbPage" value="<%= nowPbPage %>" />
 	<tbody id="pbListTT" name="pbListTT">
 		<c:forEach var="pboard" items="${pboardList }">
@@ -40,18 +49,18 @@
 			<td style="padding:5px; width:15%" align="center">
 				<fmt:formatDate value="${pboard.pbdate }" pattern="MM-dd HH:mm" />
 			</td>
-			<c:if test="${pageHostId == authInfo.pid }">
 			<td style="padding:5px; width:10%" align="center">
+			<c:if test="${pageHostId == authInfo.pid }">
 				<a class="pbidrm" style="color:red">삭제</a><input type="hidden" value="${pboard.pbid }" />
-			</td>
 			</c:if>
+			</td>
 		</tr>
 		</c:forEach>
 <% if(nowPbPage == 0) { %>		
 		<tr style="border-top: 1px solid black;">
 			<td colspan="5" style="padding:5px" align="center">
 				<br>
-				등록된 글이 없습니다.
+				마지막 항목입니다.
 				<br>
 				<br>
 			</td>
