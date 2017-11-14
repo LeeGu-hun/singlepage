@@ -23,7 +23,7 @@
 	</div>
 	<div>
 		<br/>	
-		<a >${page.pnick }</a><br/><br/>
+		<a>${page.pnick }</a><br/><br/>
 		<textarea class="introText" readonly>${page.pintro }</textarea>
 	</div>
 	<div>

@@ -4,3 +4,28 @@
 	height:200px;
 	resize:none;
 }
+
+.btn-custom {
+    color: #fff;
+    background-color: #000000;
+    border-color: #000000;
+}
+
+.btn-custom:hover {
+    color: red;
+    background-color: #000000;
+    border-color: #000000;
+}
+
+.alldiv {
+	border: 2px solid;
+	border-radius: 10px;
+	width: 700px;
+	padding: 40px;
+	position:absolute; 
+	top:150px; 
+	margin-bottom:50px;
+	left:34%; 
+	margin-top:-50px; 
+	margin-left:-50px;
+}

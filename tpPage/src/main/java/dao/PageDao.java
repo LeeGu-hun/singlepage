@@ -138,7 +138,7 @@ public class PageDao {
 	}
 	
 	public void addToplist2(int pid, String turn, String link, String checked) {
-		jdbcTemplate.update("insert into toplist values(?, tid_seq.nextval, ?, ?, ?)", 
+		jdbcTemplate.update("insert into toplist(pid, tid, turn, url, tcheck) values(?, tid_seq.nextval, ?, ?, ?)", 
 				pid, turn, link, checked);
 	}
 	

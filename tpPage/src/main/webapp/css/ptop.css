@@ -56,18 +56,30 @@
 /* End carousel */
 
 
-.topList 
-{
+.topList {
 	border: 2px solid; 
 	margin: 25px; 
 	padding: 20px; 
 	height: 300; 
 	width: 600;
+	border-radius: 10px;
 }
 
-.delspan
-{
+.delspan {
 	display:inline-block; 
 	width: 490px; 
 	text-align: right;
+}
+
+.alldiv {
+	position:absolute; 
+	top:150px; 
+	margin-bottom:50px;
+	left:35%; 
+	margin-top:-50px; 
+	margin-left:-50px;
+}
+
+.plus {
+	text-align: center;
 }
