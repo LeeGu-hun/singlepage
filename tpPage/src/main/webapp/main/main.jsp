@@ -33,6 +33,12 @@
 		</div>
 	</div>
 	</c:forEach>
+	<c:if test="${fn:length(boardList) < 1}">
+		<div class="grid-item" style="width:100%; text-align: center; font-weight:bold;" >
+			아직 좋아요 한 페이지가 없습니다.
+			<input type="hidden" id="end" name="end">
+		</div>
+	</c:if>
 </div>
 
 <c:if test="${searched == null && favo == null}">

@@ -28,7 +28,7 @@
 	              </c:if>
               </c:forEach> 
               </c:if>
-              <c:if test="${fn:length(ptop) == 0}">
+              <c:if test="${fn:length(ptop) == 0 && authInfo.pid == page.pid}">
                  <div class="col-md-4">
                		<a class="thumbnail" href="#"><img alt="" src="http://placehold.it/150x150"></a>
               	 </div>          
