@@ -64,7 +64,9 @@
 					</label>
 				</div>
 				<div class="col-md-6">
-					<img id="tuploadImg${list.turn }" name="tuploadImg" src="/tpPage/tuploads/${list.newthum }" style="width:200px; height: auto;"/>
+					<c:if test="${list.newthum != null }">
+						<img id="tuploadImg${list.turn }" name="tuploadImg" src="/tpPage/tuploads/${list.newthum }" style="width:200px; height: auto;"/>
+					</c:if>
 				</div>
 			</div>
 			</c:forEach>
