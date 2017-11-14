@@ -57,6 +57,7 @@ public class BoardController {
 			page = 0;
 		}
 		List<Pboard> pboardList = boardDao.getPboardList(pageHostId, startPage, endPage);
+		model.addAttribute("pageHostId", pageHostId);
 		model.addAttribute("pboardList", pboardList);
 		request.setAttribute("pbPage", page);
 		return "board/pbMoreList";
@@ -73,6 +74,7 @@ public class BoardController {
 			mpage = -1;
 		}
 		List<Pboard> pboardList = boardDao.getPboardList(pageHostId, startPage, endPage);
+		model.addAttribute("pageHostId", pageHostId);
 		model.addAttribute("pboardList", pboardList);
 		request.setAttribute("pbMpage", mpage);
 		return "board/pbMoreListScroll";
@@ -116,6 +118,7 @@ public class BoardController {
 			page = 0;
 		}
 		List<Mboard> mboardList = boardDao.getMboardList(pageHostId, startPage, endPage);
+		model.addAttribute("pageHostId", pageHostId);
 		model.addAttribute("mboardList", mboardList);
 		request.setAttribute("mbPage", page);
 		return "board/mbMoreList";
@@ -132,6 +135,7 @@ public class BoardController {
 			mpage = -1;
 		}
 		List<Mboard> mboardList = boardDao.getMboardList(pageHostId, startPage, endPage);
+		model.addAttribute("pageHostId", pageHostId);
 		model.addAttribute("mboardList", mboardList);
 		request.setAttribute("mbMpage", mpage);
 		return "board/mbMoreListScroll";
@@ -396,7 +400,8 @@ public class BoardController {
 		} else {
 			int pbhostid = Integer.parseInt(request.getParameter("pbhostid"));
 			boardDao.pballdrop(pbhostid);
-			return "board/boardNull";
+			model.addAttribute("pbhostid", pbhostid);
+			return "board/pballdropgoR";
 		}
 	}
 }

@@ -2,6 +2,7 @@ function pbreadURL(input) {
 	if(input.files && input.files[0]) {
 		var reader = new FileReader();
 		reader.onload = function(e) {
+			$('#pbuploadImg').show();
 			$('#pbuploadImg').attr('src', e.target.result);
 			$('#pbuploadImg').attr('width', 300);
 		}
@@ -13,6 +14,7 @@ function mbreadURL(input) {
 	if(input.files && input.files[0]) {
 		var reader = new FileReader();
 		reader.onload = function(e) {
+			$('#mbuploadImg').show();
 			$('#mbuploadImg').attr('src', e.target.result);
 			$('#mbuploadImg').attr('width', 300);
 		}
@@ -503,10 +505,10 @@ function pballdrop(pbhostid) {
 				data : "pbhostid=" + pbhostid,
 				success : pballdropgoR
 			})
-			function pballdropgoR() {
+			function pballdropgoR(msg) {
 				$('#rmchkmodal').modal('hide');
 				$('body').css('overflow', '');
-				$('#pbListT').html('등록된 글이 없습니다.');
+				$('#pbListT').html(msg);			
 			}
 		});
 		
@@ -515,6 +517,10 @@ function pballdrop(pbhostid) {
 		});
 	}
 }
+
+
+
+
 
 
 

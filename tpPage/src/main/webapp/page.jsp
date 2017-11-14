@@ -5,7 +5,7 @@
 <head>
 
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
-<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/page_style.css?ver=3" />
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/page_style.css?ver=4" />
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/ptop.css?ver=33" />
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/btnColor.css" />
 
@@ -40,9 +40,6 @@
 		</div>
 	</div>
 </div>
-
-<%@ include file="./include/footer.jsp" %>
-
 
 <!-- 후원 modal -->
 <div class="modal" id="myModal" aria-hidden="true" style="display: none; z-index: 1050;">

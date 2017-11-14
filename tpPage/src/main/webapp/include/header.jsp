@@ -51,8 +51,10 @@
 <label><%=authInfo.getMemail() %>님 환영합니다. 페이지 번호는 <%=authInfo.getPid() %>번입니다.</label>
 </form:form>
 </c:if>
-<div class="container">
+<div style="background-color: black; width: 100%;">
+<div class="container menubar">
 <%@ include file="./menubar.jsp" %>
+</div>
 </div>
 
 </div>

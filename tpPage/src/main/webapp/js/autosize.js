@@ -8,25 +8,49 @@
 	}
 }*/
 
-
-
-
-
 function autolayout() {
-	windowH = $(window).height() - ($('#header').height() + $('#footer').height());
-	pagecontentboxH = $('#pagecontentbox').height();
-	if(windowH > pagecontentboxH) {
-		$('#pagemainbox').css('height', windowH);
-	} else {
-		$('#pagemainbox').css('height', pagecontentboxH);
-	}
 	windowW = $(window).width();
-	pagecenterboxW = $(window).width() - ($('#pageleftbox').width() + $('#pageleftbox').width());
-	$('#pagecenterbox').css('width', pagecenterboxW);
-	/*if(windowW < 900) {
-		$('#pagerightbox').remove();
-		$('#pagecenterbox').css('width', 'auto');
-	}*/
+	if($(document).height() > $(window).height()) {
+		if(windowW > 1300) {
+			$('#pagecenterbox').css('min-width', '');
+			$('#pageleftbox').css('display', '');
+			$('#pagerightbox').css('display', '');
+			pagecenterboxW = $(window).width() - ($('#pageleftbox').width() + $('#pagerightbox').width());
+			$('#pagecenterbox').css('width', pagecenterboxW);
+		} else if(windowW <= 1300 && windowW > 1000) {
+			$('#pagecenterbox').css('min-width', '');
+			$('#pageleftbox').css('display', '');
+			$('#pagerightbox').css('display', 'none');
+			pagecenterboxW = $(window).width() - $('#pageleftbox').width();
+			$('#pagecenterbox').css('width', pagecenterboxW);
+		} else if(windowW <= 1000) {
+			$('#pagecenterbox').css('min-width', '600px');
+			$('#pageleftbox').css('display', 'none');
+			$('#pagerightbox').css('display', 'none');
+			pagecenterboxW = $(window).width();
+			$('#pagecenterbox').css('width', pagecenterboxW);
+		}
+	} else {
+		if(windowW > 1300) {
+			$('#pagecenterbox').css('min-width', '');
+			$('#pageleftbox').css('display', '');
+			$('#pagerightbox').css('display', '');
+			pagecenterboxW = $(window).width() - ($('#pageleftbox').width() + $('#pagerightbox').width());
+			$('#pagecenterbox').css('width', pagecenterboxW);
+		} else if(windowW <= 1300 && windowW > 1000) {
+			$('#pagecenterbox').css('min-width', '');
+			$('#pageleftbox').css('display', '');
+			$('#pagerightbox').css('display', 'none');
+			pagecenterboxW = $(window).width() - $('#pageleftbox').width();
+			$('#pagecenterbox').css('width', pagecenterboxW);
+		} else if(windowW <= 1000) {
+			$('#pagecenterbox').css('min-width', '600px');
+			$('#pageleftbox').css('display', 'none');
+			$('#pagerightbox').css('display', 'none');
+			pagecenterboxW = $(window).width();
+			$('#pagecenterbox').css('width', pagecenterboxW);
+		}
+	}	
 }
 
 $(document).ready(function() {
