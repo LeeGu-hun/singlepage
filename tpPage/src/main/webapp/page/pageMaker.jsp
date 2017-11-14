@@ -39,11 +39,12 @@ page maker
 		<label>장르카테:<br>
 			<select id="pgcate" name="pgcate" style="width:300px;" onchange>
 				<option value="0">임의</option>
-				<option value="1">노래</option>
-				<option value="2">댄스</option>
-				<option value="3">연주</option>
-				<option value="4">연극</option>
-				<option value="5">기타</option>
+				<option value="1">공연</option>
+				<option value="2">미술</option>
+				<option value="3">패션</option>
+				<option value="4">도서</option>
+				<option value="5">요리</option>
+				<option value="6">기타</option>
 			</select>
 		</label>
 	</p>
