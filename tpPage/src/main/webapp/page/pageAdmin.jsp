@@ -17,6 +17,7 @@
 <script src="<%=request.getContextPath()%>/js/admin.js?ver=2"></script>
 
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/btnColor.css" />
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
@@ -102,7 +103,7 @@ page admin
 		</label>
 	</p>
 	<p><label>시간:<br><input id="pshowtime" name="pshowtime" value="" style="width:300px;"/></label></p>
-	<p><input type="button" value="수정" onclick="adminpage() " /></p>
+	<p><input class="btn btn-custom" type="button" value="수정" onclick="adminpage() " /></p>
 </form:form>
 <script src="<%=request.getContextPath()%>/js/adminMap.js?ver=11"></script>
 </body>
