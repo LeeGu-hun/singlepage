@@ -45,7 +45,6 @@
 	           		<c:forEach var="pbrelist" items="${pbrelist }">
 	            		<div>
 	          				<hr style="margin:5px;" />
-	          				
 	          				<c:if test="${pbrelist.pbre_lev > 1 }">
 	          					<c:forEach begin="2" end="${pbrelist.pbre_lev }" step="1">
 	          						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -92,7 +91,7 @@
 	             		</c:otherwise>
 	             	</c:choose>
              	</c:if>
-             	<!-- <a href="#" data-dismiss="modal" class="btn">Close</a> -->
+             	<a href="#" data-dismiss="modal" class="btn btn-custom">닫기</a>
             </div>
    		</div>
 	</div>
