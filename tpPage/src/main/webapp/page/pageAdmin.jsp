@@ -73,7 +73,7 @@ page admin
 					<c:choose>
 						<c:when test="${s <= 9}">
 						<c:set value="0${s }:00" var="valKey1"/>
-							<option value="${s }" ${valKey1 == start ? 'selected' : ''}>0${s }:00</option>
+							<option value="0${s }" ${valKey1 == start ? 'selected' : ''}>0${s }:00</option>
 						</c:when>
 						<c:otherwise>
 						<c:set value="${s }:00" var="valKey2"/>
