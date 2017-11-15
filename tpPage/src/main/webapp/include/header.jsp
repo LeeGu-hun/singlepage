@@ -15,7 +15,7 @@
 <div class="container" style="padding: 5px; height:130px; min-width:1200px">
 <c:if test="${empty authInfo }">
 <div class="col-md-4">
-<a href="/tpPage/home">로고</a>
+<a href="/tpPage/home"><img src="/tpPage/logo.png"></a>
 </div>
 <div class="col-md-4">
 </div>
@@ -34,7 +34,7 @@
 
 <c:if test="${!empty authInfo }">
 <div class="col-md-4">
-<a href="/tpPage/home">로고</a>
+<a href="/tpPage/home"><img src="/tpPage/logo.png"></a>
 </div>
 <div class="col-md-4">
 </div>
