@@ -8,6 +8,7 @@
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/page_style.css?ver=4" />
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/ptop.css?ver=33" />
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/btnColor.css" />
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/formColor.css" />
 
 <script src="https://use.fontawesome.com/61742f8eee.js"></script>
 <script 
@@ -45,7 +46,7 @@
 <!-- 후원 modal -->
 <div class="modal" id="myModal" aria-hidden="true" style="display: none; z-index: 1050;">
 	<div class="modal-dialog modal-lg">
-	     <div class="modal-content">
+	     <div class="modal-content" style="width: 700px">
 	      	<div class="modal-header">
 	        	<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
 	        	<h4 class="modal-title">페이지 후원</h4>
@@ -53,27 +54,27 @@
 	      	<div class="modal-body">
 	      		<label>후원금액</label><br /> 
 	
-				<div onchange="donate()">
+				<div class="form-inline" onchange="donate()">
 					<input id="oneth" type="radio" name="money" value="1000" /> 
-					<label for="oneth">1000원</label>
+					<label for="oneth">1000원</label> &nbsp; &nbsp; &nbsp; &nbsp;
 					<input id="thrth" type="radio" name="money" value="3000" /> 
-					<label for="thrth">3000원</label>
+					<label for="thrth">3000원</label> &nbsp; &nbsp; &nbsp; &nbsp;
 					<input id="fivth" type="radio" name="money" value="5000" /> 
 					<label for="fivth">5000원</label><br /> 
 					<input id="tenth" type="radio" name="money" value="10000" /> 
-					<label for="tenth">10000원</label>
+					<label for="tenth">10000원</label> &nbsp; &nbsp; &nbsp;
 					<input id="in" type="radio" name="money" value="in" /> 
 					<label for="in">직접입력</label>
-					<input onkeydown="in_donate(this)" id="in_money" type="text" name="in_money" disabled/><label>원</label>
+					<input class="form-control" onkeydown="in_donate(this)" id="in_money" type="text" name="in_money" style="width: 100px" disabled/><label>원</label>
 				</div>
 	
-				<div style="text-align:right">
+				<div class="form-inline" style="text-align:right">
 					<label for="current_money">보유 포인트</label>
-					<input type="text" id="cmoney" name="cmoney" value="" readonly/>원<br/>
+					<input class="form-control" type="text" id="cmoney" name="cmoney" value="" readonly/>원<br/>
 					<label for="donate_money">- 후원 포인트</label>
-					<input type="text" id="dmoney" name="dmoney" value="" readonly/>원<br/>
+					<input class="form-control" type="text" id="dmoney" name="dmoney" value="" readonly/>원<br/>
 					<label for="after_money">= 예상 포인트</label>
-					<input type="text" id="amoney" name="amoney" value="" readonly/>원<br/>
+					<input class="form-control" type="text" id="amoney" name="amoney" value="" readonly/>원<br/>
 				</div>
 				<a data-toggle="modal" href="#myModal2" class="btn btn-custom" onclick="chargeInit()">포인트 충전</a>
             </div>
@@ -87,7 +88,7 @@
 	
 	<div class="modal" id="myModal2" aria-hidden="true" style="display: none; z-index: 1060;">
 		<div class="modal-dialog modal-lg">
-          <div class="modal-content">
+          <div class="modal-content" style="width: 700px">
             <div class="modal-header">
               <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
               <h4 class="modal-title">포인트 충전</h4>
@@ -95,27 +96,27 @@
             <div class="modal-body">
             	<label>충전금액</label><br /> 
 	
-				<div onchange="charge()">
+				<div class="form-inline" onchange="charge()">
 					<input id="coneth" type="radio" name="chmoney" value="1000" /> 
-					<label for="coneth">1000원</label>
+					<label for="coneth">1000원</label> &nbsp; &nbsp; &nbsp; &nbsp;
 					<input id="cthrth" type="radio" name="chmoney" value="3000" /> 
-					<label for="cthrth">3000원</label>
+					<label for="cthrth">3000원</label> &nbsp; &nbsp; &nbsp; &nbsp;
 					<input id="cfivth" type="radio" name="chmoney" value="5000" /> 
 					<label for="cfivth">5000원</label><br /> 
 					<input id="ctenth" type="radio" name="chmoney" value="10000" /> 
-					<label for="ctenth">10000원</label>
+					<label for="ctenth">10000원</label> &nbsp; &nbsp; &nbsp;
 					<input id="cin" type="radio" name="chmoney" value="cin" /> 
 					<label for="cin">직접입력</label>
-					<input onkeydown="cin_charge(this)" id="cin_money" type="text" name="cin_money" disabled/><label>원</label>
+					<input class="form-control" onkeydown="cin_charge(this)" id="cin_money" type="text" name="cin_money" style="width: 100px" disabled/><label>원</label>
 				</div>
 	
-				<div style="text-align:right">
+				<div class="form-inline" style="text-align:right">
 					<label for="ccurrent_money">보유 포인트</label>
-					<input type="text" id="hmoney" name="hmoney" value="" readonly/>원<br/>
+					<input class="form-control" type="text" id="hmoney" name="hmoney" value="" readonly/>원<br/>
 					<label for="charge_money">+ 충전 포인트</label>
-					<input type="text" id="ccmoney" name="ccmoney" value="" readonly/>원<br/>
+					<input class="form-control" type="text" id="ccmoney" name="ccmoney" value="" readonly/>원<br/>
 					<label for="cafter_money">= 예상 포인트</label>
-					<input type="text" id="camoney" name="camoney" value="" readonly/>원<br/>
+					<input class="form-control" type="text" id="camoney" name="camoney" value="" readonly/>원<br/>
 					<input type="hidden" id="mcheck" name="mcheck" value="${authInfo.mcheck }"/>
 				</div>
 		 	</div>
