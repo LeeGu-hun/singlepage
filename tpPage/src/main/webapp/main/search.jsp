@@ -38,10 +38,11 @@
             <div class="tab-pane" id="tab2">
 				<div id="genre">
 					<label><input type="checkbox" name="장르" value="전체" id="장르-전체" data-all data-cate="genre">전체</label>
-					<label><input type="checkbox" name="장르" value="노래" id="장르-노래" data-cate="genre">노래</label>
-					<label><input type="checkbox" name="장르" value="댄스" id="장르-댄스" data-cate="genre">댄스</label>
-					<label><input type="checkbox" name="장르" value="연주" id="장르-연주" data-cate="genre">연주</label>
-					<label><input type="checkbox" name="장르" value="연극" id="장르-연극" data-cate="genre">연극</label>
+					<label><input type="checkbox" name="장르" value="공연" id="장르-공연" data-cate="genre">공연</label>
+					<label><input type="checkbox" name="장르" value="미술" id="장르-미술" data-cate="genre">미술</label>
+					<label><input type="checkbox" name="장르" value="패션" id="장르-패션" data-cate="genre">패션</label>
+					<label><input type="checkbox" name="장르" value="도서" id="장르-도서" data-cate="genre">도서</label>
+					<label><input type="checkbox" name="장르" value="요리" id="장르-요리" data-cate="genre">요리</label>
 					<label><input type="checkbox" name="장르" value="기타" id="장르-기타" data-cate="genre">기타</label>
 				</div>
             </div>

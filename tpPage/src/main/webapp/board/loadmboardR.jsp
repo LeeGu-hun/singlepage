@@ -25,9 +25,9 @@
             	</div>
             	<div id="mbrebox">
             		<c:if test="${!empty authInfo }">
-            		<hr style="margin:0px"/>
+            		<hr style="margin:0px; border-color: black;"/>
 		            <form:form commandName="mbrecmd" action="/tpPage/mbrewrite">
-	            		<form:textarea path="mbcontent" required="required" rows="2" cols="auto" class="mbrecontent"
+	            		<form:textarea path="mbcontent" required="required" rows="2" cols="auto" class="mbrecontent form-control"
 	            			style="width:100%; margin-top:5px; resize:none" placeholder="댓글을 입력해주세요"></form:textarea>
 	            		<form:hidden path="mbid" value="${mboard.mbid }" />
 	            		<form:hidden path="mbreid" value="${mboard.mbid }" />
@@ -52,11 +52,11 @@
 	          				</c:if>
 	          				<c:if test="${!empty authInfo }">
 	          					<c:if test="${mbrelist.mbid > 0 }">
-	          						<a class="mbrebtn">댓글쓰기</a>
+	          						<a class="mbrebtn">댓글</a>
 	          					</c:if>
 	          				<div style="display: none">
 								<form:form commandName="mbrecmd" action="/tpPage/mbrewrite" class="refrm">
-									<form:textarea path="mbcontent" required="required" rows="1" cols="auto" class="mbrecontent"
+									<form:textarea path="mbcontent" required="required" rows="1" cols="auto" class="mbrecontent form-control"
 										style="width:100%; resize:none" placeholder="댓글을 입력해주세요"></form:textarea>
 									<form:hidden path="mbid" value="${mboard.mbid }" />
 									<form:hidden path="mbreid" value="${mbrelist.mbid }" />

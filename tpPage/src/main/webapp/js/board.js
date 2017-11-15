@@ -328,7 +328,15 @@ function loadpboardR(msg) {
 		if(gopbid != 0) {
 			location.href = '/tpPage/page/' + pbhostid;		
 		}
-	});	
+	});
+	
+	$('.sharebtn').on('click', function() {
+		var surl = $('#shareurl').val();
+		console.log(surl);
+		$('#shareurl').select();
+		document.execCommand('copy');
+		
+	});
 }
 
 $(document).ready(function() {
