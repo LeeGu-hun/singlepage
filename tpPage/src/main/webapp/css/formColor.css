@@ -19,6 +19,10 @@
           transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
 }
 
+.form-control:disabled {
+  width: 200px;
+}
+
 .form-control:focus {
   border-color: #000000;
   outline: 0;

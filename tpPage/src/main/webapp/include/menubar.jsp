@@ -24,10 +24,11 @@
 					<li class="col-sm-3">
 						<ul>
 							<li class="dropdown-header"><a href="/tpPage/srch?pgenre=all">장르별</a></li>
-							<li><a href="/tpPage/srch?pgenre=노래">노래</a></li>
-                            <li><a href="/tpPage/srch?pgenre=댄스">댄스</a></li>
-                            <li><a href="/tpPage/srch?pgenre=연주">연주</a></li>
-							<li><a href="/tpPage/srch?pgenre=연극">연극</a></li>
+							<li><a href="/tpPage/srch?pgenre=연공">공연</a></li>
+                            <li><a href="/tpPage/srch?pgenre=미술">미술</a></li>
+                            <li><a href="/tpPage/srch?pgenre=패션">패션</a></li>
+							<li><a href="/tpPage/srch?pgenre=도서">도서</a></li>
+							<li><a href="/tpPage/srch?pgenre=요리">요리</a></li>
 							<li><a href="/tpPage/srch?pgenre=기타">기타</a></li>
 						</ul>
 					</li>

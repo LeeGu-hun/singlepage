@@ -69,7 +69,7 @@ function cmpPass(pw) {
 	} else {
 		$('#chTitle').html("본인 인증");
 		$('#ctxtModal').append("<label style='color:red'>인증실패</label>");
-		$('#cbtnModal').html("<a href='#' class='btn btn-custom' onclick='memCheck()'>재인증</a>" +
+		$('#cbtnModal').html("<a href='#' class='btn btn-custom' onclick='memCheck()'>본인 인증</a>" +
 				"<a href='#' data-dismiss='modal' class='btn' onclick='memCheck()'>취소</a>");
 	}
 }
