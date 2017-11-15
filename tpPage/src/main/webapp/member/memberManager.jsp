@@ -44,20 +44,13 @@ a {
 <input type="hidden" id="ppoint" value=${page.ppoint } />
 <input type="hidden" id="pid" value=${page.pid } />
 
+<div class="container" style="text-align: center;">
 <c:if test="${empty authInfo }">
-	<form:form commandName="logincmd" action="login">
-		<p>
-			<label>email:<br>
-				<form:input path="memail" cssClass="form-control" />
-			</label>
-		</p>
-		<p>
-			<label>PW:<br>
-				<form:password path="mpw" cssClass="form-control" />
-			</label>
-		</p>
+	<form:form commandName="logincmd" action="login" style="margin-top:100px;" cssClass="form-inline">
+		<p><form:input path="memail" cssClass="form-control"  placeholder="이메일" /></p>
+		<p><form:password path="mpw" cssClass="form-control"  placeholder="비밀번호" /></p>
 		<form:hidden path="nowpid" value="${nowpid }" />
-		<input type="submit" value="로그인">
+		<p><input type="submit" value="로그인" class="btn btn-custom"></p>
 		<c:if test="${ mmval == 0 || mmval == 1 || mmval == 2 }">
 			<a href="./membermanager" >회원가입</a><br>
 			<!-- <a href=#>비밀번호 찾기</a> -->
@@ -66,39 +59,36 @@ a {
 	<p></p>
 
 	<%-- <c:if test="${ mmval != 0 && mmval != 1 && mmval != 2 }"> --%>
-		<form:form commandName="joincmd" action="memberJoin">
+		<form:form commandName="joincmd" action="memberJoin" cssClass="form-inline">
 			<p>
-				<label>이멜:<br>
-				<form:input path="memail" cssClass="form-control" />
+				<form:input path="memail" cssClass="form-control" placeholder="이메일" />
 				<form:errors path="memail" />
-				</label>
 			</p>
 			<p>
-				<label>이름:<br>
-				<form:input path="mname" cssClass="form-control" />
+				<form:input path="mname" cssClass="form-control" placeholder="이름" />
 				<form:errors path="mname" />
-				</label>
 			</p>
 			<p>
-				<label>비밀번호:<br>
-				<form:password path="mpw" cssClass="form-control" />
+				<form:password path="mpw" cssClass="form-control" placeholder="비밀번호" />
 				<form:errors path="mpw" />
-				</label>
 			</p>
 			<p>
-				<label>비밀번호 확인:<br>
-				<form:password path="mpwconf" cssClass="form-control" />
+				<form:password path="mpwconf" cssClass="form-control" placeholder="비밀번호 재입력" />
 				<form:errors path="mpwconf" />
-				</label>
 			</p>
-			<p><label><form:checkbox path="rememberMemail" />e메일기억</label></p>
+			<p class="checkbox"><label><form:checkbox path="rememberMemail" />e메일기억</label></p>
 			<p>가입하면 약관은 자동동의</p>
 			<input type="submit" value="가입 완료" class="btn btn-custom">
 		</form:form>
 	<%-- </c:if> --%>
 </c:if>
+</div>
+
+
 
 <!-- 로그인 전후 -->
+
+
 
 <c:if test="${! empty authInfo }">	
 
