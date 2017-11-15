@@ -26,9 +26,9 @@
 
 <c:if test="${page.pid == authInfo.pid }">
 <form:form commandName="pboardcmd" action="/tpPage/pbwrite" enctype="multipart/form-data">
-	<form:input path="pbsubject" required="required" style="width:100%; margin-top:5px" placeholder="제목을 입력해주세요"  />
-	<br><form:textarea path="pbcontent" required="required" rows="7" cols="auto" style="width:100%; margin-top:5px; resize:none" placeholder="내용을 입력해주세요"></form:textarea>
-	<br><img id="pbuploadImg" name="pbuploadImg" style="display:none" />
+	<form:input path="pbsubject" required="required" class="form-control" style="width:100%; margin-top:5px" placeholder="제목을 입력해주세요"/>
+	<form:textarea path="pbcontent" required="required" class="form-control" rows="7" cols="auto" style="width:100%; margin-top:5px; resize:none" placeholder="내용을 입력해주세요"></form:textarea>
+	<img id="pbuploadImg" name="pbuploadImg" style="display:none" />
 	<input type="file" id="pbfile" name="pbfile" style="margin-top:5px" onchange="pbreadURL(this);" />
 	<input type="hidden" id="pbupdir" name="pbupdir" value="<%=request.getRealPath("/buploads/pbuploads/")%>" />
 	<input type="hidden" id="pbhostid" name="pbhostid" value="<c:out value='${page.pid }' />" />
