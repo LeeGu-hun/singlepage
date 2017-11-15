@@ -29,7 +29,7 @@
 			<%@ include file="/page/left.jsp" %>
 		</div>
 		<div id="pagecenterbox">
-			<div style="border-bottom:1px solid black;">
+			<div>
 				<%@ include file="/page/top.jsp" %>
 			</div>
 			<div>
