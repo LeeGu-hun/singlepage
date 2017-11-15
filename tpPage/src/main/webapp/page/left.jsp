@@ -24,7 +24,7 @@
 	<div>
 		<br/>	
 		<a>${page.pnick }</a><br/><br/>
-		<textarea class="introText" readonly>${page.pintro }</textarea>
+		<div class="introText">${page.pintro }</div>
 	</div>
 	<div>
 		<br/>
