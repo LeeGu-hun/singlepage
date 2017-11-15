@@ -32,9 +32,9 @@ $(document).ready(function() {
 
 <c:if test="${!empty authInfo }">
 <form:form commandName="mboardcmd" action="/tpPage/mbwrite" enctype="multipart/form-data">
-	<form:input path="mbsubject" style="width:100%; margin-top:5px" placeholder="제목을 입력해주세요" />
-	<br><form:textarea path="mbcontent" rows="7" cols="auto" style="width:100%; margin-top:5px; resize:none" placeholder="내용을 입력해주세요"></form:textarea>
-	<br><img id="mbuploadImg" name="mbuploadImg" style="display:none" />
+	<form:input path="mbsubject" required="required" class="form-control" style="width:100%; margin-top:5px" placeholder="제목을 입력해주세요" />
+	<form:textarea path="mbcontent" required="required" class="form-control" rows="7" cols="auto" style="width:100%; margin-top:5px; resize:none" placeholder="내용을 입력해주세요"></form:textarea>
+	<img id="mbuploadImg" name="mbuploadImg" style="display:none" />
 	<input type="file" id="mbfile" name="mbfile" style="margin-top:5px" onchange="mbreadURL(this);" />
 	<input type="hidden" id="mbupdir" name="mbupdir" value="<%=request.getRealPath("/buploads/mbuploads/") %>" />
 	<input type="hidden" id="mbhostid" name="mbhostid" value="<c:out value='${page.pid }' />" />
