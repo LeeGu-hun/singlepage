@@ -116,7 +116,10 @@ $(document).ready(function() {
 <% } else { %>
 		<tr style="border-top: 1px solid black;">
 			<td colspan="5" style="padding:5px" align="center">
+				<br>
 				<input type="button" class="btn btn-custom" value="더 보기" onclick="mbMoreList();" />                    
+				<br>
+				<br>
 			</td>
 		</tr>
 <% } %>

@@ -29,12 +29,17 @@
             	<div style="word-break:break-word">
             		<c:out value="${pboard.pbcontent}" />
             	</div>
-            	<br><c:out value="192.168.0.48:8080/tpPage/page/${pboard.pbhostid }?pbid=${pboard.pbid }" />
+            	<input type="text" id="shareurl" value="192.168.0.48:8080/tpPage/page/${pboard.pbhostid }?pbid=${pboard.pbid }"
+            		style="position:absolute;top:-9999em;"/>
+				<p align="right">
+            		<a style="color: black;" href="javascript:ts('test', 'http://192.168.0.48:8080/tpPage/page/${pboard.pbhostid }?pbid=${pboard.pbid }');"><i class="fa fa-twitter fa-2x" aria-hidden="true"></i></a>
+            		<a style="color: black;" class="sharebtn"><i class="fa fa-share fa-2x" aria-hidden="true"></i></a>
+            	</p>
             	<div id="pbrebox">
 	            	<c:if test="${!empty authInfo }">
-            		<hr style="margin:0px" />
+            		<hr style="margin:0px; border-color: black;" />
 		            <form:form commandName="pbrecmd" action="/tpPage/pbrewrite">
-	            		<form:textarea path="pbcontent" required="required" rows="2" cols="auto" class="pbrecontent"
+	            		<form:textarea path="pbcontent" required="required" rows="2" cols="auto" class="pbrecontent form-control"
 	            			style="width:100%; margin-top:5px; resize:none" placeholder="댓글을 입력해주세요"></form:textarea>
 	            		<form:hidden path="pbid" value="${pboard.pbid }" />
 	            		<form:hidden path="pbreid" value="${pboard.pbid }" />
@@ -63,7 +68,7 @@
 	          					</c:if>
 	          				<div style="display: none">
 								<form:form commandName="pbrecmd" action="/tpPage/pbrewrite" class="refrm">
-									<form:textarea path="pbcontent" required="required" rows="1" cols="auto" class="pbrecontent"
+									<form:textarea path="pbcontent" required="required" rows="1" cols="auto" class="pbrecontent form-control"
 										style="width:100%; resize:none" placeholder="댓글을 입력해주세요"></form:textarea>
 									<form:hidden path="pbid" value="${pboard.pbid }" />
 									<form:hidden path="pbreid" value="${pbrelist.pbid }" />
@@ -80,8 +85,6 @@
              	<c:if test="${!empty authInfo }">
 	             	<input type="hidden" id="nowpbid" name="nowpbid" value="${pboard.pbid }" />
             		<input type="hidden" id="pblikechk" name="pblikechk" value="${pblikechk }" />
-	             	<a href="javascript:ts('test', 'http://192.168.0.48:8080/tpPage/page/${pboard.pbhostid }?pbid=${pboard.pbid }');">트위터</a>
-	             	&nbsp;&nbsp;&nbsp;
 	             	<c:choose>
 	             		<c:when test="${pblikechk == 0 || pblikechk == null }">
 	             			<a class="btn btn-custom" id="pblikebtn" onclick="pblike();">좋아요X</a>

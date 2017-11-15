@@ -24,9 +24,9 @@ img {
 <div>
 	<ul id="bTab" class="nav nav-tabs" role="tablist">
 		<li id="pbli" role="presentation" class="active"><a href="#pageboard"
-			aria-controls="pageboard" role="tab" data-toggle="tab">page</a></li>
+			aria-controls="pageboard" role="tab" data-toggle="tab"><label>Page</label></a></li>
 		<li id="mbli" role="presentation"><a href="#memberboard"
-			aria-controls="memberboard" role="tab" data-toggle="tab">member</a></li>
+			aria-controls="memberboard" role="tab" data-toggle="tab"><label>Member</label></a></li>
 	</ul>
 
 	<div class="tab-content">
