@@ -22,7 +22,7 @@
 <c:if test="${nowpid != null }">
 <form:hidden path="nowpid" value="${nowpid }"/>
 </c:if>
-<input type="submit" value="로그인" />
+<input type="submit" value="로그인" class="btn btn-custom" />
 </p>
 </form:form>
 
