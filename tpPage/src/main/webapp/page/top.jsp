@@ -22,7 +22,7 @@
               <c:forEach var="cnt" varStatus="i" begin="0" end="2">
               <c:set var="list" value="${ptop[i.index] }" />
 	              <c:if test="${list != null }">
-	              	<div class="col-xs-4">
+	              	<div class="col-xs-4" style="height:auto;">
 	              		<c:set value="${list.url}" var="url" />
 	              		<c:choose>
 	              		<c:when test="${fn:contains(url, 'youtu.be') || fn:contains(url, 'youtube.com')}">
@@ -30,7 +30,7 @@
 	              		<c:set var="key" value="${fn:substringAfter(url, 'v=') }" /></c:if>
 	              		<c:if test="${fn:contains(url, 'youtu.be')}">
 	              		<c:set var="key" value="${fn:substringAfter(url, 'be/') }" /></c:if>
-	              		<iframe style="width: 100%; height: auto;" class="thumbnail" src="http://www.youtube.com/embed/${key }?fs=0&rel=0" frameborder="0" allowfullscreen></iframe>
+	              		<iframe style="width: 100%; height: 225px;" class="thumbnail" src="http://www.youtube.com/embed/${key }?fs=0&rel=0" frameborder="0" allowfullscreen></iframe>
 	              		</c:when>
 		              <c:otherwise><a class="thumbnail" href="${list.url }"><img alt="" src="../tuploads/${list.newthum }"></a></c:otherwise>
 		              </c:choose>
@@ -39,13 +39,13 @@
               </c:forEach> 
               </c:if>
               <c:if test="${fn:length(ptop) == 0 && authInfo.pid == page.pid}">
-                 <div class="col-xs-4" style="height:auto">
+                 <div class="col-xs-4" style="height:auto;">
                		<a class="thumbnail" href="#"><img alt="" src="http://placehold.it/150x150"></a>
               	 </div>          
-              	 <div class="col-xs-4" style="height:auto">
+              	 <div class="col-xs-4" style="height:auto;">
                 	<a class="thumbnail" href="#"><img alt="" src="http://placehold.it/150x150"></a>
                	 </div>
-             	 <div class="col-xs-4" style="height:auto">
+             	 <div class="col-xs-4" style="height:auto;">
                 	<a class="thumbnail" href="#"><img alt="" src="http://placehold.it/150x150"></a>
              	</div>        
               </c:if>

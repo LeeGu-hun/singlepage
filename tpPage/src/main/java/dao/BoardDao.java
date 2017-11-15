@@ -51,7 +51,7 @@ public class BoardDao {
 	}
 	
 	public int getMboardListCount(int pageHostId) {
-		Integer x = jdbcTemplate.queryForObject("select count(*) from mboard where mbhostid = ?", Integer.class, pageHostId);
+		Integer x = jdbcTemplate.queryForObject("select count(*) from mboard where mbhostid = ? and mbre_lev = 0", Integer.class, pageHostId);
 		return x;
 	}
 	
