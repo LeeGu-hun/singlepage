@@ -1,12 +1,12 @@
 @charset "UTF-8";
 
-#header {
-	/* position: relative; */
+/* #header {
+	position: relative;
 	width: 100%;
 	height: 100px;
-	/* float: left; */
+	float: left;
 	display: block;
-}
+} */
 
 #pagemainbox {
 	height: auto;
@@ -38,13 +38,13 @@
 	 
 }
 
-#footer {
+/* #footer {
 	width: 100%;
 	height: 50px;
 	float: left;
 	background: grey;
 	dsplay: block;
-}
+} */
 
 .btn-custom {
     color: #fff;

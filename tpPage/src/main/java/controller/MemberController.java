@@ -160,7 +160,7 @@ public class MemberController {
 		if(authInfo == null) {
 			return "redirect:/login";
 		} else {
-			return "member/memberManager";
+			return "member/memInfo";
 		}
 	}
 	
