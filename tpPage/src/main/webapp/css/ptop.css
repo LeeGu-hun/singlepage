@@ -50,8 +50,8 @@
 }
 .media-carousel img
 {
-  width: 250px;
-  height: 100px;
+  width: auto;
+  height: auto;
 }
 /* End carousel */
 
@@ -74,7 +74,7 @@
 
 .alldiv {
 	position:absolute; 
-	top:150px; 
+	top:250px; 
 	margin-bottom:50px;
 	left:35%; 
 	margin-top:-50px; 
@@ -86,6 +86,6 @@
 }
 
 #tuploadImg1, #tuploadImg2, #tuploadImg3, #tuploadImg4, #tuploadImg5, #tuploadImg6 {
-	width: 200px;
+	width: 250px;
 	height: auto;
-} 
+}

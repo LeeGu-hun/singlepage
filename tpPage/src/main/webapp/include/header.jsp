@@ -20,7 +20,7 @@
 <div class="col-md-4">
 </div>
 <div class="col-md-4" align="right">
-<form:form commandName="logincmd" action="/tpPage/login">
+<form:form commandName="logincmd" action="/tpPage/login" style="margin:0px">
 <form:input path="memail" placeholder="email" class="form-control" style="width:300px"/>
 <form:password path="mpw" placeholder="password" class="form-control" style="width:300px"/>
 <a href="/tpPage/join" class="btn btn-custom" style="width:148px">회원가입</a>
@@ -40,7 +40,7 @@
 </div>
 <div class="col-md-4" align="right">
 <div align="center" class="form-control" style="width:300px"><label><c:out value="${authInfo.mname }" />님, 환영합니다.</label></div>
-<form:form commandName="logincmd" action="/tpPage/logout">
+<form:form commandName="logincmd" action="/tpPage/logout" style="margin:0px">
 <c:if test="${nowpid != null }">
 <form:hidden path="nowpid" value="${nowpid }"/>
 </c:if>
