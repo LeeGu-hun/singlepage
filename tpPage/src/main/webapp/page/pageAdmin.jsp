@@ -34,19 +34,21 @@
 <form:form commandName="pagecmd" name="apfrm" action="adminpage" enctype="multipart/form-data">
 <div class="alldiv">
 <h2 align="center"><b>Page Admin</b></h2><hr>
-	<p><c:choose>
-			<c:when test="${!empty page.pnewfile }">
-				<img id="puploadImg" name="puploadImg" src="/tpPage/puploads/${page.pnewfile }"  alt="프로필사진" width="200px" height="auto"/>
-			</c:when>
-			<c:otherwise>
-				<img id="puploadImg" name="puploadImg" src="profile.png" alt="프로필" width="" height="" />
-			</c:otherwise>
-		</c:choose>
-	<div class="form-inline"><label>●사진:&nbsp; &nbsp;
-		<input type="radio" id="yes" name="profileImg" value="yes" checked="checked"/><label for="yes">기본 프로필</label> &nbsp; &nbsp;
-		<input type="radio" id="no" name="profileImg" value="no" /><label for="no">프로필 지정</label>
-		<input type="file" id="pfile" name="pfile" onchange="pagereadURL(this);" /></label><br><br></div>
+<div class="form-inline col-md-6"><label>●사진:&nbsp; &nbsp;<br>
+	<input type="radio" id="yes" name="reply" value="yes" onclick="proImg(this.value, pfile)" /><label for="yes">기본 프로필</label> &nbsp; &nbsp;
+	<input type="radio" id="no" name="reply" value="no" onclick="proImg(this.value, pfile)" /><label for="no">프로필 지정</label>
+	<input type="file" id="pfile" name="pfile" onchange="pagereadURL(this);" /></label><br><br></div>
+<div class="col-md-6">
+	<c:choose>
+		<c:when test="${!empty page.pnewfile }">
+			<img id="puploadImg" name="puploadImg" src="/tpPage/puploads/${page.pnewfile }"  alt="프로필사진" width="200px" height="auto"/>
+		</c:when>
+		<c:otherwise>
+			<img id="puploadImg" name="puploadImg" src="profile.png" alt="프로필" width="" height="" />
+		</c:otherwise>
+	</c:choose>
 	<input type="hidden" id="pupdir" name="pupdir" value="<%=request.getRealPath("/puploads/")%>" />
+</div><br><br>
 	<div class="form-inline"><label>●이름:&nbsp; &nbsp;
 		<input class="form-control" id="pname" name="pname" style="width:300px;" value="${page.pname }"/>
 	</label><br><br></div>

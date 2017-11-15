@@ -104,6 +104,16 @@ function getDate() {
 	});
 }
 
+function proImg(reply, id) {
+	if (reply == "yes") {
+		$('#pfile').hide();
+		$('#puploadImg').hide();
+	} else {
+		$('#pfile').show();
+		$('#puploadImg').show();
+	}
+}
+
 function adminpage() {
 	var pperiod = $('#pperiod').val();
 	pperiod = pperiod.replace(/-/g, "") + "000000";
