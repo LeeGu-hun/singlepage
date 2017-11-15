@@ -69,11 +69,11 @@
 	
 				<div class="form-inline" style="text-align:right">
 					<label for="current_money">보유 포인트</label>
-					<input class="form-control" type="text" id="cmoney" name="cmoney" value="" style="width: 100px" readonly/>원<br/>
+					<input class="form-control" type="text" id="cmoney" name="cmoney" value="" readonly/>원<br/>
 					<label for="donate_money">- 후원 포인트</label>
-					<input class="form-control" type="text" id="dmoney" name="dmoney" value="" style="width: 100px" readonly/>원<br/>
+					<input class="form-control" type="text" id="dmoney" name="dmoney" value="" readonly/>원<br/>
 					<label for="after_money">= 예상 포인트</label>
-					<input class="form-control" type="text" id="amoney" name="amoney" value="" style="width: 100px" readonly/>원<br/>
+					<input class="form-control" type="text" id="amoney" name="amoney" value="" readonly/>원<br/>
 				</div>
 				<a data-toggle="modal" href="#myModal2" class="btn btn-custom" onclick="chargeInit()">포인트 충전</a>
             </div>
@@ -111,11 +111,11 @@
 	
 				<div class="form-inline" style="text-align:right">
 					<label for="ccurrent_money">보유 포인트</label>
-					<input class="form-control" type="text" id="hmoney" name="hmoney" value="" style="width: 100px" readonly/>원<br/>
+					<input class="form-control" type="text" id="hmoney" name="hmoney" value="" readonly/>원<br/>
 					<label for="charge_money">+ 충전 포인트</label>
-					<input class="form-control" type="text" id="ccmoney" name="ccmoney" value="" style="width: 100px" readonly/>원<br/>
+					<input class="form-control" type="text" id="ccmoney" name="ccmoney" value="" readonly/>원<br/>
 					<label for="cafter_money">= 예상 포인트</label>
-					<input class="form-control" type="text" id="camoney" name="camoney" value="" style="width: 100px" readonly/>원<br/>
+					<input class="form-control" type="text" id="camoney" name="camoney" value="" readonly/>원<br/>
 					<input type="hidden" id="mcheck" name="mcheck" value="${authInfo.mcheck }"/>
 				</div>
 		 	</div>
