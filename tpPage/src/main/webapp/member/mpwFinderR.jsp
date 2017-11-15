@@ -6,8 +6,8 @@
 <form:form commandName="mpwfindcmd" action="mpwfmodal">
 	<p>
 		<label>
-			<form:input path="mpwfmemail" placeholder="이메일을 입력해줘야돼요"/>
+			<form:input path="mpwfmemail" placeholder="이메일을 입력하세요" class="form-control"/>
 		</label>
 	</p>
-	<p><input type="submit" value="이메일똑바로!" onclick="mpwfmodal(); " /></p>
+	<p><input type="submit" class="btn btn-custom" value="찾기" onclick="mpwfmodal(); " /></p>
 </form:form>

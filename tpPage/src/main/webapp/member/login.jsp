@@ -11,7 +11,9 @@
 <head>
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
-
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/btnColor.css" />
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/formColor.css" />
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"
 	integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
 	crossorigin="anonymous"></script>
@@ -24,22 +26,21 @@
 <title>로그인</title>
 </head>
 <body>
+<div class="container" style="text-align: center;">
+<a href="/tpPage/home"><img src="/tpPage/logo.png" style="margin-top:100px;"></a>
+
 	<c:if test="${empty authInfo }">
-		<form:form commandName="logincmd" action="login">
+		<form:form commandName="logincmd" action="login" style="margin-top:100px;" class="form-inline">
 			<p>
-				<label>email:<br> <form:input path="memail" />
-				</label>
+				<form:input path="memail" class="form-control" placeholder="이메일" />
 			</p>
 			<p>
-				<label>PW:<br> <form:password path="mpw" />
-				</label>
+				<form:password path="mpw" class="form-control" placeholder="비밀번호" />
 			</p>
 			<form:hidden path="nowpid" value="${nowpid }" />
-			<input type="submit" value="로그인">
-			<br>
-			<br>
-			<a href="./join">회원가입</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-			<input type="button" value="비번찾기" onclick="mpwfinder(); " /><br><br>
+			<p><input type="submit" value="로그인" class="btn btn-custom"></p>
+			<p><input type="button" value="비밀번호 찾기" onclick="mpwfinder(); " class="btn btn-custom" /></p>
+			<p><a href="./join" class="btn btn-custom" >회원가입</a><br></p>
 		</form:form>
 	</c:if>
 	
@@ -75,5 +76,7 @@
 			</div>
 		</div>
 	</div>
+
+</div>	
 </body>
 </html>

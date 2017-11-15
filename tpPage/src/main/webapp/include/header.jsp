@@ -14,13 +14,18 @@
 <div id="header">
 <div class="container" style="padding: 5px; height:130px; min-width:1200px">
 <c:if test="${empty authInfo }">
-<div class="col-md-4">
-<a href="/tpPage/home">로고</a>
+<div class="col-xs-4">
+<a href="/tpPage/home"><img src="/tpPage/logo.png"></a>
 </div>
-<div class="col-md-4">
+<div class="col-xs-4">
 </div>
+<<<<<<< HEAD
 <div class="col-md-4" align="right">
 <form:form commandName="logincmd" action="/tpPage/login" style="margin:0px">
+=======
+<div class="col-xs-4" align="right">
+<form:form commandName="logincmd" action="/tpPage/login">
+>>>>>>> branch 'temp' of https://github.com/LeeGu-hun/singlepage.git
 <form:input path="memail" placeholder="email" class="form-control" style="width:300px"/>
 <form:password path="mpw" placeholder="password" class="form-control" style="width:300px"/>
 <a href="/tpPage/join" class="btn btn-custom" style="width:148px">회원가입</a>
@@ -33,12 +38,12 @@
 </c:if>
 
 <c:if test="${!empty authInfo }">
-<div class="col-md-4">
-<a href="/tpPage/home">로고</a>
+<div class="col-xs-4">
+<a href="/tpPage/home"><img src="/tpPage/logo.png"></a>
 </div>
-<div class="col-md-4">
+<div class="col-xs-4">
 </div>
-<div class="col-md-4" align="right">
+<div class="col-xs-4" align="right">
 <div align="center" class="form-control" style="width:300px"><label><c:out value="${authInfo.mname }" />님, 환영합니다.</label></div>
 <form:form commandName="logincmd" action="/tpPage/logout" style="margin:0px">
 <c:if test="${nowpid != null }">
