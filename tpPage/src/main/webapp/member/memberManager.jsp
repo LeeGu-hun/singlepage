@@ -14,7 +14,12 @@
 <html>
 <head>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
-
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/btnColor.css" />
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/formColor.css" />
+<script src="http://code.jquery.com/jquery-3.1.1.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 <style>
 a {
  cursor:pointer;
@@ -29,7 +34,7 @@ a {
 <script src="http://malsup.github.com/jquery.form.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>	
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>회원가입</title>
 </head>
 <body>
 <input type="hidden" id="memail" value="${authInfo.memail }"/>
@@ -43,12 +48,12 @@ a {
 	<form:form commandName="logincmd" action="login">
 		<p>
 			<label>email:<br>
-				<form:input path="memail" />
+				<form:input path="memail" cssClass="form-control" />
 			</label>
 		</p>
 		<p>
 			<label>PW:<br>
-				<form:password path="mpw" />
+				<form:password path="mpw" cssClass="form-control" />
 			</label>
 		</p>
 		<form:hidden path="nowpid" value="${nowpid }" />
@@ -64,31 +69,31 @@ a {
 		<form:form commandName="joincmd" action="memberJoin">
 			<p>
 				<label>이멜:<br>
-				<form:input path="memail" />
+				<form:input path="memail" cssClass="form-control" />
 				<form:errors path="memail" />
 				</label>
 			</p>
 			<p>
 				<label>이름:<br>
-				<form:input path="mname" />
+				<form:input path="mname" cssClass="form-control" />
 				<form:errors path="mname" />
 				</label>
 			</p>
 			<p>
 				<label>비밀번호:<br>
-				<form:password path="mpw" />
+				<form:password path="mpw" cssClass="form-control" />
 				<form:errors path="mpw" />
 				</label>
 			</p>
 			<p>
 				<label>비밀번호 확인:<br>
-				<form:password path="mpwconf" />
+				<form:password path="mpwconf" cssClass="form-control" />
 				<form:errors path="mpwconf" />
 				</label>
 			</p>
-			<p><label><form:checkbox path="rememberMemail"/>e메일기억</label></p>
+			<p><label><form:checkbox path="rememberMemail" />e메일기억</label></p>
 			<p>가입하면 약관은 자동동의</p>
-			<input type="submit" value="가입 완료">
+			<input type="submit" value="가입 완료" class="btn btn-custom">
 		</form:form>
 	<%-- </c:if> --%>
 </c:if>

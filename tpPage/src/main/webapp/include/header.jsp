@@ -28,7 +28,12 @@
 <c:if test="${nowpid != null }">
 <form:hidden path="nowpid" value="${nowpid }"/>
 </c:if>
+<<<<<<< HEAD
 </div>
+=======
+<input type="submit" value="로그인" class="btn btn-custom" />
+</p>
+>>>>>>> branch 'temp' of https://github.com/LeeGu-hun/singlepage.git
 </form:form>
 </c:if>
 </div>
