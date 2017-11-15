@@ -211,7 +211,7 @@ public class PageController {
 		String start = page.getPshowtime().split("-")[0].trim();
 		String end= page.getPshowtime().split("-")[1].trim();
 		
-		String[] genres = {"임의","노래","댄스","연주","연극","기타"};
+		String[] genres = {"임의","공연","미술","패션","도서","요리","기타"};
 		
 		String lat = page.getPlatlng();
 		if(lat != null) {			
@@ -234,10 +234,11 @@ public class PageController {
 	}
 	
 	@RequestMapping("/adminpage")
-	public String adminPage(@ModelAttribute("pagecmd") PageCommand pmc, HttpServletRequest request) {
+	public String adminPage(@ModelAttribute("pagecmd") PageCommand pmc, HttpServletRequest request, Model model) {
 		AuthInfo authInfo = (AuthInfo) request.getSession().getAttribute("authInfo");
 		int host = authInfo.getPid();
 		pageSvc.adminPage(host, pmc);
+		String profileImg = pmc.getProfileImg();
 		return "redirect:/page/" + host;
 	}	
 	

@@ -13,10 +13,13 @@
 	src="https://code.jquery.com/jquery-3.2.1.min.js"
 	integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
 	crossorigin="anonymous"></script>
-
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 <script src="<%=request.getContextPath()%>/js/pagemaker.js?ver=122532"></script>
 
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/left.css" />
+
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
@@ -26,18 +29,22 @@
 <title>page maker</title>
 </head>
 <body>
-page maker
+<%@ include file="../include/header.jsp" %>
+
 <form:form commandName="pagecmd" name="mpfrm" action="makepage" enctype="multipart/form-data">
+<div class="alldiv">
+<h2 align="center"><b>Page Make</b></h2><hr>
 	<p><img id="puploadImg" name="puploadImg" />
-	<p><label>사진:<input type="file" id="pfile" name="pfile" onchange="pagereadURL(this);" /></label>
-	<p><input type="hidden" id="pupdir" name="pupdir" 
-		value="<%=request.getRealPath("/puploads/")%>" />
-	<p><label>이름:<br><form:input path="pname" style="width:300px;" /></label></p>
-	<p><label>닉넴:<br><form:input path="pnick" style="width:300px;" /></label></p>
-	<p><label>소개:<br><form:textarea path="pintro" style="width:300px;" /></label></p>
-	<p>
-		<label>장르카테:<br>
-			<select id="pgcate" name="pgcate" style="width:300px;" onchange>
+	<div class="form-inline"><label>●사진:<input type="file" id="pfile" name="pfile" onchange="pagereadURL(this);" /></label>
+	<input type="hidden" id="pupdir" name="pupdir" value="<%=request.getRealPath("/puploads/")%>" /></div><br><br>
+	<div class="form-inline"><label>●이름:&nbsp; &nbsp;<form:input class="form-control" path="pname" style="width:300px;" /></label></div><br><br>
+	<div class="form-inline"><label>●닉넴:&nbsp; &nbsp;<form:input class="form-control" path="pnick" style="width:300px;" /></label></div><br><br>
+	<div class="form-inline"><label>●소개:&nbsp; &nbsp;<form:textarea class="form-control" path="pintro" style="width:300px;" /></label></div><br><br>
+	
+	<div class="form-inline">
+		<label>●구분</label><br>
+		<label>&nbsp; -카테고리:&nbsp; &nbsp;
+			<select class="form-control" id="pgcate" name="pgcate" style="width:265px;" onchange>
 				<option value="0">임의</option>
 				<option value="1">공연</option>
 				<option value="2">미술</option>
@@ -47,18 +54,27 @@ page maker
 				<option value="6">기타</option>
 			</select>
 		</label>
-	</p>
-	<p><label>장르세부:<br><input type="text" id="pgdetail" name="pgdetail" style="width:300px;" onkeyup; onkeypress; onkeydown; /></label></p>
-	<p><label>장르:<br><form:input path="pgenre" style="width:300px;" /></label></p>
-	<div id="map" style="width:500px;height:400px;"></div>
-	<input type="text" id="keyword" style="width:300px;" /> 
-	<input type="button" value="검색" onclick="mapsearch(); return false;" />
-	<p><label>지역:<br><form:input path="ploc" style="width:300px;" /></label></p>
-	<p><label>좌표:<br><form:input path="platlng" style="width:300px;" /></label></p>
-	<p><label>기간:<br><form:input path="pperiod" value="" style="width:300px;" /></label></p>
-	<p>
-		<label>시작:<br>
-			<select id="pststart" name="pststart" style="width:300px;" onchange>
+	</div><br>
+	<div class="form-inline"><label>&nbsp; -세부장르:&nbsp; &nbsp;<input class="form-control" type="text" id="pgdetail" name="pgdetail" style="width:265px;" onkeyup; onkeypress; onkeydown; /></label></div><br><br>
+	<!-- <label>장르:<br> --><form:input class="form-control" type="hidden" path="pgenre" style="width:300px;" /><!-- </label> -->
+	<div class="form-inline">
+		<label>●지역:&nbsp; &nbsp;
+		<input class="form-control" type="text" id="keyword" style="width:300px;" /> 
+		<input class="btn btn-custom" type="button" value="검색" onclick="mapsearch(); return false;" /><br><br>
+		 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  
+		<form:input class="form-control" path="ploc" style="width: 300px" readonly="true"/></label>	
+	</div>
+	 &nbsp; &nbsp;
+	<div id="map" style="width:500px;height:400px;"></div><br><br>
+	
+	<!-- <label>좌표:<br> --><form:input type="hidden" path="platlng" style="width:300px;" /><!-- </label> -->
+	<div class="form-inline">
+		<label>●기간:&nbsp; &nbsp;
+		<form:input class="form-control" path="pperiod" value="" style="width:300px;" /></label></div><br><br>
+	<div class="form-inline">
+		<label>●공연시간</label><br>
+		<label>&nbsp; -시작:&nbsp; &nbsp;
+			<select class="form-control" id="pststart" name="pststart" style="width:295px;" onchange>
 				<option value="">미정</option>
 				<%
 					String start;
@@ -74,9 +90,11 @@ page maker
 					}
 				%>
 			</select>
-		</label><br>
-		<label>종료:<br>
-			<select id="pstend" name="pstend" style="width:300px;" onchange>
+		</label>
+	</div>
+	<div class="form-inline">
+		<label>&nbsp; -종료:&nbsp; &nbsp;
+			<select class="form-control" id="pstend" name="pstend" style="width:295px;" onchange>
 				<option value="">미정</option>
 				<%
 					String end;
@@ -93,9 +111,13 @@ page maker
 				%>
 			</select>
 		</label>
-	</p>
-	<p><label>시간:<br><form:input path="pshowtime" value="" style="width:300px;"/></label></p>
-	<p><input type="button" value="만들기" onclick="makepage(); " /></p>
+	</div>
+	<!-- <label>시간:<br> --><form:input class="form-control" type="hidden" path="pshowtime" value="" style="width:300px;"/><!-- </label> -->
+	<div style="text-align: center">
+		<br/><br/>
+		<input class="btn btn-custom" type="button" value="만들기" onclick="makepage(); " />
+	</div>
+</div>
 </form:form>
 <script src="<%=request.getContextPath()%>/js/map.js?ver=1"></script>
 </body>

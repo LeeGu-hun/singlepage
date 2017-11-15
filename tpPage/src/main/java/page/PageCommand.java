@@ -6,7 +6,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.multipart.MultipartFile;
 
 public class PageCommand {
-	private String pname, pnick, pintro, pgenre, ploc, pupdir, pshowtime, platlng;
+	private String pname, pnick, pintro, pgenre, ploc, pupdir, pshowtime, platlng, profileImg;
 	private MultipartFile pfile;
 	@DateTimeFormat(pattern="yyyyMMddHHmmss")
 	private Date pperiod;
@@ -69,6 +69,12 @@ public class PageCommand {
 	}
 	public void setPperiod(Date pperiod) {
 		this.pperiod = pperiod;
+	}
+	public String getProfileImg() {
+		return profileImg;
+	}
+	public void setProfileImg(String profileImg) {
+		this.profileImg = profileImg;
 	}
 
 	
