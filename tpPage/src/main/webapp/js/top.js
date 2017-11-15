@@ -4,5 +4,6 @@ $(document).ready(function() {
 		pause : true,
 		interval : false,
 	});
-});
+	
+});	
 })(jQuery);
