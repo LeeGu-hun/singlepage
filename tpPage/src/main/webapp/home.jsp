@@ -17,7 +17,7 @@
 <script src="<%=request.getContextPath()%>/js/main.js?ver=15"></script>
 
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>SinglePage</title>
+<title>PLAIN</title>
 </head>
 <body>
 <%@ include file="./include/header.jsp" %>
