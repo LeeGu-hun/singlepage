@@ -63,34 +63,32 @@ a {
 			</c:otherwise>
 		</c:choose></p>
 	</form:form>
-	<p></p>
-
-	<%-- <c:if test="${ mmval != 0 && mmval != 1 && mmval != 2 }"> --%>
-		<form:form commandName="joincmd" action="memberJoin" cssClass="form-inline">
-			<p>
-				<form:input path="memail" cssClass="form-control" placeholder="이메일" cssErrorClass="has-error"/>
-				<form:errors path="memail" class="msg" element="div" />
-			</p>
-			<p>
-				<form:input path="mname" cssClass="form-control" placeholder="이름" cssErrorClass="has-error"/>
-				<form:errors path="mname" class="msg" element="div" />
-			</p>
-			<p>
-				<form:password path="mpw" cssClass="form-control" placeholder="비밀번호" cssErrorClass="has-error"/>
-				<form:errors path="mpw" class="msg" element="div" />
-			</p>
-			<p>
-				<form:password path="mpwconf" cssClass="form-control" placeholder="비밀번호 재입력" cssErrorClass="has-error"/>
-				<form:errors path="mpwconf" class="msg" element="div" />
-			</p>
-			<input type="submit" value="가입 완료" class="btn btn-custom" style="width:150px">
-			<label id="rmbjl" class="btn btn-custom unchecked"><form:checkbox path="rememberMemail"/>기억</label>			
-			<br>
-			<br>
-			<br>
-			<p>가입완료 버튼을 클릭하면 약관에 동의한 것으로 취급합니다.</p>
-		</form:form>
-	<%-- </c:if> --%>
+	<hr style="margin: 50px 200px; border-color: black;"  />
+	
+	<form:form commandName="joincmd" action="memberJoin" cssClass="form-inline">
+		<p>
+			<form:input path="memail" cssClass="form-control" placeholder="이메일" cssErrorClass="has-error"/>
+			<form:errors path="memail" class="msg" element="div" />
+		</p>
+		<p>
+			<form:input path="mname" cssClass="form-control" placeholder="이름" cssErrorClass="has-error"/>
+			<form:errors path="mname" class="msg" element="div" />
+		</p>
+		<p>
+			<form:password path="mpw" cssClass="form-control" placeholder="비밀번호" cssErrorClass="has-error"/>
+			<form:errors path="mpw" class="msg" element="div" />
+		</p>
+		<p>
+			<form:password path="mpwconf" cssClass="form-control" placeholder="비밀번호 재입력" cssErrorClass="has-error"/>
+			<form:errors path="mpwconf" class="msg" element="div" />
+		</p>
+		<input type="submit" value="가입 완료" class="btn btn-custom" style="width:150px">
+		<label id="rmbjl" class="btn btn-custom unchecked"><form:checkbox path="rememberMemail"/>기억</label>			
+		<br>
+		<br>
+		<br>
+		<p>가입완료 버튼을 클릭하면 약관에 동의한 것으로 취급합니다.</p>
+	</form:form>
 </c:if>
 
 <!-- 로그인 전후 -->

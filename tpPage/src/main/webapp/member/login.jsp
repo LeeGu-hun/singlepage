@@ -53,43 +53,8 @@
 					<label id="rmbhl" class="btn btn-custom unchecked"><form:checkbox path="rememberMemail"/>기억</label>
 				</c:otherwise>
 			</c:choose></p>
-			<hr style="margin:50px 200px 50px 200px; border-color: black;" />
-			<p><input type="button" value="비밀번호 재설정" onclick="mpwfinder(); " class="btn btn-custom" style="width:150px" /></p>
 		</form:form>
 	</c:if>
-	
-	<div id="mpwfinderR" name="mpwfinderR"></div>
-	
-	<!-- <div id="mpwfmodalR" name="mpwfmodalR"></div> -->
-	
-	<div class="modal" id="mpwfmodal" aria-hidden="true" style="display: none; z-index: 500;">
-		<div class="modal-dialog modal-lg">
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-					<h4 class="modal-title">비번 재설정</h4>
-				</div>
-				<div class="container"></div>
-					<form:form commandName="mpwresetcmd" action="mpwreset">
-				<div class="modal-body">
-						<p>
-							<label> <form:password path="newmpw" placeholder="새 비밀번호 입력" />
-							</label>
-						</p>
-						<p>
-							<label> <form:password path="newmpwconf" placeholder="새 비밀번호 다시 입력" />
-							</label>
-						</p>
-						<form:hidden path="mpwrmemail" />
-				</div>
-				<div class="modal-footer">
-					<input type="submit" class="btn btn-primary" value="비번 재설정">
-					<a href="" data-dismiss="modal" class="btn">닫기</a>
-				</div>
-					</form:form>
-			</div>
-		</div>
-	</div>
 
 </div>	
 </body>
