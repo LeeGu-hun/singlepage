@@ -12,6 +12,7 @@
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/login.css" />
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/btnColor.css" />
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/formColor.css" />
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"
@@ -21,6 +22,7 @@
 <script src="http://malsup.github.com/jquery.form.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="<%=request.getContextPath()%>/js/member.js?ver=99"></script>
+<script type="text/javascript" src="<%=request.getContextPath()%>/js/login.js"></script>
 
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>로그인</title>
@@ -32,10 +34,12 @@
 	<c:if test="${empty authInfo }">
 		<form:form commandName="logincmd" action="login" style="margin-top:100px;" class="form-inline">
 			<p>
-				<form:input path="memail" class="form-control" placeholder="이메일" />
+				<form:input path="memail" class="form-control" placeholder="이메일" cssErrorClass="has-error" />
+				<form:errors path="memail" class="msg" element="div"/>
 			</p>
 			<p>
-				<form:password path="mpw" class="form-control" placeholder="비밀번호" />
+				<form:password path="mpw" class="form-control" placeholder="비밀번호" cssErrorClass="has-error" />
+				<form:errors path="mpw" class="msg" element="div"/>
 			</p>
 			<form:hidden path="nowpid" value="${nowpid }" />
 			<p><input type="submit" value="로그인" class="btn btn-custom"></p>

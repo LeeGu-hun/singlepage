@@ -50,10 +50,10 @@
 </form:form>
 <c:choose>
 	<c:when test="${authInfo.pid == 0 }">
-		<a href="/tpPage/pagemaker" class="btn btn-custom" style="margin:5px 0px 5px 0px; width:300px">page 만들기</a>
+		<a href="/tpPage/pagemaker" class="btn btn-custom" style="margin:5px 0px 5px 0px; width:300px">PLAIN 만들기</a>
 	</c:when>
 	<c:otherwise>
-		<a href="/tpPage/page/${authInfo.pid }" class="btn btn-custom" style="margin:5px 0px 5px 0px; width:300px">내 page 이동</a>
+		<a href="/tpPage/page/${authInfo.pid }" class="btn btn-custom" style="margin:5px 0px 5px 0px; width:300px">내 PLAIN 이동</a>
 	</c:otherwise>
 </c:choose>
 </div>

@@ -14,8 +14,8 @@ public class LoginValidator implements Validator {
 
 	@Override
 	public void validate(Object target, Errors errors) {
-		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "memail", "이메일을 입력하시오.");
-		ValidationUtils.rejectIfEmpty(errors, "mpw", "비번을 입력하시오.");	
+		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "memail", "required");
+		ValidationUtils.rejectIfEmpty(errors, "mpw", "required");	
 	}
 
 }

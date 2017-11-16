@@ -28,19 +28,19 @@ public class JoinValidator implements Validator {
 	public void validate(Object target, Errors errors) {
 		MemberCommand memCmd = (MemberCommand) target;
 		if (memCmd.getMemail() == null || memCmd.getMemail().trim().isEmpty()) {
-			errors.rejectValue("memail", "이메일을 입력하시오.");
+			errors.rejectValue("memail", "required");
 		} else {
 			Matcher matcher = pattern.matcher(memCmd.getMemail());
 			if (!matcher.matches()) {
-				errors.rejectValue("memail", "이메일이 이미 있음.");
+				errors.rejectValue("memail", "bad");
 			}
 		}
-		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "mname", "이름을 입력하시오.");
-		ValidationUtils.rejectIfEmpty(errors, "mpw", "비번을 입력하시오.");
-		ValidationUtils.rejectIfEmpty(errors, "mpwconf", "비번확인 입력하시오.");
+		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "mname", "required");
+		ValidationUtils.rejectIfEmpty(errors, "mpw", "required");
+		ValidationUtils.rejectIfEmpty(errors, "mpwconf", "required");
 		if (!memCmd.getMpw().isEmpty()) {
 			if (!memCmd.isPasswordEqualToConfirmPassword()) {
-				errors.rejectValue("mpwconf", "비밀번호와 동일하게 입력하시오.");
+				errors.rejectValue("mpwconf", "nomatch");
 			}
 		}
 	}

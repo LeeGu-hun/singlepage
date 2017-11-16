@@ -29,6 +29,7 @@ import page.Page;
 import vali_exception.AlreadyExistngMemberException;
 import vali_exception.IdPasswordNotMatchingException;
 import vali_exception.JoinValidator;
+import vali_exception.LoginValidator;
 
 @Controller
 public class MemberController {
@@ -57,11 +58,11 @@ public class MemberController {
 	
 	@RequestMapping("/memberJoin")
 	public String MemberJoin(@ModelAttribute("joincmd") MemberCommand mjcmd, HttpSession session,
-			HttpServletResponse response, Errors errors) {
-		/* new JoinValidator().validate(membercmd, errors); */
-		// if (errors.hasErrors())
-		// return "member/join";
-		// try {
+			HttpServletResponse response, Errors errors, @ModelAttribute("logincmd") MemberCommand mlcmd) {
+		new JoinValidator().validate(mjcmd, errors);
+		 if (errors.hasErrors())
+		 return "member/memberManager";
+		 try {
 		memberSvc.memberJoin(mjcmd, errors);
 		Member member = memberSvc.memberLogin(mjcmd.getMemail());
 
@@ -83,13 +84,13 @@ public class MemberController {
 		}
 		response.addCookie(cookie);*/
 		return "redirect:/home";
-		// } catch (AlreadyExistngMemberException e) {
-		// errors.rejectValue("memail", "이미 있다");
-		// return "member/join";
-		// } catch (IdPasswordNotMatchingException e) {
-		// errors.rejectValue("memail", "아이디나 비번 틀림");
-		// return "redirect:/login";
-		// }
+		 } catch (AlreadyExistngMemberException e) {
+		 errors.rejectValue("memail", "duplicate");
+		 return "member/memberManager";
+		 } catch (IdPasswordNotMatchingException e) {
+		 errors.rejectValue("memail", "아이디나 비번 틀림");
+		 return "redirect:/login";
+		 }
 	}
 	
 	/*@RequestMapping("/membermanager")
@@ -105,9 +106,10 @@ public class MemberController {
 	}*/
 	
 	@RequestMapping("/login")
-	public String MemberLogin(@ModelAttribute("logincmd") MemberCommand mlcmd, @ModelAttribute("mpwfindcmd") MemberCommand mpwfcmd,
+	public String MemberLogin(@ModelAttribute("logincmd") MemberCommand mlcmd, Errors errors, @ModelAttribute("mpwfindcmd") MemberCommand mpwfcmd,
 			@ModelAttribute("mpwresetcmd") MemberCommand mpwresetcmd, HttpSession session, HttpServletRequest request, Model model) {
-		
+		new LoginValidator().validate(mlcmd, errors);
+		if(errors.hasErrors()) return "member/login"; 
 		if (request.getParameter("pid") != null) {
 			int nowpid = Integer.parseInt(request.getParameter("pid"));
 			model.addAttribute("nowpid", nowpid);
