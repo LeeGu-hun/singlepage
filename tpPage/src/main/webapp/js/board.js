@@ -22,6 +22,33 @@ function mbreadURL(input) {
 	}
 }
 
+$(document).ready(function() {
+	var pbfileTarget = $('#pbfile');
+	var mbfileTarget = $('#mbfile');
+	pbfileTarget.on('change', function() { // 값이 변경되면
+		if (window.FileReader) { // modern browser
+			var filename = $(this)[0].files[0].name;
+		} else { // old IE
+			var filename = $(this).val().split('/').pop().split('\\').pop(); // 파일명만 추출
+		} // 추출한 파일명 삽입
+		$('#pbfname').val(filename);
+	});
+	mbfileTarget.on('change', function() { // 값이 변경되면
+		if (window.FileReader) { // modern browser
+			var filename = $(this)[0].files[0].name;
+		} else { // old IE
+			var filename = $(this).val().split('/').pop().split('\\').pop(); // 파일명만 추출
+		} // 추출한 파일명 삽입
+		$('#mbfname').val(filename);
+	});
+	$('.btnRmv').on('click', function(){
+		$('.fname').val('파일 없음');
+		$('.uploadImg').hide();
+	});
+}); 
+
+
+
 function pbScroll() {
 	var pbli = $('#pbli').attr('class');
 	if(pbli == 'active') {
