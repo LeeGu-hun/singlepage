@@ -34,7 +34,7 @@
     border-color: #000000;
 }
 
-input[type="checkbox"]:not(#tomorrow), input[type="radio"] { /* 실제 체크박스는 화면에서 숨김 */
+input[type="checkbox"]:not(#tomorrow) { /* 실제 체크박스는 화면에서 숨김 */
 	position: absolute;
 	width: 1px;
 	height: 1px;

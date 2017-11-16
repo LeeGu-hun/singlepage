@@ -30,7 +30,7 @@
 	<div class="container" style="padding-top: 100px;">
 		<div class="alldiv">
 			<h2 align="center">
-				<b>My Info</b>
+				<b>회원정보</b>
 			</h2>
 			<hr>
 			<c:if test="${!empty authInfo }">
@@ -194,11 +194,10 @@
 						</div>
 					</div>
 				</div>
-
 			</c:if>
 		</div>
 	</div>
-
+	
 	<input type="hidden" id="memail" value="${authInfo.memail }" />
 	<input type="hidden" id="ck" value="${ck }" />
 	<input type="hidden" id="mid" value="${authInfo.mid }" />

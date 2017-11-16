@@ -99,18 +99,6 @@ public class MemberController {
 		 }
 	}
 	
-	/*@RequestMapping("/membermanager")
-	public String memberManager(@ModelAttribute("logincmd") MemberCommand mlcmd,
-			@ModelAttribute("joincmd") MemberCommand mjcmd,
-			@CookieValue(value = "remember", required = false) Cookie cookie, HttpServletRequest request, Model model) {
-		if (request.getParameter("pid") != null) {
-			int nowpid = Integer.parseInt(request.getParameter("pid"));
-			model.addAttribute("nowpid", nowpid);
-			return "member/memberManager";
-		}
-		return "member/memberManager";
-	}*/
-	
 	@RequestMapping("/login")
 	public String MemberLogin(@ModelAttribute("logincmd") MemberCommand mlcmd, Errors errors, @ModelAttribute("mpwfindcmd") MemberCommand mpwfcmd,
 			@ModelAttribute("mpwresetcmd") MemberCommand mpwresetcmd, HttpSession session, HttpServletRequest request, HttpServletResponse response, Model model) {
