@@ -32,8 +32,8 @@
 					<input type="button" class="btn btn-custom" style="display: none;" id="del1" value="삭제" onclick="deleteList(1)" />
 				</span>
 				<hr>
-				<div class="col-md-6">
-					<label>링크: </label><input type="text" id="link1" name="link" required /><br/><br/>
+				<div class="col-md-6 form-inline">
+					<label>링크:&nbsp; &nbsp;</label><input class="form-control" type="text" id="link1" name="link" required /><br/><br/>
 					<label>이미지: <input type="file" id="thum1" name="thum" onchange="imgreadURL(this);" />
 					<input type="hidden" id="tupdir1" name="tupdir" value="<%=request.getRealPath("/tuploads/")%>" />
 					</label>
@@ -56,8 +56,8 @@
 					<input type="button" class="btn btn-custom" id="del${list.turn }" value="삭제" onclick="deleteList(${list.turn})" />
 				</span>
 				<hr>
-				<div class="col-md-6">
-					<label>링크: </label><input type="text" id="link${list.turn }" name="link" value="${list.url }" required /><br/><br/>
+				<div class="col-md-6 form-inline">
+					<label>링크:&nbsp; &nbsp;</label><input class="form-control" type="text" id="link${list.turn }" name="link" value="${list.url }" required /><br/><br/>
 					<label>이미지: <input type="file" id="thum${list.turn }" name="thum" onchange="imgreadURL(this)" value="${list.thum }" />
 					<input type="hidden" id="tupdir${list.turn }" name="tupdir" value="<%=request.getRealPath("/tuploads/")%>" />
 					</label>

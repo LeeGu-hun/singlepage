@@ -4,6 +4,7 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/ptop.css?ver=3311" />
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/formColor.css?ver=3311" />
 
 <script 
 	src="https://code.jquery.com/jquery-3.2.1.min.js"
