@@ -5,12 +5,14 @@ import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.tools.ToolProvider;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -74,7 +76,14 @@ public class PageController {
 	@RequestMapping("/page/{host}")
 	public String pageLoad(@PathVariable("host") int host, @ModelAttribute("logincmd") MemberCommand logincmd,
 			@ModelAttribute("pboardcmd") PboardCommand pbc, @ModelAttribute("mboardcmd") MboardCommand mbc,
-			@ModelAttribute("pbrecmd") PboardCommand pbrecmd, Model model, HttpServletRequest request) {
+			@ModelAttribute("pbrecmd") PboardCommand pbrecmd, Model model, HttpServletRequest request,
+			@CookieValue(value= "remember", required = false) Cookie cookie) {
+		
+		if(cookie != null) {
+			logincmd.setMemail(cookie.getValue());
+			logincmd.setRememberMemail(true);
+		}
+		
 		int pageHostId = host;
 		Page page = pageDao.getPage(pageHostId);
 		if(page == null) {

@@ -2,7 +2,7 @@
 <%@ page session="false" %>
 <html>
 <head>
-	<title>Home</title>
+	<title>PLAIN</title>
 </head>
 <body>
 <jsp:forward page="./home"></jsp:forward>

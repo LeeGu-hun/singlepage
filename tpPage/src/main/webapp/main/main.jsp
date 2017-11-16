@@ -33,9 +33,9 @@
 		</div>
 	</div>
 	</c:forEach>
-	<c:if test="${fn:length(boardList) < 1}">
+	<c:if test="${favo != null || fn:length(boardList) < 1 }">
 		<div class="grid-item" style="width:100%; text-align: center; font-weight:bold;" >
-			아직 좋아요 한 페이지가 없습니다.
+			아직 마음에 들어한 플레인이 없군요!
 			<input type="hidden" id="end" name="end">
 		</div>
 	</c:if>
