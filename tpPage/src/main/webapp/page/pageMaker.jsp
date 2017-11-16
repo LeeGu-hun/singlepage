@@ -19,6 +19,7 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/left.css" />
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/btnColor.css" />
 
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
@@ -35,9 +36,15 @@
 <div class="alldiv">
 <h2 align="center"><b>Make PLAIN</b></h2><hr>
 	
-	<img id="puploadImg" name="puploadImg" /><br>
-	<label>●사진:<br>
-	<input type="file" id="pfile" name="pfile" accept="image/gif, image/jpeg, image/png" onchange="pagereadURL(this);" /></label>
+	<label>●사진:&nbsp;&nbsp;</label>
+		<div style="display:inline-table;border:1px solid #000; border-radius:4px; padding: 6px 12px; width:300px">
+		<div style="text-align: center;"><img id="puploadImg" name="puploadImg" class="uploadImg" style="display:none; margin-bottom: 5px" /></div>
+		<div class="form-inline">
+		<label class="btn btn-custom btn-sm filebox">
+		<input id="pfile" name="pfile" type="file" accept="image/gif, image/jpeg, image/png" onchange="pagereadURL(this);" />파일 선택</label>
+		<a class="btn btn-custom btn-sm btnRmv" style="margin-left:5px">삭제</a>
+		<br><input type="text" class="form-control fname" style="width:auto;" value="파일 없음" disabled="disabled"></div>
+		</div>
 	<input type="hidden" id="pupdir" name="pupdir" value="<%=request.getRealPath("/puploads/")%>" />
 	<br><br>
 	<div class="form-inline"><label>●이름:&nbsp; &nbsp;<form:input class="form-control" path="pname" style="width:300px;" /></label></div><br><br>

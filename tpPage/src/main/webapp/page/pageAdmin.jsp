@@ -19,6 +19,7 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/left.css" />
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/btnColor.css" />
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
@@ -34,9 +35,9 @@
 <form:form commandName="pagecmd" name="apfrm" action="adminpage" enctype="multipart/form-data">
 <div class="alldiv">
 <h2 align="center"><b>Admin PLAIN</b></h2><hr>
-<c:out value="${page.profile }" />
-<div class="form-inline col-md-6"><label>●사진:</label><br>
+<div class="form-inline col-md-6" style="padding: 0"><label>●사진:</label><br>
 	<c:if test="${page.profile == 'no'}">
+	&nbsp;
 		<input type="radio" id="no" name="reply" value="no" checked="checked" onclick="proImg(this.value, pfile)" />
 		<label for="no">기본 프로필</label> &nbsp; &nbsp;
 		<input type="radio" id="yes" name="reply" value="yes" onclick="proImg(this.value, pfile)" />

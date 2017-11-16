@@ -28,8 +28,14 @@
 <form:form commandName="pboardcmd" action="/tpPage/pbwrite" enctype="multipart/form-data">
 	<form:input path="pbsubject" required="required" class="form-control" style="width:100%; margin-top:5px" placeholder="제목을 입력해주세요"/>
 	<form:textarea path="pbcontent" required="required" class="form-control" rows="7" cols="auto" style="width:100%; margin-top:5px; resize:none" placeholder="내용을 입력해주세요"></form:textarea>
-	<img id="pbuploadImg" name="pbuploadImg" style="display:none" />
-	<input type="file" id="pbfile" name="pbfile" style="margin-top:5px" onchange="pbreadURL(this);" />
+		<div style="border:1px solid #000; border-radius:4px; padding: 6px 12px;">
+		<img id="pbuploadImg" name="pbuploadImg" class="uploadImg" style="display:none;" />
+		<div class="form-inline">
+		<label class="btn btn-custom btn-sm filebox">
+		<input id="pbfile" name="pbfile" type="file" onchange="pbreadURL(this);">파일 선택</label>
+		<a class="btn btn-custom btn-sm btnRmv" style="margin-left:10px">삭제</a>
+		<input type="text" id="pbfname" class="form-control fname" style="width:auto; margin-left:10px" value="파일 없음" disabled="disabled"></div>
+		</div>
 	<input type="hidden" id="pbupdir" name="pbupdir" value="<%=request.getRealPath("/buploads/pbuploads/")%>" />
 	<input type="hidden" id="pbhostid" name="pbhostid" value="<c:out value='${page.pid }' />" />
 	<div align="center" style="margin-top:5px">

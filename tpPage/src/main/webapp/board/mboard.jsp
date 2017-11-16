@@ -34,8 +34,14 @@ $(document).ready(function() {
 <form:form commandName="mboardcmd" action="/tpPage/mbwrite" enctype="multipart/form-data">
 	<form:input path="mbsubject" required="required" class="form-control" style="width:100%; margin-top:5px" placeholder="제목을 입력해주세요" />
 	<form:textarea path="mbcontent" required="required" class="form-control" rows="7" cols="auto" style="width:100%; margin-top:5px; resize:none" placeholder="내용을 입력해주세요"></form:textarea>
-	<img id="mbuploadImg" name="mbuploadImg" style="display:none" />
-	<input type="file" id="mbfile" name="mbfile" style="margin-top:5px" onchange="mbreadURL(this);" />
+	<div style="border:1px solid #000; border-radius:4px; padding: 6px 12px;">
+	<img id="mbuploadImg" name="mbuploadImg" class="uploadImg" style="display:none;" />
+	<div class="form-inline">
+	<label class="btn btn-custom btn-sm filebox">
+	<input id="mbfile" name="mbfile" type="file" onchange="mbreadURL(this);">파일 선택</label>
+	<a class="btn btn-custom btn-sm btnRmv" style="margin-left:10px">삭제</a>
+	<input type="text" id="mbfname" class="form-control fname" style="width:auto; margin-left:10px" value="파일 없음" disabled="disabled"></div>
+	</div>
 	<input type="hidden" id="mbupdir" name="mbupdir" value="<%=request.getRealPath("/buploads/mbuploads/") %>" />
 	<input type="hidden" id="mbhostid" name="mbhostid" value="<c:out value='${page.pid }' />" />
 	<input type="hidden" id="mbTab" name="mbTab" value="active" />
