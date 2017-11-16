@@ -5,8 +5,8 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 <div class="related-page" style="padding: 20px;">
-<div style="text-align: center;">
-관련 페이지
+<div style="text-align: center; margin-bottom: 15px">
+관련 PLAIN
 </div>
 <div class="rPages">
 <c:forEach var="related" items="${related}">

@@ -47,7 +47,7 @@ $(document).ready(function(){
 		$('.inner-content').css('top', 50);
 	});
 
-	$('.inner-item').on('click', function(){
+	$('.inner-item').not('a').on('click', function(){
 		$('body').css({overflow: 'hidden'});
 		var content = $(this).children().clone();
 		$('.inner-content').html(content);
