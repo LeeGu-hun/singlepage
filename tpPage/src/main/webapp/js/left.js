@@ -241,10 +241,10 @@ function like() {
 			ck = $.trim(ck);
 			$('#ck').val(ck);
 			if( ck == 0 ){
-				$('#btnLike').text('좋아요♡');
+				$('#btnLike').html("좋아요   <i class='fa fa-heart-o fa-lg' aria-hidden='true'></i>");
 			}
 			else {
-				$('#btnLike').text('좋아요♥');
+				$('#btnLike').html("좋아요   <i class='fa fa-heart fa-lg' aria-hidden='true'></i>");
 			}
 		}
 	}

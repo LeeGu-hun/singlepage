@@ -47,7 +47,7 @@
 <!-- 후원 modal -->
 <div class="modal" id="myModal" aria-hidden="true" style="display: none; z-index: 1050;">
 	<div class="modal-dialog modal-lg">
-	     <div class="modal-content" style="width: 700px">
+	     <div class="modal-content">
 	      	<div class="modal-header">
 	        	<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
 	        	<h4 class="modal-title">페이지 후원</h4>
@@ -89,7 +89,7 @@
 	
 	<div class="modal" id="myModal2" aria-hidden="true" style="display: none; z-index: 1060;">
 		<div class="modal-dialog modal-lg">
-          <div class="modal-content" style="width: 700px">
+          <div class="modal-content">
             <div class="modal-header">
               <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
               <h4 class="modal-title">포인트 충전</h4>

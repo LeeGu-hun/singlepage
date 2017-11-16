@@ -182,5 +182,10 @@ public class PageDao {
 			return "";
 		}
 	}
+
+	public int likeCnt(int pageHostId) {
+		Integer cnt = jdbcTemplate.queryForObject("select count(distinct mid) from page_like where pid=? and plike=1", Integer.class, pageHostId);
+		return cnt;
+	}
 }
 

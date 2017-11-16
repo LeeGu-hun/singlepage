@@ -1,24 +1,13 @@
 @charset "UTF-8";
 
 .introText {
+	margin: 10px;
 	text-align: justify;
-	width: 200px;
+	width: 180px;
 	height:200px;
 	word-break: break-word;
 	overflow: auto;
 	resize:none;
-}
-
-.btn-custom {
-    color: #fff;
-    background-color: #000000;
-    border-color: #000000;
-}
-
-.btn-custom:hover {
-    color: red;
-    background-color: #000000;
-    border-color: #000000;
 }
 
 .alldiv {
