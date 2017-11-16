@@ -123,9 +123,10 @@ public class PageController {
 				} else {
 					int ck = ckList.get(0).getPlike();
 					model.addAttribute("ck", ck);
-				} 
+				} 		
 			}
-			
+			int likeCnt = pageDao.likeCnt(page.getPid());
+			model.addAttribute("cnt", likeCnt);
 			//carousel
 			List<PageTop> ptop = pageDao.selectCarousel(host);
 			model.addAttribute("ptop", ptop);
