@@ -238,7 +238,10 @@ public class PageController {
 		AuthInfo authInfo = (AuthInfo) request.getSession().getAttribute("authInfo");
 		int host = authInfo.getPid();
 		pageSvc.adminPage(host, pmc);
-		String profileImg = pmc.getProfileImg();
+		String reply = request.getParameter("reply");
+		System.out.println(reply);
+		request.setAttribute("reply", reply);
+//		model.addAttribute("reply", reply);
 		return "redirect:/page/" + host;
 	}	
 	
