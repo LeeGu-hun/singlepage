@@ -52,12 +52,10 @@ a {
 		<p><input type="submit" value="로그인" class="btn btn-custom"></p>
 		<c:if test="${ mmval == 0 || mmval == 1 || mmval == 2 }">
 			<a href="./membermanager" >회원가입</a><br>
-			<!-- <a href=#>비밀번호 찾기</a> -->
 		</c:if>	
 	</form:form>
 	<p></p>
 
-	<%-- <c:if test="${ mmval != 0 && mmval != 1 && mmval != 2 }"> --%>
 		<form:form commandName="joincmd" action="memberJoin" cssClass="form-inline">
 			<p>
 				<form:input path="memail" cssClass="form-control" placeholder="이메일" />
@@ -79,7 +77,7 @@ a {
 			<p>아래 가입완료 버튼을 클릭하면 약관에 동의한 것으로 취급합니다.</p>
 			<input type="submit" value="가입 완료" class="btn btn-custom">
 		</form:form>
-	<%-- </c:if> --%>
+
 </c:if>
 
 

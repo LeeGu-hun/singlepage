@@ -46,7 +46,14 @@ public class MemberController {
 
 	@RequestMapping("/join")
 	public String memberManager(@ModelAttribute("logincmd") MemberCommand mlcmd,
-			@ModelAttribute("joincmd") MemberCommand mjcmd, HttpServletRequest request, Model model) {
+			@ModelAttribute("joincmd") MemberCommand mjcmd, HttpServletRequest request, Model model,
+			@CookieValue(value= "remember", required = false) Cookie cookie) {
+		
+		if(cookie != null) {
+			mlcmd.setMemail(cookie.getValue());
+			mlcmd.setRememberMemail(true);
+		}
+		
 		if(request.getParameter("pid") != null) {
 			int nowpid = Integer.parseInt(request.getParameter("pid"));
 			model.addAttribute("nowpid", nowpid);
@@ -69,19 +76,18 @@ public class MemberController {
 				member.getMcheck(), member.getMpoint(), member.getMdate(), 0);
 		session.setAttribute("authInfo", authInfo);
 
-		/*Cookie cookie = new Cookie("remember", mjcmd.getMemail());
-		cookie.setPath("/");*/
-		/*
-		 * Cookie cookie2 = new Cookie("remember2", mjcmd.getMemail());
-		 * cookie2.setPath("./");
-		 */
-
-		/*if (mjcmd.isRememberMemail()) {
+		
+		Cookie cookie = new Cookie("remember", mjcmd.getMemail());
+		cookie.setPath("/");
+		
+		if (mjcmd.isRememberMemail()) {
 			cookie.setMaxAge(60 * 60 * 24 * 1);
 		} else {
 			cookie.setMaxAge(0);
 		}
-		response.addCookie(cookie);*/
+		response.addCookie(cookie);
+		
+		
 		return "redirect:/home";
 		// } catch (AlreadyExistngMemberException e) {
 		// errors.rejectValue("memail", "이미 있다");
@@ -106,7 +112,13 @@ public class MemberController {
 	
 	@RequestMapping("/login")
 	public String MemberLogin(@ModelAttribute("logincmd") MemberCommand mlcmd, @ModelAttribute("mpwfindcmd") MemberCommand mpwfcmd,
-			@ModelAttribute("mpwresetcmd") MemberCommand mpwresetcmd, HttpSession session, HttpServletRequest request, Model model) {
+			@ModelAttribute("mpwresetcmd") MemberCommand mpwresetcmd, HttpSession session, HttpServletRequest request, Model model,
+			@CookieValue(value= "remember", required = false) Cookie cookie) {
+		
+		if(cookie != null) {
+			mlcmd.setMemail(cookie.getValue());
+			mlcmd.setRememberMemail(true);
+		}
 		
 		if (request.getParameter("pid") != null) {
 			int nowpid = Integer.parseInt(request.getParameter("pid"));
@@ -114,8 +126,9 @@ public class MemberController {
 			return "member/login";
 		}
 		
+		System.out.println(mlcmd.getMemail());
 		Member member = memberSvc.memberLogin(mlcmd.getMemail());
-
+		
 		if (member == null) {
 			return "member/login";
 		} else {
