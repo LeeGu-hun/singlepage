@@ -43,9 +43,9 @@ public class PageDao {
 
 	@Transactional
 	public int makePage(final Page page) {
-		jdbcTemplate.update("insert into page values(pid_seq.nextval, ?, ?, ?, ?, ?, ?, ?, 0, sysdate, ?, ?, ?, ?)",
+		jdbcTemplate.update("insert into page values(pid_seq.nextval, ?, ?, ?, ?, ?, ?, ?, 0, sysdate, ?, ?, ?, ?, ?)",
 				page.getPname(), page.getPnick(), page.getPintro(), page.getPgenre(), page.getPloc(), page.getPperiod(), page.getPshowtime(),
-				page.getPmaster(), page.getPfile(), page.getPnewfile(), page.getPlatlng());
+				page.getPmaster(), page.getPfile(), page.getPnewfile(), page.getPlatlng(), page.getProfile());
 		
 		Integer pid = jdbcTemplate.queryForObject("select pid from page where pmaster = ?", Integer.class, page.getPmaster());
 		return pid;
@@ -53,17 +53,17 @@ public class PageDao {
 	
 	public void adminPage1(int host, final Page page) {
 		jdbcTemplate.update("update page set pname=?, pnick=?, pintro=?, pgenre=?, ploc=?, pperiod=?, "
-				+ "pshowtime=?, pfile=?, pnewfile=?, platlng=? where pid=?",
+				+ "pshowtime=?, pfile=?, pnewfile=?, platlng=?, profile=? where pid=?",
 				page.getPname(), page.getPnick(), page.getPintro(), page.getPgenre(), page.getPloc(), 
 				page.getPperiod(), page.getPshowtime(),page.getPfile(), page.getPnewfile(), 
-				page.getPlatlng(), host);
+				page.getPlatlng(), page.getProfile(), host);
 	}
 	
 	public void adminPage2(int host, final Page page) {
 		jdbcTemplate.update("update page set pname=?, pnick=?, pintro=?, pgenre=?, ploc=?, pperiod=?, "
-				+ "pshowtime=?, platlng=? where pid=?",
+				+ "pshowtime=?, platlng=?, profile=? where pid=?",
 				page.getPname(), page.getPnick(), page.getPintro(), page.getPgenre(), page.getPloc(), 
-				page.getPperiod(), page.getPshowtime(),	page.getPlatlng(), host);
+				page.getPperiod(), page.getPshowtime(),	page.getPlatlng(), page.getProfile(), host);
 	}
 
 	public Page getPage(int pageHostId) {
@@ -76,7 +76,9 @@ public class PageDao {
 								rs.getString("pname"), rs.getString("pnick"),
 								rs.getString("pintro"), rs.getString("pgenre"),
 								rs.getString("ploc"), rs.getString("pfile"), rs.getString("pnewfile"),
-								rs.getString("pshowtime"), rs.getTimestamp("pdate"), rs.getTimestamp("pperiod"), rs.getString("platlng"));
+								rs.getString("pshowtime"), rs.getTimestamp("pdate"), 
+								rs.getTimestamp("pperiod"), rs.getString("platlng"),
+								rs.getString("profile"));
 						return page;
 					}
 		}, pageHostId);
@@ -104,7 +106,8 @@ public class PageDao {
 						rs.getString("pname"), rs.getString("pnick"),
 						rs.getString("pintro"), rs.getString("pgenre"),
 						rs.getString("ploc"), rs.getString("pfile"), rs.getString("pnewfile"),
-						rs.getString("pshowtime"), rs.getTimestamp("pdate"), rs.getTimestamp("pperiod"), rs.getString("platlng"));
+						rs.getString("pshowtime"), rs.getTimestamp("pdate"), rs.getTimestamp("pperiod"),
+						rs.getString("platlng"), rs.getString("profile"));
 				return page;
 			}
 		}, hostId);
