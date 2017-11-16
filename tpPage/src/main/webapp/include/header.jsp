@@ -24,7 +24,7 @@
 <form:input path="memail" placeholder="email" class="form-control" style="width:300px"/>
 <form:password path="mpw" placeholder="password" class="form-control" style="width:300px"/>
 <a href="/tpPage/join" class="btn btn-custom" style="width:118px">회원가입</a>
-<input type="button" class="btn btn-custom" style="width:56px" value="기억" />
+<label class="btn btn-custom unchecked" ><input type="checkbox" value="rmb" />기억</label>
 <input type="submit" class="btn btn-custom" style="width:118px" value="로그인" />
 <c:if test="${nowpid != null }">
 <form:hidden path="nowpid" value="${nowpid }"/>
