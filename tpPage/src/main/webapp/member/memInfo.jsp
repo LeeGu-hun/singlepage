@@ -7,16 +7,11 @@
 <!DOCTYPE html>
 <html>
 <head>
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
-<link rel="stylesheet"
-	href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-<link rel="stylesheet" type="text/css"
-	href="<%=request.getContextPath()%>/css/memInfo.css" />
-<link rel="stylesheet" type="text/css"
-	href="<%=request.getContextPath()%>/css/btnColor.css" />
-<link rel="stylesheet" type="text/css"
-	href="<%=request.getContextPath()%>/css/formColor.css" />
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/memInfo.css" />
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/btnColor.css" />
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/formColor.css" />
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"
 	integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
 	crossorigin="anonymous"></script>
@@ -24,12 +19,10 @@
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"
 	type="text/javascript"></script>
 <script src="http://malsup.github.com/jquery.form.js"></script>
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
-<script type="text/javascript"
-	src="<%=request.getContextPath()%>/js/member.js?ver=118"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="<%=request.getContextPath()%>/js/member.js?ver=118"></script>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>회원 정보</title>
+<title>PLAIN</title>
 </head>
 <body>
 

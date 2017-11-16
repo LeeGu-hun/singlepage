@@ -19,7 +19,7 @@
 <script src="<%=request.getContextPath()%>/js/autosize.js?ver=3"></script>
 
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>SinglePage</title>
+<title>${page.pnick }의 PLAIN</title>
 </head>
 <body>
 <%@ include file="./include/header.jsp" %>
