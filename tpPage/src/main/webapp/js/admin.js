@@ -105,7 +105,7 @@ function getDate() {
 }
 
 function proImg(reply, id) {
-	if (reply == "yes") {
+	if (reply == "no") {
 		$('#pfile').hide();
 		$('#puploadImg').hide();
 	} else {

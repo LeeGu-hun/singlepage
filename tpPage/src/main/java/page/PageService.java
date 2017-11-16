@@ -25,7 +25,7 @@ public class PageService {
 		if (!(pfile.equals(""))) {
 			String pnewfile = System.currentTimeMillis() + "_" + pfile;
 			Page page = new Page(pmaster, pmc.getPname(), pmc.getPnick(), pmc.getPintro(), pmc.getPgenre(),
-					pmc.getPloc(), pfile, pnewfile, pmc.getPperiod(), pmc.getPshowtime(), pmc.getPlatlng());
+					pmc.getPloc(), pfile, pnewfile, pmc.getPperiod(), pmc.getPshowtime(), pmc.getPlatlng(), "no");
 			int pid = pageDao.makePage(page);
 			String path = pmc.getPupdir() + pnewfile;
 			try {
@@ -40,7 +40,7 @@ public class PageService {
 			return pid;
 		} else {
 			Page page = new Page(pmaster, pmc.getPname(), pmc.getPnick(), pmc.getPintro(), pmc.getPgenre(),
-					pmc.getPloc(), null, null, pmc.getPperiod(), pmc.getPshowtime(), pmc.getPlatlng());
+					pmc.getPloc(), null, null, pmc.getPperiod(), pmc.getPshowtime(), pmc.getPlatlng(), "yes");
 			int pid = pageDao.makePage(page);
 			authInfo = new AuthInfo(authInfo.getMid(), authInfo.getMname(), authInfo.getMemail(), authInfo.getMphone(),
 					authInfo.getMcheck(), authInfo.getMpoint(), authInfo.getMdate(), pid);
@@ -55,13 +55,13 @@ public class PageService {
 		return lists;
 	}
 
-	public void adminPage(int host, PageCommand pmc) {
+	public void adminPage(int host, PageCommand pmc, String reply) {
 		MultipartFile multi = pmc.getPfile();
 		String pfile = multi.getOriginalFilename();
 		if (!(pfile.equals(""))) {
 			String pnewfile = System.currentTimeMillis() + "_" + pfile;
 			Page page = new Page(host, pmc.getPname(), pmc.getPnick(), pmc.getPintro(), pmc.getPgenre(), pmc.getPloc(),
-					pfile, pnewfile, pmc.getPperiod(), pmc.getPshowtime(), pmc.getPlatlng());
+					pfile, pnewfile, pmc.getPperiod(), pmc.getPshowtime(), pmc.getPlatlng(), reply);
 			pageDao.adminPage1(host, page);
 			String path = pmc.getPupdir() + pnewfile;
 			try {
@@ -72,7 +72,7 @@ public class PageService {
 			}
 		} else {
 			Page page = new Page(host, pmc.getPname(), pmc.getPnick(), pmc.getPintro(), pmc.getPgenre(), pmc.getPloc(),
-					pmc.getPperiod(), pmc.getPshowtime(), pmc.getPlatlng());
+					pmc.getPperiod(), pmc.getPshowtime(), pmc.getPlatlng(), reply);
 			pageDao.adminPage2(host, page);
 		}
 	}

@@ -237,11 +237,9 @@ public class PageController {
 	public String adminPage(@ModelAttribute("pagecmd") PageCommand pmc, HttpServletRequest request, Model model) {
 		AuthInfo authInfo = (AuthInfo) request.getSession().getAttribute("authInfo");
 		int host = authInfo.getPid();
-		pageSvc.adminPage(host, pmc);
 		String reply = request.getParameter("reply");
-		System.out.println(reply);
-		request.setAttribute("reply", reply);
-//		model.addAttribute("reply", reply);
+		pageSvc.adminPage(host, pmc, reply);
+		
 		return "redirect:/page/" + host;
 	}	
 	

@@ -33,27 +33,38 @@
 
 <form:form commandName="pagecmd" name="apfrm" action="adminpage" enctype="multipart/form-data">
 <div class="alldiv">
-<h2 align="center"><b>Page Admin</b></h2><hr>
-<div class="form-inline col-md-6"><label>●사진:&nbsp; &nbsp;<br>
-	<input type="radio" id="yes" name="reply" value="yes" onclick="proImg(this.value, pfile)" /><label for="yes">기본 프로필</label> &nbsp; &nbsp;
-	<input type="radio" id="no" name="reply" value="no" onclick="proImg(this.value, pfile)" /><label for="no">프로필 지정</label>
-	<input type="file" id="pfile" name="pfile" onchange="pagereadURL(this);" /></label><br><br></div>
+<h2 align="center"><b>Admin PLAIN</b></h2><hr>
+<c:out value="${page.profile }" />
+<div class="form-inline col-md-6"><label>●사진:</label><br>
+	<c:if test="${page.profile == 'no'}">
+		<input type="radio" id="no" name="reply" value="no" checked="checked" onclick="proImg(this.value, pfile)" />
+		<label for="no">기본 프로필</label> &nbsp; &nbsp;
+		<input type="radio" id="yes" name="reply" value="yes" onclick="proImg(this.value, pfile)" />
+		<label for="yes">프로필 지정</label>
+		<input type="file" id="pfile" name="pfile" style="display: none" onchange="pagereadURL(this);" />
+	</c:if>
+	<c:if test="${page.profile == 'yes'}">
+		<input type="radio" id="no" name="reply" value="no" onclick="proImg(this.value, pfile)" />
+		<label for="no">기본 프로필</label> &nbsp; &nbsp;
+		<input type="radio" id="yes" name="reply" value="yes" checked="checked" onclick="proImg(this.value, pfile)" />
+		<label for="yes">프로필 지정</label>
+		<input type="file" id="pfile" name="pfile" onchange="pagereadURL(this);" />
+	</c:if>
+	<br><br></div>
 <div class="col-md-6">
-	<c:choose>
-		<c:when test="${!empty page.pnewfile }">
-			<img id="puploadImg" name="puploadImg" src="/tpPage/puploads/${page.pnewfile }"  alt="프로필사진" width="200px" height="auto"/>
-		</c:when>
-		<c:otherwise>
-			<img id="puploadImg" name="puploadImg" src="profile.png" alt="프로필" width="" height="" />
-		</c:otherwise>
-	</c:choose>
+	<c:if test="${page.profile == 'yes'}">
+		<img id="puploadImg" name="puploadImg" src="/tpPage/puploads/${page.pnewfile }"  alt="프로필사진" width="200px" height="auto"/>
+	</c:if>
+	<c:if test="${page.profile == 'no'}">
+		<img id="puploadImg" name="puploadImg" src="/tpPage/puploads/${page.pnewfile }" style="display: none" alt="프로필사진" width="200px" height="auto"/>
+	</c:if>
 	<input type="hidden" id="pupdir" name="pupdir" value="<%=request.getRealPath("/puploads/")%>" />
 </div><br><br>
 	<div class="form-inline"><label>●이름:&nbsp; &nbsp;
-		<input class="form-control" id="pname" name="pname" style="width:300px;" value="${page.pname }"/>
+		<input class="form-control" id="pname" name="pname" style="width:300px;" value="${page.pname }" />
 	</label><br><br></div>
 	<div class="form-inline"><label>●닉넴:&nbsp; &nbsp;
-		<input class="form-control" id="pnick" name="pnick" style="width:300px;" value="${page.pnick }"/>
+		<input class="form-control" id="pnick" name="pnick" style="width:300px;" value="${page.pnick }" />
 	</label><br><br></div>
 	<div class="form-inline"><label>●소개:&nbsp; &nbsp;
 		<textarea class="form-control" id="pintro" name="pintro">${page.pintro }</textarea>
@@ -74,9 +85,9 @@
 	<br><br>
 	<div class="form-inline">
 		<label>●지역:&nbsp; &nbsp;<input class="form-control" type="text" id="keyword" style="width:300px;"/> 
-		<input type="button" class="btn btn-custom" value="검색" onclick="mapsearch(); return false;"/><br/>
+		<input type="button" class="btn btn-custom" value="검색" onclick="mapsearch(); return false;"/>
 		<input type="hidden" id="loc" name="loc" /><br>
-		 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;        
+		 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
 		<input class="form-control" id="ploc" name="ploc" style="width:300px;" value="${page.ploc }" readonly /></label>
 	</div>
 	 &nbsp; &nbsp;

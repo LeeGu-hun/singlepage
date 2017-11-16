@@ -33,10 +33,13 @@
 
 <form:form commandName="pagecmd" name="mpfrm" action="makepage" enctype="multipart/form-data">
 <div class="alldiv">
-<h2 align="center"><b>Page Make</b></h2><hr>
-	<p><img id="puploadImg" name="puploadImg" />
-	<div class="form-inline"><label>●사진:<input type="file" id="pfile" name="pfile" onchange="pagereadURL(this);" /></label>
-	<input type="hidden" id="pupdir" name="pupdir" value="<%=request.getRealPath("/puploads/")%>" /></div><br><br>
+<h2 align="center"><b>Make PLAIN</b></h2><hr>
+	
+	<img id="puploadImg" name="puploadImg" /><br>
+	<label>●사진:<br>
+	<input type="file" id="pfile" name="pfile" accept="image/gif, image/jpeg, image/png" onchange="pagereadURL(this);" /></label>
+	<input type="hidden" id="pupdir" name="pupdir" value="<%=request.getRealPath("/puploads/")%>" />
+	<br><br>
 	<div class="form-inline"><label>●이름:&nbsp; &nbsp;<form:input class="form-control" path="pname" style="width:300px;" /></label></div><br><br>
 	<div class="form-inline"><label>●닉넴:&nbsp; &nbsp;<form:input class="form-control" path="pnick" style="width:300px;" /></label></div><br><br>
 	<div class="form-inline"><label>●소개:&nbsp; &nbsp;<form:textarea class="form-control" path="pintro" style="width:300px;" /></label></div><br><br>
@@ -54,14 +57,16 @@
 				<option value="6">기타</option>
 			</select>
 		</label>
-	</div><br>
-	<div class="form-inline"><label>&nbsp; -세부장르:&nbsp; &nbsp;<input class="form-control" type="text" id="pgdetail" name="pgdetail" style="width:265px;" onkeyup; onkeypress; onkeydown; /></label></div><br><br>
+	</div>
+	<div class="form-inline"><label>&nbsp; -세부장르:&nbsp; &nbsp;
+		<input class="form-control" type="text" id="pgdetail" name="pgdetail" style="width:265px;" onkeyup; onkeypress; onkeydown; /></label>
+	</div><br><br>
 	<!-- <label>장르:<br> --><form:input class="form-control" type="hidden" path="pgenre" style="width:300px;" /><!-- </label> -->
 	<div class="form-inline">
 		<label>●지역:&nbsp; &nbsp;
 		<input class="form-control" type="text" id="keyword" style="width:300px;" /> 
-		<input class="btn btn-custom" type="button" value="검색" onclick="mapsearch(); return false;" /><br><br>
-		 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  
+		<input class="btn btn-custom" type="button" value="검색" onclick="mapsearch(); return false;" /><br>
+		 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;     
 		<form:input class="form-control" path="ploc" style="width: 300px" readonly="true"/></label>	
 	</div>
 	 &nbsp; &nbsp;
