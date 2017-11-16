@@ -58,6 +58,23 @@
     border-color: #000000;
 }
 
+.unchecked {
+	color: #000000;
+    background-color: #ffffff;
+    border-color: #000000;
+}
+
+input[type="checkbox"]:not(#tomorrow), input[type="radio"] { /* 실제 체크박스는 화면에서 숨김 */
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	padding: 0;
+	margin: -1px;
+	overflow: hidden;
+	clip: rect(0, 0, 0, 0);
+	border: 0
+}
+
 .form-control {
   display: block;
   width: 100%;

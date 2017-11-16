@@ -3,9 +3,12 @@ package controller;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.List;
+
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -25,7 +28,14 @@ public class MainController {
 	}
 
 	@RequestMapping("/home")
-	public String onLoad(@ModelAttribute("logincmd") MemberCommand logincmd, Model model, HttpServletRequest req) {
+	public String onLoad(@ModelAttribute("logincmd") MemberCommand logincmd, Model model, HttpServletRequest req,
+			@CookieValue(value= "remember", required = false) Cookie cookie) {
+		
+		if(cookie != null) {
+			logincmd.setMemail(cookie.getValue());
+			logincmd.setRememberMemail(true);
+		}
+		
 		int page = 1; int limit = 9;
 		List<Pboard> boardList = mainService.getRandom(page, limit);
 		model.addAttribute("boardList", boardList);
@@ -33,7 +43,8 @@ public class MainController {
 	}
 	
 	@RequestMapping("/srch")
-	public String srch(HttpServletRequest req, Model model, @ModelAttribute("logincmd") MemberCommand logincmd) {
+	public String srch(HttpServletRequest req, Model model, @ModelAttribute("logincmd") MemberCommand logincmd,
+			@CookieValue(value= "remember", required = false) Cookie cookie) {
 		int page = 1; int limit = 9;
 		Enumeration<String> e = req.getParameterNames();
 		ArrayList<String> list = new ArrayList<String>();
@@ -43,7 +54,7 @@ public class MainController {
 			String srchOpt = name + "=";
 			String[] data = req.getParameterValues(name);
 			if(data[0].equals("more")) {
-				return onLoad(logincmd, model, req);
+				return onLoad(logincmd, model, req, cookie);
 			}
 			if(data[0].equals("all")) continue;
 			if(data!=null) {

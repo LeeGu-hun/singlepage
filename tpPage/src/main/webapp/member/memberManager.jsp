@@ -23,7 +23,7 @@ a {
  cursor:pointer;
 }
 </style>
-
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/headerfooter.css?ver=1" />
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"
 	integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
 	crossorigin="anonymous"></script>
@@ -53,11 +53,15 @@ a {
 		<p><form:input path="memail" cssClass="form-control"  placeholder="이메일" /></p>
 		<p><form:password path="mpw" cssClass="form-control"  placeholder="비밀번호" /></p>
 		<form:hidden path="nowpid" value="${nowpid }" />
-		<p><input type="submit" value="로그인" class="btn btn-custom"></p>
-		<c:if test="${ mmval == 0 || mmval == 1 || mmval == 2 }">
-			<a href="./membermanager" >회원가입</a><br>
-			<!-- <a href=#>비밀번호 찾기</a> -->
-		</c:if>	
+		<p align="center"><input type="submit" value="로그인" class="btn btn-custom" style="width:150px" />
+		<c:choose>
+			<c:when test="${! empty cookie.remember.value }">
+				<label id="rmbhl" class="btn btn-custom sel"><form:checkbox path="rememberMemail"/>기억</label>
+			</c:when>
+			<c:otherwise>
+				<label id="rmbhl" class="btn btn-custom unchecked"><form:checkbox path="rememberMemail"/>기억</label>
+			</c:otherwise>
+		</c:choose></p>
 	</form:form>
 	<p></p>
 
@@ -79,13 +83,15 @@ a {
 				<form:password path="mpwconf" cssClass="form-control" placeholder="비밀번호 재입력" cssErrorClass="has-error"/>
 				<form:errors path="mpwconf" class="msg" element="div" />
 			</p>
-			<p class="checkbox"><label><form:checkbox path="rememberMemail" /> 이메일 기억</label></p>
-			<p>아래 가입완료 버튼을 클릭하면 약관에 동의한 것으로 취급합니다.</p>
-			<input type="submit" value="가입 완료" class="btn btn-custom">
+			<input type="submit" value="가입 완료" class="btn btn-custom" style="width:150px">
+			<label id="rmbjl" class="btn btn-custom unchecked"><form:checkbox path="rememberMemail"/>기억</label>			
+			<br>
+			<br>
+			<br>
+			<p>가입완료 버튼을 클릭하면 약관에 동의한 것으로 취급합니다.</p>
 		</form:form>
 	<%-- </c:if> --%>
 </c:if>
-
 
 <!-- 로그인 전후 -->
 

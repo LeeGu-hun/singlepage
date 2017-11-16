@@ -11,6 +11,8 @@
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/menubar.css?ver=33" />
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/headerfooter.css?ver=1" />
 
+<script type="text/javascript" src="<%=request.getContextPath()%>/js/member.js?ver=118"></script>
+
 <div id="header">
 <div class="container" style="padding: 5px; height:130px; min-width:1200px">
 <c:if test="${empty authInfo }">
@@ -23,9 +25,16 @@
 <form:form commandName="logincmd" action="/tpPage/login" style="margin:0px">
 <form:input path="memail" placeholder="email" class="form-control" style="width:300px"/>
 <form:password path="mpw" placeholder="password" class="form-control" style="width:300px"/>
-<a href="/tpPage/join" class="btn btn-custom" style="width:118px">회원가입</a>
-<label class="btn btn-custom unchecked" ><input type="checkbox" value="rmb" />기억</label>
-<input type="submit" class="btn btn-custom" style="width:118px" value="로그인" />
+<a href="/tpPage/join" class="btn btn-custom" style="width:119px">회원가입</a>
+<input type="submit" class="btn btn-custom" style="width:119px" value="로그인" />
+<c:choose>
+	<c:when test="${! empty cookie.remember.value }">
+		<label id="rmbhl" class="btn btn-custom sel"><form:checkbox path="rememberMemail"/>기억</label>
+	</c:when>
+	<c:otherwise>
+		<label id="rmbhl" class="btn btn-custom unchecked"><form:checkbox path="rememberMemail"/>기억</label>
+	</c:otherwise>
+</c:choose>
 <c:if test="${nowpid != null }">
 <form:hidden path="nowpid" value="${nowpid }"/>
 </c:if>

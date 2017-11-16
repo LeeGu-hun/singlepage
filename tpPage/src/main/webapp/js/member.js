@@ -157,3 +157,25 @@ function chargeInit() {
 	$('#ccmoney').val("");
 	$('#camoney').val("");
 }
+
+$(document).ready(function() {
+	$('#rememberMemail1').on('change', function(){
+		if($(this).is(':checked') == true) {
+			$('#rmbhl').attr('class', 'btn btn-custom sel');
+			console.log('참으로');
+		} else {
+			$('#rmbhl').attr('class', 'btn btn-custom unchecked');
+			console.log('거짓으로');
+		}
+	});
+	
+	$('#rememberMemail2').on('change', function(){
+		if($(this).is(':checked') == true) {
+			$('#rmbjl').attr('class', 'btn btn-custom sel');
+			console.log('참으로');
+		} else {
+			$('#rmbjl').attr('class', 'btn btn-custom unchecked');
+			console.log('거짓으로');
+		}
+	});
+});
