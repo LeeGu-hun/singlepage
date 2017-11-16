@@ -86,7 +86,7 @@ $(document).ready(function(){
 		$('input:radio').not(':radio:checked').parent().removeClass('sel');
 	});
 
-	$('input:checkbox').on('change', function(){
+	$('input:checkbox').not('input:checkbox[id="rememberMemail1"]').on('change', function(){
 		if($(this).is('[name]')){
 			var itemId = $(this).attr('id');
 			var itemVal = $(this).val();

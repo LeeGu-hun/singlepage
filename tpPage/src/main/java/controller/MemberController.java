@@ -112,13 +112,17 @@ public class MemberController {
 	
 	@RequestMapping("/login")
 	public String MemberLogin(@ModelAttribute("logincmd") MemberCommand mlcmd, @ModelAttribute("mpwfindcmd") MemberCommand mpwfcmd,
-			@ModelAttribute("mpwresetcmd") MemberCommand mpwresetcmd, HttpSession session, HttpServletRequest request, Model model,
-			@CookieValue(value= "remember", required = false) Cookie cookie) {
+			@ModelAttribute("mpwresetcmd") MemberCommand mpwresetcmd, HttpSession session, HttpServletRequest request, HttpServletResponse response, Model model) {
 		
-		if(cookie != null) {
-			mlcmd.setMemail(cookie.getValue());
-			mlcmd.setRememberMemail(true);
+		Cookie cookie = new Cookie("remember", mlcmd.getMemail());
+		cookie.setPath("/");
+		
+		if (mlcmd.isRememberMemail()) {
+			cookie.setMaxAge(60 * 60 * 24 * 1);
+		} else {
+			cookie.setMaxAge(0);
 		}
+		response.addCookie(cookie);
 		
 		if (request.getParameter("pid") != null) {
 			int nowpid = Integer.parseInt(request.getParameter("pid"));
@@ -126,7 +130,6 @@ public class MemberController {
 			return "member/login";
 		}
 		
-		System.out.println(mlcmd.getMemail());
 		Member member = memberSvc.memberLogin(mlcmd.getMemail());
 		
 		if (member == null) {

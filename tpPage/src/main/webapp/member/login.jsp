@@ -14,6 +14,7 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/btnColor.css" />
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/formColor.css" />
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/headerfooter.css?ver=1" />
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"
 	integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
 	crossorigin="anonymous"></script>
@@ -30,17 +31,22 @@
 <a href="/tpPage/home"><img src="/tpPage/logo.png" style="margin-top:100px;"></a>
 
 	<c:if test="${empty authInfo }">
-		<form:form commandName="logincmd" action="login" style="margin-top:100px;" class="form-inline">
-			<p>
-				<form:input path="memail" class="form-control" placeholder="이메일" />
-			</p>
-			<p>
-				<form:password path="mpw" class="form-control" placeholder="비밀번호" />
-			</p>
+		<form:form commandName="logincmd" action="login" style="margin-top:100px;">
+			<p align="center"><form:input path="memail" class="form-control" placeholder="이메일" style="width:300px" /></p>
+			<p align="center"><form:password path="mpw" class="form-control" placeholder="비밀번호" style="width:300px" /></p>
 			<form:hidden path="nowpid" value="${nowpid }" />
-			<p><input type="submit" value="로그인" class="btn btn-custom"></p>
-			<p><input type="button" value="비밀번호 찾기" onclick="mpwfinder(); " class="btn btn-custom" /></p>
-			<p><a href="./join" class="btn btn-custom" >회원가입</a><br></p>
+			<p align="center"><a href="./join" class="btn btn-custom" style="width:119px" >회원가입</a>
+			<input type="submit" value="로그인" class="btn btn-custom" style="width:119px" />
+			<c:choose>
+				<c:when test="${! empty cookie.remember.value }">
+					<label id="rmbhl" class="btn btn-custom sel"><form:checkbox path="rememberMemail"/>기억</label>
+				</c:when>
+				<c:otherwise>
+					<label id="rmbhl" class="btn btn-custom unchecked"><form:checkbox path="rememberMemail"/>기억</label>
+				</c:otherwise>
+			</c:choose></p>
+			<hr style="margin:50px 200px 50px 200px; border-color: black;" />
+			<p><input type="button" value="비밀번호 재설정" onclick="mpwfinder(); " class="btn btn-custom" style="width:150px" /></p>
 		</form:form>
 	</c:if>
 	

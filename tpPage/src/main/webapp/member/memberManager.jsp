@@ -22,7 +22,7 @@ a {
  cursor:pointer;
 }
 </style>
-
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/headerfooter.css?ver=1" />
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"
 	integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
 	crossorigin="anonymous"></script>
@@ -45,41 +45,48 @@ a {
 <a href="/tpPage/home"><img src="/tpPage/logo.png" style="margin-top:100px;"></a>
 
 <c:if test="${empty authInfo }">
-	<form:form commandName="logincmd" action="login" style="margin-top:100px;" cssClass="form-inline">
-		<p><form:input path="memail" cssClass="form-control"  placeholder="이메일" /></p>
-		<p><form:password path="mpw" cssClass="form-control"  placeholder="비밀번호" /></p>
+	<form:form commandName="logincmd" action="login" style="margin-top:100px;">
+		<p align="center"><form:input path="memail" cssClass="form-control"  placeholder="이메일" style="width:300px" /></p>
+		<p align="center"><form:password path="mpw" cssClass="form-control"  placeholder="비밀번호" style="width:300px" /></p>
 		<form:hidden path="nowpid" value="${nowpid }" />
-		<p><input type="submit" value="로그인" class="btn btn-custom"></p>
-		<c:if test="${ mmval == 0 || mmval == 1 || mmval == 2 }">
-			<a href="./membermanager" >회원가입</a><br>
-		</c:if>	
+		<p align="center"><input type="submit" value="로그인" class="btn btn-custom" style="width:150px" />
+		<c:choose>
+			<c:when test="${! empty cookie.remember.value }">
+				<label id="rmbhl" class="btn btn-custom sel"><form:checkbox path="rememberMemail"/>기억</label>
+			</c:when>
+			<c:otherwise>
+				<label id="rmbhl" class="btn btn-custom unchecked"><form:checkbox path="rememberMemail"/>기억</label>
+			</c:otherwise>
+		</c:choose></p>
 	</form:form>
-	<p></p>
-
-		<form:form commandName="joincmd" action="memberJoin" cssClass="form-inline">
-			<p>
-				<form:input path="memail" cssClass="form-control" placeholder="이메일" />
+	
+	<hr style="margin:50px 200px 50px 200px; border-color: black;" />
+	
+	<form:form commandName="joincmd" action="memberJoin">
+			<p align="center">
+				<form:input path="memail" cssClass="form-control" placeholder="이메일" style="width:300px" />
 				<form:errors path="memail" />
 			</p>
-			<p>
-				<form:input path="mname" cssClass="form-control" placeholder="이름" />
+			<p align="center">
+				<form:input path="mname" cssClass="form-control" placeholder="이름" style="width:300px" />
 				<form:errors path="mname" />
 			</p>
-			<p>
-				<form:password path="mpw" cssClass="form-control" placeholder="비밀번호" />
+			<p align="center">
+				<form:password path="mpw" cssClass="form-control" placeholder="비밀번호" style="width:300px" />
 				<form:errors path="mpw" />
 			</p>
-			<p>
-				<form:password path="mpwconf" cssClass="form-control" placeholder="비밀번호 재입력" />
+			<p align="center">
+				<form:password path="mpwconf" cssClass="form-control" placeholder="비밀번호 재입력" style="width:300px" />
 				<form:errors path="mpwconf" />
 			</p>
-			<p class="checkbox"><label><form:checkbox path="rememberMemail" /> 이메일 기억</label></p>
-			<p>아래 가입완료 버튼을 클릭하면 약관에 동의한 것으로 취급합니다.</p>
-			<input type="submit" value="가입 완료" class="btn btn-custom">
+			<input type="submit" value="가입 완료" class="btn btn-custom" style="width:150px">
+			<label id="rmbjl" class="btn btn-custom unchecked"><form:checkbox path="rememberMemail"/>기억</label>			
+			<br>
+			<br>
+			<br>
+			<p>가입완료 버튼을 클릭하면 약관에 동의한 것으로 취급합니다.</p>
 		</form:form>
-
 </c:if>
-
 
 <!-- 로그인 전후 -->
 
