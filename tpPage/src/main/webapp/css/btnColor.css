@@ -11,3 +11,9 @@
     background-color: #000000;
     border-color: #000000;
 }
+
+.unchecked {
+	color: #000000;
+    background-color: #ffffff;
+    border-color: #000000;
+}
