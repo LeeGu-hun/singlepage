@@ -105,7 +105,6 @@ input[type="checkbox"]:not(#tomorrow), input[type="radio"] { /* 실제 체크박
           box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 6px #000000;
 }
 
-<<<<<<< HEAD
 .filebox input[type="file"] { /* 파일 필드 숨기기 */
 	position: absolute;
 	width: 1px;
@@ -116,6 +115,3 @@ input[type="checkbox"]:not(#tomorrow), input[type="radio"] { /* 실제 체크박
 	clip: rect(0, 0, 0, 0);
 	border: 0;
 }
-=======
-.
->>>>>>> branch 'temp' of https://github.com/LeeGu-hun/singlepage.git
