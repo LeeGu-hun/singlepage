@@ -4,7 +4,7 @@ import java.util.Date;
 
 public class Page {
 	private int pid, ppoint, pmaster;
-	private String pname, pnick, pintro, pgenre, ploc, pfile, pnewfile, pshowtime, platlng;
+	private String pname, pnick, pintro, pgenre, ploc, pfile, pnewfile, pshowtime, platlng, profile;
 	private Date pdate, pperiod;
 
 	public Page(int pid) {
@@ -12,7 +12,7 @@ public class Page {
 	}
 	
 	public Page(int pmaster, String pname, String pnick, String pintro, String pgenre, String ploc, String pfile,
-			String pnewfile, Date pperiod, String pshowtime, String platlng) {
+			String pnewfile, Date pperiod, String pshowtime, String platlng, String profile) {
 		this.pmaster = pmaster;
 		this.pname = pname;
 		this.pnick = pnick;
@@ -24,10 +24,11 @@ public class Page {
 		this.pperiod = pperiod;
 		this.pshowtime = pshowtime;
 		this.platlng = platlng;
+		this.profile = profile;
 	}
 	
 	public Page(int pmaster, String pname, String pnick, String pintro, String pgenre, String ploc, Date pperiod, 
-			String pshowtime, String platlng) {
+			String pshowtime, String platlng, String proifile) {
 		this.pmaster = pmaster;
 		this.pname = pname;
 		this.pnick = pnick;
@@ -37,10 +38,11 @@ public class Page {
 		this.pperiod = pperiod;
 		this.pshowtime = pshowtime;
 		this.platlng = platlng;
+		this.profile = proifile;
 	}
 	
 	public Page(int pid, int ppoint, int pmaster, String pname, String pnick, String pintro, String pgenre, String ploc,
-			String pfile, String pnewfile, String pshowtime, Date pdate, Date pperiod, String platlng) {
+			String pfile, String pnewfile, String pshowtime, Date pdate, Date pperiod, String platlng, String profile) {
 		super();
 		this.pid = pid;
 		this.ppoint = ppoint;
@@ -56,6 +58,7 @@ public class Page {
 		this.pdate = pdate;
 		this.pperiod = pperiod;
 		this.platlng = platlng;
+		this.profile = profile;
 	}
 
 	public int getPid() {
@@ -168,6 +171,14 @@ public class Page {
 
 	public void setPlatlng(String platlng) {
 		this.platlng = platlng;
+	}
+
+	public String getProfile() {
+		return profile;
+	}
+
+	public void setProfile(String profile) {
+		this.profile = profile;
 	}
 	
 }

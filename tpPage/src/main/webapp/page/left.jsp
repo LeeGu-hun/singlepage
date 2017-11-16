@@ -13,7 +13,7 @@
 <div style="margin: 50px auto; width: 200px; text-align: center">
 	<div>
 		<c:choose>
-			<c:when test="${!empty page.pnewfile || reply=='no'}">
+			<c:when test="${page.profile=='yes'}">
 				<img src="/tpPage/puploads/${page.pnewfile }" alt="프로필사진" width="200px" height="150px" />
 			</c:when>
 			<c:otherwise>

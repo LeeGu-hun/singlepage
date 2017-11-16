@@ -231,4 +231,5 @@ create table toplist(
 
 create sequence tid_seq increment by 1 start with 1 maxvalue 50000;
 
+alter table page add (profile varchar2(3) default 'no' not null);
 

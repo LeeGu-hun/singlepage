@@ -30,6 +30,7 @@
 			<%@ include file="/page/left.jsp" %>
 		</div>
 		<div id="pagecenterbox">
+			<h2><b>${page.pnick }</b></h2>
 			<div>
 				<%@ include file="/page/top.jsp" %>
 			</div>

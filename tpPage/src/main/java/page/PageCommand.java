@@ -69,5 +69,5 @@ public class PageCommand {
 	}
 	public void setPperiod(Date pperiod) {
 		this.pperiod = pperiod;
-	}	
+	}
 }
