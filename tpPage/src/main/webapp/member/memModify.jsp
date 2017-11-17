@@ -20,6 +20,7 @@
 	type="text/javascript"></script>
 <script src="http://malsup.github.com/jquery.form.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="<%=request.getContextPath()%>/js/autosize.js?"></script>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>PLAIN</title>
 </head>
@@ -27,7 +28,7 @@
 
 <%@ include file="/include/header.jsp"%>
 
-<div class="container" style="padding-top: 100px">
+<div class="container" align="center" id="mainbox">
 <div class="alldiv">
 <form:form commandName="modifycmd" action="memModify">
 	<h2 align="center">
@@ -35,30 +36,28 @@
 	</h2>
 	<hr />
 	<p>
-		<label>이메일
-		<form:input path="memail" placeholder="${authInfo.memail }" class="form-control"/>
+		<form:input path="memail" placeholder="이메일" class="form-control" style="width:200px"/>
 		<form:errors path="memail" />
-		</label>
 	</p>
 	<p>
-		<label>이름
-		<form:input path="mname" placeholder="${authInfo.mname }" class="form-control"/>
+		<form:input path="mname" placeholder="이름" class="form-control" style="width:200px"/>
 		<form:errors path="mname" />
-		</label>
 	</p>
 	<c:if test="${authInfo.mphone != null }">
 	<p>
-		<label>폰번호
-			<form:input path="mphone" placeholder="${authInfo.mphone }" class="form-control"/>
+		<form:input path="mphone" placeholder="폰번호" class="form-control" style="width:200px"/>
 		<form:errors path="mphone" />
-		</label>
 	</p>
 	</c:if>
-
+<hr />
+<p>
 <input type="submit" value="수정완료" class="btn btn-custom">
 <a href="/tpPage/meminfo" class="btn btn-custom">뒤로</a>
+</p>
 </form:form>
 </div>
 </div>
+
+<%@ include file="/include/footer.jsp"%>
 </body>
 </html>

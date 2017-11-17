@@ -8,6 +8,19 @@
 	}
 }*/
 
+function autofooter() {
+	mainbox = $('#mainbox').height();
+	
+	if($('#header').length) {
+		windowH = $(window).height() - ($('#header').height() + $('#footer').height());
+	} else {
+		windowH = $(window).height() - $('#footer').height();
+	}
+	if(mainbox <= windowH) {
+		$('#mainbox').css('height', windowH);
+	}
+}
+
 function autolayout() {
 	windowW = $(window).width();
 	if($(document).height() > $(window).height()) {
@@ -55,16 +68,20 @@ function autolayout() {
 
 $(document).ready(function() {
 	autolayout();
+	autofooter();
 });
 
 $(document).resize(function() {
 	autolayout();
+	autofooter();
 });
 
 $(window).ready(function () {
 	autolayout();
+	autofooter();
 });
 
 $(window).resize(function () {
 	autolayout();
+	autofooter();
 });

@@ -19,16 +19,17 @@
 	type="text/javascript"></script>
 <script src="http://malsup.github.com/jquery.form.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="<%=request.getContextPath()%>/js/autosize.js?"></script>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>PLAIN</title>
 </head>
 <body>
 
 <%@ include file="/include/header.jsp"%>	
-<div class="container" style="padding-top: 100px">
+<div class="container" align="center" id="mainbox">
 <div class="alldiv">
 	<h2 align="center">
-		<b>비밀번호수정</b>
+		<b>비밀번호변경</b>
 	</h2>
 	<hr>
 	<form:form commandName="mpwcmd" action="mpwchange">
@@ -41,10 +42,14 @@
 		<p>
 			<form:input path="newmpwconf" placeholder="새 비밀번호 확인" class="form-control" style="width:200px"/>
 		</p>
+		<hr />
+		<p>
 		<input type="submit" value="변경하기" class="btn btn-custom">
 		<a href="/tpPage/meminfo" class="btn btn-custom">뒤로</a>
+		</p>
 	</form:form>
 </div>
-</div>		
+</div>
+<%@ include file="/include/footer.jsp"%>
 </body>
 </html>
