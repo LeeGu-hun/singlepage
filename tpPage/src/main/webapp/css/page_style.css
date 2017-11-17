@@ -46,8 +46,6 @@
 	dsplay: block;
 } */
 
-<<<<<<< HEAD
-=======
 .btn-custom {
     color: #fff;
     background-color: #000000;
@@ -77,7 +75,6 @@ input[type="checkbox"]:not(#tomorrow) { /* 실제 체크박스는 화면에서 �
 	border: 0
 }
 
->>>>>>> branch 'temp' of https://github.com/LeeGu-hun/singlepage.git
 .form-control {
   display: block;
   width: 100%;
