@@ -52,9 +52,15 @@
 		<input type="file" id="pfile" name="pfile" accept="image/gif, image/jpeg, image/png" onchange="pagereadURL(this);" />
 	</c:if>
 	<br><br></div>
-<div class="col-md-6">
+<div class="form-inline col-md-6">
 	<c:if test="${page.profile == 'yes'}">
 		<img id="puploadImg" name="puploadImg" src="/tpPage/puploads/${page.pnewfile }"  alt="프로필사진" width="200px" height="auto"/>
+	</c:if>
+	<c:if test="${page.profile == 'no' && page.pnewfile != null}">
+		<img id="puploadImg" name="puploadImg" src="/tpPage/puploads/${page.pnewfile }" style="display: none" alt="프로필사진" width="200px" height="auto"/>
+	</c:if>
+	<c:if test="${page.profile == 'no' && page.pnewfile == null}">
+		<img id="puploadImg" name="puploadImg" style="display: none" alt="프로필사진" width="200px" height="auto"/>
 	</c:if>
 	<input type="hidden" id="pupdir" name="pupdir" value="<%=request.getRealPath("/puploads/")%>" />
 </div><br><br>
