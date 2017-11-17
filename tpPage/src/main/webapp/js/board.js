@@ -314,6 +314,8 @@ function loadpboardR(msg) {
 	var pbhostid = $('#pbhostid').val();
 	var gopbid = $('#gopbid').val();
 	
+	reboxsize();
+
 	$('.pbrew').on('click', function() {
 		var frm = $(this).parent().parent().parent().children('#pbrecmd');
 		frm.ajaxSubmit({
@@ -322,10 +324,10 @@ function loadpboardR(msg) {
 	});
 	
 	$('.pbrebtn').on('click', function() {
-		if($(this).next().css("display") == "none"){
-			$(this).next().show();
+		if($(this).parent().next().css("display") == "none"){
+			$(this).parent().next().show();
 		}else{
-			$(this).next().hide();
+			$(this).parent().next().hide();
 		}
 	});
 	
@@ -444,6 +446,9 @@ function loadmboardR(msg) {
 	$('.mbrecontent').val('');
 	$("#mbmodal").modal('show');
 	$('body').css({'overflow': 'hidden', 'padding': '0px'});
+	
+	reboxsize();
+		
 	$('.mbrew').on('click', function() {
 		var frm = $(this).parent().parent().parent().children('#mbrecmd');
 		frm.ajaxSubmit({
@@ -452,10 +457,10 @@ function loadmboardR(msg) {
 	});
 	
 	$('.mbrebtn').on('click', function() {
-		if($(this).next().css("display") == "none"){
-			$(this).next().show();
+		if($(this).parent().next().css("display") == "none"){
+			$(this).parent().next().show();
 		}else{
-			$(this).next().hide();
+			$(this).parent().next().hide();
 		}
 	});
 	
@@ -590,8 +595,23 @@ function mballdrop(mbhostid) {
 	}
 }
 
+$(window).resize(function() {
+	reboxsize();
+});
 
-
+function reboxsize() {
+	$('.pbreboxrow').children('.pbreboxmark').each(function(index, element) {
+		var pbreboxW = $('.pbreboxrow').width();
+		var pbrecontW = pbreboxW - $(this).width() - 4;
+		$(this).next().css('width', pbrecontW);
+	})
+	
+	$('.mbreboxrow').children('.mbreboxmark').each(function(index, element) {
+		var mbreboxW = $('.mbreboxrow').width();
+		var mbrecontW = mbreboxW - $(this).width() - 4;
+		$(this).next().css('width', mbrecontW);
+	})
+}
 
 
 
