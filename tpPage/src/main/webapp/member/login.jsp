@@ -24,16 +24,17 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="<%=request.getContextPath()%>/js/member.js?ver=99"></script>
 <script type="text/javascript" src="<%=request.getContextPath()%>/js/login.js"></script>
+<script type="text/javascript" src="<%=request.getContextPath()%>/js/autosize.js?"></script>
 
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>PLAIN</title>
 </head>
 <body>
-<div class="container" style="text-align: center;">
-<a href="/tpPage/home"><img src="/tpPage/logo.png" style="margin-top:100px;"></a>
+<div class="container" style="text-align: center;" id=mainbox>
+<a href="/tpPage/home"><img src="/tpPage/logo.png" style="margin-top:75px;"></a>
 
 	<c:if test="${empty authInfo }">
-		<form:form commandName="logincmd" action="login" style="margin-top:100px;" class="form-inline">
+		<form:form commandName="logincmd" action="login" style="margin-top:75px;" class="form-inline">
 			<p>
 				<form:input path="memail" class="form-control" placeholder="이메일" cssErrorClass="has-error" />
 				<form:errors path="memail" class="msg" element="div"/>
@@ -43,8 +44,8 @@
 				<form:errors path="mpw" class="msg" element="div"/>
 			</p>
 			<form:hidden path="nowpid" value="${nowpid }" />
-			<p align="center"><a href="./join" class="btn btn-custom" style="width:119px" >회원가입</a>
-			<input type="submit" value="로그인" class="btn btn-custom" style="width:119px" />
+			<p>
+			<input type="submit" value="로그인" class="btn btn-custom" style="width:142px" />
 			<c:choose>
 				<c:when test="${! empty cookie.remember.value }">
 					<label id="rmbhl" class="btn btn-custom sel"><form:checkbox path="rememberMemail"/>기억</label>
@@ -52,10 +53,16 @@
 				<c:otherwise>
 					<label id="rmbhl" class="btn btn-custom unchecked"><form:checkbox path="rememberMemail"/>기억</label>
 				</c:otherwise>
-			</c:choose></p>
+			</c:choose>
+			</p>
+			<hr style="margin: 50px 200px; border-color: black;"  />
+			<p>
+			<a href="./join" class="btn btn-custom" style="width:200px">회원가입</a>
+			</p>
 		</form:form>
 	</c:if>
+</div>
 
-</div>	
+<%@ include file="/include/footer.jsp" %>	
 </body>
 </html>

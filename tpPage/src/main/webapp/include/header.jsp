@@ -55,7 +55,7 @@
 <form:hidden path="nowpid" value="${nowpid }"/>
 </c:if>
 <a href="/tpPage/meminfo" class="btn btn-custom" style="width:148px">회원 정보</a>
-<input type="submit" class="btn btn-custom" style="width:148px" value="로그아웃">
+<input type="submit" class="btn btn-custom" style="width:149px" value="로그아웃">
 </form:form>
 <c:choose>
 	<c:when test="${authInfo.pid == 0 }">

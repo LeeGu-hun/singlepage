@@ -21,13 +21,14 @@
 <script src="http://malsup.github.com/jquery.form.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="<%=request.getContextPath()%>/js/member.js?ver=118"></script>
+<script type="text/javascript" src="<%=request.getContextPath()%>/js/autosize.js?"></script>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>PLAIN</title>
 </head>
 <body>
-
 	<%@ include file="/include/header.jsp"%>
-	<div class="container" style="padding-top: 100px;">
+	
+	<div class="container" align="center" id="mainbox">
 		<div class="alldiv">
 			<h2 align="center">
 				<b>회원정보</b>
@@ -35,17 +36,19 @@
 			<hr>
 			<c:if test="${!empty authInfo }">
 
-				<p>
+				<p align="left">
 					<label>● 이메일 : <%=authInfo.getMemail()%></label>
 				</p>
-				<p>
+				<p align="left">
 					<label>● 이름 : <%=authInfo.getMname()%></label>
 				</p>
-				<p>
+				<c:if test="${authInfo.mphone != null }">
+				<p align="left">
 					<label>● 폰번호 : <%=authInfo.getMphone()%></label>
 				</p>
+				</c:if>
 				<c:if test="${ authInfo.getMcheck() == 0 }">
-					<p>
+					<p align="left">
 						<label>● 포인트 : <%=authInfo.getMpoint()%></label>
 						<a data-toggle="modal" class="btn btn-custom btn-xs" href="#mcheckcmd">본인 인증</a>
 					</p>
@@ -79,7 +82,7 @@
 					</div>
 				</c:if>
 				<c:if test="${ authInfo.getMcheck() == 1 }">
-					<p>
+					<p align="left">
 						<label>● 포인트 : <%=authInfo.getMpoint()%></label>
 						<a data-toggle="modal" class="btn btn-custom btn-xs" href="#pointchargecmd" onclick="chargeInit()">포인트 충전</a>
 					</p>
@@ -124,8 +127,8 @@
 									</div>
 								</div>
 								<div class="modal-footer">
-									<a href="#" data-dismiss="modal" class="btn" onclick="chargeInit()">취소</a>
 									<a data-toggle="modal" href="#finishcmd" class="btn btn-custom" onclick="chargeCheck()">충전하기</a>
+									<a href="#" data-dismiss="modal" class="btn btn-custom" onclick="chargeInit()">취소</a>
 								</div>
 							</div>
 						</div>
@@ -145,12 +148,13 @@
 						</div>
 					</div>
 				</c:if>
+				
+				<hr>
+				<p>
 				<a href="./memmodifier" class="btn btn-custom">회원정보수정</a>
-				<a href="./mpwchange" class="btn btn-custom">비밀번호 변경</a>
-				<br>
-				<br>
+				<a href="./mpwchange" class="btn btn-custom">비밀번호변경</a>
 				<a data-toggle="modal" class="btn btn-danger" onclick="memberdrop()">회원탈퇴</a>
-
+				</p>
 
 				<div class="modal" id="memberdrop" aria-hidden="true" style="display: none; z-index: 1050;">
 					<div class="modal-dialog">
@@ -171,7 +175,7 @@
 							</div>
 							<div class="modal-footer">
 								<a href="#" id="memdpbtn" class="btn btn-danger">회원탈퇴</a>
-								<a href="#" data-dismiss="modal" class="btn">취소</a>
+								<a href="#" data-dismiss="modal" class="btn btn-custom">취소</a>
 							</div>
 						</div>
 					</div>
@@ -186,10 +190,8 @@
 							</div>
 							<div class="container"></div>
 							<div class="modal-body">
-								<a id="memdpgobtn">탈퇴</a> <a href="#" data-dismiss="modal" class="btn">아니오</a>
-							</div>
-							<div class="modal-footer">
-								<a href="#" data-dismiss="modal" class="btn">Close</a>
+								<a id="memdpgobtn" class="btn btn-danger">탈퇴</a>&nbsp;&nbsp;
+								<a href="#" data-dismiss="modal" class="btn btn-custom">취소</a>
 							</div>
 						</div>
 					</div>
@@ -205,6 +207,6 @@
 	<input type="hidden" id="ppoint" value=${page.ppoint } />
 	<input type="hidden" id="pid" value=${page.pid } />
 
-
+	<%@ include file="/include/footer.jsp"%>
 </body>
 </html>
