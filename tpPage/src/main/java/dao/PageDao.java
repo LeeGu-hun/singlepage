@@ -174,9 +174,9 @@ public class PageDao {
 		jdbcTemplate.update("delete from toplist where pid=? and turn=?", pid, turn);
 	}
 	
-	public String selectExistTurn(String turn) {
+	public String selectExistTurn(String turn, int pid) {
 		try {
-			String tid = jdbcTemplate.queryForObject("select tid from toplist where turn=?", String.class, turn);
+			String tid = jdbcTemplate.queryForObject("select tid from toplist where turn=? and pid=?", String.class, turn, pid);
 			return tid;
 		} catch (EmptyResultDataAccessException e) {
 			return "";

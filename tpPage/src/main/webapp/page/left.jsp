@@ -40,7 +40,7 @@
 				</c:otherwise>
 			</c:choose>
 			<c:if test="${authInfo.mid != null}">
-				<a data-toggle="modal" class="btn btn-custom" href="#myModal" style="width: 93px"onclick="donate()">후원   <i class="fa fa-credit-card-alt fa-lg" aria-hidden="true"></i></a>
+				<a data-toggle="modal" class="btn btn-custom" href="#myModal" style="width: 93px" onclick="donate()">후원   <i class="fa fa-credit-card-alt fa-lg" aria-hidden="true"></i></a>
 			</c:if>
 		</div>
 		<label><c:out value="${cnt }"></c:out>명이 좋아합니다.</label>
