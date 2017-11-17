@@ -1,0 +1,22 @@
+@charset "UTF-8";
+
+.related {
+	word-break: break-all;
+}
+
+.related a {
+	font-size:x-large;
+	font-weight:bold;
+	color: black; 
+}
+
+.related a:hover {
+	color: red; 
+}
+
+.related img {
+	border-radius: 10px;
+	width: 50px;
+	height: 50px;
+	margin-right: 5px;
+}

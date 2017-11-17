@@ -104,6 +104,7 @@ $(document).ready(function(){
 						id = id.substring(2, id.length);
 						$('#'+id).prop('checked', false);
 						$('#'+id).attr('checked', false);
+						$('#'+id).parent().removeClass('sel');
 						$(this).remove();
 					});
 				} else {
@@ -118,6 +119,7 @@ $(document).ready(function(){
 						id = id.substring(2, id.length);
 						$('#'+id).prop('checked', false);
 						$('#'+id).attr('checked', false);
+						$('#'+id).parent().removeClass('sel');
 						$(this).remove();
 					});
 				}
