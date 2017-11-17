@@ -35,43 +35,40 @@
 <form:form commandName="pagecmd" name="apfrm" action="adminpage" enctype="multipart/form-data">
 <div class="alldiv">
 <h2 align="center"><b>Admin PLAIN</b></h2><hr>
-<div class="form-inline col-md-6" style="padding: 0"><label>●사진:</label>
+<label>●사진:&nbsp;&nbsp;&nbsp;</label>
 		<div style="display:inline-table;border:1px solid #000; border-radius:4px; padding: 6px 12px; width:300px">
-		<div style="text-align: center;"><img id="puploadImg" name="puploadImg" class="uploadImg" style="display:none; margin-bottom: 5px" /></div>
-		<div class="form-inline">
+		<div class="radio">
+		<c:if test="${page.profile == 'no'}">
+			<label><input type="radio" id="no" name="reply" value="no" checked="checked" onclick="proImg(this.value, pfile)" />기본 프로필</label> &nbsp; &nbsp;
+			<label><input type="radio" id="yes" name="reply" value="yes" onclick="proImg(this.value, pfile)" />프로필 지정</label>
+			<!-- <input type="file" id="pfile" name="pfile" accept="image/gif, image/jpeg, image/png"  style="display: none" onchange="pagereadURL(this);" /> -->
+		</c:if>
+		<c:if test="${page.profile == 'yes'}">
+			<label><input type="radio" id="no" name="reply" value="no" onclick="proImg(this.value, pfile)" />기본 프로필</label> &nbsp; &nbsp;
+			<label><input type="radio" id="yes" name="reply" value="yes" checked="checked" onclick="proImg(this.value, pfile)" />프로필 지정</label>
+			<!-- <input type="file" id="pfile" name="pfile" accept="image/gif, image/jpeg, image/png" onchange="pagereadURL(this);" /> -->
+		</c:if>
+		</div>
+		<div style="text-align: center; padding-bottom:5px;">
+			<c:if test="${page.profile == 'yes'}">
+				<img id="puploadImg" name="puploadImg" src="/tpPage/puploads/${page.pnewfile }"  alt="프로필사진" width="200px" height="auto"/>
+			</c:if>
+			<c:if test="${page.profile == 'no' && page.pnewfile != null}">
+				<img id="puploadImg" name="puploadImg" src="/tpPage/puploads/${page.pnewfile }" style="display: none" alt="프로필사진" width="200px" height="auto"/>
+			</c:if>
+			<c:if test="${page.profile == 'no' && page.pnewfile == null}">
+				<img id="puploadImg" name="puploadImg" style="display: none" alt="프로필사진" width="200px" height="auto"/>
+			</c:if>
+		</div>
+		<div class="form-inline" id="profile">
 		<label class="btn btn-custom btn-sm filebox">
 		<input id="pfile" name="pfile" type="file" accept="image/gif, image/jpeg, image/png" onchange="pagereadURL(this);" />파일 선택</label>
 		<a class="btn btn-custom btn-sm btnRmv" style="margin-left:5px">삭제</a>
 		<br><input type="text" class="form-control fname" style="width:auto;" value="파일 없음" disabled="disabled"></div>
 		</div>
-	<c:if test="${page.profile == 'no'}">
-	&nbsp;
-		<input type="radio" id="no" name="reply" value="no" checked="checked" onclick="proImg(this.value, pfile)" />
-		<label for="no">기본 프로필</label> &nbsp; &nbsp;
-		<input type="radio" id="yes" name="reply" value="yes" onclick="proImg(this.value, pfile)" />
-		<label for="yes">프로필 지정</label>
-		<input type="file" id="pfile" name="pfile" accept="image/gif, image/jpeg, image/png"  style="display: none" onchange="pagereadURL(this);" />
-	</c:if>
-	<c:if test="${page.profile == 'yes'}">
-		<input type="radio" id="no" name="reply" value="no" onclick="proImg(this.value, pfile)" />
-		<label for="no">기본 프로필</label> &nbsp; &nbsp;
-		<input type="radio" id="yes" name="reply" value="yes" checked="checked" onclick="proImg(this.value, pfile)" />
-		<label for="yes">프로필 지정</label>
-		<input type="file" id="pfile" name="pfile" accept="image/gif, image/jpeg, image/png" onchange="pagereadURL(this);" />
-	</c:if>
-	<br><br></div>
-<div class="form-inline col-md-6">
-	<c:if test="${page.profile == 'yes'}">
-		<img id="puploadImg" name="puploadImg" src="/tpPage/puploads/${page.pnewfile }"  alt="프로필사진" width="200px" height="auto"/>
-	</c:if>
-	<c:if test="${page.profile == 'no' && page.pnewfile != null}">
-		<img id="puploadImg" name="puploadImg" src="/tpPage/puploads/${page.pnewfile }" style="display: none" alt="프로필사진" width="200px" height="auto"/>
-	</c:if>
-	<c:if test="${page.profile == 'no' && page.pnewfile == null}">
-		<img id="puploadImg" name="puploadImg" style="display: none" alt="프로필사진" width="200px" height="auto"/>
-	</c:if>
 	<input type="hidden" id="pupdir" name="pupdir" value="<%=request.getRealPath("/puploads/")%>" />
-</div><br><br>
+
+<br><br>
 	<div class="form-inline"><label>●이름:&nbsp; &nbsp;
 		<input class="form-control" id="pname" name="pname" style="width:300px;" value="${page.pname }" />
 	</label><br><br></div>

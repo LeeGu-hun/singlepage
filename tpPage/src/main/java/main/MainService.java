@@ -32,7 +32,7 @@ public class MainService {
 	
 	
 	
-	public List<Pboard> getRandom(int page, int limit) {
+	public List<Pboard> getRandom(int limit) {
 		List<Pboard> boardList = new ArrayList<Pboard>();
 		if (mainDao.count()>0) {
 			boardList = mainDao.getBoardListRandom(limit);

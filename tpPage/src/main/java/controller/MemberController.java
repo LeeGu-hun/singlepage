@@ -65,7 +65,13 @@ public class MemberController {
 	
 	@RequestMapping("/memberJoin")
 	public String MemberJoin(@ModelAttribute("joincmd") MemberCommand mjcmd, HttpSession session,
-			HttpServletResponse response, Errors errors, @ModelAttribute("logincmd") MemberCommand mlcmd) {
+			HttpServletResponse response, Errors errors, @ModelAttribute("logincmd") MemberCommand mlcmd,
+			@CookieValue(value= "remember", required = false) Cookie cookie) {
+		
+		if(cookie != null) {
+			mlcmd.setRememberMemail(true);
+		}
+		
 		new JoinValidator().validate(mjcmd, errors);
 		 if (errors.hasErrors())
 		 return "member/memberManager";
@@ -78,7 +84,7 @@ public class MemberController {
 		session.setAttribute("authInfo", authInfo);
 
 		
-		Cookie cookie = new Cookie("remember", mjcmd.getMemail());
+		cookie = new Cookie("remember", mjcmd.getMemail());
 		cookie.setPath("/");
 		
 		if (mjcmd.isRememberMemail()) {
@@ -196,31 +202,15 @@ public class MemberController {
 		AuthInfo authInfo = (AuthInfo) request.getSession().getAttribute("authInfo");
 		Member member = memberSvc.memberLogin(authInfo.getMemail());
 		if (member.getMpw().equals(mpwcmd.getMpw())) {
-//			if (mpwcmd.ismpwEqualTonewmpw()) {
-				if (!member.getMpw().equals(mpwcmd.getNewmpw())) {
-					if (mpwcmd.isnewmpwEqualTonewmpwconf()) {
-						if (memberDao.changeMpw(authInfo.getMemail(), mpwcmd.getNewmpw())) {
-							return "redirect:/meminfo";
-						} else {
-							System.out.println("오류");
-							return "member/mpwChange";
-						}
-					} else {
-						System.out.println("새비번 새비번확인이 맞지않음");
-						return "member/mpwChange";
+			if (!member.getMpw().equals(mpwcmd.getNewmpw())) {
+				if (mpwcmd.isnewmpwEqualTonewmpwconf()) {
+					if (memberDao.changeMpw(authInfo.getMemail(), mpwcmd.getNewmpw())) {
+						return "redirect:/meminfo";
 					}
-				} else {
-					System.out.println("현재비번과 새로운비번이 같음");
-					return "member/mpwChange";
 				}
-//			} else {
-//				System.out.println("새비번 입력");
-//				return "redirect:/changeMpw";
-//			}
-		} else {
-			System.out.println("현재 비번이 틀렷네");
-			return "member/mpwChange";
+			}	
 		}
+		return "redirect:/mpwchanger";
 	}
 
 	@RequestMapping("/memberCheck")

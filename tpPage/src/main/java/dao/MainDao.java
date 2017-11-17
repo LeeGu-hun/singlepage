@@ -45,7 +45,7 @@ public class MainDao {
 	}
 
 	public int count() {
-		Integer count = jdbcTemplate.queryForObject("select count(*) from pboard", Integer.class);
+		Integer count = jdbcTemplate.queryForObject("select count(*) from pboard where pbre_lev = 0", Integer.class);
 		return count;
 	}
 	
@@ -59,7 +59,6 @@ public class MainDao {
 				sql += " or ";
 			}
 		}
-
 		List<Pboard> board = jdbcTemplate.query(sql, row, boRowMapper);
 		return board; 
 	}

@@ -35,9 +35,8 @@ public class MainController {
 			logincmd.setMemail(cookie.getValue());
 			logincmd.setRememberMemail(true);
 		}
-		
-		int page = 1; int limit = 9;
-		List<Pboard> boardList = mainService.getRandom(page, limit);
+		int limit = 9;
+		List<Pboard> boardList = mainService.getRandom(limit);
 		model.addAttribute("boardList", boardList);
 		return "home";
 	}
@@ -108,13 +107,8 @@ public class MainController {
 	
 	@RequestMapping("/loadMain")
 	public String load(HttpServletRequest req, Model model, @ModelAttribute("logincmd") MemberCommand logincmd) {
-		int page = 1;
-		if(req.getParameter("page") != null) {
-			page = Integer.parseInt(req.getParameter("page"));
-		}
-		page = page * 9 + 1;
-		int limit = page + 8;
-		List<Pboard> appendList = mainService.getRandom(page, limit);
+		int limit = 9;
+		List<Pboard> appendList = mainService.getRandom(limit);
 		model.addAttribute("appendList", appendList);
 		
 		return "main/load";

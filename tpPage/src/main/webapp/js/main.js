@@ -1,7 +1,19 @@
 
 
 $(document).ready(function(){
+	$('.grid').imagesLoaded(function (){
+		$('.grid').masonry({
+			  // options
+			  columnWidth: 1,
+			  itemSelector: '.grid-item',
+			  percentPosition: true
+		});
+		if($(document).height() > $(window).height())
+			$("#btn").css("display", "none");
+	});
+	
 
+	
 	$(function() {
         $(window).on('scroll', function() {
             if ($(this).scrollTop() > 500) {
@@ -21,8 +33,6 @@ $(document).ready(function(){
 	$(window).on('scroll.load', function(){
 		var scrollHeight = $(window).scrollTop() + $(window).height();
 		var documentHeight = $(document).height();
-		if($(document).height() > $(window).height())
-			$("#btn").css("display", "none");
 		if(scrollHeight == documentHeight){
 			if($("#srch").length) {
 				loadSrch();
@@ -52,9 +62,9 @@ $(document).ready(function(){
 			$('body').css({overflow: 'hidden'});
 			var content = $(this).children().clone();
 			$('.inner-content').html(content);
-			$('.inner-content').addClass('on');
-			$('.outer-content').addClass('on');
-			$('.outer-back').addClass('on');
+			$('.inner-content').fadeIn(200);
+			$('.outer-content').fadeIn(200);
+			$('.outer-back').fadeIn(200);
 			var totalw = $(window).width();
 			var totalh = $(window).height();
 			var ow = $('.inner-item').width();
@@ -74,9 +84,9 @@ $(document).ready(function(){
 	$('.inner-back').on('click', function(){
 		$('.outer-content').scrollTop(0);
 		$('body').css({overflow: ''});
-		$('.inner-content').removeClass('on');
-		$('.outer-content').removeClass('on');
-		$('.outer-back').removeClass('on');
+		$('.inner-content').fadeOut(200);
+		$('.outer-content').fadeOut(200);
+		$('.outer-back').fadeOut(200);
 	});
 	
 	$('input:radio[name=sido]').on('click', function(){
@@ -309,9 +319,9 @@ function appendList(list) {
 					$('body').css({overflow: 'hidden'});
 					var content = $(this).children().clone();
 					$('.inner-content').html(content);
-					$('.inner-content').addClass('on');
-					$('.outer-content').addClass('on');
-					$('.outer-back').addClass('on');
+					$('.inner-content').fadeIn(200);
+					$('.outer-content').fadeIn(200);
+					$('.outer-back').fadeIn(200);
 					var totalw = $(window).width();
 					var ow = $('.inner-item').width();
 					$('.inner-content').css('width', ow*2);

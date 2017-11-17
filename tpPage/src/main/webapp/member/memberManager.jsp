@@ -51,7 +51,7 @@ a {
 
 <c:if test="${empty authInfo }">
 	<form:form commandName="logincmd" action="login" style="margin-top:75px;" cssClass="form-inline">
-		<p><form:input path="memail" cssClass="form-control"  placeholder="이메일" /></p>
+		<p><form:input path="memail" cssClass="form-control cookieemail"  placeholder="이메일" /></p>
 		<p><form:password path="mpw" cssClass="form-control"  placeholder="비밀번호" /></p>
 		<form:hidden path="nowpid" value="${nowpid }" />
 		<p><input type="submit" value="로그인" class="btn btn-custom" style="width:138px" />
@@ -97,5 +97,24 @@ a {
 </div> 
 
 <%@ include file="/include/footer.jsp" %>
+
+<input type="hidden" id="cookieemail" value="${cookie.remember.value }" />
+<c:choose>
+	<c:when test="${! empty cookie.remember.value }">
+		<script>
+		$(document).ready(function() {
+			cookieemail();	
+		});
+		</script>
+	</c:when>
+	<c:otherwise>
+		<script>
+		$(document).ready(function() {
+			cookieemail();
+		});
+		</script>
+	</c:otherwise>
+</c:choose>
+
 </body>
 </html>

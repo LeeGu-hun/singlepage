@@ -179,3 +179,14 @@ $(document).ready(function() {
 		}
 	});
 });
+
+function cookieemail() {
+	var cookie = $('#cookieemail').val();
+	if(cookie != '') {
+		console.log('쿠키있음');
+		$('.cookieemail').val(cookie);
+	} else {
+		console.log('쿠키없음');
+		$('.cookieemail').val('');
+	}
+}
