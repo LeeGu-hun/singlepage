@@ -35,7 +35,15 @@
 <form:form commandName="pagecmd" name="apfrm" action="adminpage" enctype="multipart/form-data">
 <div class="alldiv">
 <h2 align="center"><b>Admin PLAIN</b></h2><hr>
-<div class="form-inline col-md-6" style="padding: 0"><label>●사진:</label><br>
+<div class="form-inline col-md-6" style="padding: 0"><label>●사진:</label>
+		<div style="display:inline-table;border:1px solid #000; border-radius:4px; padding: 6px 12px; width:300px">
+		<div style="text-align: center;"><img id="puploadImg" name="puploadImg" class="uploadImg" style="display:none; margin-bottom: 5px" /></div>
+		<div class="form-inline">
+		<label class="btn btn-custom btn-sm filebox">
+		<input id="pfile" name="pfile" type="file" accept="image/gif, image/jpeg, image/png" onchange="pagereadURL(this);" />파일 선택</label>
+		<a class="btn btn-custom btn-sm btnRmv" style="margin-left:5px">삭제</a>
+		<br><input type="text" class="form-control fname" style="width:auto;" value="파일 없음" disabled="disabled"></div>
+		</div>
 	<c:if test="${page.profile == 'no'}">
 	&nbsp;
 		<input type="radio" id="no" name="reply" value="no" checked="checked" onclick="proImg(this.value, pfile)" />
