@@ -17,29 +17,13 @@ $(document).ready(function() {
 
 function pagereadURL(input) {
 	if(input.files && input.files[0]) {
-		var pathpoint = input.value.lastIndexOf('.');
-		var filepoint = input.value.substring(pathpoint+1, input.length);
-		var filetype = filepoint.toLowerCase();
-		if(filetype=='jpg' || filetype=='gif' || filetype=='png' || filetype=='png' || filetype=='jpeg' || filetype=='bmp') {
-			var reader = new FileReader();
-			reader.onload = function(e) {
-				$('#puploadImg').show();
-				$('#puploadImg').attr('src', e.target.result);
-				$('#puploadImg').attr('width', 300);
-			}
-			reader.readAsDataURL(input.files[0]);
-		} else {
-			alter('이미지 파일만 선택할 수 있습니다.');
-			var parentInput = input.parentNode;
-			var noed = parentInput.replaceChild(input.cloneNode(true), input);
-			return false;
+		var reader = new FileReader();
+		reader.onload = function(e) {
+			$('#puploadImg').show();
+			$('#puploadImg').attr('src', e.target.result);
+			$('#puploadImg').attr('width', 300);
 		}
-		if(filetype=='bmp') {
-			var upload = confirm('BMP 파일은 웹상에서 사용하기에 적적한 이미지 형식이 아닙니다.\n 그래도 계속 하시겠습니까?');
-			if(!upload) return false;
-		}
-	} else {
-		$('#puploadImg').attr('src', "");
+		reader.readAsDataURL(input.files[0]);
 	}
 }
 
@@ -133,5 +117,4 @@ function makepage() {
 	pperiod = pperiod.replace(/-/g, "") + "000000";
 	$('#pperiod').val(pperiod);
 	document.mpfrm.submit();
-
 }
