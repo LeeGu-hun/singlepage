@@ -4,6 +4,9 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<% pageContext.setAttribute("newLineChar", "\n"); %>
+<% pageContext.setAttribute("renewLine", "\n"); %>
 
 <script>
  function ts(text, url) {
@@ -13,7 +16,7 @@
 
 <div class="modal" id="pbmodal" aria-hidden="true" style="display: none; z-index: 1050;">
 	<div class="modal-dialog modal-lg">
-		<div class="modal-content">
+		<div class="modal-content" style="min-width: 500px">
       		<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
               	<h4 class="modal-title"><c:out value="${pboard.pbsubject }" /></h4>
@@ -27,7 +30,7 @@
             	</div>
             	<br>
             	<div style="word-break:break-word">
-            		<c:out value="${pboard.pbcontent}" />
+            		${fn:replace(pboard.pbcontent, newLineChar, "<br/>") }
             	</div>
             	<input type="text" id="shareurl" value="192.168.0.48:8080/tpPage/page/${pboard.pbhostid }?pbid=${pboard.pbid }"
             		style="position:absolute;top:-9999em;"/>
@@ -48,14 +51,20 @@
 	            	</form:form>
 	           		</c:if>
 	           		<c:forEach var="pbrelist" items="${pbrelist }">
-	            		<div>
+	            		<div class="pbreboxrow">
 	          				<hr style="margin:5px;" />
+	          				<div style="display: inline-flex;" class="pbreboxmark">
 	          				<c:if test="${pbrelist.pbre_lev > 1 }">
 	          					<c:forEach begin="2" end="${pbrelist.pbre_lev }" step="1">
 	          						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 	          					</c:forEach>
 	          				</c:if>
-	          				↘<c:out value="${pbrelist.pbcontent }" />
+	          				↘
+	          				</div>
+							<div style="display: inline-flex; word-break:break-word;" class="pbreboxcont">
+	          				${fn:replace(pbrelist.pbcontent, newLineChar, "<br/>") }
+							</div>	          				
+	          				<p style="margin:0px;" align="right"><c:out value="${pbrelist.mname }" />&nbsp;&nbsp;/&nbsp;&nbsp;<fmt:formatDate value="${pboard.pbdate }" pattern="MM-dd HH:mm" />
 	          				<c:if test="${authInfo.mid == pbrelist.pbwriterid }">
 	          					<c:if test="${pbrelist.pbid > 0 }">
 	          						<a class="pbrmbtn" style="color:red">삭제</a>
@@ -64,8 +73,11 @@
 	          				</c:if>
 							<c:if test="${!empty authInfo }">
           						<c:if test="${pbrelist.pbid > 0 }">
-          						<a class="pbrebtn">댓글</a>
+          							<a class="pbrebtn">댓글</a>
 	          					</c:if>
+	          				</c:if>
+	          				</p>
+	          				<c:if test="${!empty authInfo }">
 	          				<div style="display: none">
 								<form:form commandName="pbrecmd" action="/tpPage/pbrewrite" class="refrm">
 									<form:textarea path="pbcontent" required="required" rows="1" cols="auto" class="pbrecontent form-control"

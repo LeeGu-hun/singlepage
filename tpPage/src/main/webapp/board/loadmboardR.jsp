@@ -3,11 +3,14 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>    
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<% pageContext.setAttribute("newLineChar", "\n"); %>
+<% pageContext.setAttribute("renewLine", "\n"); %>
     
 <div class="modal" id="mbmodal" aria-hidden="true" style="display: none; z-index: 1050;">
 	<div class="modal-dialog modal-lg">
-		<div class="modal-content">
+		<div class="modal-content" style="min-width: 500px">
       		<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
               	<h4 class="modal-title"><c:out value="${mboard.mbsubject }" /></h4>
@@ -21,7 +24,7 @@
             	</div>
             	<br>
             	<div style="word-break:break-word">
-            		<c:out value="${mboard.mbcontent}" />
+            		${fn:replace(mboard.mbcontent, newLineChar, "<br/>") }
             	</div>
             	<div id="mbrebox">
             		<c:if test="${!empty authInfo }">
@@ -36,14 +39,20 @@
 	            	</form:form>
 	           		</c:if>
 	           		<c:forEach var="mbrelist" items="${mbrelist }">
-	            		<div>
+	            		<div class="mbreboxrow">
 	          				<hr style="margin:5px;" />
+	          				<div style="display: inline-flex;" class="mbreboxmark">
 	          				<c:if test="${mbrelist.mbre_lev > 1 }">
 	          					<c:forEach begin="2" end="${mbrelist.mbre_lev }" step="1">
 	          						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 	          					</c:forEach>
 	          				</c:if>
-	          				↘<c:out value="${mbrelist.mbcontent }" />
+	          				↘
+	          				</div>
+	          				<div style="display: inline-flex; word-break:break-word" class="mbreboxcont">
+	          				${fn:replace(mbrelist.mbcontent, newLineChar, "<br/>") }
+	          				</div>
+	          				<p style="margin:0px" align="right"><c:out value="${mbrelist.mname }" />&nbsp;&nbsp;/&nbsp;&nbsp;<fmt:formatDate value="${mboard.mbdate }" pattern="MM-dd HH:mm" />
 	          				<c:if test="${authInfo.mid == mbrelist.mbwriterid || authInfo.mid == mbrelist.mbhostid }">
 	          					<c:if test="${mbrelist.mbid > 0 }">
 	          						<a class="mbrmbtn" style="color:red">삭제</a>
@@ -54,6 +63,9 @@
 	          					<c:if test="${mbrelist.mbid > 0 }">
 	          						<a class="mbrebtn">댓글</a>
 	          					</c:if>
+							</c:if>
+							</p>
+							<c:if test="${!empty authInfo }">
 	          				<div style="display: none">
 								<form:form commandName="mbrecmd" action="/tpPage/mbrewrite" class="refrm">
 									<form:textarea path="mbcontent" required="required" rows="1" cols="auto" class="mbrecontent form-control"
