@@ -32,7 +32,7 @@
 		<img id="pbuploadImg" name="pbuploadImg" class="uploadImg" style="display:none;" />
 		<div class="form-inline">
 		<label class="btn btn-custom btn-sm filebox">
-		<input id="pbfile" name="pbfile" type="file" onchange="pbreadURL(this);">파일 선택</label>
+		<input id="pbfile" name="pbfile" type="file" accept="image/gif, image/jpeg, image/png" onchange="pbreadURL(this);">파일 선택</label>
 		<a class="btn btn-custom btn-sm btnRmv" style="margin-left:10px">삭제</a>
 		<input type="text" id="pbfname" class="form-control fname" style="width:auto; margin-left:10px" value="파일 없음" disabled="disabled"></div>
 		</div>

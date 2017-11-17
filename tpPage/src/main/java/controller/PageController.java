@@ -231,7 +231,6 @@ public class PageController {
 		if(lng != null) {			
 			lng= page.getPlatlng().split("//")[1].trim();
 		}
-		
 		model.addAttribute("genres", genres);
 		model.addAttribute("page", page);
 		model.addAttribute("genre", genre);

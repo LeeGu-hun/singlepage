@@ -34,7 +34,7 @@ function addlist() {
 				+"<input type='button' class='btn btn-custom' id='del${list.turn }' value='삭제' onclick='deleteList(" + count + ")'/></span><hr>" 
 				+"<div class='col-md-6 form-inline'>" 
 				+"<label>링크: &nbsp; &nbsp;</label><input class='form-control' type='text' id='link"+ count +"' name='link' value='' required /><br/><br/> " 
-				+"<label>이미지: <input type='file' id='thum"+ count +"' name='thum' onchange='imgreadURL(this)' />"
+				+"<label>이미지: <input type='file' id='thum"+ count +"' name='thum' accept='image/gif, image/jpeg, image/png' onchange='imgreadURL(this)' />"
 				+"<input type='hidden' id='tupdir" + count + "' name='tupdir' value='"+$('#realPath').val()+"' /></label>" 
 				+"</div><div class='col-md-6'><img id='tuploadImg"+ count +"' name='tuploadImg'/>" 
 				+"</div></div><br/>");
