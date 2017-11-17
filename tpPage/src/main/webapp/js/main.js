@@ -3,7 +3,7 @@
 $(document).ready(function(){
 
 	$(function() {
-        $(window).scroll(function() {
+        $(window).on('scroll', function() {
             if ($(this).scrollTop() > 500) {
                 $('#btnTop').fadeIn();
             } else {
@@ -18,7 +18,7 @@ $(document).ready(function(){
         });
     });
 
-	$(window).scroll(function(){
+	$(window).on('scroll.load', function(){
 		var scrollHeight = $(window).scrollTop() + $(window).height();
 		var documentHeight = $(document).height();
 		if($(document).height() > $(window).height())
@@ -47,26 +47,28 @@ $(document).ready(function(){
 		$('.inner-content').css('top', 50);
 	});
 
-	$('.inner-item').not('a').on('click', function(){
-		$('body').css({overflow: 'hidden'});
-		var content = $(this).children().clone();
-		$('.inner-content').html(content);
-		$('.inner-content').addClass('on');
-		$('.outer-content').addClass('on');
-		$('.outer-back').addClass('on');
-		var totalw = $(window).width();
-		var totalh = $(window).height();
-		var ow = $('.inner-item').width();
-		$('.inner-content').css('width', ow*2);
-		$('.outer-back').css('top', $(window).scrollTop());
-		$('.outer-back').css('width', totalw);
-		$('.outer-back').css('height', totalh);
-		$('.outer-content').css('top', $(window).scrollTop());
-		$('.outer-content').css('width', totalw);
-		$('.outer-content').css('height', totalh);
-		var w = $('.inner-content').width();
-		$('.inner-content').css('left', totalw/2-w/2-20);
-		$('.inner-content').css('top', 50);
+	$('.inner-item').on('click', function(e){
+		if(!($(e.target).hasClass('link') || $(e.target).is('b'))){
+			$('body').css({overflow: 'hidden'});
+			var content = $(this).children().clone();
+			$('.inner-content').html(content);
+			$('.inner-content').addClass('on');
+			$('.outer-content').addClass('on');
+			$('.outer-back').addClass('on');
+			var totalw = $(window).width();
+			var totalh = $(window).height();
+			var ow = $('.inner-item').width();
+			$('.inner-content').css('width', ow*2);
+			$('.outer-back').css('top', $(window).scrollTop());
+			$('.outer-back').css('width', totalw);
+			$('.outer-back').css('height', totalh);
+			$('.outer-content').css('top', $(window).scrollTop());
+			$('.outer-content').css('width', totalw);
+			$('.outer-content').css('height', totalh);
+			var w = $('.inner-content').width();
+			$('.inner-content').css('left', totalw/2-w/2-20);
+			$('.inner-content').css('top', 50);
+		}
 	});
 	
 	$('.inner-back').on('click', function(){
@@ -81,7 +83,6 @@ $(document).ready(function(){
 		$('.itemList').hide();
 		var sido = $('input:radio[name=sido]:checked').val();
 		$('#'+sido).show();
-		console.log($(this));
 		$(':radio:checked').parent().addClass('sel');
 		$('input:radio').not(':radio:checked').parent().removeClass('sel');
 	});
@@ -223,6 +224,34 @@ function srchBtn() {
 	loadSrch();
 }
 
+$(document).ajaxStart(function() {
+	scrollOff();
+	$item = $('<div id="div_ajax_load_image" class="grid-item" style="width:100%; text-align: center;"><img src="/tpPage/ajax_loader.gif" style="width:50px; height:50px;"></div>');
+	$('.grid').append($item).masonry('appended',$item);
+})
+
+function scrollOff() {
+	$(window).off('scroll.load');
+}
+
+function rebind() {
+	$(window).on('scroll.load', function(){
+		var scrollHeight = $(window).scrollTop() + $(window).height();
+		var documentHeight = $(document).height();
+		if($(document).height() > $(window).height())
+			$("#btn").css("display", "none");
+		if(scrollHeight == documentHeight){
+			if($("#srch").length) {
+				loadSrch();
+			} else if($("#favo").length) {
+				loadFavo();
+			} else {
+				loadMain();
+			}
+		}
+	});
+}
+
 function loadSrch() {
 	var frm = $("#srchFrm").serialize();
 	var page = $("#page").val();
@@ -263,31 +292,39 @@ function appendList(list) {
 			  itemSelector: '.grid-item',
 			  percentPosition: true
 		}).masonry();
+		$("#div_ajax_load_image").remove();
+		$(".grid").masonry('layout');
+		rebind();
 		return;
 	} else {
 		var $list = $(list);
 		$list.imagesLoaded(function (){
+			$("#div_ajax_load_image").remove();
+			$(".grid").masonry('layout');
 			$(".grid").append($list).masonry('appended',$list);
-			$('.inner-item').on('click', function(){
-				$('body').css({overflow: 'hidden'});
-				var content = $(this).children().clone();
-				$('.inner-content').html(content);
-				$('.inner-content').addClass('on');
-				$('.outer-content').addClass('on');
-				$('.outer-back').addClass('on');
-				var totalw = $(window).width();
-				var ow = $('.inner-item').width();
-				$('.inner-content').css('width', ow*2);
-				$('.outer-back').css('top', $(window).scrollTop());
-				$('.outer-back').css('width', totalw);
-				$('.outer-back').css('height', $(window).height());
-				$('.outer-content').css('top', $(window).scrollTop());
-				$('.outer-content').css('width', totalw);
-				$('.outer-content').css('height', $(window).height());
-				var w = $('.inner-content').width();
-				$('.inner-content').css('left', totalw/2-w/2-20);
-				$('.inner-content').css('top', 50);
+			$('.inner-item').on('click', function(e){
+				if(!($(e.target).hasClass('link') || $(e.target).is('b'))){
+					$('body').css({overflow: 'hidden'});
+					var content = $(this).children().clone();
+					$('.inner-content').html(content);
+					$('.inner-content').addClass('on');
+					$('.outer-content').addClass('on');
+					$('.outer-back').addClass('on');
+					var totalw = $(window).width();
+					var ow = $('.inner-item').width();
+					$('.inner-content').css('width', ow*2);
+					$('.outer-back').css('top', $(window).scrollTop());
+					$('.outer-back').css('width', totalw);
+					$('.outer-back').css('height', $(window).height());
+					$('.outer-content').css('top', $(window).scrollTop());
+					$('.outer-content').css('width', totalw);
+					$('.outer-content').css('height', $(window).height());
+					var w = $('.inner-content').width();
+					$('.inner-content').css('left', totalw/2-w/2-20);
+					$('.inner-content').css('top', 50);
+				}
 			});
+			rebind();
 		});
 		var $grid = $('.grid').masonry({
 			  // options

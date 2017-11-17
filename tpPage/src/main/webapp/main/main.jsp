@@ -29,13 +29,14 @@
 	<c:forEach var="list" items="${boardList }">
 	<div class="grid-item">
 		<div class="inner-item">
-			<div class="content"><c:if test="${!empty list.pbnewfile}"><div style="text-align: center;"><img src="/tpPage/buploads/pbuploads/${list.pbnewfile}"></div><br></c:if><a href="/tpPage/page/${list.pbhostid }?pbid=${list.pbid}"><b><c:out value="${list.pname }"/></b>(<c:out value="${list.mname }" />)</a><br><br><b><c:out value="${list.pbsubject}" /></b><br><% pageContext.setAttribute("rn", "\r\n"); %>${fn:replace(list.pbcontent, rn, "<br>")}<br><br><fmt:formatDate value="${list.pbdate}" pattern="yy.MM.dd HH:mm:ss"/></div>
+			
+			<div class="content"><c:if test="${!empty list.pbnewfile}"><div style="text-align: center;"><img src="/tpPage/buploads/pbuploads/${list.pbnewfile}"></div><br></c:if><a class="link" href="/tpPage/page/${list.pbhostid }?pbid=${list.pbid}"><b><c:out value="${list.pname }"/></b>(<c:out value="${list.mname }" />)</a><br><br><b><c:out value="${list.pbsubject}" /></b><br><% pageContext.setAttribute("rn", "\r\n"); %>${fn:replace(list.pbcontent, rn, "<br>")}<br><br><fmt:formatDate value="${list.pbdate}" pattern="yy.MM.dd HH:mm:ss"/></div>
 		</div>
 	</div>
 	</c:forEach>
 	<c:if test="${favo != null || fn:length(boardList) < 1 }">
 		<div class="grid-item" style="width:100%; text-align: center; font-weight:bold;" >
-			아직 마음에 들어한 플레인이 없군요!
+			아직 마음에 들어한 PLAIN이 없군요!
 			<input type="hidden" id="end" name="end">
 		</div>
 	</c:if>
