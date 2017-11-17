@@ -32,6 +32,7 @@ a {
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>	
 <script type="text/javascript" src="<%=request.getContextPath()%>/js/member.js?ver=118"></script>
 <script type="text/javascript" src="<%=request.getContextPath()%>/js/login.js?"></script>
+<script type="text/javascript" src="<%=request.getContextPath()%>/js/autosize.js?"></script>
 
 
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -45,15 +46,15 @@ a {
 <input type="hidden" id="ppoint" value=${page.ppoint } />
 <input type="hidden" id="pid" value=${page.pid } />
 
-<div class="container" style="text-align: center;">
-<a href="/tpPage/home"><img src="/tpPage/logo.png" style="margin-top:100px;"></a>
+<div class="container" style="text-align: center;" id="mainbox">
+<a href="/tpPage/home"><img src="/tpPage/logo.png" style="margin-top:75px;"></a>
 
 <c:if test="${empty authInfo }">
-	<form:form commandName="logincmd" action="login" style="margin-top:100px;" cssClass="form-inline">
+	<form:form commandName="logincmd" action="login" style="margin-top:75px;" cssClass="form-inline">
 		<p><form:input path="memail" cssClass="form-control"  placeholder="이메일" /></p>
 		<p><form:password path="mpw" cssClass="form-control"  placeholder="비밀번호" /></p>
 		<form:hidden path="nowpid" value="${nowpid }" />
-		<p align="center"><input type="submit" value="로그인" class="btn btn-custom" style="width:150px" />
+		<p><input type="submit" value="로그인" class="btn btn-custom" style="width:138px" />
 		<c:choose>
 			<c:when test="${! empty cookie.remember.value }">
 				<label id="rmbhl" class="btn btn-custom sel"><form:checkbox path="rememberMemail"/>기억</label>
@@ -82,19 +83,19 @@ a {
 			<form:password path="mpwconf" cssClass="form-control" placeholder="비밀번호 재입력" cssErrorClass="has-error"/>
 			<form:errors path="mpwconf" class="msg" element="div" />
 		</p>
-		<input type="submit" value="가입 완료" class="btn btn-custom" style="width:150px">
+		<p>
+		<input type="submit" value="가입 완료" class="btn btn-custom" style="width:138px">
 		<label id="rmbjl" class="btn btn-custom unchecked"><form:checkbox path="rememberMemail"/>기억</label>			
-		<br>
-		<br>
+		</p>
 		<br>
 		<p>가입완료 버튼을 클릭하면 약관에 동의한 것으로 취급합니다.</p>
+		<br>
+		<br>
+		<br>
 	</form:form>
 </c:if>
-
-<!-- 로그인 전후 -->
-
-	
 </div> 
-<!-- 메인 컨테이너 끝 -->
+
+<%@ include file="/include/footer.jsp" %>
 </body>
 </html>

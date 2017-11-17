@@ -125,8 +125,8 @@ function chargeCheck() {
 		} else {
 			$('#chTitle').html("충전 확인");
 			$('#ctxtModal').html('충전하시겠습니까?');
-			$('#cbtnModal').html("<a href='#' data-dismiss='modal' class='btn'>취소</a> " +
-					"<a href='#' class='btn btn-custom' onclick='chargeClose()'>충전</a>");
+			$('#cbtnModal').html("<a href='#' class='btn btn-custom' onclick='chargeClose()'>충전</a> " +
+					"<a href='#' data-dismiss='modal' class='btn btn-custom'>취소</a>");
 		}
 	}
 }
@@ -143,11 +143,11 @@ function chargeClose() {
 			$('#mpoint').val(ck);
 			$('#cmoney').val($('#mpoint').val());
 			$('#hmoney').val($('#mpoint').val());
+			$('#pointchargecmd').modal('hide');
+			$('#finishcmd').modal('hide');
+			location.reload();
 		}
 	});
-	$('#pointchargecmd').modal('hide');
-	$('#finishcmd').modal('hide');
-	location.reload();
 }
 
 function chargeInit() {
