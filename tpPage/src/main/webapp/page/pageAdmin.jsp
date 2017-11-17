@@ -27,7 +27,7 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>page maker</title>
+<title>Admin Page</title>
 </head>
 <body>
 <%@ include file="../include/header.jsp" %>
@@ -42,22 +42,19 @@
 		<label for="no">기본 프로필</label> &nbsp; &nbsp;
 		<input type="radio" id="yes" name="reply" value="yes" onclick="proImg(this.value, pfile)" />
 		<label for="yes">프로필 지정</label>
-		<input type="file" id="pfile" name="pfile" style="display: none" onchange="pagereadURL(this);" />
+		<input type="file" id="pfile" name="pfile" accept="image/gif, image/jpeg, image/png"  style="display: none" onchange="pagereadURL(this);" />
 	</c:if>
 	<c:if test="${page.profile == 'yes'}">
 		<input type="radio" id="no" name="reply" value="no" onclick="proImg(this.value, pfile)" />
 		<label for="no">기본 프로필</label> &nbsp; &nbsp;
 		<input type="radio" id="yes" name="reply" value="yes" checked="checked" onclick="proImg(this.value, pfile)" />
 		<label for="yes">프로필 지정</label>
-		<input type="file" id="pfile" name="pfile" onchange="pagereadURL(this);" />
+		<input type="file" id="pfile" name="pfile" accept="image/gif, image/jpeg, image/png" onchange="pagereadURL(this);" />
 	</c:if>
 	<br><br></div>
 <div class="col-md-6">
 	<c:if test="${page.profile == 'yes'}">
 		<img id="puploadImg" name="puploadImg" src="/tpPage/puploads/${page.pnewfile }"  alt="프로필사진" width="200px" height="auto"/>
-	</c:if>
-	<c:if test="${page.profile == 'no'}">
-		<img id="puploadImg" name="puploadImg" src="/tpPage/puploads/${page.pnewfile }" style="display: none" alt="프로필사진" width="200px" height="auto"/>
 	</c:if>
 	<input type="hidden" id="pupdir" name="pupdir" value="<%=request.getRealPath("/puploads/")%>" />
 </div><br><br>

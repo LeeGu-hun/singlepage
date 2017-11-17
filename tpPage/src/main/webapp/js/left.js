@@ -42,15 +42,15 @@ function donateCheck() {
 	var amoney = Number(cmoney) - Number(dmoney);
 	if(dmoney == "") {
 		$('#dtxtModal').html('후원하실 금액을 선택(또는 입력)해주세요.');
-		$('#dbtnModal').html("<a href='#' data-dismiss='modal' class='btn'>확인</a>");
+		$('#dbtnModal').html("<a href='#' data-dismiss='modal' class='btn btn-custom'>확인</a>");
 	} else {
 		if(Number(cmoney)==0 || Number(amoney) < 0) {
 			$('#dtxtModal').html('포인트를 충전해주세요.');
-			$('#dbtnModal').html("<a href='#' data-dismiss='modal' class='btn'>확인</a>");
+			$('#dbtnModal').html("<a href='#' data-dismiss='modal' class='btn btn-custom'>확인</a>");
 		} else {
 			$('#dtxtModal').html('후원하시겠습니까?');
-			$('#dbtnModal').html("<a href='#' data-dismiss='modal' class='btn'>취소</a>" +
-			"<a href='#' class='btn btn-primary' onclick='donateClose()'>후원</a>");
+			$('#dbtnModal').html("<a href='#' data-dismiss='modal' class='btn btn-custom'>취소</a>" +
+			"<a href='#' class='btn  btn-custom' onclick='donateClose()'>후원</a>");
 		}
 	}
 }
@@ -137,18 +137,18 @@ function chargeCheck() {
             		"<input type='text' id='email' name='email' /><br /> <label>password:</label>" + 
             		"<input type='password' id='pass' name='pass' /><br /> <label>phone:</label>" +
             		"<input type='text' id='phone' name='phone' /><br /></div>");
-		$('#cbtnModal').html("<a href='#' class='btn' onclick='memCheck()'>본인 인증</a>" +
-				"<a href='#' data-dismiss='modal' class='btn'>취소</a>");
+		$('#cbtnModal').html("<a href='#' class='btn btn-custom' onclick='memCheck()'>본인 인증</a>" +
+				"<a href='#' data-dismiss='modal' class='btn btn-custom'>취소</a>");
 	} else {
 		if(ccmoney == "" || Number(ccmoney)==0) {
 			$('#chTitle').html("실행 오류");
 			$('#ctxtModal').html('충전할 금액을 선택해주세요.');
-			$('#cbtnModal').html("<a href='#' data-dismiss='modal' class='btn'>확인</a>");
+			$('#cbtnModal').html("<a href='#' data-dismiss='modal' class='btn btn-custom'>확인</a>");
 		} else {
 			$('#chTitle').html("충전 확인")
 			$('#ctxtModal').html('충전하시겠습니까?');
-			$('#cbtnModal').html("<a href='#' data-dismiss='modal' class='btn'>취소</a>" +
-			"<a href='#' class='btn btn-primary' onclick='chargeClose()'>충전</a>");
+			$('#cbtnModal').html("<a href='#' data-dismiss='modal' class='btn btn-custom'>취소</a>" +
+			"<a href='#' class='btn btn-custom' onclick='chargeClose()'>충전</a>");
 		}
 	}
 }
@@ -211,12 +211,12 @@ function cmpPass(pw) {
 		}
 		$('#chTitle').html("본인 인증");
 		$('#ctxtModal').html("<label style='color:red'>인증성공</label>");
-		$('#cbtnModal').html("<a href='#' data-dismiss='modal' class='btn'>확인</a>");
+		$('#cbtnModal').html("<a href='#' data-dismiss='modal' class='btn btn-custom'>확인</a>");
 	} else {
 		$('#chTitle').html("본인 인증");
-		$('#ctxtModal').append("<label style='color:red'>인증실패</label>");
-		$('#cbtnModal').html("<a href='#' class='btn' onclick='memCheck()'>재인증</a>" +
-				"<a href='#' data-dismiss='modal' class='btn' onclick='memCheck()'>취소</a>");
+		$('#ctxtModal').html("<label style='color:red'>인증실패</label>");
+		$('#cbtnModal').html("<a href='#' class='btn btn-custom' onclick='memCheck()'>재인증</a>" +
+				"<a href='#' data-dismiss='modal' class='btn btn-custom' onclick='memCheck()'>취소</a>");
 	}
 	
 }

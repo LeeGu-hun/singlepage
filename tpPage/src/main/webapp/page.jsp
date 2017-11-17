@@ -5,8 +5,9 @@
 <head>
 
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
-<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/page_style.css?ver=4" />
-<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/ptop.css?ver=33" />
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/modal.css" />
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/page_style.css" />
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/ptop.css" />
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/btnColor.css" />
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/formColor.css" />
 
@@ -55,7 +56,7 @@
 	      	<div class="modal-body">
 	      		<label>후원금액</label><br /> 
 	
-				<div class="form-inline" onchange="donate()">
+				<div class="form-inline mrange" onchange="donate()">
 					<input id="oneth" type="radio" name="money" value="1000" /> 
 					<label for="oneth">1000원</label> &nbsp; &nbsp; &nbsp; &nbsp;
 					<input id="thrth" type="radio" name="money" value="3000" /> 
@@ -65,8 +66,8 @@
 					<input id="tenth" type="radio" name="money" value="10000" /> 
 					<label for="tenth">10000원</label> &nbsp; &nbsp; &nbsp;
 					<input id="in" type="radio" name="money" value="in" /> 
-					<label for="in">직접입력</label>
-					<input class="form-control" onkeydown="in_donate(this)" id="in_money" type="text" name="in_money" style="width: 100px" disabled/><label>원</label>
+					<label for="in">직접입력
+					<input class="form-control" onkeydown="in_donate(this)" id="in_money" type="text" name="in_money" style="width: 100px" disabled/>원</label>
 				</div>
 	
 				<div class="form-inline" style="text-align:right">
@@ -80,7 +81,7 @@
 				<a data-toggle="modal" href="#myModal2" class="btn btn-custom" onclick="chargeInit()">포인트 충전</a>
             </div>
             <div class="modal-footer">
-              <a href="#" data-dismiss="modal" class="btn" onclick="donateInit()">취소</a>
+              <a href="#" data-dismiss="modal" class="btn btn-custom" onclick="donateInit()">취소</a>
               <a data-toggle="modal" href="#myModal3" class="btn btn-custom" onclick="donateCheck()">후원하기</a>
             </div>
 		</div>
@@ -97,7 +98,7 @@
             <div class="modal-body">
             	<label>충전금액</label><br /> 
 	
-				<div class="form-inline" onchange="charge()">
+				<div class="form-inline mrange" onchange="charge()">
 					<input id="coneth" type="radio" name="chmoney" value="1000" /> 
 					<label for="coneth">1000원</label> &nbsp; &nbsp; &nbsp; &nbsp;
 					<input id="cthrth" type="radio" name="chmoney" value="3000" /> 
@@ -107,8 +108,8 @@
 					<input id="ctenth" type="radio" name="chmoney" value="10000" /> 
 					<label for="ctenth">10000원</label> &nbsp; &nbsp; &nbsp;
 					<input id="cin" type="radio" name="chmoney" value="cin" /> 
-					<label for="cin">직접입력</label>
-					<input class="form-control" onkeydown="cin_charge(this)" id="cin_money" type="text" name="cin_money" style="width: 100px" disabled/><label>원</label>
+					<label for="cin">직접입력
+					<input class="form-control" onkeydown="cin_charge(this)" id="cin_money" type="text" name="cin_money" style="width: 100px" disabled/>원</label>
 				</div>
 	
 				<div class="form-inline" style="text-align:right">
@@ -122,7 +123,7 @@
 				</div>
 		 	</div>
             <div class="modal-footer">
-              <a href="#" data-dismiss="modal" class="btn" onclick="chargeInit()">취소</a>
+              <a href="#" data-dismiss="modal" class="btn btn-custom" onclick="chargeInit()">취소</a>
               <a data-toggle="modal" href="#myModal4" class="btn btn-custom" onclick="chargeCheck()">충전하기</a>
             </div>
           </div>
@@ -131,7 +132,7 @@
 
 	<div class="modal" id="myModal3" aria-hidden="true" style="display: none; z-index: 1070;">
     	<div class="modal-dialog">
-          <div class="modal-content">
+          <div class="modal-content modal-alert">
             <div class="modal-header">
               <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
               <h4 class="modal-title">후원 확인</h4>
@@ -148,7 +149,7 @@
 	
 	<div class="modal" id="myModal4" data-backdrop="static" aria-hidden="true" style="display: none; z-index: 1080;">
     	<div class="modal-dialog">
-          <div class="modal-content">
+          <div class="modal-content modal-alert">
             <div class="modal-header">
               <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
               <h4 id="chTitle" class="modal-title"></h4>

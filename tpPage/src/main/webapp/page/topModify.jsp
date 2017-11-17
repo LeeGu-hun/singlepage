@@ -34,7 +34,7 @@
 				<hr>
 				<div class="col-md-6 form-inline">
 					<label>링크:&nbsp; &nbsp;</label><input class="form-control" type="text" id="link1" name="link" required /><br/><br/>
-					<label>이미지: <input type="file" id="thum1" name="thum" onchange="imgreadURL(this);" />
+					<label>이미지: <input type="file" id="thum1" name="thum" accept="image/gif, image/jpeg, image/png" onchange="imgreadURL(this);" />
 					<input type="hidden" id="tupdir1" name="tupdir" value="<%=request.getRealPath("/tuploads/")%>" />
 					</label>
 				</div>
@@ -58,7 +58,7 @@
 				<hr>
 				<div class="col-md-6 form-inline">
 					<label>링크:&nbsp; &nbsp;</label><input class="form-control" type="text" id="link${list.turn }" name="link" value="${list.url }" required /><br/><br/>
-					<label>이미지: <input type="file" id="thum${list.turn }" name="thum" onchange="imgreadURL(this)" value="${list.thum }" />
+					<label>이미지: <input type="file" id="thum${list.turn }" name="thum" accept="image/gif, image/jpeg, image/png" onchange="imgreadURL(this)" value="${list.thum }" />
 					<input type="hidden" id="tupdir${list.turn }" name="tupdir" value="<%=request.getRealPath("/tuploads/")%>" />
 					</label>
 				</div>

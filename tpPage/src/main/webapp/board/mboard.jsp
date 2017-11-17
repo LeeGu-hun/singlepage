@@ -38,7 +38,7 @@ $(document).ready(function() {
 	<img id="mbuploadImg" name="mbuploadImg" class="uploadImg" style="display:none;" />
 	<div class="form-inline">
 	<label class="btn btn-custom btn-sm filebox">
-	<input id="mbfile" name="mbfile" type="file" onchange="mbreadURL(this);">파일 선택</label>
+	<input id="mbfile" name="mbfile" type="file" accept="image/gif, image/jpeg, image/png" onchange="mbreadURL(this);">파일 선택</label>
 	<a class="btn btn-custom btn-sm btnRmv" style="margin-left:10px">삭제</a>
 	<input type="text" id="mbfname" class="form-control fname" style="width:auto; margin-left:10px" value="파일 없음" disabled="disabled"></div>
 	</div>
