@@ -25,6 +25,9 @@
 
 
 <div class="container">
+<div >
+
+</div>
 <div class="grid">
 	<c:forEach var="list" items="${boardList }">
 	<div class="grid-item">
@@ -70,14 +73,7 @@ $(document).ready(function(){
 		})
 	
 });
-$('.grid').imagesLoaded(function (){
-	$('.grid').masonry({
-		  // options
-		  columnWidth: 1,
-		  itemSelector: '.grid-item',
-		  percentPosition: true
-	});
-});
+
 </script>
 
 </div>

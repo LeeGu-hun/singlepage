@@ -1,3 +1,4 @@
+
 function pbreadURL(input) {
 	if(input.files && input.files[0]) {
 		var reader = new FileReader();
@@ -27,7 +28,9 @@ $(document).ready(function() {
 	var mbfileTarget = $('#mbfile');
 	pbfileTarget.on('change', function() { // 값이 변경되면
 		if (window.FileReader) { // modern browser
+			if($(this)[0].files.length>0)
 			var filename = $(this)[0].files[0].name;
+			else return;
 		} else { // old IE
 			var filename = $(this).val().split('/').pop().split('\\').pop(); // 파일명만 추출
 		} // 추출한 파일명 삽입
@@ -35,7 +38,9 @@ $(document).ready(function() {
 	});
 	mbfileTarget.on('change', function() { // 값이 변경되면
 		if (window.FileReader) { // modern browser
+			if($(this)[0].files.length>0)
 			var filename = $(this)[0].files[0].name;
+			else return;
 		} else { // old IE
 			var filename = $(this).val().split('/').pop().split('\\').pop(); // 파일명만 추출
 		} // 추출한 파일명 삽입
