@@ -65,7 +65,13 @@ public class MemberController {
 	
 	@RequestMapping("/memberJoin")
 	public String MemberJoin(@ModelAttribute("joincmd") MemberCommand mjcmd, HttpSession session,
-			HttpServletResponse response, Errors errors, @ModelAttribute("logincmd") MemberCommand mlcmd) {
+			HttpServletResponse response, Errors errors, @ModelAttribute("logincmd") MemberCommand mlcmd,
+			@CookieValue(value= "remember", required = false) Cookie cookie) {
+		
+		if(cookie != null) {
+			mlcmd.setRememberMemail(true);
+		}
+		
 		new JoinValidator().validate(mjcmd, errors);
 		 if (errors.hasErrors())
 		 return "member/memberManager";
@@ -78,7 +84,7 @@ public class MemberController {
 		session.setAttribute("authInfo", authInfo);
 
 		
-		Cookie cookie = new Cookie("remember", mjcmd.getMemail());
+		cookie = new Cookie("remember", mjcmd.getMemail());
 		cookie.setPath("/");
 		
 		if (mjcmd.isRememberMemail()) {
