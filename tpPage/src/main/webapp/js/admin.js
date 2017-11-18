@@ -13,6 +13,7 @@ $(document).ready(function() {
 
 	$('.btnRmv').on('click', function(){
 		$('.fname').val('파일 없음');
+		$('#puploadImg').attr('src', '');
 		$('.uploadImg').hide();
 	});
 }); 
@@ -25,6 +26,7 @@ function pagereadURL(input) {
 			$('#puploadImg').attr('width', 300);
 		}
 		reader.readAsDataURL(input.files[0]);
+		$('.uploadImg').show();
 	}
 }
 
@@ -126,10 +128,10 @@ function getDate() {
 function proImg(reply, id) {
 	if (reply == "no") {
 		$('#profile').hide();
-		$('#puploadImg').hide();
+		$('.uploadImg').hide();
 	} else {
 		$('#profile').show();
-		$('#puploadImg').show();
+		$('.uploadImg').show();
 	}
 }
 

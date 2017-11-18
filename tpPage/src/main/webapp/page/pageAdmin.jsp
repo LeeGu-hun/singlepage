@@ -49,7 +49,7 @@
 			<!-- <input type="file" id="pfile" name="pfile" accept="image/gif, image/jpeg, image/png" onchange="pagereadURL(this);" /> -->
 		</c:if>
 		</div>
-		<div style="text-align: center; padding-bottom:5px;">
+		<div style="text-align: center; padding-bottom:5px;" class="uploadImg">
 			<c:if test="${page.profile == 'yes'}">
 				<img id="puploadImg" name="puploadImg" src="/tpPage/puploads/${page.pnewfile }"  alt="프로필사진" width="200px" height="auto"/>
 			</c:if>
@@ -60,7 +60,12 @@
 				<img id="puploadImg" name="puploadImg" style="display: none" alt="프로필사진" width="200px" height="auto"/>
 			</c:if>
 		</div>
-		<div class="form-inline" id="profile">
+		<c:if test="${page.profile == 'no'}">
+		<div class="form-inline" id="profile" style="display:none;">
+		</c:if>
+		<c:if test="${page.profile == 'yes'}">
+		<div class="form-inline" id="profile"">
+		</c:if>
 		<label class="btn btn-custom btn-sm filebox">
 		<input id="pfile" name="pfile" type="file" accept="image/gif, image/jpeg, image/png" onchange="pagereadURL(this);" />파일 선택</label>
 		<a class="btn btn-custom btn-sm btnRmv" style="margin-left:5px">삭제</a>

@@ -79,7 +79,7 @@
 		</div>	
 		<div style="text-align: center;">
 		<br/>
-			<input type="submit" class="btn btn-custom"/>
+			<input type="button" class="btn btn-custom" value="수정" onclick="emptyCheck()"/>
 		</div>
 	</div>
 </form:form>

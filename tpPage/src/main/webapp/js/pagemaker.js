@@ -13,6 +13,7 @@ $(document).ready(function() {
 
 	$('.btnRmv').on('click', function(){
 		$('.fname').val('파일 없음');
+		$('.uploadImg').attr('src', '');
 		$('.uploadImg').hide();
 	});
 }); 
