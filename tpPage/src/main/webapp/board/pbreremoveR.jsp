@@ -5,7 +5,7 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
-<div class="modal" id="rmchkmodal" aria-hidden="true" style="display: none; z-index: 1050;">
+<div class="modal" id="rmchkmodal" aria-hidden="true" style="display: none; z-index: 1060;">
    	<div class="modal-dialog modal-sm">
       		<div class="modal-content">
            	<div class="modal-header">
