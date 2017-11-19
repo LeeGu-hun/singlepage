@@ -6,6 +6,10 @@ $(document).ready(function() {
 			$('#checked'+$(this).val()).val(0);
 		}
 	});	
+	
+	if($('#originCnt').val()==1) {
+		$('#del1').hide();
+	}
 })
 
 function imgreadURL(input) {
@@ -22,6 +26,7 @@ function imgreadURL(input) {
 
 function addlist() {
 	var count = $('#count').val();
+	
 	if(count <= 5) {
 		count ++;
 		$('#count').val(count);
@@ -31,13 +36,16 @@ function addlist() {
 				+"<input type='hidden' id='checked" + count + "' name='checked'  value='0' />" 
 				+"<input type='checkbox' id='ck" + count + "' value='"+ count +"'/>보이기 " 
 				+"<span class='delspan'>" 
-				+"<input type='button' class='btn btn-custom' id='del${list.turn }' value='삭제' onclick='deleteList(" + count + ")'/></span><hr>" 
+				+"<input type='button' class='btn btn-custom' id='del" + count + "' value='삭제' onclick='deleteList(" + count + ")'/></span><hr>" 
 				+"<div class='col-md-6 form-inline'>" 
-				+"<label>링크: &nbsp; &nbsp;</label><input class='form-control' type='text' id='link"+ count +"' name='link' value='' required /><br/><br/> " 
+				+"<label>링크: &nbsp; &nbsp;</label><input class='form-control' type='text' id='link"+ count +"' name='link' value='' /><br/><br/> " 
 				+"<label>이미지: <input type='file' id='thum"+ count +"' name='thum' accept='image/gif, image/jpeg, image/png' onchange='imgreadURL(this)' />"
 				+"<input type='hidden' id='tupdir" + count + "' name='tupdir' value='"+$('#realPath').val()+"' /></label>" 
 				+"</div><div class='col-md-6'><img id='tuploadImg"+ count +"' name='tuploadImg'/>" 
-				+"</div></div><br/>");
+				+"</div></div>");
+		if(count > 1) {
+			$('#del1').show();					
+		}
 		$('input:checkbox').on('change', function(){
 			if($(this).is(':checked') == true){
 				$('#checked'+$(this).val()).val(1);
@@ -72,8 +80,6 @@ function deleteList(num) {
 			$("#tupdir"+i).attr("id", "tupdir"+(i-1));
 			$("#tuploadImg"+i).attr("id", "tuploadImg"+(i-1));
 		}
-		$('#count').val(count);
-		
 	} else {
 		$("#order"+num).remove();	
 		for(var i=(num+1); i<=(count+1); i++) {
@@ -91,8 +97,57 @@ function deleteList(num) {
 			$("#tupdir"+i).attr("id", "tupdir"+(i-1));
 			$("#tuploadImg"+i).attr("id", "tuploadImg"+(i-1));
 		}
-		$('#count').val(count);
 		$('#del1').hide();
 	}
+	$('#count').val(count);
 	
+	if(count < 6) {
+		$('#plus').show();
+	}
+
+}
+
+function emptyCheck() {
+	var count = $('#count').val();
+	var count2 = count;
+	var check = new Array(count);
+	var a = 1;
+	for(var i = 1; i <= count; i++) {
+		if($("#link"+i).val() != '' || $("#thum"+i)[0].files.length > 0) {
+			check.push('1');
+		}
+		else {
+			check.push('0');
+		}
+		a *= Number(check[i]);
+	}
+	if(a==1) {
+		$('#frm').submit();
+	} else {
+		for(var j=count; j>0; j--) {
+			console.log(check[j]);
+			if(check[j]==0) {
+				$("#order"+(j)).remove();
+				console.log(j);
+				for(var i=j+1; i<=count2; i++) {
+					$("#order"+i).attr("id", "order"+(i-1));
+					$("#tid"+i).attr("id", "tid"+(i-1));
+					$("#turn"+i).val(i-1);
+					$("#turn"+i).attr("id", "turn"+(i-1));
+					$("#checked"+i).attr("id", "checked"+(i-1));
+					$("#ck"+i).val((i-1));
+					$("#ck"+i).attr("id", "ck"+(i-1));
+					$("#del"+i).attr("onclick", "deleteList("+(i-1)+")");
+					$("#del"+i).attr("id", "del"+(i-1));
+					$("#link"+i).attr("id", "link"+(i-1));
+					$("#thum"+i).attr("id", "thum"+(i-1));
+					$("#tupdir"+i).attr("id", "tupdir"+(i-1));
+					$("#tuploadImg"+i).attr("id", "tuploadImg"+(i-1));
+				}
+				count2 -= 1;
+			}
+		}
+		$('#count').val(count2);
+		$('#frm').submit();
+	}
 }

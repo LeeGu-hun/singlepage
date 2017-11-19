@@ -33,7 +33,7 @@
 				</span>
 				<hr>
 				<div class="col-md-6 form-inline">
-					<label>링크:&nbsp; &nbsp;</label><input class="form-control" type="text" id="link1" name="link" required /><br/><br/>
+					<label>링크:&nbsp; &nbsp;</label><input class="form-control" type="text" id="link1" name="link" /><br/><br/>
 					<label>이미지: <input type="file" id="thum1" name="thum" accept="image/gif, image/jpeg, image/png" onchange="imgreadURL(this);" />
 					<input type="hidden" id="tupdir1" name="tupdir" value="<%=request.getRealPath("/tuploads/")%>" />
 					</label>
@@ -41,7 +41,7 @@
 				<div class="col-md-6">
 					<img id="tuploadImg1" name="tuploadImg"/>
 				</div>
-			</div><br/>
+			</div>
 		</c:if>
 		<c:if test="${ptop != null}">
 			<input type="hidden" id="originCnt" name="originCnt" value="${fn:length(ptop)}"/>
@@ -57,7 +57,7 @@
 				</span>
 				<hr>
 				<div class="col-md-6 form-inline">
-					<label>링크:&nbsp; &nbsp;</label><input class="form-control" type="text" id="link${list.turn }" name="link" value="${list.url }" required /><br/><br/>
+					<label>링크:&nbsp; &nbsp;</label><input class="form-control" type="text" id="link${list.turn }" name="link" value="${list.url }" /><br/><br/>
 					<label>이미지: <input type="file" id="thum${list.turn }" name="thum" accept="image/gif, image/jpeg, image/png" onchange="imgreadURL(this)" value="${list.thum }" />
 					<input type="hidden" id="tupdir${list.turn }" name="tupdir" value="<%=request.getRealPath("/tuploads/")%>" />
 					</label>
@@ -79,7 +79,7 @@
 		</div>	
 		<div style="text-align: center;">
 		<br/>
-			<input type="submit" class="btn btn-custom" value="수정" /> 
+			<input type="button" class="btn btn-custom" value="수정" onclick="emptyCheck()"/>
 		</div>
 	</div>
 </form:form>

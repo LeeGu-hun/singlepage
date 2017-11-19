@@ -12,6 +12,9 @@
 	<div>
 		<c:choose>
 			<c:when test="${page.profile=='yes'}">
+				<c:if test="${page.pnewfile == null }">
+					<img src="/tpPage/profile.png" alt="프로필" width="150px" height="150px" />
+				</c:if>
 				<img src="/tpPage/puploads/${page.pnewfile }" alt="프로필사진" width="200px" height="200px" />
 			</c:when>
 			<c:otherwise>
@@ -40,7 +43,7 @@
 				</c:otherwise>
 			</c:choose>
 			<c:if test="${authInfo.mid != null}">
-				<a data-toggle="modal" class="btn btn-custom" href="#myModal" style="width: 93px"onclick="donate()">후원   <i class="fa fa-credit-card-alt fa-lg" aria-hidden="true"></i></a>
+				<a data-toggle="modal" class="btn btn-custom" href="#myModal" style="width: 93px" onclick="donate()">후원   <i class="fa fa-credit-card-alt fa-lg" aria-hidden="true"></i></a>
 			</c:if>
 		</div>
 		<label><c:out value="${cnt }"></c:out>명이 좋아합니다.</label>

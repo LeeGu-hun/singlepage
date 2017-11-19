@@ -20,6 +20,7 @@
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/left.css" />
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/btnColor.css" />
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/login.css" />
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
@@ -35,7 +36,8 @@
 <form:form commandName="pagecmd" name="apfrm" action="adminpage" enctype="multipart/form-data">
 <div class="alldiv">
 <h2 align="center"><b>Admin PLAIN</b></h2><hr>
-<label>●사진:&nbsp;&nbsp;&nbsp;</label>
+	
+	<label>●사진:&nbsp;&nbsp;&nbsp;</label>
 		<div style="display:inline-table;border:1px solid #000; border-radius:4px; padding: 6px 12px; width:300px">
 		<div class="radio">
 		<c:if test="${page.profile == 'no'}">
@@ -49,7 +51,7 @@
 			<!-- <input type="file" id="pfile" name="pfile" accept="image/gif, image/jpeg, image/png" onchange="pagereadURL(this);" /> -->
 		</c:if>
 		</div>
-		<div style="text-align: center; padding-bottom:5px;">
+		<div style="text-align: center; padding-bottom:5px;" class="uploadImg">
 			<c:if test="${page.profile == 'yes'}">
 				<img id="puploadImg" name="puploadImg" src="/tpPage/puploads/${page.pnewfile }"  alt="프로필사진" width="200px" height="auto"/>
 			</c:if>
@@ -60,24 +62,29 @@
 				<img id="puploadImg" name="puploadImg" style="display: none" alt="프로필사진" width="200px" height="auto"/>
 			</c:if>
 		</div>
-		<div class="form-inline" id="profile">
+		<c:if test="${page.profile == 'no'}">
+		<div class="form-inline" id="profile" style="display:none;"></div>
+		</c:if>
+		<c:if test="${page.profile == 'yes'}">
+		<div class="form-inline" id="profile"></div>
+		</c:if>
 		<label class="btn btn-custom btn-sm filebox">
 		<input id="pfile" name="pfile" type="file" accept="image/gif, image/jpeg, image/png" onchange="pagereadURL(this);" />파일 선택</label>
 		<a class="btn btn-custom btn-sm btnRmv" style="margin-left:5px">삭제</a>
 		<br><input type="text" class="form-control fname" style="width:auto;" value="파일 없음" disabled="disabled"></div>
-		</div>
 	<input type="hidden" id="pupdir" name="pupdir" value="<%=request.getRealPath("/puploads/")%>" />
 
-<br><br>
+
 	<div class="form-inline"><label>●이름:&nbsp; &nbsp;
-		<input class="form-control" id="pname" name="pname" style="width:300px;" value="${page.pname }" />
-	</label><br><br></div>
+		<input class="form-control" id="pname" name="pname" style="width:300px; margin-top:15px;" value="${page.pname }" /><span id="pnamechk" class="msg">필수 입력 항목입니다.</span>
+	</label></div>
 	<div class="form-inline"><label>●닉넴:&nbsp; &nbsp;
 		<input class="form-control" id="pnick" name="pnick" style="width:300px;" value="${page.pnick }" />
-	</label><br><br></div>
+	</label></div>
 	<div class="form-inline"><label>●소개:&nbsp; &nbsp;
 		<textarea class="form-control" id="pintro" name="pintro">${page.pintro }</textarea>
-	</label><br></div>
+	</label></div>
+	<br>
 	<div class="form-inline">
 		<label>●구분</label><br>
 		<label>&nbsp; -카테고리:&nbsp; &nbsp;
@@ -91,7 +98,7 @@
 		<label>&nbsp; -세부장르:&nbsp; &nbsp;
 		<input class="form-control" type="text" id="pgdetail" name="pgdetail" style="width:265px;" value="${genreDetail }" onkeyup; onkeypress; onkeydown; /></label></div>
 	<input type="hidden" id="pgenre" name="pgenre" style="width:300px;"/>
-	<br><br>
+	<br>
 	<div class="form-inline">
 		<label>●지역:&nbsp; &nbsp;<input class="form-control" type="text" id="keyword" style="width:300px;"/> 
 		<input type="button" class="btn btn-custom" value="검색" onclick="mapsearch(); return false;"/>
@@ -99,14 +106,13 @@
 		 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
 		<input class="form-control" id="ploc" name="ploc" style="width:300px;" value="${page.ploc }" readonly /></label>
 	</div>
-	 &nbsp; &nbsp;
 	<div id="map" style="width:500px; height:400px;"></div>
 	<input type="hidden" id="lat" name="lat" value="${lat }" />
 	<input type="hidden" id="lng" name="lng" value="${lng }" />
 	<input type="hidden" id="platlng" name="platlng" style="width:300px;" value="${page.platlng }"/>
-	</label></p>
+	
 	<div class="form-inline"><br/><label>●기간: &nbsp; &nbsp;<input  class="form-control" id="pperiod" name="pperiod" value="${page.pdate }" style="width:300px;" /></label><br><br></div>
-	<label>●공연시간</label><br>
+	<label>●활동시간</label><br>
 	<div class="form-inline">
 	<label>&nbsp; -시작:&nbsp; &nbsp;
 		<select class="form-control" id="pststart" name="pststart" style="width:295px;" onchange="">
@@ -147,11 +153,13 @@
 	</div>
 	<input type="hidden" id="pshowtime" name="pshowtime" value="" style="width:300px;"/>
 	<div style="text-align: center">
-	<br/><br/>
+		<hr />
 		<input class="btn btn-custom" type="button" value="수정" onclick="adminpage() " />
 	</div>
 </div>
 </form:form>
 <script src="<%=request.getContextPath()%>/js/adminMap.js?ver=11"></script>
+
+<%@ include file="../include/footer.jsp" %>
 </body>
 </html>

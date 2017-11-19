@@ -16,7 +16,7 @@
 
 <div class="modal" id="pbmodal" aria-hidden="true" style="display: none; z-index: 1050;">
 	<div class="modal-dialog modal-lg">
-		<div class="modal-content" style="min-width: 500px">
+		<div class="modal-content" style="min-width: 500px;">
       		<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
               	<h4 class="modal-title"><c:out value="${pboard.pbsubject }" /></h4>
@@ -85,7 +85,7 @@
 									<form:hidden path="pbid" value="${pboard.pbid }" />
 									<form:hidden path="pbreid" value="${pbrelist.pbid }" />
 									<form:hidden path="pbhostid" value="${pboard.pbhostid }" />
-									<p align="right"><input type="button" value="댓글쓰기" class="pbrew btn btn-custom btn-xs"></p>
+									<p align="right"><input type="button" value="댓글쓰기" class="pbrew btn btn-custom btn-xs" style="margin-bottom: 0px"></p>
 								</form:form>
 							</div>
 	          				</c:if>

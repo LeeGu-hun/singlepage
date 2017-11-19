@@ -221,7 +221,7 @@ create table toplist(
     pid number not null,
     tid number not null,
     turn number default 0 not null,
-    url varchar2(100) not null,
+    url varchar2(100),
     thum varchar2(100),
     newthum varchar2(100),
     tcheck number default 0 not null,
@@ -233,3 +233,4 @@ create sequence tid_seq increment by 1 start with 1 maxvalue 50000;
 
 alter table page add (profile varchar2(3) default 'no' not null);
 
+alter table toplist drop constraint url제약조건(not null)찾아보고 지우삼;

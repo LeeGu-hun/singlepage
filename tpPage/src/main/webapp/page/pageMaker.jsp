@@ -20,6 +20,7 @@
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/left.css" />
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/btnColor.css" />
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/login.css" />
 
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
@@ -46,11 +47,11 @@
 		<br><input type="text" class="form-control fname" style="width:auto;" value="파일 없음" disabled="disabled"></div>
 		</div>
 	<input type="hidden" id="pupdir" name="pupdir" value="<%=request.getRealPath("/puploads/")%>" />
-	<br><br>
-	<div class="form-inline"><label>●이름:&nbsp; &nbsp;<form:input class="form-control" path="pname" style="width:300px;" /></label></div><br><br>
-	<div class="form-inline"><label>●닉넴:&nbsp; &nbsp;<form:input class="form-control" path="pnick" style="width:300px;" /></label></div><br><br>
-	<div class="form-inline"><label>●소개:&nbsp; &nbsp;<form:textarea class="form-control" path="pintro" style="width:300px;" /></label></div><br><br>
-	
+	<div class="form-inline" style="margin-top:10px"><label>●이름:&nbsp; &nbsp;<form:input class="form-control" path="pname" style="width:300px;" />
+		<span id="pnamechk" class="msg">필수 입력 항목입니다.</span></label></div>
+	<div class="form-inline"><label>●닉넴:&nbsp; &nbsp;<form:input class="form-control" path="pnick" style="width:300px;" /></label></div>
+	<div class="form-inline"><label>●소개:&nbsp; &nbsp;<form:textarea class="form-control" path="pintro" style="width:300px;" /></label></div>
+	<br>
 	<div class="form-inline">
 		<label>●구분</label><br>
 		<label>&nbsp; -카테고리:&nbsp; &nbsp;
@@ -67,24 +68,26 @@
 	</div>
 	<div class="form-inline"><label>&nbsp; -세부장르:&nbsp; &nbsp;
 		<input class="form-control" type="text" id="pgdetail" name="pgdetail" style="width:265px;" onkeyup; onkeypress; onkeydown; /></label>
-	</div><br><br>
+	</div>
 	<!-- <label>장르:<br> --><form:input class="form-control" type="hidden" path="pgenre" style="width:300px;" /><!-- </label> -->
+	<br>
 	<div class="form-inline">
 		<label>●지역:&nbsp; &nbsp;
 		<input class="form-control" type="text" id="keyword" style="width:300px;" /> 
 		<input class="btn btn-custom" type="button" value="검색" onclick="mapsearch(); return false;" /><br>
 		 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;     
-		<form:input class="form-control" path="ploc" style="width: 300px" readonly="true"/></label>	
+		<form:input class="form-control" path="ploc" style="width: 300px; margin-left:2px;" readonly="true"/></label>	
 	</div>
-	 &nbsp; &nbsp;
-	<div id="map" style="width:500px;height:400px;"></div><br><br>
+	<div id="map" style="width:500px;height:400px;"></div>
 	
 	<!-- <label>좌표:<br> --><form:input type="hidden" path="platlng" style="width:300px;" /><!-- </label> -->
+	<br>
 	<div class="form-inline">
 		<label>●기간:&nbsp; &nbsp;
-		<form:input class="form-control" path="pperiod" value="" style="width:300px;" /></label></div><br><br>
+		<form:input class="form-control" path="pperiod" value="" style="width:300px;" /></label></div>
+	<br>
 	<div class="form-inline">
-		<label>●공연시간</label><br>
+		<label>●활동시간</label><br>
 		<label>&nbsp; -시작:&nbsp; &nbsp;
 			<select class="form-control" id="pststart" name="pststart" style="width:295px;" onchange>
 				<option value="">미정</option>
@@ -126,11 +129,14 @@
 	</div>
 	<!-- <label>시간:<br> --><form:input class="form-control" type="hidden" path="pshowtime" value="" style="width:300px;"/><!-- </label> -->
 	<div style="text-align: center">
-		<br/><br/>
+		<hr />
 		<input class="btn btn-custom" type="button" value="만들기" onclick="makepage(); " />
 	</div>
 </div>
 </form:form>
 <script src="<%=request.getContextPath()%>/js/map.js?ver=1"></script>
+
+
+<%@ include file="../include/footer.jsp" %>
 </body>
 </html>

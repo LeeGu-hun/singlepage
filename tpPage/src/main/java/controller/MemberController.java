@@ -223,13 +223,14 @@ public class MemberController {
 	
 	@RequestMapping("/mchkUpdate")
 	public String mchkUpdate(HttpServletRequest request, HttpSession session) {
+		AuthInfo authInfo = (AuthInfo) session.getAttribute("authInfo");
 		int mid = Integer.parseInt(request.getParameter("mid"));
 		String email = request.getParameter("email");
 		String phone = request.getParameter("phone");
 		memberDao.ckUpdate(email, phone);
 		Member member = memberSvc.getAuthInfo(mid);
-		AuthInfo authInfo = new AuthInfo(member.getMid(), member.getMname(), member.getMemail(), member.getMphone(),
-				member.getMcheck(), member.getMpoint(), member.getMdate());
+		authInfo = new AuthInfo(member.getMid(), member.getMname(), member.getMemail(), member.getMphone(),
+				member.getMcheck(), member.getMpoint(), member.getMdate(), authInfo.getPid());
 		session.setAttribute("authInfo", authInfo);
 		return "page/ck";
 	}

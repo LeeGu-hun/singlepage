@@ -2,7 +2,7 @@
 
 .msg {
 	display: none;
-	margin: -5px auto 0 auto;
+	margin: -5px auto 0 10px;
 	background-color: #fff;
 	color: red;
 	font-size: 12px;
