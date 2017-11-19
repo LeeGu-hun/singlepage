@@ -136,8 +136,16 @@ function proImg(reply, id) {
 }
 
 function adminpage() {
+	if($('#pname').val() == '') {
+		$('#pnamechk').show();
+		$('#pname').attr('class', 'has-error');
+		$('#pname').focus();
+		return;
+	}
+	
 	var pperiod = $('#pperiod').val();
 	pperiod = pperiod.replace(/-/g, "") + "000000";
 	$('#pperiod').val(pperiod);
+	
 	document.apfrm.submit();
 }
