@@ -63,15 +63,16 @@
 			</c:if>
 		</div>
 		<c:if test="${page.profile == 'no'}">
-		<div class="form-inline" id="profile" style="display:none;"></div>
+		<div class="form-inline" id="profile" style="display:none;">
 		</c:if>
 		<c:if test="${page.profile == 'yes'}">
-		<div class="form-inline" id="profile"></div>
+		<div class="form-inline" id="profile">
 		</c:if>
 		<label class="btn btn-custom btn-sm filebox">
 		<input id="pfile" name="pfile" type="file" accept="image/gif, image/jpeg, image/png" onchange="pagereadURL(this);" />파일 선택</label>
 		<a class="btn btn-custom btn-sm btnRmv" style="margin-left:5px">삭제</a>
 		<br><input type="text" class="form-control fname" style="width:auto;" value="파일 없음" disabled="disabled"></div>
+		</div>
 	<input type="hidden" id="pupdir" name="pupdir" value="<%=request.getRealPath("/puploads/")%>" />
 
 
