@@ -2,7 +2,8 @@ var container = document.getElementById('map')
 
 var lat = $('#lat').val();
 var lng = $('#lng').val();
-if(lat == "/" && lng == "/") {
+
+if(lat == "" && lng == "") {
 	var lat = 36.8456144382645;
 	var lng = 127.6883583287049;
 	
