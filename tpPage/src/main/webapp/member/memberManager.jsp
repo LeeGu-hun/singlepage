@@ -69,7 +69,7 @@ a {
 		</p>
 		<p>
 		<input type="submit" value="가입 완료" class="btn btn-custom" style="width:138px">
-		<label id="rmbjl" class="btn btn-custom unchecked"><form:checkbox path="rememberMemail"/>기억</label>			
+		<label id="rmbhl" class="btn btn-custom unchecked"><form:checkbox path="rememberMemail"/>기억</label>			
 		</p>
 		<br>
 		<p>가입완료 버튼을 클릭하면 약관에 동의한 것으로 취급합니다.</p>
@@ -84,10 +84,10 @@ a {
 		<p><input type="submit" value="로그인" class="btn btn-custom" style="width:138px" />
 		<c:choose>
 			<c:when test="${! empty cookie.remember.value }">
-				<label id="rmbhl" class="btn btn-custom sel"><form:checkbox path="rememberMemail"/>기억</label>
+				<label id="rmbjl" class="btn btn-custom sel"><form:checkbox path="rememberMemail"/>기억</label>
 			</c:when>
 			<c:otherwise>
-				<label id="rmbhl" class="btn btn-custom unchecked"><form:checkbox path="rememberMemail"/>기억</label>
+				<label id="rmbjl" class="btn btn-custom unchecked"><form:checkbox path="rememberMemail"/>기억</label>
 			</c:otherwise>
 		</c:choose></p>
 	</form:form>
