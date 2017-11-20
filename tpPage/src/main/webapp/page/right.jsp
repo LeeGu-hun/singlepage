@@ -14,6 +14,7 @@
 	<div style="border:2px solid #000; border-radius: 10px; padding: 10px;">
 		<div class="related"><a href="/tpPage/page/${related.pid }"><c:if test="${!empty related.pnewfile}"><img src="/tpPage/puploads/${related.pnewfile}"></c:if><c:out value="${related.pname}" /></a><br><c:out value="${related.pshowtime}" />, <c:out value="${related.ploc}" /></div>
 	</div>
+	<br>
 </c:forEach>
 </div>
 

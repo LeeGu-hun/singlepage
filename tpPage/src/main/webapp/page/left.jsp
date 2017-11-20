@@ -12,9 +12,6 @@
 	<div>
 		<c:choose>
 			<c:when test="${page.profile=='yes'}">
-				<c:if test="${page.pnewfile == null }">
-					<img src="/tpPage/profile.png" alt="프로필" width="150px" height="150px" />
-				</c:if>
 				<img src="/tpPage/puploads/${page.pnewfile }" alt="프로필사진" width="200px" height="200px" />
 			</c:when>
 			<c:otherwise>
