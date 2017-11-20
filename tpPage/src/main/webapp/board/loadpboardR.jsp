@@ -99,10 +99,10 @@
             		<input type="hidden" id="pblikechk" name="pblikechk" value="${pblikechk }" />
 	             	<c:choose>
 	             		<c:when test="${pblikechk == 0 || pblikechk == null }">
-	             			<a class="btn btn-custom" id="pblikebtn" onclick="pblike();">좋아요X</a>
+	             			<a class="btn btn-custom" id="pblikebtn" onclick="pblike();">좋아요   <i class="fa fa-heart-o fa-lg" aria-hidden="true"></i></a>
 	             		</c:when>
 	             		<c:otherwise>
-	             			<a class="btn btn-custom" id="pblikebtn" onclick="pblike();">좋아요O</a>
+	             			<a class="btn btn-custom" id="pblikebtn" onclick="pblike();">좋아요   <i class="fa fa-heart fa-lg" aria-hidden="true"></i></a>
 	             		</c:otherwise>
 	             	</c:choose>
              	</c:if>
