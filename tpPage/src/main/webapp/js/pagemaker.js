@@ -13,6 +13,7 @@ $(document).ready(function() {
 
 	$('.btnRmv').on('click', function(){
 		$('.fname').val('파일 없음');
+		$('.uploadImg').attr('src', '');
 		$('.uploadImg').hide();
 	});
 }); 
@@ -115,8 +116,16 @@ function getDate() {
 }
 
 function makepage() {
+	if($('#pname').val() == '') {
+		$('#pnamechk').show();
+		$('#pname').attr('class', 'has-error');
+		$('#pname').focus();
+		return;
+	}
+	
 	var pperiod = $('#pperiod').val();
 	pperiod = pperiod.replace(/-/g, "") + "000000";
 	$('#pperiod').val(pperiod);
+	
 	document.mpfrm.submit();
 }

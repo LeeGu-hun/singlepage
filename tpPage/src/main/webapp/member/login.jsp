@@ -57,7 +57,7 @@
 			</p>
 			<hr style="margin: 50px 200px; border-color: black;"  />
 			<p>
-			<a href="./join" class="btn btn-custom" style="width:200px">회원가입</a>
+			<a href="./join" class="btn btn-custom" style="width:200px; margin-bottom:75px">회원가입</a>
 			</p>
 		</form:form>
 	</c:if>

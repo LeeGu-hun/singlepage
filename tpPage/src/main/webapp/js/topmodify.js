@@ -104,5 +104,50 @@ function deleteList(num) {
 	if(count < 6) {
 		$('#plus').show();
 	}
-	
+
+}
+
+function emptyCheck() {
+	var count = $('#count').val();
+	var count2 = count;
+	var check = new Array(count);
+	var a = 1;
+	for(var i = 1; i <= count; i++) {
+		if($("#link"+i).val() != '' || $("#thum"+i)[0].files.length > 0) {
+			check.push('1');
+		}
+		else {
+			check.push('0');
+		}
+		a *= Number(check[i]);
+	}
+	if(a==1) {
+		$('#frm').submit();
+	} else {
+		for(var j=count; j>0; j--) {
+			console.log(check[j]);
+			if(check[j]==0) {
+				$("#order"+(j)).remove();
+				console.log(j);
+				for(var i=j+1; i<=count2; i++) {
+					$("#order"+i).attr("id", "order"+(i-1));
+					$("#tid"+i).attr("id", "tid"+(i-1));
+					$("#turn"+i).val(i-1);
+					$("#turn"+i).attr("id", "turn"+(i-1));
+					$("#checked"+i).attr("id", "checked"+(i-1));
+					$("#ck"+i).val((i-1));
+					$("#ck"+i).attr("id", "ck"+(i-1));
+					$("#del"+i).attr("onclick", "deleteList("+(i-1)+")");
+					$("#del"+i).attr("id", "del"+(i-1));
+					$("#link"+i).attr("id", "link"+(i-1));
+					$("#thum"+i).attr("id", "thum"+(i-1));
+					$("#tupdir"+i).attr("id", "tupdir"+(i-1));
+					$("#tuploadImg"+i).attr("id", "tuploadImg"+(i-1));
+				}
+				count2 -= 1;
+			}
+		}
+		$('#count').val(count2);
+		$('#frm').submit();
+	}
 }
