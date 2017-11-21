@@ -54,6 +54,8 @@ public class Member {
 		this.mpw = mpw;                       				
 	}*/
 
+	
+	
 	public int getMid() {
 		return mid;
 	}
