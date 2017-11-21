@@ -46,7 +46,7 @@
 				<a data-toggle="modal" class="btn btn-custom" href="#myModal" style="width: 93px" onclick="donate()">후원   <i class="fa fa-credit-card-alt fa-lg" aria-hidden="true"></i></a>
 			</c:if>
 		</div>
-		<label><c:out value="${cnt }"></c:out>명이 좋아합니다.</label>
+		<label id="likettl"><c:out value="${cnt }"></c:out>명이 좋아합니다.</label>
 		<br>
 		<div class="introText">
 			<label style="font-size: 20px;">Intro</label><br>
