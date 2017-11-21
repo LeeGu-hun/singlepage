@@ -34,9 +34,18 @@
 				<hr>
 				<div class="col-md-6 form-inline">
 					<label>링크:&nbsp; &nbsp;</label><input class="form-control" type="text" id="link1" name="link" /><br/><br/>
-					<label>이미지: <input type="file" id="thum1" name="thum" accept="image/gif, image/jpeg, image/png" onchange="imgreadURL(this);" />
+					<label>이미지:</label>
+						<div style="display:inline-table;border:1px solid #000; border-radius:4px; padding: 6px 12px; margin-left:20px">
+							<div style="text-align: center;"><img id="puploadImg" name="puploadImg" class="uploadImg" style="display:none; margin-bottom: 5px" /></div>
+							<div class="form-inline">
+							<label class="btn btn-custom btn-sm filebox">
+							<input id="thum1" class="thum" name="thum" type="file" accept="image/gif, image/jpeg, image/png" onchange="imgreadURL(this);" />파일 선택</label>
+							<a class="btn btn-custom btn-sm btnRmv" style="margin-left:5px">삭제</a>
+							<br><input type="text" class="form-control fname" style="width:auto;" value="파일 없음" disabled="disabled"></div>
+						</div>
+					 <!-- <input type="file" id="thum1" name="thum" accept="image/gif, image/jpeg, image/png" onchange="imgreadURL(this);" /> -->
 					<input type="hidden" id="tupdir1" name="tupdir" value="<%=request.getRealPath("/tuploads/")%>" />
-					</label>
+					
 				</div>
 				<div class="col-md-6">
 					<img id="tuploadImg1" name="tuploadImg"/>

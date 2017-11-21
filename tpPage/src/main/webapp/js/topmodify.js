@@ -24,6 +24,27 @@ function imgreadURL(input) {
 	}
 }
 
+$(document).ready(function() {
+	var fileTarget = $('.thum');
+	fileTarget.on('change', function() { // 값이 변경되면
+		if (window.FileReader) { // modern browser
+			if($(this)[0].files.length>0)
+			var filename = $(this)[0].files[0].name;
+			else return;
+		} else { // old IE
+			var filename = $(this).val().split('/').pop().split('\\').pop(); // 파일명만 추출
+		} // 추출한 파일명 삽입
+		$(this).next().next().val(filename);
+	});
+
+	$('.btnRmv').on('click', function(e){
+		$(e).next().val('파일 없음');
+		$('.uploadImg').attr('src', '');
+		$('.uploadImg').hide();
+	});
+});
+
+
 function addlist() {
 	var count = $('#count').val();
 	
@@ -113,7 +134,7 @@ function emptyCheck() {
 	var check = new Array(count);
 	var a = 1;
 	for(var i = 1; i <= count; i++) {
-		if($("#link"+i).val() != '' || $("#thum"+i)[0].files.length > 0) {
+		if($("#link"+i).val() != '' || $("#thum"+i)[0].files.length > 0 || $('#tuploadImg'+i).is('[src]')) {
 			check.push('1');
 		}
 		else {
@@ -123,12 +144,13 @@ function emptyCheck() {
 	}
 	if(a==1) {
 		$('#frm').submit();
+		console.log('1');
 	} else {
 		for(var j=count; j>0; j--) {
 			console.log(check[j]);
 			if(check[j]==0) {
 				$("#order"+(j)).remove();
-				console.log(j);
+//				console.log(j);
 				for(var i=j+1; i<=count2; i++) {
 					$("#order"+i).attr("id", "order"+(i-1));
 					$("#tid"+i).attr("id", "tid"+(i-1));
@@ -149,5 +171,6 @@ function emptyCheck() {
 		}
 		$('#count').val(count2);
 		$('#frm').submit();
+		console.log('0');
 	}
 }

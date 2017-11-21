@@ -180,6 +180,10 @@ public class BoardController {
 		model.addAttribute("pboard", pboard);
 		model.addAttribute("pbrelist", pbrelist);
 		
+		StringBuffer url = request.getRequestURL();
+		
+		System.out.println(url);
+		
 		AuthInfo authInfo = (AuthInfo) request.getSession().getAttribute("authInfo");
 		if (authInfo != null) {
 			Pblike pblike = boardDao.pblikeChk(authInfo.getMid(), pboard.getPbid());

@@ -327,11 +327,19 @@ function loadpboardR(msg) {
 		if($(this).parent().next().css("display") == "none"){
 			$(this).parent().next().show();
 			var mdcont = $(this).parent().parent().parent().parent().parent().parent();
-			$('.modal-backdrop').css('height', mdcont.height() + 60);
+			if(mdcont.height() + 60 > $('#pbmodal').height()) {
+				$('.modal-backdrop').css('height', mdcont.height() + 60);
+			} else {
+				$('.modal-backdrop').css('height', $('#pbmodal').height());
+			}
 		}else{
 			$(this).parent().next().hide();
 			var mdcont = $(this).parent().parent().parent().parent().parent().parent();
-			$('.modal-backdrop').css('height', mdcont.height() + 60);
+			if(mdcont.height() + 60 > $('#pbmodal').height()) {
+				$('.modal-backdrop').css('height', mdcont.height() + 60);				
+			} else {
+				$('.modal-backdrop').css('height', $('#pbmodal').height());
+			}
 		}		
 	});
 	
@@ -436,9 +444,9 @@ function pblike() {
 		pblikechk = $.trim(pblikechk);
 		$('#pblikechk').val(pblikechk);
 		if(pblikechk == 0) {
-			$('#pblikebtn').text('좋아요X');
+			$('#pblikebtn').html('좋아요   <i class="fa fa-heart-o fa-lg" aria-hidden="true"></i>');
 		} else {
-			$('#pblikebtn').text('좋아요O');
+			$('#pblikebtn').html('좋아요   <i class="fa fa-heart fa-lg" aria-hidden="true"></i>');
 		}
 	}
 }
