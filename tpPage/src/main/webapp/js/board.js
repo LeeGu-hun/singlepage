@@ -479,11 +479,19 @@ function loadmboardR(msg) {
 		if($(this).parent().next().css("display") == "none"){
 			$(this).parent().next().show();
 			var mdcont = $(this).parent().parent().parent().parent().parent().parent();
-			$('.modal-backdrop').css('height', mdcont.height() + 60);
+			if(mdcont.height() + 60 > $('#mbmodal').height()) {
+				$('.modal-backdrop').css('height', mdcont.height() + 60);
+			} else {
+				$('.modal-backdrop').css('height', $('#mbmodal').height());
+			}
 		}else{
 			$(this).parent().next().hide();
 			var mdcont = $(this).parent().parent().parent().parent().parent().parent();
-			$('.modal-backdrop').css('height', mdcont.height() + 60);
+			if(mdcont.height() + 60 > $('#mbmodal').height()) {
+				$('.modal-backdrop').css('height', mdcont.height() + 60);
+			} else {
+				$('.modal-backdrop').css('height', $('#mbmodal').height());
+			}
 		}
 	});
 	
