@@ -175,4 +175,49 @@ public class MainDao {
 			return null;
 		}
 	}
+
+	public List<Page> getFavoList(int mid) {
+		List<PageLike> select = jdbcTemplate.query("select distinct pid from page_like where mid = ?", new RowMapper<PageLike>() {
+			@Override
+			public PageLike mapRow(ResultSet rs, int rowNum) throws SQLException {
+				PageLike pid = new PageLike();
+				pid.setPid(rs.getInt(1));
+				return pid;
+			}
+		}, mid);
+		List<PageLike> favoPid = new ArrayList<PageLike>();
+		if(!select.isEmpty()) {
+			String sql = "select mid, plike, pid, plike_date from (select mid, plike, pid, plike_date from page_like where pid = ? order by plike_date desc) where rownum = 1";
+			for(int i=0;i<select.size();i++) {
+				PageLike plike = jdbcTemplate.queryForObject(sql, new RowMapper<PageLike>() {
+				@Override
+				public PageLike mapRow(ResultSet rs, int rowNum) throws SQLException {
+					PageLike pageLike = new PageLike();
+					pageLike.setPid(rs.getInt("pid"));
+					pageLike.setPlike(rs.getInt("plike"));
+					return pageLike;
+				}
+				}, select.get(i).getPid());
+			if(plike.getPlike() != 0) favoPid.add(plike);
+			}
+		}
+		if(favoPid.size()>0) {
+			String sql = "select * from page where ";
+			sql += " (";
+			for(int i = 0; i <favoPid.size(); i++) {
+				sql += " pid = " + favoPid.get(i).getPid();
+				if(i != favoPid.size()-1) sql += " or ";
+			}
+			sql += " ) ";
+			List<Page> favoList = jdbcTemplate.query(sql, new RowMapper<Page>() {
+				@Override
+				public Page mapRow(ResultSet rs, int rowNum) throws SQLException {
+					Page page = new Page(rs.getInt("pid"), rs.getString("pname"), rs.getString("pnick"), rs.getString("pgenre"), rs.getString("ploc"), rs.getString("pnewfile"));
+					return page;
+				}
+			});			
+			return favoList;
+		}
+		return null;
+	}
 }

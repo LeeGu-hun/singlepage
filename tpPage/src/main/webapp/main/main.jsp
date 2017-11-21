@@ -20,14 +20,20 @@
 <c:if test="${favo != null }">
 <input type="hidden" id="favo" value="0" />
 <input type="hidden" value="1" id="page" />
+<c:if test="${fn:length(boardList) > 0 }">
+	<div class="favoList" style="border:2px solid #000; border-radius: 10px; padding: 10px;">
+	<div class="favoTitle">내가 좋아요 한 PLAIN</div>
+		<c:forEach var="list" items="${favoList }">
+		<div class="favoItem" onclick="location.href='/tpPage/page/${list.pid }'"><a href="/tpPage/page/${list.pid }"><c:if test="${!empty list.pnewfile}"><img src="/tpPage/puploads/${list.pnewfile}"></c:if><c:out value="${list.pname}" /></a><br><c:out value="${list.pgenre}" /></div>
+		</c:forEach>
+	</div>
+</c:if>
 </c:if>
 </div>
 
 
 <div class="container">
-<div >
 
-</div>
 <div class="grid">
 	<c:forEach var="list" items="${boardList }">
 	<div class="grid-item">

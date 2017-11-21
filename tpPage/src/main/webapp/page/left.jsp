@@ -46,16 +46,20 @@
 				<a data-toggle="modal" class="btn btn-custom" href="#myModal" style="width: 93px" onclick="donate()">후원   <i class="fa fa-credit-card-alt fa-lg" aria-hidden="true"></i></a>
 			</c:if>
 		</div>
-		<label><c:out value="${cnt }"></c:out>명이 좋아합니다.</label>
+		<label id="likettl"><c:out value="${cnt }"></c:out>명이 좋아합니다.</label>
 		<br>
 		<div class="introText">
 			<label style="font-size: 20px;">Intro</label><br>
 			${fn:replace(page.pintro, newLineChar, "<br/>") }
 		</div>
 	</div>
-
+	
 	<div>
+	
+	</div>
 		<br/>
+		<a class="btn btn-custom" style="width: 200px" onclick="openmapmodal(); ">위치정보</a>&nbsp;&nbsp;
+	<div>
 		<c:if test="${authInfo.pid == page.pid }">
 			<a class="btn btn-custom" href="/tpPage/admin" style="width: 200px">관리</a>&nbsp;&nbsp;
 		</c:if>

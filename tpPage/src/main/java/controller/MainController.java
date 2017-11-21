@@ -18,6 +18,7 @@ import main.Loc;
 import main.MainService;
 import member.AuthInfo;
 import member.MemberCommand;
+import page.Page;
 
 @Controller
 public class MainController {
@@ -120,7 +121,9 @@ public class MainController {
 		int page = 1; int limit = 9;
 		AuthInfo authInfo = (AuthInfo)req.getSession().getAttribute("authInfo");
 		List<Pboard> boardList = mainService.getFavo(page, limit, authInfo.getMid());
+		List<Page> favoList = mainService.getFavoList(authInfo.getMid());
 		model.addAttribute("boardList", boardList);
+		model.addAttribute("favoList", favoList);
 		req.setAttribute("favo", 0);
 		
 		return "home";

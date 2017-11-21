@@ -172,6 +172,14 @@ public class PageController {
 		model.addAttribute("ck", ckList.get(0).getPlike());
 		return "page/ck";
 	}
+	
+	@RequestMapping("/likecnt")
+	public String likecnt(HttpServletRequest request, Model model) {
+		int pid = Integer.parseInt(request.getParameter("pid"));
+		int likeCnt = pageDao.likeCnt(pid);
+		model.addAttribute("cnt", likeCnt);
+		return "page/likecnt";
+	}
 
 	@RequestMapping("/pointDonate")
 	public String pointDonate(HttpServletRequest request, HttpSession session, Model model) {
