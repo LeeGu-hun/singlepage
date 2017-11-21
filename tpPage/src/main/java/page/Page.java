@@ -11,6 +11,16 @@ public class Page {
 		this.pid = pid;
 	}
 	
+	public Page(int pid, String pname, String pnick, String pgenre, String ploc, String pnewfile) {
+		super();
+		this.pid = pid;
+		this.pname = pname;
+		this.pnick = pnick;
+		this.pgenre = pgenre;
+		this.ploc = ploc;
+		this.pnewfile = pnewfile;
+	}
+
 	public Page(int pmaster, String pname, String pnick, String pintro, String pgenre, String ploc, String pfile,
 			String pnewfile, Date pperiod, String pshowtime, String platlng, String profile) {
 		this.pmaster = pmaster;

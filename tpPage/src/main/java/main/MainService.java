@@ -5,6 +5,7 @@ import java.util.List;
 
 import board.Pboard;
 import dao.MainDao;
+import page.Page;
 
 public class MainService {
 	MainDao mainDao;
@@ -20,6 +21,11 @@ public class MainService {
 	public List<Pboard> getFavo(int page, int limit, int mid) {
 		
 		return mainDao.getBoardListFavo(page, limit, mid);
+	}
+	
+	public List<Page> getFavoList(int mid) {
+
+		return mainDao.getFavoList(mid);
 	}
 	
 	public void getHot() {
