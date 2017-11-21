@@ -237,6 +237,12 @@ function like() {
 			data : "pid=" + pid + "&mid=" + mid + "&ck=" + $.trim(ck),
 			success : changeHeart
 		});
+		$.ajax({
+			type : "POST",
+			url : "/tpPage/likecnt",
+			data : "pid=" + pid,
+			success : likecntR
+		});
 		function changeHeart(ck) {
 			ck = $.trim(ck);
 			$('#ck').val(ck);
@@ -247,8 +253,10 @@ function like() {
 				$('#btnLike').html("좋아요   <i class='fa fa-heart fa-lg' aria-hidden='true'></i>");
 			}
 		}
+		function likecntR(msg) {
+			$('#likettl').html(msg);
+		}	
 	}
-	
 }
 
 

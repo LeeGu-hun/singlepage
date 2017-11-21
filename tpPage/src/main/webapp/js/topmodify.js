@@ -19,14 +19,14 @@ function imgreadURL(input) {
 			var id = $(input).attr('id').substr(4,1);
 			$('#tuploadImg'+id).attr('src', e.target.result);
 			$('#tuploadImg'+id).attr('width', 200);
+			$('#tuploadImg'+id).show();
 		}
 		reader.readAsDataURL(input.files[0]);
 	}
 }
 
-$(document).ready(function() {
-	var fileTarget = $('.thum');
-	fileTarget.on('change', function() { // 값이 변경되면
+function binding(){
+	$('.thum').on('change', function() { // 값이 변경되면
 		if (window.FileReader) { // modern browser
 			if($(this)[0].files.length>0)
 			var filename = $(this)[0].files[0].name;
@@ -34,14 +34,19 @@ $(document).ready(function() {
 		} else { // old IE
 			var filename = $(this).val().split('/').pop().split('\\').pop(); // 파일명만 추출
 		} // 추출한 파일명 삽입
-		$(this).next().next().val(filename);
+		$(this).parent().next().next().next().val(filename);
 	});
 
-	$('.btnRmv').on('click', function(e){
-		$(e).next().val('파일 없음');
-		$('.uploadImg').attr('src', '');
-		$('.uploadImg').hide();
+	$('.btnRmv').on('click', function(){
+		console.log('aaaa');
+		$(this).next().next().val('파일 없음');
+		console.log($(this).parent().parent().parent().next());
+		$(this).parent().parent().parent().next().children('img').attr('src', '');
+		$(this).parent().parent().parent().next().children('img').hide();
 	});
+}
+$(document).ready(function() {
+	binding();
 });
 
 
@@ -60,10 +65,16 @@ function addlist() {
 				+"<input type='button' class='btn btn-custom' id='del" + count + "' value='삭제' onclick='deleteList(" + count + ")'/></span><hr>" 
 				+"<div class='col-md-6 form-inline'>" 
 				+"<label>링크: &nbsp; &nbsp;</label><input class='form-control' type='text' id='link"+ count +"' name='link' value='' /><br/><br/> " 
-				+"<label>이미지: <input type='file' id='thum"+ count +"' name='thum' accept='image/gif, image/jpeg, image/png' onchange='imgreadURL(this)' />"
+				+"<label>이미지: </label> <div style='display:inline-table;border:1px solid #000; border-radius:4px; padding: 6px 12px; margin-left:20px'>"
+				+ "<div class='form-inline'>"
+				+ "<label class='btn btn-custom btn-sm filebox'>"
+				+ "<input id='thum" + count + "' class='thum' name='thum' type='file' accept='image/gif, image/jpeg, image/png' onchange='imgreadURL(this);' />파일 선택</label>"
+				+ "<a class='btn btn-custom btn-sm btnRmv' style='margin-left:5px'>삭제</a><br>"
+				+ "<input type='text' class='form-control fname' style='width:auto;' value='파일 없음' disabled='disabled'></div></div>"
 				+"<input type='hidden' id='tupdir" + count + "' name='tupdir' value='"+$('#realPath').val()+"' /></label>" 
 				+"</div><div class='col-md-6'><img id='tuploadImg"+ count +"' name='tuploadImg'/>" 
 				+"</div></div>");
+		binding();
 		if(count > 1) {
 			$('#del1').show();					
 		}

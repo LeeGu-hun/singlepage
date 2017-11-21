@@ -12,6 +12,7 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.transaction.annotation.Transactional;
 
 import board.Pboard;
+import member.Member;
 import page.Page;
 import page.PageLike;
 import page.PageTop;
@@ -184,8 +185,25 @@ public class PageDao {
 	}
 
 	public int likeCnt(int pageHostId) {
-		Integer cnt = jdbcTemplate.queryForObject("select count(distinct mid) from page_like where pid=? and plike=1", Integer.class, pageHostId);
-		return cnt;
+		
+		List<Member> likememlist = jdbcTemplate.query("select DISTINCT mid from page_like where pid = ?",
+				new RowMapper<Member>() {
+					@Override
+					public Member mapRow(ResultSet rs, int rowNum) throws SQLException {
+						Member likemem = new Member(rs.getInt("mid"));
+						return likemem;
+					}
+				},pageHostId);
+		int likettl = 0;
+		for(int i=0; i < likememlist.size(); i++) {
+			int likechk = jdbcTemplate.queryForObject("select plike from (select * from page_like where mid = ? order by plike_date desc) "
+					+ "where rownum = 1", Integer.class, likememlist.get(i).getMid());
+			if(likechk == 1) {
+				likettl = likettl + 1;
+			}
+		}
+		
+		return likettl;
 	}
 }
 
