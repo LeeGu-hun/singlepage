@@ -6,8 +6,8 @@
             <ul class="nav nav-tabs">
                 <li class="active"><a href="#tab1" data-toggle="tab">지역별</a></li>
                 <li><a href="#tab2" data-toggle="tab">장르별</a></li>
-                <li><a href="#tab3" data-toggle="tab">공연시간별</a></li>
-                <li><a href="#tab4" data-toggle="tab">활동기간별</a></li>
+                <li><a href="#tab3" data-toggle="tab">시간별</a></li>
+                <li><a href="#tab4" data-toggle="tab">기간별</a></li>
             </ul>
     </div>
     <div class="panel-body">

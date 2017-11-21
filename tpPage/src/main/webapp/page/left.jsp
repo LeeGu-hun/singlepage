@@ -1,6 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<% pageContext.setAttribute("newLineChar", "\n"); %>
+<% pageContext.setAttribute("renewLine", "\n"); %>
 
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/left.css?ver=1" />
 
@@ -47,7 +50,7 @@
 		<br>
 		<div class="introText">
 			<label style="font-size: 20px;">Intro</label><br>
-			${page.pintro }
+			${fn:replace(page.pintro, newLineChar, "<br/>") }
 		</div>
 	</div>
 

@@ -444,9 +444,9 @@ function pblike() {
 		pblikechk = $.trim(pblikechk);
 		$('#pblikechk').val(pblikechk);
 		if(pblikechk == 0) {
-			$('#pblikebtn').text('좋아요X');
+			$('#pblikebtn').html('좋아요   <i class="fa fa-heart-o fa-lg" aria-hidden="true"></i>');
 		} else {
-			$('#pblikebtn').text('좋아요O');
+			$('#pblikebtn').html('좋아요   <i class="fa fa-heart fa-lg" aria-hidden="true"></i>');
 		}
 	}
 }
