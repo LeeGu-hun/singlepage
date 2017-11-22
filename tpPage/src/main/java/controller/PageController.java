@@ -96,6 +96,14 @@ public class PageController {
 					model.addAttribute("gopbid", pboard.getPbid());
 				}
 			}
+			if(request.getParameter("mbid") != null) {
+				int mbid = Integer.parseInt(request.getParameter("mbid"));
+				Mboard mboard = boardDao.getMboard(mbid);
+				if(mboard != null) {
+					model.addAttribute("gombid", mboard.getMbid());
+				}
+			}
+			
 			model.addAttribute("nowpid", page.getPid());
 			
 			//board 부분

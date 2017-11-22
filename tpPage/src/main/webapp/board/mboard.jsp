@@ -11,6 +11,20 @@
 %>
 
 <c:choose>
+	<c:when test="${gombid != null }">
+		<script>
+			$(document).ready(function() {
+				loadmboard(${gombid });
+			});
+		</script>
+		<input type="hidden" id="gombid" value="${gombid }" />
+	</c:when>
+	<c:otherwise>
+		<input type="hidden" id="gombid" value="0" />
+	</c:otherwise>
+</c:choose>
+
+<c:choose>
 	<c:when test="${reMbTab eq null }">
 		<input type="hidden" id="rMbTab" name="rMbTab" value="noactive" />
 	</c:when>
