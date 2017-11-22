@@ -53,9 +53,15 @@
 			${fn:replace(page.pintro, newLineChar, "<br/>") }
 		</div>
 	</div>
-
+	
 	<div>
+	
+	</div>
 		<br/>
+		<a class="btn btn-custom" style="width: 200px" onclick="openmapmodal(); ">위치정보</a>&nbsp;&nbsp;
+		<input type="hidden" id="nowploc" value="${page.ploc }" />
+		<input type="hidden" id="nowplatlng" value="${page.platlng }" />
+	<div>
 		<c:if test="${authInfo.pid == page.pid }">
 			<a class="btn btn-custom" href="/tpPage/admin" style="width: 200px">관리</a>&nbsp;&nbsp;
 		</c:if>

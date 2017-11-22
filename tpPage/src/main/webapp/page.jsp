@@ -227,5 +227,29 @@
     </div>
 </div>
 
+<!-- map modal -->
+
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=f637d5fa5f8a019e35446dc32b94a752"></script>
+
+<div id="mapmodaldiv">
+<div class="modal" id="mapmodal" aria-hidden="true" style="display: none; z-index: 1050;">
+	<div class="modal-dialog modal-lg">
+   		<div class="modal-content">
+        	<div class="modal-header">
+          		<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+          		<h4 class="modal-title">위치</h4>
+        	</div><div class="container"></div>
+        	<div class="modal-body">
+        	</div>
+        	<div class="modal-footer">
+          		<a href="" data-dismiss="modal" class="btn btn-custom">Close</a>
+        	</div>
+      	</div>
+    </div>
+</div>
+</div>
+
+<script src="<%=request.getContextPath()%>/js/mapmodal.js?ver=3"></script>
+
 </body>
 </html>
