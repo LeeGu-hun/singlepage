@@ -465,6 +465,8 @@ function loadmboardR(msg) {
 	$('.mbrecontent').val('');
 	$("#mbmodal").modal('show');
 	$('body').css({'overflow': 'hidden', 'padding': '0px'});
+	var mbhostid = $('#mbhostid').val();
+	var gombid = $('#gombid').val();
 	
 	reboxsize();
 		
@@ -528,6 +530,9 @@ function loadmboardR(msg) {
 	
 	$('#mbmodal').on('hidden.bs.modal', function() {
 		$('body').css('overflow', '');
+		if(gombid != 0) {
+			location.href = '/tpPage/page/' + mbhostid;
+		}
 	});
 }
 

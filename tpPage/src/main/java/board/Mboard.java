@@ -85,6 +85,10 @@ public class Mboard {
 		this.mname = mname;
 		this.mbdate = mbdate;
 	}
+	
+	public Mboard(int mbid) {
+		this.mbid = mbid;
+	}
 
 	public int getMbid() {
 		return mbid;
