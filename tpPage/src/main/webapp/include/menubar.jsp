@@ -34,7 +34,7 @@
 					</li>
 					<li class="col-sm-3">
 						<ul>
-							<li class="dropdown-header"><a href="/tpPage/srch?pshowtime=all">공연시간별</a></li>
+							<li class="dropdown-header"><a href="/tpPage/srch?pshowtime=all">시간별</a></li>
 							<li><a href="/tpPage/srch?pshowtime=24~12">오전</a></li>
 							<li><a href="/tpPage/srch?pshowtime=12~24">오후</a></li>
 						</ul>
