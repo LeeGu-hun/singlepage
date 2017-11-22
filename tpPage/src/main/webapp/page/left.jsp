@@ -55,9 +55,10 @@
 	</div>
 	
 	<div>
-	
+	<div class="form-control">
+		<label>활동시간 <c:out value="${page.pshowtime }" /></label>
 	</div>
-		<br/>
+	</div>
 		<a class="btn btn-custom" style="width: 200px" onclick="openmapmodal(); ">위치정보</a>&nbsp;&nbsp;
 		<input type="hidden" id="nowploc" value="${page.ploc }" />
 		<input type="hidden" id="nowplatlng" value="${page.platlng }" />
