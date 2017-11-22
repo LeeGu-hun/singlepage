@@ -118,13 +118,17 @@ public class MemberController {
 			cookie.setMaxAge(0);
 		}
 		response.addCookie(cookie);
-		new LoginValidator().validate(mlcmd, errors);
-		if(errors.hasErrors()) return "member/login"; 
+		
+		
+		
 		if (request.getParameter("pid") != null) {
 			int nowpid = Integer.parseInt(request.getParameter("pid"));
 			model.addAttribute("nowpid", nowpid);
 			return "member/login";
 		}
+		
+		new LoginValidator().validate(mlcmd, errors);
+		if(errors.hasErrors()) return "member/login"; 
 		
 		Member member = memberSvc.memberLogin(mlcmd.getMemail());
 
