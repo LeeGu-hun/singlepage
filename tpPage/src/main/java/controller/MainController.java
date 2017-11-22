@@ -118,7 +118,7 @@ public class MainController {
 	
 	@RequestMapping("/my")
 	public String my(HttpServletRequest req, Model model, @ModelAttribute("logincmd") MemberCommand logincmd) {
-		int page = 1; int limit = 9;
+		int page = 1; int limit = 999;
 		AuthInfo authInfo = (AuthInfo)req.getSession().getAttribute("authInfo");
 		List<Mboard> boardList = mainService.getMy(page, limit, authInfo.getMid());
 		model.addAttribute("boardList", boardList);

@@ -65,7 +65,7 @@
 	</c:if>
 </div>
 
-<c:if test="${searched == null && favo == null}">
+<c:if test="${searched == null && favo == null && my == null}">
 <button id="btn" onclick="loadMain()" class="btn btn-md btn-custom">더보기</button>
 </c:if>
 <c:if test="${searched != null }">
