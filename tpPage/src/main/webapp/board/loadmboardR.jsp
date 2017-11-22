@@ -26,6 +26,7 @@
             	<div style="word-break:break-word">
             		${fn:replace(mboard.mbcontent, newLineChar, "<br/>") }
             	</div>
+            	<br>
             	<div id="mbrebox">
             		<c:if test="${!empty authInfo }">
             		<hr style="margin:0px; border-color: black;"/>

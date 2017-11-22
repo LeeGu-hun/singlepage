@@ -286,4 +286,30 @@ public class PageController {
 
 		return "redirect:/page/" + pid;
 	}
+	
+	@RequestMapping("/mapmodal")
+	public String mapmodal(HttpServletRequest request, Model model) {
+		String ploc = request.getParameter("ploc");
+		String platlng = request.getParameter("platlng");
+		model.addAttribute("ploc", ploc);
+		model.addAttribute("platlng", platlng);
+		return "page/mapmodalR";
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }
