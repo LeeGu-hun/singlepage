@@ -8,6 +8,8 @@ public class Mboard {
 	private String mbsubject, mbcontent, mbfile, mbnewfile, pname, mname;
 	private Date mbdate;
 	
+	public Mboard() {}
+
 	public Mboard(int mbhostid, int mbwriterid, String mbsubject, String mbcontent, String mbfile, String mbnewfile) {
 		this.mbhostid = mbhostid;
 		this.mbwriterid = mbwriterid;

@@ -3,6 +3,7 @@ package main;
 import java.util.ArrayList;
 import java.util.List;
 
+import board.Mboard;
 import board.Pboard;
 import dao.MainDao;
 import page.Page;
@@ -56,6 +57,11 @@ public class MainService {
 	
 	public List<Loc> getGunguList() {
 		return mainDao.getGunguList();
+	}
+
+	public List<Mboard> getMy(int page, int limit, int mid) {
+		
+		return mainDao.getMyList(page, limit, mid);
 	}
 	
 }

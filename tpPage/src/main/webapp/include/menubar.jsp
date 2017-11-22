@@ -54,6 +54,7 @@
 			</li>
             <c:if test="${authInfo != null }">
             <li><a href="/tpPage/favo">모아보기</a></li>
+            <li><a href="/tpPage/my">내글보기</a></li>
             </c:if>
 		</ul>
         <!-- <ul class="nav navbar-nav navbar-right">
