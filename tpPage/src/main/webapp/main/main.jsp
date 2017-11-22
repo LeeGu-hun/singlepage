@@ -29,12 +29,17 @@
 	</div>
 </c:if>
 </c:if>
+<c:if test="${my != null }">
+<input type="hidden" id="my" value="0" />
+<input type="hidden" value="1" id="page" />
+</c:if>
 </div>
 
 
 <div class="container">
 
 <div class="grid">
+	<c:if test="${my == null }">
 	<c:forEach var="list" items="${boardList }">
 	<div class="grid-item">
 		<div class="inner-item">
@@ -42,6 +47,16 @@
 		</div>
 	</div>
 	</c:forEach>
+	</c:if>
+	<c:if test="${my != null }">
+	<c:forEach var="list" items="${boardList }">
+	<div class="grid-item">
+		<div class="inner-item">
+			<div class="content"><c:if test="${!empty list.mbnewfile}"><div style="text-align: center;"><img src="/tpPage/buploads/pbuploads/${list.mbnewfile}"></div><br></c:if><a class="link" href="/tpPage/page/${list.mbhostid }?mbid=${list.mbid}"><b><c:out value="${list.pname }"/></b></a><br><br><b><c:out value="${list.mbsubject}" /></b><br><% pageContext.setAttribute("rn", "\r\n"); %>${fn:replace(list.mbcontent, rn, "<br>")}<br><br><fmt:formatDate value="${list.mbdate}" pattern="yy.MM.dd HH:mm:ss"/></div>
+		</div>
+	</div>
+	</c:forEach>
+	</c:if>
 	<c:if test="${favo != null && fn:length(boardList) < 1 }">
 		<div class="grid-item" style="width:100%; text-align: center; font-weight:bold;" >
 			아직 마음에 들어한 PLAIN이 없군요!

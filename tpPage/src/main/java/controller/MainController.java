@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import board.Mboard;
 import board.Pboard;
 import dao.MainDao;
 import main.Loc;
@@ -115,6 +116,30 @@ public class MainController {
 		return "main/load";
 	}
 	
+	@RequestMapping("/my")
+	public String my(HttpServletRequest req, Model model, @ModelAttribute("logincmd") MemberCommand logincmd) {
+		int page = 1; int limit = 9;
+		AuthInfo authInfo = (AuthInfo)req.getSession().getAttribute("authInfo");
+		List<Mboard> boardList = mainService.getMy(page, limit, authInfo.getMid());
+		model.addAttribute("boardList", boardList);
+		req.setAttribute("my", 0);
+		
+		return "home";
+	}
+	
+	@RequestMapping("/loadMy")
+	public String loadMy(HttpServletRequest req, Model model, @ModelAttribute("logincmd") MemberCommand logincmd) {
+		int page = 1;
+		if(req.getParameter("page") != null) {
+			page = Integer.parseInt(req.getParameter("page"));
+		}
+		page = page * 9 + 1;
+		int limit = page + 8;
+		AuthInfo authInfo = (AuthInfo)req.getSession().getAttribute("authInfo");
+
+		
+		return "home";
+	}
 	
 	@RequestMapping("/favo")
 	public String favo(HttpServletRequest req, Model model, @ModelAttribute("logincmd") MemberCommand logincmd) {

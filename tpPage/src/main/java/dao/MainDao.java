@@ -10,6 +10,7 @@ import javax.sql.DataSource;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 
+import board.Mboard;
 import board.Pboard;
 import main.Loc;
 import page.Page;
@@ -219,5 +220,29 @@ public class MainDao {
 			return favoList;
 		}
 		return null;
+	}
+
+	public List<Mboard> getMyList(int page, int limit, int mid) {
+		String sql = "select * from (select rownum rnum, mbid, mbsubject, mbcontent, mbfile, mbnewfile, mbre_ref, mbre_lev, mbre_seq, mbreadcount, mbdate, mbhostid, mbwriterid, pname from (select * from mboard mb, page p where mb.mbhostid = p.pid and mbre_lev = 0 and mbwriterid = ?))  where rnum >= ? and rnum<= ?";
+		List<Mboard> myList = jdbcTemplate.query(sql, new RowMapper<Mboard>() {
+			@Override
+			public Mboard mapRow(ResultSet rs, int rowNum) throws SQLException {
+				Mboard board = new Mboard();
+				board.setMbid(rs.getInt("mbid"));
+				board.setMbre_ref(rs.getInt("mbre_ref"));
+				board.setMbre_lev(rs.getInt("mbre_lev"));
+				board.setMbre_seq(rs.getInt("mbre_seq"));
+				board.setMbhostid(rs.getInt("mbhostid"));
+				board.setMbwriterid(rs.getInt("mbwriterid"));
+				board.setMbsubject(rs.getString("mbsubject"));
+				board.setMbcontent(rs.getString("mbcontent"));
+				board.setMbnewfile(rs.getString("mbnewfile"));
+				board.setMbdate(rs.getDate("mbdate")); 
+				board.setPname(rs.getString("pname"));
+				return board;
+		}
+		}, mid, page, limit);
+		
+		return myList;
 	}
 }
