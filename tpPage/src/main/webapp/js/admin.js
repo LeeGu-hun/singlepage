@@ -27,6 +27,7 @@ function pagereadURL(input) {
 		}
 		reader.readAsDataURL(input.files[0]);
 		$('.uploadImg').show();
+		$('#puploadImg').show();
 	}
 }
 

@@ -231,6 +231,19 @@ public class BoardDao {
 		}, pbid);
 		return results.isEmpty() ? null : results.get(0);
 	}
+	
+	public Mboard getMboard(int mbid) {
+		List<Mboard> results = jdbcTemplate.query("select mbid from mboard where mbid = ?",
+				new RowMapper<Mboard>() {
+					@Override
+					public Mboard mapRow(ResultSet rs, int rowNum) throws SQLException {
+						Mboard mboard = new Mboard(rs.getInt("mbid"));
+						return mboard;
+					}
+			
+		}, mbid);
+		return results.isEmpty() ? null : results.get(0);
+	}
 
 	public void pbrerm(int rmpbid) {
 		String remove = "삭제된 댓글입니다.";

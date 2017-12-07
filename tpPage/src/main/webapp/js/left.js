@@ -133,10 +133,10 @@ function chargeCheck() {
 	if(mcheck == "0") {
 		$('#chTitle').html("본인 인증")
 		$('#ctxtModal').html('본인 인증하세요.');
-		$('#ctxtModal').append("<div id='mchkTxt'> <label>email:</label>" +
-            		"<input type='text' id='email' name='email' /><br /> <label>password:</label>" + 
-            		"<input type='password' id='pass' name='pass' /><br /> <label>phone:</label>" +
-            		"<input type='text' id='phone' name='phone' /><br /></div>");
+		$('#ctxtModal').append("<div class='form-inline' id='mchkTxt'> <label>email:</label>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;" +
+            		"<input class='form-control' type='text' id='email' name='email' /><br /> <label>password:</label> &nbsp;" + 
+            		"<input class='form-control' type='password' id='pass' name='pass' /><br /> <label>phone:</label> &nbsp; &nbsp; &nbsp; &nbsp;" +
+            		"<input class='form-control' type='text' id='phone' name='phone' /><br /></div>");
 		$('#cbtnModal').html("<a href='#' class='btn btn-custom' onclick='memCheck()'>본인 인증</a>" +
 				"<a href='#' data-dismiss='modal' class='btn btn-custom'>취소</a>");
 	} else {
@@ -229,7 +229,7 @@ function like() {
 	var mid = $('#mid').val();
 	var ck = $('#ck').val();
 	if(mid == ""){
-		location.href = './login?pid='+pid;
+		location.href = '/tpPage/login?pid='+pid;
 	} else {
 		$.ajax({
 			type : "POST",

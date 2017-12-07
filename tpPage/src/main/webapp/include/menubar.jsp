@@ -34,7 +34,7 @@
 					</li>
 					<li class="col-sm-3">
 						<ul>
-							<li class="dropdown-header"><a href="/tpPage/srch?pshowtime=all">공연시간별</a></li>
+							<li class="dropdown-header"><a href="/tpPage/srch?pshowtime=all">시간별</a></li>
 							<li><a href="/tpPage/srch?pshowtime=24~12">오전</a></li>
 							<li><a href="/tpPage/srch?pshowtime=12~24">오후</a></li>
 						</ul>
@@ -54,6 +54,7 @@
 			</li>
             <c:if test="${authInfo != null }">
             <li><a href="/tpPage/favo">모아보기</a></li>
+            <li><a href="/tpPage/my">내글보기</a></li>
             </c:if>
 		</ul>
         <!-- <ul class="nav navbar-nav navbar-right">
